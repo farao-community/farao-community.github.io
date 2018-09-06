@@ -1,35 +1,38 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
-title: Type on Strap # site's title
-description: "A website with blog posts and pages" # used by search engines
+baseurl: ''
+url: http://farao-community.github.io/
+title: FARAO # site's title
+description: >
+  FARAO (for Fully Autonomous Remedial Actions Optimization) is a modular toolbox based on powsybl framework.
+  It provides tools for coordination studies in power systems.
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
-  avatar: assets/img/triangle.svg
+  title: FARAO # blog's title
+  avatar: assets/img/king-tut.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
-  header_text_feature_image: assets/img/pexels/triangular.jpeg
+     <p>Open-source modular toolbox for<br/>
+     power system coordination process
+  header_text_feature_image: assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: sebastien.murgey@rte-france.com # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "farao-community"
   google_plus:
   instagram:
   keybase:
@@ -47,14 +50,14 @@ theme_settings:
   
   # Sharing options
   share_buttons:
-    facebook: true
+    facebook:
     twitter: true
-    google_plus: true
+    google_plus:
     tumblr:
     pinterest:
     pocket:
     reddit: true
-    linkedin:
+    linkedin: true
     wordpress:
     email: true
 
@@ -69,7 +72,7 @@ theme_settings:
       enabled: true
     tags:
       icon: "tags"
-      enabled: true
+      enabled: false
   
   # Localization strings
   str_follow_on: "Follow on"

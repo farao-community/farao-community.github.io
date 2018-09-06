@@ -2,13 +2,13 @@
 layout: page
 title: About
 permalink: /about/
-feature-img: "assets/img/pexels/circuit.jpeg"
-tags: [About, Archive]
+feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+tags: [Edito]
 ---
 
-Type on Strap is based on Type Theme, a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
+FARAO is a [powsybl](http://www.powsybl.com) based toolbox that provides software solutions for power systems coordinated capacity calculation and security analysis projects. It will be open sourced on GitHub soon under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
 
-Head over to the [theme's documentation](https://github.io/sylhare/Type-on-Strap) for much more information about Type on Strap or to install this theme on your own Jekyll site.
+This website is dedicated to sharing information and news about FARAO project, and other community contributions around FARAO toolbox and powsybl framework.
 
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
+Do not hesitate to follow the website RSS feed to be informed at each new publication on this website.
  

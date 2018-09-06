@@ -1,8 +1,8 @@
 --- 
 layout: page
-title : Portfolio 
+title : Projects 
 permalink: /portfolio/
-subtitle: "Projects I am working on" 
+subtitle: "FARAO community associated projects" 
 feature-img: "assets/img/pexels/computer.jpeg"
 tags: [Archive]
 ---
