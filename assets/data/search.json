@@ -25,6 +25,18 @@
           "content"  : {{ post.content | truncate: '250' | jsonify }}
        {% endif %}
      } {% unless forloop.last %},{% endunless %}
-   {% endfor %}
-  {% endif %}
+   {% endfor %}{% if site.pages.size > 0 %},{% endif %}
+   {% for page in site.pages %}
+     {
+       {% if page.title != nil %}
+          "title"    : "{{ page.title | escape }}",
+          "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
+          "url"      : "{{ site.baseurl }}{{ page.url }}",
+          "date"     : "{{ site.time | date: "%B %-d, %Y" }}",
+          "excerpt"  : {{ page.content | truncate: '250' | jsonify }},
+          "content"  : {{ page.content | truncate: '250' | jsonify }}
+        {% endif %}
+      } {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    {% endif %}
 ]
