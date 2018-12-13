@@ -31,4 +31,4 @@ The first complete release of FARAO is expected on June 2019, but modules will b
 [^1]:
     Capacity Allocation & Congestion Management, published on 07/24/2015. The text can be found on [ENTSOE network code page][cacm-code].
 
-[cacm-code]: https://electricity.network-codes.eu/network_codes/cacm/
+[cacm-code]: https://electricity.network-codes.eu/network_codes/cacm
