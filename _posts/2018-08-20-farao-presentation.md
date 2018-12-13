@@ -6,7 +6,7 @@ tags: [Edito, powsybl, coordination, FARAO]
 excerpt_separator: <!--more-->
 ---
 
-What is FARAO? FARAO is a [Powsybl](http://www.powsybl.com) based toolbox that aims at providing open-source, fully transparent software solutions for coordinated processes in power sytems operations and planning.
+What is FARAO? FARAO is a [Powsybl](http://www.powsybl.org) based toolbox that aims at providing open-source, fully transparent software solutions for coordinated processes in power sytems operations and planning.
 <!--more-->
 
 ### FARAO context
@@ -19,7 +19,7 @@ We strongly believe that the only way to face these challenges is to build a lar
 
 ### Ambition and planning
 
-In FARAO team, we have one ambition: create an open, transparent and modular toolbox for supporting coordination processes experimentations and industrialisation. That is the main reason why we decided to base our developments on [Powsybl](http://www.powsybl.com) framework, a project supported by the Linux Fondation through the [LF Energy project](http://www.lfenergy.com).
+In FARAO team, we have one ambition: create an open, transparent and modular toolbox for supporting coordination processes experimentations and industrialisation. That is the main reason why we decided to base our developments on [Powsybl](http://www.powsybl.org) framework, a project supported by the Linux Fondation through the [LF Energy project](http://www.lfenergy.org).
 
 We want these tools to be shared, developed and improved with the community, including:
 - CGMES integration and associated files (GLSK, CRAC, CNE)

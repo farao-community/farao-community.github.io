@@ -7,7 +7,7 @@ feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---
 
-FARAO standard distribution comes with multiple computation engines embedded. Some directly come from [PowSyBl](https://www.powsybl.com/)
+FARAO standard distribution comes with multiple computation engines embedded. Some directly come from [PowSyBl](http://www.powsybl.org)
 framework, as [load flow](https://powsybl.github.io/docs/tools/loadflow.html) engine and
 [sensitivity computation](https://powsybl.github.io/docs/tools/sensitivity-computation.html) engine.
 
