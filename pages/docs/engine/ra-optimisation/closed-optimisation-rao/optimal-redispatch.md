@@ -23,9 +23,9 @@ problem.
 The main input of FARAO optimiser is the network model. It must be detailed enough to
 simulate the actual transport system behaviour, including after contingency and after generation shift.
 
-Internal network model is based on [PowSyBl](http://www.powsybl.com)  IIDM format.
+Internal network model is based on [PowSyBl](http://www.powsybl.org)  IIDM format.
 For a detailed description of IIDM network model, please refer to the IIDM format
-[JavaDoc](http://javadoc.io/doc/com.powsybl/powsybl-iidm-api/2.1.0)  and [documentation](www.powsybl.com).
+[JavaDoc](http://javadoc.io/doc/com.powsybl/powsybl-iidm-api/2.1.0)  and [documentation](www.powsybl.org).
 
 Moreover, some [importers](https://powsybl.github.io/docs/iidm/importer/) from standard source
 formats are provided by PowSyBl framework.

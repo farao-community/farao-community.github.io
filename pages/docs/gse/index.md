@@ -19,9 +19,9 @@ that already provides built-in capabilities useful for experimentation purpose:
 - Network modification by scripts
 
 These features may be extended in the future by the contribution of many projects
-in [PowSyBl](http://www.powsybl.com) environment.
+in [PowSyBl](http://www.powsybl.org) environment.
 
-Beside built-in features provided by [PowSyBl](http://www.powsybl.com) framework,
+Beside built-in features provided by [PowSyBl](http://www.powsybl.org) framework,
 extensions are provided by FARAO team to integrate FARAO data importers and visualizers
 (CRAC, GLSK, ...), and computation cores integration (Flowbased, RAO, ...).
 
