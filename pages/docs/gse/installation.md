@@ -23,6 +23,7 @@ To build farao-gse, just do the following:
 
 ```
 $> git clone https://github.com/farao-community/farao-gse.git
+$> cd farao-gse
 $> ./install.sh
 ```
 
