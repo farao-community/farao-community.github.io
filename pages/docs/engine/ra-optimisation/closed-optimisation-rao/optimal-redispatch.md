@@ -101,7 +101,7 @@ $$
 \end{align*}
 $$
 
-Associated cost of the remedial actiion can then be calculated as:
+Associated cost of the remedial action can then be calculated as:
 
 $$
 \begin{align*}
@@ -151,22 +151,65 @@ $$
 
 ##### Reference flows calculation pre-processor
 
+This pre-processor compute a loadflow on the input network situation before and after applying contingencies. 
+Returns the list of monitored element Id's associated to it's reference flow on the basecase and after each contingencies.
+
 ##### Sensitivity calculation pre-processor
+
+Return sensitivity factors of monitored element flows for each remedial action (PST and redispatch).
 
 #### Problem fillers
 
+##### Branch Margins Positivity Constraint Filler
+
+Set constraints on monitored element flows which has to respect positive margin compared to the maximum flow on the basecase and after contingencies. 
+
+##### Branch Margins Variables Filler
+
+Set monitored element flows variables as equal to the reference flow on monitored elements on the base case and after contingencies. 
+
+##### Generator Redispatch Costs Filler
+
+Set the total redispatch cost variable calculated with the equation of cost related to the use of the remedial action defined bellow. 
+
+##### Generator Redispatch Variables Filler
+
+Set redispatch variables for each remedial action generators. 
+
+##### PST Angle Impact on Branch Flow Filler
+
+Set the PST angle impact on elements flow as equal to the sensitivity factor for each monitored elements the basecase and after contingencies.
+
+##### PST Angle Variables Filler
+
+Set PST angle variables for each PST remedial actions.
+
+##### Redispatch Equilibrium Constraint Filler
+
+Set the constraint of power equilibrium for the redispatch. 
+
+##### Redispatch Impact on Branch Flow Filler
+
+Set the redispatch impact on elements flow as equal to the sensitivity factor for each monitored elements the basecase and after contingencies.
+
+##### Redispatch CostMinimizationObjectiveFiller
+
+Set the objective function for the optimizer as the minimization of total redispatch cost. 
 
 #### Post-processors
 
-##### PST tap discretization post-processor
+##### Branch Results post-processor
 
-As the impact of PST taps is linearized, for improving computation performance, a post-processor is needed
-to discretize the PST taps for the optimiser output.
+Fills the remedial actions optimization results with the flow on monitored elements before and after optimisation.
 
-##### Security analysis post-processor
+##### PST Element Results post-processor
 
-To take into account discretization of PST taps, and validate the results found in AC calculation, a
-security analysis post-processor is run before filling the final results.
+Fills the remedial actions optimization results with PST remedial actions results (initial angle, initial tap position, final angle, final tap position).
+The post-processor check the PST taps are valid  and included in the range allowed after discretizing the PST since it is linearized for the optimisation problem. 
+
+##### Redispatch Element Results post-processor
+
+Fills the remedial actions optimization results with redispatch remedial actions results (Initial P and calculated P after optimization). 
 
 #### Solver
 
@@ -192,4 +235,8 @@ closed-optimisation-rao-parameters:
     pre-processors:
         - com.farao_community.farao.closed_optimisation_rao.pre_processors.ReferenceFlowsPreProcessor
         - com.farao_community.farao.closed_optimisation_rao.pre_processors.SensitivityPreProcessor
+    post-processors:
+        - com.farao_community.farao.closed_optimisation_rao.post_processors.BranchResultsPostProcessor
+        - com.farao_community.farao.closed_optimisation_rao.post_processors.PstElementResultsPostProcessor
+        - com.farao_community.farao.closed_optimisation_rao.post_processors.RedispatchElementResultsPostProcessor
 ```
