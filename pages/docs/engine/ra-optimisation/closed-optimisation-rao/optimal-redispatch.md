@@ -152,7 +152,7 @@ $$
 ##### Reference flows calculation pre-processor
 
 This pre-processor compute a loadflow on the input network situation before and after applying contingencies. 
-Return the list of monitored element Id's associated to the it's reference flow on the base case and after each contingencies.
+Returns the list of monitored element Id's associated to it's reference flow on the basecase and after each contingencies.
 
 ##### Sensitivity calculation pre-processor
 
@@ -162,7 +162,7 @@ Return sensitivity factors of monitored element flows for each remedial action (
 
 ##### Branch Margins Positivity Constraint Filler
 
-Set constraint on monitored element flows which has to respect positive margin compared to the maximum flow on the base case and after contingencies. 
+Set constraints on monitored element flows which has to respect positive margin compared to the maximum flow on the basecase and after contingencies. 
 
 ##### Branch Margins Variables Filler
 
@@ -178,7 +178,7 @@ Set redispatch variables for each remedial action generators.
 
 ##### PST Angle Impact on Branch Flow Filler
 
-Set the PST angle impact on elements flow as equal to the sensitivity factor for each monitored elements the base case and after contingencies.
+Set the PST angle impact on elements flow as equal to the sensitivity factor for each monitored elements the basecase and after contingencies.
 
 ##### PST Angle Variables Filler
 
@@ -186,11 +186,11 @@ Set PST angle variables for each PST remedial actions.
 
 ##### Redispatch Equilibrium Constraint Filler
 
-Set the constraint of power equilibrium for the dispatch. 
+Set the constraint of power equilibrium for the redispatch. 
 
 ##### Redispatch Impact on Branch Flow Filler
 
-Set the redispatch impact on elements flow as equal to the sensitivity factor for each monitored elements the base case and after contingencies.
+Set the redispatch impact on elements flow as equal to the sensitivity factor for each monitored elements the basecase and after contingencies.
 
 ##### Redispatch CostMinimizationObjectiveFiller
 
@@ -200,16 +200,16 @@ Set the objective function for the optimizer as the minimization of total redisp
 
 ##### Branch Results post-processor
 
-Return the list monitored elements before and after contingencies with the calculated flow after optimization.
+Fills the remedial actions optimization results with the flow on monitored elements before and after optimisation.
 
 ##### PST Element Results post-processor
 
-This post-processor return PST results (initial angle, initial tap position, final angle, final tap position) for each PST remedial action element.
+Fills the remedial actions optimization results with PST remedial actions results (initial angle, initial tap position, final angle, final tap position).
 The post-processor check the PST taps are valid  and included in the range allowed after discretizing the PST since it is linearized for the optimisation problem. 
 
 ##### Redispatch Element Results post-processor
 
-Return Redispatch results (Initial P and calculated P after optimization) for each redispatch remedial action element. 
+Fills the remedial actions optimization results with redispatch remedial actions results (Initial P and calculated P after optimization). 
 
 #### Solver
 
@@ -231,8 +231,12 @@ closed-optimisation-rao-parameters:
         - com.farao_community.farao.closed_optimisation_rao.fillers.PstAngleVariablesFiller
         - com.farao_community.farao.closed_optimisation_rao.fillers.RedispatchEquilibriumConstraintFiller
         - com.farao_community.farao.closed_optimisation_rao.fillers.RedispatchImpactOnBranchFlowFiller
-        - com.farao_community.farao.closed_optimisation_rao.fillers.RedispathCostMinimizationObjectiveFiller
+        - com.farao_community.farao.closed_optimisation_rao.fillers.RedispatchCostMinimizationObjectiveFiller
     pre-processors:
         - com.farao_community.farao.closed_optimisation_rao.pre_processors.ReferenceFlowsPreProcessor
         - com.farao_community.farao.closed_optimisation_rao.pre_processors.SensitivityPreProcessor
+    post-processors:
+        - com.farao_community.farao.closed_optimisation_rao.post_processors.BranchResultsPostProcessor
+        - com.farao_community.farao.closed_optimisation_rao.post_processors.PstElementResultsPostProcessor
+        - com.farao_community.farao.closed_optimisation_rao.post_processors.RedispatchElementResultsPostProcessor
 ```
