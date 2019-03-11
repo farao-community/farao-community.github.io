@@ -9,7 +9,7 @@ tags: [Docs]
 
 Below is the installation guide of FARAO GSE from its sources.
 
-FARAO GSE is is currently only available on Linux, because there is no load-flow engine that runs on Windows
+FARAO GSE is currently only available on Linux, because there is no load-flow engine that runs on Windows
 currently integrated in PowSyBl framework.
 
 ## Requirements
@@ -21,11 +21,19 @@ In order to build **farao-gse**, you need the following environment available:
 ## Install
 To build farao-gse, just do the following:
 
-```
-$> git clone https://github.com/farao-community/farao-gse.git
-$> cd farao-gse
-$> ./install.sh
-```
+1. Install FARAO CORE
+    ```
+    $> git clone https://github.com/farao-community/farao-core.git
+    $> cd farao-core
+    $> ./install.sh
+    ```
+2. Install FARAO GSE
+    ```
+    $> cd ..
+    $> git clone https://github.com/farao-community/farao-gse.git
+    $> cd farao-gse
+    $> ./install.sh
+    ```
 
 FARAO also needs a load-flow engine and a sensitivity calculation engine.
 
