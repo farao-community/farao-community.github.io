@@ -51,13 +51,14 @@ congestions:
 
 The scope of the optimisation problem therefore covers several situations. The set of monitored 
 states is noted $$\mathcal{S}$$, it contains one preventive state and  multiple curative states.
+The preventive state is noted $$s_0$$.
 
 ### Monitored elements description
 
 We want to ensure that flows on the monitored elements of the network respects the given
 maximum admissible flows.
 
-In case the security analysis reports some overloads in preventive or after contingency, the
+In case the security analysis reports some overloads in the preventive state or after contingency, the
 remedial actions optimisation is called to find the cheaper solution for solving the congestions.
 
 Let's note $$\widehat{F_{i,s}}$$ the estimated flow for a network element $$i$$, monitored in state $$s$$.
@@ -158,11 +159,24 @@ With $$f^{ref}_{i,s}$$ the calculated flow for each monitored element $$(i,s)$$ 
 a security analysis result, we can get a linear estimation of the flow on each
 monitored element $$(i,s)$$ after the application of remedial actions.
 
+In the preventive state, only the remedial actions which are activated within the same state 
+can impact the flows. For $$s_0$$.
+
 $$
 \begin{align*}
-    & \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
+    & \widehat{F_{i,s_0}}=f^{ref}_{i,s_0}+\sum_{g \in \mathcal{G}_{s_0}} \Delta^P_{g,s_0}.\sigma_{i,s_0,g} + \sum_{p \in \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s_0}. \sigma_{i,s_0,p}
 \end{align*}
 $$
+
+In the curative states, the flows are impacted by the remedial actions activated during the same state
+as well as by the remedial actions already activated in the preventive state. For $$s \neq \text{N} :
+
+$$
+\begin{align*}
+    & \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s  \cup \mathcal{G}_{s_0}} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s \cup \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
+\end{align*}
+$$
+
 
 ### objective function
 
@@ -202,7 +216,9 @@ $$
 
     & \forall s \in \mathcal{S}, \forall p \in \mathcal{P}_s, \quad \underline{\delta^{\alpha}_p} \leq \Delta^{\alpha}_{p,s} \leq \overline{\delta^{\alpha}_p} 
 
-    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
+    & \forall (i,s) \in \mathcal{C}, s=s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
+
+    & \forall (i,s) \in \mathcal{C}, s \neq s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s  \cup \mathcal{G}_{s_0}} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s \cup \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
 
     & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i}}
 
