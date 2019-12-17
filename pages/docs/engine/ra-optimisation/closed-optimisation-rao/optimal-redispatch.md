@@ -105,12 +105,12 @@ The redispatch remedial action can moreover be activated, according to the CRAC 
 - in a subset of the curative states, i.e. after some pre-speficied critical outages.
 
 We note $$\mathcal{S}_g$$ the set of states for which the redispatch remedial action $$g$$ 
-is activable. And symmetrically, $$\mathcal{G}_s$$ the set of redispatch remedial action 
+is activable. And symmetrically, $$\mathcal{G}_s$$ the set of redispatch remedial actions 
 activable in the state $$s$$.
 
 For a given redispatch remedial action $$g$$ and one of the state $$s$$ belonging in 
 $$\mathcal{S}_g$$, the cost related to the use of the remedial action $$C_{g,s}$$ is 
-though defined as:
+defined as:
 
 $$
 \begin{align*}
@@ -155,11 +155,11 @@ to the variation of PST angle $$p$$ in state $$s$$.
 
 These sensitivities are computed through derivation of the network equations.
 
-With $$f^{ref}_{i,s}$$ the calculated flow for each monitored element $$(i,s)$$ obtained as
+$$f^{ref}_{i,s}$$ is the calculated flow for each monitored element $$(i,s)$$ obtained as
 a security analysis result, we can get a linear estimation of the flow on each
 monitored element $$(i,s)$$ after the application of remedial actions.
 
-In the preventive state, only the remedial actions which are activated within the same state 
+- In the preventive state, only the remedial actions which are activated within the same state 
 can impact the flows. For $$s_0$$.
 
 $$
@@ -168,8 +168,8 @@ $$
 \end{align*}
 $$
 
-In the curative states, the flows are impacted by the remedial actions activated during the same state
-as well as by the remedial actions already activated in the preventive state. For $$s \neq \text{N} :
+- In the curative states, the flows are impacted by the remedial actions activated during the same state
+as well as by the remedial actions already activated in the preventive state. For $$s \neq s_0$$ :
 
 $$
 \begin{align*}
@@ -185,7 +185,7 @@ The objective function includes :
 - a secondary objective which is the minimization of the redispatching costs
 
 In the case where all congestions can be relieved by the remedial actions, the objective of the
-optimisation consists in looking for the cheapest combination of redispatch remedial action
+optimisation consists in looking for the cheapest combination of remedial actions
 which solves all congestions.
 
 The priority between the two objectives is handled with the congestion cost $$c^{cong}$$, which sets
@@ -223,6 +223,7 @@ $$
     & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i}}
 
     & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i}}
+\end{align*}
 $$
 
 
