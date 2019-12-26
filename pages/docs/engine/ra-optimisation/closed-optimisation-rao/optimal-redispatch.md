@@ -37,126 +37,195 @@ flexibilities to deal with potential constraints.
 
 Internal model of CRAC files is provided by FARAO and described in detailed [documentation](../../../data/crac/index.md).
 
-## Optimization problem
+## Optimization problem 
 
-### Mathematical description
+In this section, variables of the optimisation problem are identified by capital letters, while 
+constants parameters are in lower case.
+
+### Pre and post contingencies
+
+The optimal redispatch problem looks for a combination of network actions which relieves 
+congestions:
+- in normal operation conditions ("N" state, also called "preventive" state)
+- after possible critical network outages ("N-1" states, also called "curative" states)
+
+The scope of the optimisation problem therefore covers several situations. The set of monitored 
+states is noted $$\mathcal{S}$$, it contains one preventive state and  multiple curative states.
+The preventive state is noted $$s_0$$.
+
+### Monitored elements description
 
 We want to ensure that flows on the monitored elements of the network respects the given
 maximum admissible flows.
 
-In case security analysis report some overloads in preventive or after contingency, the
-remedial actions optimisation is called to find the cheaper solution for solving the constraints.
+In case the security analysis reports some overloads in the preventive state or after contingency, the
+remedial actions optimisation is called to find the cheaper solution for solving the congestions.
 
-Let's note $$RAM_i$$ the estimated available margin on monitored element $$i$$.
+Let's note $$\widehat{F_{i,s}}$$ the estimated flow for a network element $$i$$, monitored in state $$s$$.
+
+The estimated flow on a monitored element should ideally be within its admissible transmission
+limits, $$-f^{max}_{i,s}$$ and $$f^{max}_{i,s}$$.
+
+However, some overloads might be unavoidable. The overload on a monitored element $$(i,s)$$ 
+is noted $$\widehat{O_{i,s}}$$. Overloads can be either on the upper or lower limit of a network 
+elements, they are linked to the estimated flows with the two following constraints.
 
 $$
 \begin{align*}
-    & RAM_i = F_{max,i} - \widehat{F_{i}}
+    & \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i,s}}
+    & \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i,s}}
 \end{align*}
 $$
 
-$$\widehat{F_{i}}$$ is the estimated flow for each monitored element $$i$$.
-$$F_{max,i}$$ is the maximum admissible flow for each monitored element $$i$$.
+In the objective function of the RAO problem, $$\widehat{O_{i,s}}$$ is strongly penalized. 
+The penalisation cost of the congestion is noted $$c^{cong}$$ and is by default equal to 
+5000 €/MW. As a consequence, an overload is a last resort for the solver to find a feasable 
+solution. More precisely, an overload will occur only if remedial actions cannot prevent it 
+for less than 5000 €/MW.
 
-Let's note $$g$$ a given generation redispatch remedial action. we note $$C_{act,g}$$
-the activation cost of the redispatch offer. We also note $$C_{var,g}$$ the relative cost
+All couples of network element and contingency are not necessarily monitored by the optimal
+redispatch problem. The CRAC file allows to define specifically the set of couples $$(i,s)$$
+to be monitored. A couple $$(i,s)$$ is also commonly called a CNEC, for Critical Network 
+Element and Contingency. The set of monitored elements $$(i,s)$$ will be as of now noted 
+$$\mathcal{C}$$.
+
+### Redispatch remedial actions
+
+Let's note $$g$$ a given generation redispatch remedial action. we note $$c^{act}_{g}$$
+the activation cost of the redispatch offer. We also note $$c^{var}_{g}$$ the relative cost
 of a variation (in MW) of the generation.
 
-Each redispatch remedial action is also constrained in terms of quantity delivered $$\Delta_{P,g}$$.
-Though, we note $$\underline{\Delta_{P,g}}$$ the minimum available variation and $$\overline{\Delta_{P,g}}$$
+Each redispatch remedial action is also constrained in terms of quantity delivered. Thus, 
+we note $$\underline{\delta^P_{g}}$$ the minimum available variation and $$\overline{\delta^P_{g}}$$
 the maximum available variation.
 
-The cost related to the use of the remedial action $$C_g$$ is though defined as:
+The redispatch remedial action can moreover be activated, according to the CRAC file definition :
+- in the preventive state, or
+- in all the curative states, or
+- in a subset of the curative states, i.e. after some pre-speficied critical outages.
+
+We note $$\mathcal{S}_g$$ the set of states for which the redispatch remedial action $$g$$ 
+is activable. And symmetrically, $$\mathcal{G}_s$$ the set of redispatch remedial actions 
+activable in the state $$s$$.
+
+For a given redispatch remedial action $$g$$ and one of the state $$s$$ belonging in 
+$$\mathcal{S}_g$$, the cost related to the use of the remedial action $$C_{g,s}$$ is 
+defined as:
 
 $$
 \begin{align*}
-    & C_g = \delta_g.C_{act,g} + \Delta_{P,g}.C_{var,g} \quad\textrm{with}\quad
-    \delta_{g}.\underline{\Delta_{P,g}} \leq \Delta_{P,g} \leq \delta_{g}.\overline{\Delta_{P,g}}
+    & C_{g,s} = X_{g,s}.c^{act}_{g} + \Delta^P_{g,s}.c^{var}_{g} \quad\textrm{with}\quad
+    & X_{g,s}.\underline{\delta^P_g} \leq \Delta^P_{g,s} \leq X_{g,s}.\overline{\delta^P_{g}}
 \end{align*}
 $$
 
-with $$\delta_g$$ a binary variable representing actual activation of the redispatch remedial action
+With $$X_{g,s}$$ a binary variable representing actual activation of the redispatch remedial 
+action in state $$s$$ and $$\Delta^P_{g,s}$$ representing the redispatched quantity, in MW.
+ 
+For keeping an equilibrium between generation and consumption on the network, a constraint enforces
+the sum of all generators redispatch to be 0 in a given state $$s$$.
 
-Let's note $$t$$ a given PST remedial action. PST remedial actions are supposed to have no cost.
+$$
+\begin{align*}
+    & \sum_{g \in \mathcal{G}_s}.\Delta^P_{g,s} = 0
+\end{align*}
+$$
 
-Each PST remedial action is also linearized, and constrained in terms of angle variation available
-$$\Delta_{\alpha,t}$$.
-Though, we note $$\underline{\Delta_{\alpha,t}}$$ the minimum available variation and $$\overline{\Delta_{\alpha,t}}$$
+### PST remedial actions
+
+Let's note $$p$$ a given PST remedial action. PST remedial actions are supposed to have no cost.
+
+Each PST remedial action is linearized, and constrained in terms of angle variation available.
+Thus, we note $$\underline{\delta^{\alpha}_p}$$ the minimum available variation and $$\overline{\delta^{\alpha}_p}$$
 the maximum available variation.
 
-Now, let's estimate the actual flow on each monitored element $$\widehat{F_{i}}$$.
-We note $$\sigma_{i,g}$$ the sensitivity of the flow on monitored branch $$i$$ to the variation of
-generation $$g$$. We also note $$\sigma_{i,t}$$ the sensitivity of the flow on monitored branch $$i$$
-to the variation of PST angle $$t$$.
+As for the redispatch remedial actions, we note $$\mathcal{S}_g$$, subset of $$\mathcal{S}$$, the
+set of states for which the PST $$p$$ is usable. And symmetrically, $$\mathcal{P}_s$$ the set of 
+PST activable in the state $$s$$.
+
+An angle variation of PST $$p$$ in a state $$s$$ is represented by the variable $$\Delta^{\alpha}_{p,s}$$, 
+which is naturally bounded by the minimum and maximum angle variations of this PST. 
+
+### Impact of remedial actions on flows
+
+Now, let's estimate the actual flow on each monitored element $$\widehat{F_{i,s}}$$.
+We note $$\sigma_{i,s,g}$$ the sensitivity of the flow on the network element $$i$$ to the variation of
+generation $$g$$ in state $$s$$. We also note $$\sigma_{i,s,p}$$ the sensitivity of the flow on the network element $$i$$
+to the variation of PST angle $$p$$ in state $$s$$.
 
 These sensitivities are computed through derivation of the network equations.
 
-With $$F_{ref,i}$$ the calculated flow for each monitored element $$i$$ obtained as
+$$f^{ref}_{i,s}$$ is the calculated flow for each monitored element $$(i,s)$$ obtained as
 a security analysis result, we can get a linear estimation of the flow on each
-monitored branch $$i$$.
+monitored element $$(i,s)$$ after the application of remedial actions.
+
+- In the preventive state, only the remedial actions which are activated within the same state 
+can impact the flows. For $$s_0$$.
 
 $$
 \begin{align*}
-    & \widehat{F_{i}}=F_{ref,i}+\sum_{g}\Delta_{P,g}.\sigma_{i,g}+\sum_{t}\Delta_{\alpha,t}.\sigma_{i,t}
+    & \widehat{F_{i,s_0}}=f^{ref}_{i,s_0}+\sum_{g \in \mathcal{G}_{s_0}} \Delta^P_{g,s_0}.\sigma_{i,s_0,g} + \sum_{p \in \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s_0}. \sigma_{i,s_0,p}
 \end{align*}
 $$
 
-Associated cost of the remedial action can then be calculated as:
+- In the curative states, the flows are impacted by the remedial actions activated during the same state
+as well as by the remedial actions already activated in the preventive state. For $$s \neq s_0$$ :
 
 $$
 \begin{align*}
-    & \widehat{C}=\sum_{g}.C_g
+    & \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s  \cup \mathcal{G}_{s_0}} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s \cup \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
 \end{align*}
 $$
 
-The variable of the system are remedial actions activation variables $$\delta_{j}$$, continous remedial
-actions quantity variables $$q_j$$ and extra linearization variables $$p_j$$.
 
-Some other constraints must be fulfilled. First, for each remedial action $$i$$, $$RAM_i$$ must be positive.
+### objective function
+
+The objective function includes :
+- a primary objective which consists in the minimization of the network congestion (in MW of total congestions)
+- a secondary objective which is the minimization of the redispatching costs
+
+In the case where all congestions can be relieved by the remedial actions, the objective of the
+optimisation consists in looking for the cheapest combination of remedial actions
+which solves all congestions.
+
+The priority between the two objectives is handled with the congestion cost $$c^{cong}$$, which sets
+the weighting coefficient between the two linear component of the objective function.
 
 $$
 \begin{align*}
-    & RAM_i \geq 0
+    & \text{minimize}\sum_{s \in \mathcal{S}} (\sum_{g \in \mathcal{G}_s}.C_{g,s}) + c^{cong}. \sum_{(i,s) \in \mathcal{C}} \widehat{O_{i,s}}
 \end{align*}
 $$
 
-For keeping an equilibrium between generation and consumption on the network, another constraint enforces
-the sum of all generators redispatch to be 0.
+
+### Summary
 
 $$
 \begin{align*}
-    & \sum_{g}.\Delta_{P,g} = 0
+    & \text{minimize}\sum_{s \in \mathcal{S}} (\sum_{g \in \mathcal{G}_s}.C_{g,s}) + c^{cong}. \sum_{(i,s) \in \mathcal{C}} \widehat{O_{i,s}} \\
+    & \text{subject to} \\
+    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \quad C_{g,s} = X_{g,s}.c^{act}_{g} + \Delta^P_{g,s}.c^{var}_{g} \\
+    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \Delta^P_{g,s} \leq X_{g,s}.\overline{\delta^P_{g}} \\
+    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \Delta^P_{g,s} \geq X_{g,s}.\underline{\delta^P_g}  \\
+    & \forall s \in \mathcal{S}, \quad \sum_{g \in \mathcal{G}_s}.\Delta^P_{g,s} = 0 \\
+    & \forall s \in \mathcal{S}, \forall p \in \mathcal{P}_s, \quad \underline{\delta^{\alpha}_p} \leq \Delta^{\alpha}_{p,s} \leq \overline{\delta^{\alpha}_p}  \\
+    & \forall (i,s) \in \mathcal{C}, s=s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p} \\
+    & \forall (i,s) \in \mathcal{C}, s \neq s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s  \cup \mathcal{G}_{s_0}} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s \cup \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p} \\
+    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i}} \\
+    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i}} \\
 \end{align*}
 $$
 
-#### Summary
 
-$$
-\begin{align*}
-    & C_{opt} = \min \widehat{C} \\
-    & \widehat{C}=\sum_{g}.C_g \\
-    & \sum_{g}.\Delta_{P,g} = 0 \\
-    & \forall g \quad C_g = \delta_g.C_{act,g} + \Delta_{P,g}.C_{var,g} \\
-    & \forall g \quad \delta_{g}.\underline{\Delta_{P,g}} \leq \Delta_{P,g} \leq \delta_{g}.\overline{\Delta_{P,g}} \\
-    & \forall i \quad RAM_i \geq 0 \\
-    & \forall i \quad RAM_i =  F_{max,i} - \widehat{F_{i}} \\
-    & \forall i \quad \widehat{F_{i}}=F_{ref,i}+\sum_{g}\Delta_{P,g}.\sigma_{i,g}+\sum_{t}\Delta_{\alpha,t}.\sigma_{i,t} \\
-    & \forall t \quad \underline{\Delta_{\alpha,t}} \leq \Delta_{\alpha,t} \leq \overline{\Delta_{\alpha,t}}
-\end{align*}
-$$
-
-### Optimizer implementation
+## Optimizer implementation
 
 #### Pre-processors
 
-##### Reference flows calculation pre-processor
-
-This pre-processor compute a loadflow on the input network situation before and after applying contingencies. 
-Returns the list of monitored element Id's associated to it's reference flow on the basecase and after each contingencies.
-
 ##### Sensitivity calculation pre-processor
 
-Return sensitivity factors of monitored element flows for each remedial action (PST and redispatch).
+This pre-processor computes a loadflow and a sensitivity calculation on the input network situation before and after applying contingencies. 
+Returns the list of monitored element Id's associated to it's reference flow on the basecase and after each contingencies.
+Returns sensitivity factors of monitored element flows for each remedial action (PST and redispatch).
 
 #### Problem fillers
 
@@ -168,6 +237,10 @@ Set constraints on monitored element flows which has to respect positive margin 
 
 Set monitored element flows variables as equal to the reference flow on monitored elements on the base case and after contingencies. 
 
+##### Branch Overload Variables Filler
+
+Set monitored element overload variables which allows to relax the branch margins positivity constraints.
+
 ##### Generator Redispatch Costs Filler
 
 Set the total redispatch cost variable calculated with the equation of cost related to the use of the remedial action defined bellow. 
@@ -175,6 +248,14 @@ Set the total redispatch cost variable calculated with the equation of cost rela
 ##### Generator Redispatch Variables Filler
 
 Set redispatch variables for each remedial action generators. 
+
+##### Minimization Objective Filler
+
+Set the objective function as a minimization (in opposition to a maximization)
+
+##### Overload Penalty Cost Filler 
+
+Add the total congestion cost to the objective function.
 
 ##### PST Angle Impact on Branch Flow Filler
 
@@ -192,9 +273,9 @@ Set the constraint of power equilibrium for the redispatch.
 
 Set the redispatch impact on elements flow as equal to the sensitivity factor for each monitored elements the basecase and after contingencies.
 
-##### Redispatch CostMinimizationObjectiveFiller
+##### Redispatch Cost Minimization Objective Filler
 
-Set the objective function for the optimizer as the minimization of total redispatch cost. 
+Add the total redispatch cost to the objective function. 
 
 #### Post-processors
 
@@ -215,6 +296,17 @@ Fills the remedial actions optimization results with redispatch remedial actions
 
 As it is a mixed-integer linear problem, the recommended solver is [CBC](https://projects.coin-or.org/Cbc). 
 
+Some parameters allow to set stop criteria to the resolution of the mixed-integer linear problem :
+- stop criterion with a given relative MIP gap, and/or
+- stop criterion in solving time. 
+
+#### Other
+
+The closed optimisation RAO can also filter "unsignificant" sensitivities so as to speed up the computation by
+reducing the number of non-zero elements in the mixed-integer linear problem. Two thresholds can be configured, 
+one for the PST (in MW/tap) and one for the redispatching (in MW/MW) to define which sensitivity coefficients will be 
+filtered and so removed from the optimization problem.
+
 #### Recap: final configuration
 
 The final associated configuration for closed optimisation module is the following one.
@@ -222,6 +314,10 @@ The final associated configuration for closed optimisation module is the followi
 ```yaml
 closed-optimisation-rao-parameters:
     solver-type: CBC_MIXED_INTEGER_PROGRAMMING
+    relative-mip-gap: 0.001
+    max-time-in-seconds: 18000
+    redispatching-sensitivity-threshold: 0.05
+    pst-sensitivity-threshold: 1
     problem-fillers:
         - com.farao_community.farao.closed_optimisation_rao.fillers.BranchMarginsPositivityConstraintFiller
         - com.farao_community.farao.closed_optimisation_rao.fillers.BranchMarginsVariablesFiller
@@ -232,8 +328,10 @@ closed-optimisation-rao-parameters:
         - com.farao_community.farao.closed_optimisation_rao.fillers.RedispatchEquilibriumConstraintFiller
         - com.farao_community.farao.closed_optimisation_rao.fillers.RedispatchImpactOnBranchFlowFiller
         - com.farao_community.farao.closed_optimisation_rao.fillers.RedispatchCostMinimizationObjectiveFiller
+        - com.farao_community.farao.closed_optimisation_rao.fillers.BranchOverloadVariablesFiller
+        - com.farao_community.farao.closed_optimisation_rao.fillers.MinimizationObjectiveFiller
+        - com.farao_community.farao.closed_optimisation_rao.fillers.OverloadPenaltyCostFiller
     pre-processors:
-        - com.farao_community.farao.closed_optimisation_rao.pre_processors.ReferenceFlowsPreProcessor
         - com.farao_community.farao.closed_optimisation_rao.pre_processors.SensitivityPreProcessor
     post-processors:
         - com.farao_community.farao.closed_optimisation_rao.post_processors.BranchResultsPostProcessor
