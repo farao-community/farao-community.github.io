@@ -30,7 +30,7 @@
     "gulp-uglify": "^3.0.0",
     "cryptiles": ">=4.1.2",
     "minimatch": ">=3.0.2",
-    "lodash": ">=4.17.11",
+    "lodash": ">=4.17.13",
     "extend": ">=3.0.2"
   }
 }
