@@ -63,8 +63,8 @@ remedial actions optimisation is called to find the cheaper solution for solving
 
 Let's note $$\widehat{F_{i,s}}$$ the estimated flow for a network element $$i$$, monitored in state $$s$$.
 
-The estimated flow on a monitored element should ideally be within its admissible transmition
-limits, $$-f^{max}_i,s$$ and $$f^{max}_i,s$$.
+The estimated flow on a monitored element should ideally be within its admissible transmission
+limits, $$-f^{max}_{i,s}$$ and $$f^{max}_{i,s}$$.
 
 However, some overloads might be unavoidable. The overload on a monitored element $$(i,s)$$ 
 is noted $$\widehat{O_{i,s}}$$. Overloads can be either on the upper or lower limit of a network 
@@ -72,8 +72,8 @@ elements, they are linked to the estimated flows with the two following constrai
 
 $$
 \begin{align*}
-    & \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i}}
-    & \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i}}
+    & \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i,s}}
+    & \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i,s}}
 \end{align*}
 $$
 
@@ -146,7 +146,7 @@ PST activable in the state $$s$$.
 An angle variation of PST $$p$$ in a state $$s$$ is represented by the variable $$\Delta^{\alpha}_{p,s}$$, 
 which is naturally bounded by the minimum and maximum angle variations of this PST. 
 
-### impact of remedial actions on flows
+### Impact of remedial actions on flows
 
 Now, let's estimate the actual flow on each monitored element $$\widehat{F_{i,s}}$$.
 We note $$\sigma_{i,s,g}$$ the sensitivity of the flow on the network element $$i$$ to the variation of
@@ -203,26 +203,16 @@ $$
 $$
 \begin{align*}
     & \text{minimize}\sum_{s \in \mathcal{S}} (\sum_{g \in \mathcal{G}_s}.C_{g,s}) + c^{cong}. \sum_{(i,s) \in \mathcal{C}} \widehat{O_{i,s}} \\
-
-    & \text{subject to}
-
-    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \quad C_{g,s} = X_{g,s}.c^{act}_{g} + \Delta^P_{g,s}.c^{var}_{g}
-
-    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \Delta^P_{g,s} \leq X_{g,s}.\overline{\delta^P_{g}}
-
-    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \Delta^P_{g,s} \geq X_{g,s}.\underline{\delta^P_g} 
-
-    & \forall s \in \mathcal{S}, \quad \sum_{g \in \mathcal{G}_s}.\Delta^P_{g,s} = 0
-
-    & \forall s \in \mathcal{S}, \forall p \in \mathcal{P}_s, \quad \underline{\delta^{\alpha}_p} \leq \Delta^{\alpha}_{p,s} \leq \overline{\delta^{\alpha}_p} 
-
-    & \forall (i,s) \in \mathcal{C}, s=s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
-
-    & \forall (i,s) \in \mathcal{C}, s \neq s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s  \cup \mathcal{G}_{s_0}} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s \cup \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p}
-
-    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i}}
-
-    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i}}
+    & \text{subject to} \\
+    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \quad C_{g,s} = X_{g,s}.c^{act}_{g} + \Delta^P_{g,s}.c^{var}_{g} \\
+    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \Delta^P_{g,s} \leq X_{g,s}.\overline{\delta^P_{g}} \\
+    & \forall s \in \mathcal{S}, \forall g \in \mathcal{G}_s, \Delta^P_{g,s} \geq X_{g,s}.\underline{\delta^P_g}  \\
+    & \forall s \in \mathcal{S}, \quad \sum_{g \in \mathcal{G}_s}.\Delta^P_{g,s} = 0 \\
+    & \forall s \in \mathcal{S}, \forall p \in \mathcal{P}_s, \quad \underline{\delta^{\alpha}_p} \leq \Delta^{\alpha}_{p,s} \leq \overline{\delta^{\alpha}_p}  \\
+    & \forall (i,s) \in \mathcal{C}, s=s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p} \\
+    & \forall (i,s) \in \mathcal{C}, s \neq s_0, \quad \widehat{F_{i,s}}=f^{ref}_{i,s}+\sum_{g \in \mathcal{G}_s  \cup \mathcal{G}_{s_0}} \Delta^P_{g,s}.\sigma_{i,s,g} + \sum_{p \in \mathcal{P}_s \cup \mathcal{P}_{s_0}} \Delta^{\alpha}_{p,s}. \sigma_{i,s,p} \\
+    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \leq f^{max}_i - \widehat{O_{i}} \\
+    & \forall (i,s) \in \mathcal{C}, \quad \widehat{F_{i,s}} \geq -f^{max}_i + \widehat{O_{i}} \\
 \end{align*}
 $$
 
@@ -233,7 +223,7 @@ $$
 
 ##### Sensitivity calculation pre-processor
 
-This pre-processor compute a loadflow and a sensitivity calculation on the input network situation before and after applying contingencies. 
+This pre-processor computes a loadflow and a sensitivity calculation on the input network situation before and after applying contingencies. 
 Returns the list of monitored element Id's associated to it's reference flow on the basecase and after each contingencies.
 Returns sensitivity factors of monitored element flows for each remedial action (PST and redispatch).
 
