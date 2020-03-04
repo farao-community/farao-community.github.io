@@ -90,7 +90,6 @@ Therefore we want to maximize:
   
 $$MM - \sum_{p \in \mathcal{P}} ( \Delta^{+}_{p} + \Delta^{-}_{p}) c^{RA}$$
 
-
 ### Verification and loop
 
 The linearization of the effects of the remedial actions on the network is only an approximation and is not exact.
@@ -109,6 +108,49 @@ If one wishes to only optimize remedial actions that can vary in a given range, 
 ```yaml
 rao:
     default: LinearRao
+```
+
+**XML version**
+
+```xml
+<rao>
+    <default>LinearRao</default>
+</rao>
+```
+
+Several options are available for this RAO provider:
+
+**YAML version**
+```yaml
+linear-rao-parameters:
+    max-number-of-iterations: 5
+    security-analysis-without-rao: false
+```
+
+**XML version**
+
+```xml
+<linear-rao-parameters>
+    <max-number-of-iterations>5</max-number-of-iterations>
+    <security-analysis-without-rao>false</security-analysis-without-rao>
+</linear-rao-parameters>
+```
+
+And more coming soon! (options to change objective function, include loopflows etc...)
+
+## Installing OR-Tools
+
+OR-Tools project provides some pre-compiled bundles for different platforms/operating systems. If you just need
+standard open-source solvers, you can download the one provided for your platform on
+[that page](https://github.com/google/or-tools/releases/). If any third party solver is expected, you may have
+to build it from source. For information about how to build OR-Tools, please refer to the
+[OR-Tools website](https://developers.google.com/optimization/install/java/). 
+
+After getting OR-Tools downloaded or installed, set your environment variables.
+
+```bash
+export PATH=$PATH:<or-tools-dir>/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<or-tools-dir>/lib
 ```
 
 
