@@ -1,3 +1,10 @@
+# To launch the website locally, you need to:
+* set GEM_HOME variable in a repository where you have admin rights
+* add GEM_HOME/bin to your PATH variable
+* install ruby: see https://jekyllrb.com/docs/installation/other-linux/
+* install bundle: run 'gem install bundler -v "=1.17.1" '
+* run 'bundle install'
+
 # Type on Strap 
 
 [![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/Sylhare/Type-on-Strap) 
