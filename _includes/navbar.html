@@ -35,7 +35,17 @@
         {% endif %}
         {% assign name_page = page.title | append: name_page %}
         {% endif %}
-        {% endfor %} 
+        {% endfor %}
+
+        <!-- Add Contributing link -->
+        {% if site.theme_settings.contribute_link and site.theme_settings.contribute_link.enabled %}
+        <li class="separator"> | </li>
+        <li>
+            <a class="clear" href="{{ site.theme_settings.contribute_link.url }}">
+                {{ site.theme_settings.contribute_link.name }}
+            </a>
+        </li>
+        {% endif %}
         
         <!-- Auto Generation of SPECIAL pages in the navbar -->
         {% for item in site.theme_settings.special_page %}
