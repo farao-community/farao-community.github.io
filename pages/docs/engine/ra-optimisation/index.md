@@ -121,11 +121,6 @@ The following example shows how to run a remedial actions optimisation, using th
 $> itools ra-optimisation --case-file case.uct --crac-file crac.json
 ```
 
-### Via FARAO-GSE:
-
-Please refer to [FARAO-GSE user guide](../../gse/user-guide.md) for explanations about remedial action optimisation study in
-FARAO-GSE.
-
 ### Via direct code usage:
 
 #### Maven configuration
