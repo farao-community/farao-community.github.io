@@ -38,7 +38,6 @@ On both stop criteria, additional constraints can be added, for example:
 
 These two additional criteria can be applied without considering the actual objective function.
 
-
 ### Algorithm
 
 ![Search tree RAO algorithm](/assets/img/search-tree-rao-algo.png)

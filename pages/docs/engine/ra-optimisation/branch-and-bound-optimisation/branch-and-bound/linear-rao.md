@@ -15,7 +15,6 @@ In particular, the Linear RAO module is called in the [Search Tree RAO module](/
 
 ### Inputs
 
-See the page dedicated on the rao-api.
 
 The main inputs of the algorithm are:
 - the network of the "initial situation", where the remedial actions are supposed to be at their "standard position",
@@ -28,10 +27,6 @@ The Crac is updated by the linear RAO, as most of the results of the RAO are sto
 ### Others
 
 If the RAO finds several equivalent solutions, it keeps the one with the setpoints that are the closest to their standard position.
-
-#### RaoParameters
-
-The parameters specific to the linear Rao are described in Linear RAO configuration.
 
 ### Algorithm
 
