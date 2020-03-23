@@ -9,7 +9,9 @@ tags: [Docs, Branch & Bound RAO]
 
 ### Overview
 
-The Linear RAO optimizes the Range Actions (for now, only PSTs) according to a configurable objective function (e.g. maximization of the minimum margin). The solving algorithm approximates the impact of the Remedial Actions on the network flows with linear sensitivity coefficients. It therefore solves linear optimisation problems to find the optimal application of the Remedial Actions. Moreover, it can iterate over several reference points in order to mitigate the linear approximation inherent to its optimisation problems.
+The Linear RAO optimizes the Range Actions (for now, only PSTs) according to a configurable objective function (e.g. maximization of the minimum margin). The solving algorithm approximates the impact of the Remedial Actions on the network flows with linear sensitivity coefficients. It therefore solves [linear optimisation problems](/docs/engine/ra-optimisation/branch-and-bound/linear-optimisation-problem) to find the optimal application of the Remedial Actions. Moreover, it can iterate over several reference points in order to mitigate the linear approximation inherent to its optimisation problems.
+
+In particular, the Linear RAO module is called in the [Search Tree RAO module](/docs/engine/ra-optimisation/branch-and-bound/search-tree-rao).
 
 ### Inputs
 
