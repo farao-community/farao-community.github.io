@@ -21,7 +21,7 @@ and CRAC objects. A first prototype is currently available in FARAO. Please refe
 about closed optimisation RAO module.
 - ***Branch & Bound RAO*** engine: an efficient implementation of RAO interface for dealing with combinatorial problem of
 remedial actions optimisation mixing topological actions, and combined preventive/curative optimisation. This module
-is being developed in FARAO toolbox. Please refer to [FARAO roadmap](/roadmap) for information about current
+is being developed in FARAO toolbox. Please refer to the [dedicated documentation page](/docs/engine/ra-optimisation/branch-and-bound) to get more information about the module, and to the [FARAO roadmap](/roadmap) for information about current
 implementation plan.
 
 ### Flowbased
