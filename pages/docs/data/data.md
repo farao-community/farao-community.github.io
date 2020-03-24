@@ -14,14 +14,6 @@ The network data model used by FARAO toolbox is the PowSyBl IIDM format.
 To get detailed information about the network model, please refer to [dedicated documentation](https://powsybl.github.io/docs/iidm/model)
 on PowSyBl website.
 
-### GLSK
-
-GLSK (for "*Generation and Load Shift Keys*") are objects dedicated to define scaling strategies
-to simulate injections modification on network model.
-
-GLSK objects are not yet available in FARAO toolbox. Please refer to [FARAO roadmap](/roadmap) for information
-about current implementation plan.
-
 ### CRAC
 
 CRAC (for "*Contingency list, Remedial Actions and additional Constraints*") are objects dedicated to define security
@@ -29,8 +21,12 @@ domain of the network object. They define contingencies to take into account in 
 process, constraint to monitor and remedial actions available to get rid of potential
 active constraints.
 
-Please refer to the [dedicated documentation page](/docs/data/crac) to get more information about FARAO CRAC
-data model. 
+Please refer to the [dedicated documentation page](/docs/data/crac) to get more information about FARAO CRAC data model.
+
+### GLSK
+
+GLSK (for "*Generation and Load Shift Keys*") are objects dedicated to define scaling strategies
+to simulate injections modification on network model.
 
 ### CNE
 

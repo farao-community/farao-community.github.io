@@ -17,14 +17,12 @@ tags: [Docs]
 
 - CIM GLSK
 - JSON GLSK
+- UCT GLSK
 
 ### CRAC exchange formats
 
-- CIM CRAC
 - JSON CRAC
-- XLSX CRAC
 
 ### CNE exchange formats
 
-- CIM CNE
-- JSON CNE
+Coming soon...

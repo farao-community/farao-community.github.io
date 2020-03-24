@@ -25,14 +25,14 @@ Closed optimisation implementation of RAO feature is the conversion of RAO probl
 For more information regarding closed optimisation engine, and available optimisation problem converters,
 please refer to the [dedicated documentation](/docs/engine/ra-optimisation/closed-optimisation-rao).  
 
-### Branch & Bound optimisation
+### Search tree remedial action optimisation
 
 [Branch & Bound algorithm](https://en.wikipedia.org/wiki/Branch_and_bound) is an efficient implementation of RAO interface for dealing with combinatorial
 and non linear problem of remedial actions optimisation mixing topological actions, and combined
-preventive/curative optimisation.
+preventive/curative optimisation. The search tree RAO developed in FARAO is based on this algorithm.
 
 This module is being developed in FARAO toolbox. Please refer to [FARAO roadmap](/roadmap) for
-information about current implementation plan. For more information on this implementation, please refer to the [dedicated documentation](/docs/engine/ra-optimisation/branch-and-bound).
+information about current implementation plan. For more information on this implementation, please refer to the [dedicated documentation](/docs/engine/ra-optimisation/search-tree-rao).
 
 ## Using RAO function
 

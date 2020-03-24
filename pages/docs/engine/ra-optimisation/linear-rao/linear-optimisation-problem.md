@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Linear optimisation problem
-permalink: /docs/engine/ra-optimisation/branch-and-bound/linear-optimisation-problem
+permalink: /docs/engine/ra-optimisation/linear-optimisation-problem
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Docs, Branch & Bound RAO]
+tags: [Docs, Search Tree RAO]
 ---
 
 # Overview
@@ -13,10 +13,10 @@ The main decision variables of the linear optimisation problem are the setpoints
 
 The first objective function which will be implemented for this linear optimisation problem is the maximum margin.
 
-During the [search tree RAO process](/docs/engine/ra-optimisation/branch-and-bound/search-tree-rao), the linear optimisation problem is solved multiple times:
+During the [search tree RAO process](/docs/engine/ra-optimisation/search-tree-rao), the linear optimisation problem is solved multiple times:
 - for different perimeters (e.g. before outage, after outage)
 - with different activated Network Remedial Action (Network Actions are not optimized within the linear optimisation)
-- with sensitivities computed around different combinaison of Range Action setpoints. During the algorithm of the [linear RAO](/docs/engine/ra-optimisation/branch-and-bound/linear-rao), the sensitivities are re-computed and the linear optimisation problem re-solved every time that a new optimal combination of PST setpoints is found.
+- with sensitivities computed around different combinaison of Range Action setpoints. During the algorithm of the [linear RAO](/docs/engine/ra-optimisation/linear-rao), the sensitivities are re-computed and the linear optimisation problem re-solved every time that a new optimal combination of PST setpoints is found.
 
 # Problem formulation
 
