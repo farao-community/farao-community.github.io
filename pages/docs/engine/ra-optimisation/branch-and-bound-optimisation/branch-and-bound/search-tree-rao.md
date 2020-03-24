@@ -23,8 +23,6 @@ The main inputs of the algorithm are:
 
 ### Stop criterion
 
-Technical documentation: Configuration
-
 Considering that the objective function is the minimum margin (meaning the minimum of all flow margins of every CNEC), there are currently two stop criteria, so to say two ways to stop the search tree algorithm:
 - when the minimum margin is positive, meaning that the network is secured (all the CNEC flows are under line thresholds): **positive margin** stop criterion,
 - when the the minimal margin on every CNEC cannot be increased anymore: **maximum margin** stop criterion.
