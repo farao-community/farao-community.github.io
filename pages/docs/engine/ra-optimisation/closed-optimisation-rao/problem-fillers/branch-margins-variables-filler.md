@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Branches margin variables filler
 hide: true
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao/problem-fillers/branch-margin-variables-filler
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
+category: Computation engines
 ---
 
 This optimisation problem filler plugin is responsible for adding variables and associated constraints regarding actual

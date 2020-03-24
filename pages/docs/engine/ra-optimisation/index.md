@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Remedial Actions Optimization interface
 permalink: /docs/engine/ra-optimisation
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
+category: "Computation engines"
 ---
 
 FARAO provides a common interface for remedial actions optimisation features. This way, it may be possible to
@@ -23,7 +24,7 @@ Closed optimisation implementation of RAO feature is the conversion of RAO probl
 [Mixed-Integer Linear Programming](https://en.wikipedia.org/wiki/Integer_programming) (MILP) problem. This problem can then be solved using different solvers.
 
 For more information regarding closed optimisation engine, and available optimisation problem converters,
-please refer to the [dedicated documentation](closed-optimisation-rao/index.md).  
+please refer to the [dedicated documentation](/docs/engine/ra-optimisation/closed-optimisation-rao).  
 
 ### Branch & Bound optimisation
 
@@ -31,8 +32,8 @@ please refer to the [dedicated documentation](closed-optimisation-rao/index.md).
 and non linear problem of remedial actions optimisation mixing topological actions, and combined
 preventive/curative optimisation.
 
-This module is not yet available in FARAO toolbox. Please refer to [FARAO roadmap](./roadmap.md) for
-information about current implementation plan.
+This module is being developed in FARAO toolbox. Please refer to [FARAO roadmap](/roadmap) for
+information about current implementation plan. For more information on this implementation, please refer to the [dedicated documentation](/docs/engine/ra-optimisation/branch-and-bound).
 
 ## Using RAO function
 
@@ -120,11 +121,6 @@ The following example shows how to run a remedial actions optimisation, using th
 ```shell
 $> itools ra-optimisation --case-file case.uct --crac-file crac.json
 ```
-
-### Via FARAO-GSE:
-
-Please refer to [FARAO-GSE user guide](../../gse/user-guide.md) for explanations about remedial action optimisation study in
-FARAO-GSE.
 
 ### Via direct code usage:
 
