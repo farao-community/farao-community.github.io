@@ -10,17 +10,6 @@ Below is the roadmap of future major releases of FARAO, with the associated func
 and a foreseen due date. It is important to understand that these due dates may be subject to
 change due to unforeseen complexity in implementing features or priority changes. 
 
-### First optimiser release: v*1.0.0* (December 2018)
-
-- Simple CRAC model
-- **XLSX** CRAC file importer
-- Closed optimisation engine
-- Closed optimisation plugins for PST taps & redispatch cost minimization
-- Simple RAO results model
-- JSON RAO results exporter
-- **CSVs** RAO results exporter
-- Study environment based on PowSyBl GSE framework
-
 ### Partial release of the search-tree RAO: v*2.0.0* (March 2020) - *FARAO Black Forest cake*
 
 - Optimisation of **preventive** PST and **topological** remedial actions
