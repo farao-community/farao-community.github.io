@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Closed optimisation modular engine
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
+category: Computation engines
 ---
 
 Closed optimisation implementation of RAO functionality is built as a modular

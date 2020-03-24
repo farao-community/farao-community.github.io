@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Closed optimisation RAO parameters configuration
 permalink: /docs/configuration/closed-optimisation-rao-parameters
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
+category: Configuration
 ---
 
 The ```closed-optimisation-rao-parameters``` module is used everytime a closed optimisation RAO job is run.

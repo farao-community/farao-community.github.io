@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: FARAO platform configuration
 permalink: /docs/configuration
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
+category: Configuration
 ---
 
 ## Platform configuration

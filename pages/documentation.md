@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Documentation
 permalink: /docs/
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"

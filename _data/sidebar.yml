@@ -1,0 +1,34 @@
+menu:
+  - name: "Business data"
+    url: /docs/data
+    items:
+      - name: "Network"
+        url: https://www.powsybl.org/docs/iidm/model/
+      - name: "GLSK"
+        url: /docs/data/glsk
+      - name: "CRAC"
+        url: /docs/data/crac
+      - name: "CNE"
+        url: /docs/data/cne
+      - name: "Exchange standards"
+        url: /docs/format
+  - name: "Computation engines"
+    url: /docs/engine
+    items:
+      - name: "Remedial actions optimisation"
+        url: /docs/engine/ra-optimisation
+        items:
+        - name: "Closed optimisation RAO"
+          url: /docs/engine/ra-optimisation/closed-optimisation-rao
+        - name: "Branch & Bound RAO"
+          url: /docs/engine/ra-optimisation/branch-and-bound
+      - name: "Flowbased"
+        url: /docs/engine/flowbased
+      - name: "Flow decomposition"
+        url: /docs/engine/flow-decomposition
+      - name: "Loadflow"
+        url: https://www.powsybl.org/docs/tools/loadflow.html
+      - name: "Sensitivity analysis"
+        url: https://www.powsybl.org/docs/tools/sensitivity-computation.html
+  - name: "Configuration"
+    url: /docs/configuration.html

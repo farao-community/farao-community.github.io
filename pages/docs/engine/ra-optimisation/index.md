@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Remedial Actions Optimization interface
 permalink: /docs/engine/ra-optimisation
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
+category: "Computation engines"
 ---
 
 FARAO provides a common interface for remedial actions optimisation features. This way, it may be possible to

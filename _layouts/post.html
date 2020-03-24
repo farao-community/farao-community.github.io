@@ -10,11 +10,11 @@ layout: default
     </p>
   </header>
   <section class="post-content">
-  {% if page.bootstrap %}
+  {% if page.bootstrap or layout.bootstrap %}
   <div class="bootstrap-iso">
   {% endif %}
     {{ content }}
-  {% if page.bootstrap %}
+  {% if page.bootstrap or layout.bootstrap %}
   </div>
   {% endif %}
   </section>

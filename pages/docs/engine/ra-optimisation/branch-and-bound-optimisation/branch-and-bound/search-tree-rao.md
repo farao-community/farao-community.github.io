@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Search tree RAO
 permalink: /docs/engine/ra-optimisation/branch-and-bound/search-tree-rao
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Branch & Bound RAO]
+category: Computation engines
 ---
 
 ### Overview

@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Linear optimisation problem
 permalink: /docs/engine/ra-optimisation/branch-and-bound/linear-optimisation-problem
 hide: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Branch & Bound RAO]
+category: Computation engines
 ---
 
 # Overview
