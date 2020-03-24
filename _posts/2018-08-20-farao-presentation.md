@@ -2,7 +2,7 @@
 layout: post
 title: Welcome in FARAO community
 category: edito
-tags: [Edito, powsybl, coordination, FARAO]
+tags: [Edito, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---
 

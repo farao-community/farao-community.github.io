@@ -28,7 +28,6 @@ plugin for computation engines.
 local computation manager, for running computation engines locally.
 - [default-computation-manager](https://powsybl.github.io/docs/configuration/modules/default-computation-manager.html):
 Configuration of computation managers to be used by default.
-- [farao-gse](farao-gse.md): FARAO-GSE application configuration.
 - [load-flow-default-parameters](https://powsybl.github.io/docs/configuration/modules/load-flow-default-parameters.html): Common
 parameters for LoadFlow computation services.
 - [local-app-file-system](https://powsybl.github.io/docs/configuration/modules/local-app-file-system.html): Configuration
