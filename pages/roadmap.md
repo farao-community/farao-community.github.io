@@ -21,8 +21,16 @@ change due to unforeseen complexity in implementing features or priority changes
 - **CSVs** RAO results exporter
 - Study environment based on PowSyBl GSE framework
 
+### Partial release of the search-tree RAO: v*2.0.0* (March 2020) - *FARAO Black Forest cake*
 
-### First operational release of the search-tree RAO: FARAO Blackforest v*2* (July 2020)
+- Optimisation of **preventive** PST and **topological** remedial actions
+- **Objective function** : maximize (min. margin)
+- Branch monitored in both directions, with **thresholds defined in MW**
+- Branch monitored in **N and N-1 states**
+- **AC computations** (for load flow and sensitivity analyses)
+
+
+### First operational release of the search-tree RAO: v*3.0.0* (July 2020) - *FARAO Cinnamon roll*
 
 - Optimisation of **preventive** PST and **topological** remedial actions
 - **Two possible objective functions** : maximize (min. margin) and maximize (pos. margin)
@@ -31,9 +39,7 @@ change due to unforeseen complexity in implementing features or priority changes
 - **AC and DC computations** (for load flow and sensitivity analyses)
 - Limitation of **loopflows** in the RAO, as described in the ACER methodology
 
-![FARAO blackforest](/assets/img/portfolio/cake.png)
-
-### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*3.0.0* (December 2020)
+### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*4.0.0* (December 2020) - *FARAO Dobos torte*
 
 - Optimisation of **curative** PST and topological remedial actions
 - rest of the scope yet to be defined
