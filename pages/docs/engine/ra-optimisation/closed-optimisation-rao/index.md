@@ -23,11 +23,11 @@ objects and CRAC files for example - and generic OR-Tools optimisation solver wr
 
 An important feature of closed optimisation engine is that it is built to be extended via simple plugins.
 Each plugin is responsible of creating some variables, constraints or even objective function. It can even
-modify some existing constraints and/or variable. We call such plugin a [problem-filler](problem-fillers/index.md).
+modify some existing constraints and/or variable. We call such plugin a [problem-filler](/docs/engine/ra-optimisation/closed-optimisation-rao/problem-fillers).
 
 These problem-fillers may need some external data to be able to define these optimisation elements. For example,
 one may need the results from a sensitivity computation to define the impact on monitored branches of a generation
-shift at one node. These external data are provided by plugins called [pre-processors](pre-processors/index.md), that
+shift at one node. These external data are provided by plugins called [pre-processors](/docs/engine/ra-optimisation/closed-optimisation-rao/pre-processors), that
 are run before the problem construction. 
 
 ### Available solver
@@ -65,9 +65,9 @@ To run RAO computation using Closed optimisation engine, one have to configure t
 module to indicate the implementation to use for the `com.farao_community.farao.ra_optimisation.RaoComputationFactory`,
 by setting the `RaoComputationFactory` property.
 
-Moreover, specific configuration has to be provided via [closed-optimisation-rao-parameters](../../../configuration/closed-optimisation-rao-parameters.md)
+Moreover, specific configuration has to be provided via [closed-optimisation-rao-parameters](/docs/configuration/closed-optimisation-rao-parameters)
 module, to indicate the plugins to be used to generate the optimisation problem, as the list of
-[problem fillers](problem-fillers/index.md), [pre-processors](pre-processors/index.md) and [post-processors](post-processors/index.md).
+[problem fillers](/docs/engine/ra-optimisation/closed-optimisation-rao/problem-fillers), [pre-processors](/docs/engine/ra-optimisation/closed-optimisation-rao/pre-processors) and [post-processors](/docs/engine/ra-optimisation/closed-optimisation-rao/post-processors).
 
 #### YAML version
 
@@ -115,4 +115,4 @@ closed-optimisation-rao-parameters:
 
 Some examples of problem instanciation in closed optimisation engine for concrete projects are
 available:
-- [Optimal redispatch](optimal-redispatch.md)
+- [Optimal redispatch](/docs/engine/ra-optimisation/closed-optimisation-rao/optimal-redispatch)
