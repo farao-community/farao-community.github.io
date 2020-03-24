@@ -10,7 +10,7 @@ Below is the roadmap of future major releases of FARAO, with the associated func
 and a foreseen due date. It is important to understand that these due dates may be subject to
 change due to unforeseen complexity in implementing features or priority changes. 
 
-### Partial release of the search-tree RAO: v*2.0.0* (March 2020) - *FARAO Black Forest cake*
+### Partial release of the search-tree RAO: v*2.0.0* (March 2020)
 
 - Optimisation of **preventive** PST and **topological** remedial actions
 - **Objective function** : maximize (min. margin)
@@ -19,7 +19,7 @@ change due to unforeseen complexity in implementing features or priority changes
 - **AC computations** (for load flow and sensitivity analyses)
 
 
-### First operational release of the search-tree RAO: v*3.0.0* (July 2020) - *FARAO Cinnamon roll*
+### First operational release of the search-tree RAO: v*3.0.0* (July 2020)
 
 - Optimisation of **preventive** PST and **topological** remedial actions
 - **Two possible objective functions** : maximize (min. margin) and maximize (pos. margin)
@@ -28,7 +28,7 @@ change due to unforeseen complexity in implementing features or priority changes
 - **AC and DC computations** (for load flow and sensitivity analyses)
 - Limitation of **loopflows** in the RAO, as described in the ACER methodology
 
-### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*4.0.0* (December 2020) - *FARAO Dobos torte*
+### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*4.0.0* (December 2020)
 
 - Optimisation of **curative** PST and topological remedial actions
 - rest of the scope yet to be defined
