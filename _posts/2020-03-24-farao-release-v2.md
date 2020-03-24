@@ -10,7 +10,7 @@ FARAO team is pleased to inform that the latest version of FARAO has been releas
 
 Good things come in pairs, the website has been updated:
 - the new [roadmap](/roadmap) is available,
-- the documentation is enriched, especially for the new features on [Branch & Bound RAO](/docs/engine/ra-optimisation/branch-and-bound).
+- the documentation is enriched, especially for the new features on [Search Tree RAO](/docs/engine/ra-optimisation/search-tree-rao).
 
 For any question, don't hesitate to contact us using the [FARAO Spectrum community](https://spectrum.chat/farao-community).
 
