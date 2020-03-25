@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Test data for FARAO has been open-sourced
-category: blog
+category: news
 tags: [RAO, FARAO, Data]
 excerpt_separator: <!--more-->
 ---

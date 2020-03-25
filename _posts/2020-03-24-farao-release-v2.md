@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FARAO v2.0.0 has been released
-category: blog
+category: news
 tags: [RAO, FARAO, Data]
 excerpt_separator: <!--more-->
 ---

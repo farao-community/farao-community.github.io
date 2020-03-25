@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A step towards FARAO open-sourcing
-category: blog
+category: news
 tags: [RAO, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---

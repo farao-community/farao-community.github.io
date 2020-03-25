@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FARAO code base is open-source
-category: blog
+category: news
 tags: [RAO, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---
