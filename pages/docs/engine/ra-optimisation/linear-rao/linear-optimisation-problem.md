@@ -32,7 +32,7 @@ $$\mathcal{B}$$ : set of monitored Branches
 $$\mathcal{C}$$ : set of Contingencies
 
 
-$$\mathcal{I}$$ : ordered set of instants. The preventive instant, noted $i=0$, is the first element of this ordered set.
+$$\mathcal{I}$$ : ordered set of instants. The preventive instant, noted $$i=0$$, is the first element of this ordered set.
 
 
 $$NEC$$ : set of "Network Element and Contingency". $$NEC \subset \mathcal{B} \times \mathcal{C} \times \mathcal{I} $$
@@ -52,13 +52,13 @@ $$f^{ref}_{b,c,i}$$ : reference flows, defined $$\forall (b,c,i) \in NEC$$.
 $$f^{max}_{b,c,i} and f^{min}_{b,c,i}$$ : maximum and minimum flow thresholds, defined $$\forall (b,c,i) \in NEC$$.
 
 
-$$\sigma_{b,c,i,p}$$ : sensitivity of PST $p$ on the flow of NEC $$(b,c,i)$$.
+$$\sigma_{b,c,i,p}$$ : sensitivity of PST $$p$$ on the flow of NEC $$(b,c,i)$$.
 
 
 $$\alpha^{0}_{0}$$ : initial angle of PST remedial actions $$p$$. As described in the input network of the linear RAO.
 
 
-$$\alpha^{n}_{p}$$ : angle of the PST remedial actions $p$ around which the sensitivities $$\sigma_{b,c,i,p}$$ are computed (in the first iteration of the linear RAO $$\alpha^{n}_{p} = \alpha^{0}_{p}$$
+$$\alpha^{n}_{p}$$ : angle of the PST remedial actions $$p$$ around which the sensitivities $$\sigma_{b,c,i,p}$$ are computed (in the first iteration of the linear RAO $$\alpha^{n}_{p} = \alpha^{0}_{p}$$
 
 
 $$\overline{\alpha_{p}}$$ and $$\underline{\alpha_{p}}$$ : maximum and minimum angle of PST remedial actions $$p$$.
