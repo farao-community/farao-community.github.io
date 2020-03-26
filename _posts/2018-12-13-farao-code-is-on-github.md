@@ -2,6 +2,7 @@
 layout: post
 title: FARAO code base is open-source
 category: news
+feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [RAO, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---

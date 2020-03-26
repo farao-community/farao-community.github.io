@@ -2,6 +2,7 @@
 layout: post
 title: Welcome in FARAO community
 category: edito
+feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Edito, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---

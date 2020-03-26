@@ -2,6 +2,7 @@
 layout: post
 title: FARAO v2.0.0 has been released
 category: news
+feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [RAO, FARAO, Data]
 excerpt_separator: <!--more-->
 ---
