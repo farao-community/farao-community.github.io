@@ -1,9 +1,8 @@
 ---
-layout: page
-title: About
-permalink: /about/
+layout: home
+permalink: /
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Edito]
+hide: true
 ---
 
 FARAO is an open source project aiming at providing an efficient solution for electrical power systems'

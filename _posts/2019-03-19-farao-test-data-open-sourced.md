@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Test data for FARAO has been open-sourced
-category: blog
+category: news
+feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [RAO, FARAO, Data]
 excerpt_separator: <!--more-->
 ---

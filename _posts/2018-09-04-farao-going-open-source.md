@@ -1,7 +1,8 @@
 ---
 layout: post
 title: A step towards FARAO open-sourcing
-category: blog
+category: news
+feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [RAO, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---
