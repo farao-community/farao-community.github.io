@@ -28,7 +28,7 @@ change due to unforeseen complexity in implementing features or priority changes
 - **AC and DC computations** (for load flow and sensitivity analyses)
 - Limitation of **loopflows** in the RAO, as described in the ACER methodology
 
-### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*4.0.0* (December 2020)
+### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*4.0.0* (October 2020)
 
 - Optimisation of **curative** PST and topological remedial actions
-- rest of the scope yet to be defined
+
