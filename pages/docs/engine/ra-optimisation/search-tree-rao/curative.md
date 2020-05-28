@@ -67,6 +67,7 @@ value can be increased through the application of this action) when compared wit
 - When studying the flow in curative (“3- After curative”), PATL applies, and the CNEC is initially seen in overload 
 against this limit due to applied preventive actions. Curative actions should then normally make the flow go below the PATL value.
 
+![Different thresholds for different instants](/assets/img/curative1.png)
 
 ## Extension of the preventive perimeter to the curative situation when no curative actions are available
 
@@ -80,3 +81,5 @@ This ensures that the optimisation avoids finding a preventive solution where th
 the PATL and TATL value. If such preventive solution were selected, due to the unavailability of curative action, the 
 flow in curative would remain higher than the PATL value, which would correspond to an overload on the grid element 
 (situation for Outage 2 in the figure below).
+
+![Curative CNEC in preventive example](/assets/img/curative2.png)
