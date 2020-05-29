@@ -7,7 +7,7 @@ feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Search Tree RAO]
 ---
 
-## Preventive and curative parameters
+## Preventive and curative parameters (Coming later on...)
 
 To be able to face the combinatorial complexity of the problem, without having to simplify / linearize the impact of 
 the available remedial actions available, the problem is divided into preventive and curative perimeters.
