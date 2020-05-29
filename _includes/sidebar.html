@@ -1,0 +1,31 @@
+<!-- Menu -->
+<ul class="sidebar">
+    <!-- Auto Generation of NORMAL pages in the navbar -->
+    {% assign name_page = "" %}
+
+    {% if page.docu == true %}
+    {% for page_section in site.pages %}
+    {% if page_section.title and page_section.docu == true and page_section.docu-parent == "none" %}
+    <li class="sidebar-section">
+        <a style="text-decoration:none; color:inherit;" href="{{ page_section.url | relative_url }}">
+            {{ page_section.title }}
+        </a>
+        {% if page_section.title == page.title or page_section.title == page.docu-parent %}
+        {% for page_elem in site.pages %}
+        {% if page_elem.title and page_elem.docu-parent contains page_section.title %}
+        <li class="sidebar-element">
+            <a style="text-decoration:none; color:inherit;" href="{{ page_elem.url | relative_url }}">
+                {{ page_elem.title }}
+                {{ section_title }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</ul>
+
+

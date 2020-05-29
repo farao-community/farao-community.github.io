@@ -3,6 +3,8 @@ layout: page
 title: Linear optimisation problem
 permalink: /docs/engine/ra-optimisation/linear-optimisation-problem
 hide: true
+docu: true
+docu-parent: Linear RAO
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Search Tree RAO]
 ---

@@ -3,6 +3,8 @@ layout: page
 title: Closed optimisation RAO parameters configuration
 permalink: /docs/configuration/closed-optimisation-rao-parameters
 hide: true
+docu: true
+docu-parent: FARAO platform configuration
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---

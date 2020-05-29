@@ -3,6 +3,8 @@ layout: page
 title: Closed optimisation modular engine
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao
 hide: true
+docu: true
+docu-parent: none
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---

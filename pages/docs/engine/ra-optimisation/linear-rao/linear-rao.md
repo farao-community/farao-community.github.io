@@ -3,6 +3,8 @@ layout: page
 title: Linear RAO
 permalink: /docs/engine/ra-optimisation/linear-rao
 hide: true
+docu: true
+docu-parent: none
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Search Tree RAO]
 ---

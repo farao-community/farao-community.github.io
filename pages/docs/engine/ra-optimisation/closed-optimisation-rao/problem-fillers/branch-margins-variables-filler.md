@@ -2,6 +2,7 @@
 layout: page
 title: Branches margin variables filler
 hide: true
+docu-parent: Closed optimisation modular engine
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao/problem-fillers/branch-margin-variables-filler
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]

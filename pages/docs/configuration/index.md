@@ -3,6 +3,8 @@ layout: page
 title: FARAO platform configuration
 permalink: /docs/configuration
 hide: true
+docu: true
+docu-parent: none
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---

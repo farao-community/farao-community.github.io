@@ -1,0 +1,44 @@
+
+.sidebar {
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    top: 60%;
+    width: 15%;
+    font-size: 80%;
+    background-color: #f1f1f1;
+}
+
+.sidebar-section {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #111;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  position: relative;
+}
+
+.sidebar-element {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+  position: relative;
+}
+
+.sidebar-section:hover {
+  background-color: #050;
+  color: white;
+}
+
+.sidebar-element:hover {
+   background-color: #050;
+   color: white;
+}
