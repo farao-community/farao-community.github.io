@@ -112,8 +112,8 @@ of CNEC $$i$$ relatively to a commercial border (zone-to-zone) of the capacity c
  = one commercial border in the capacity calculation region (e-g FR-BE)
 
 The objective function of FARAO search-tree is also configurable. The constraints taken into account within the 
-optimization are also configurable in order to comply with process specificities (i.e limitation of loop flows 
-required for Flow based CORE Capacity Calculation).
+optimization are also configurable in order to comply with process specificities (i.e limitation of 
+[loop flows](/docs/engine/ra-optimisation/loopflows) required for Flow based CORE Capacity Calculation).
 
 
 #### For NTC Capacity calculation/CEP Validation
