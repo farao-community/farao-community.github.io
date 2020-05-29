@@ -116,8 +116,11 @@ required for Flow based CORE Capacity Calculation).
 
 #### For NTC Capacity calculation/CEP Validation
 
-The objective function is ….
+The objective function is :
 
+$$\begin{equation}
+OF = min_i(F_{max_i}-F_i)
+\end{equation}$$
 
 For the NTC Capacity calculation, only the positive margin stop criterion is activated. This is equivalent to an 
 iterative security analysis at different values of commercial exchanges. It is also valid for the CEP Validation 
@@ -151,3 +154,31 @@ On both stop criteria, additional constraints can be added, for example:
 
 ![Search tree RAO algorithm](/assets/img/search-tree-rao-algo.png)
 
+
+For each iteration/step (a level of depth in tree):
+
+- Determination of available remedial actions. 
+- Once the list of available remedial actions is defined, candidates are created. Each candidate corresponds to a 
+    grid situation, where one (or more) remedial actions are applied. 
+- A security analysis determines for each candidate the value of the objective function. 
+The security analysis consists of a series of DC (or AC) load-flow computations (for each defined contingency).
+- In order to maximise the objective function, values obtained for each candidate are compared: the candidate leading to 
+the best increase of objective function value is selected. The remedial actions corresponding to this candidate are applied. 
+
+Note that if no candidate can increase the objective function value more than configurable value, the optimisation of 
+the current studied perimeter (preventive/curative) stops. All candidates applied in previous steps/iterations of 
+optimisation will be considered as final found remedial actions.
+
+FARAO search-tree can be configured in order to change the way candidates are created, in particular always studying 
+the combination of PST remedial actions with each individual non-PST remedial action. This allows to better take into
+consideration the joint effect of non-PST remedial with available PST (in particular if the non-PST remedial action 
+impacts significantly the PSDF of available PST, typically if both actions are located in a close “electrical vicinity”).
+
+![Search Tree example](/assets/img/search-tree-example.png) 
+
+In this figure above, 3 non-PST remedial actions are available, as well as a list of PSTs.
+Each non-PST remedial action is applied on the grid situation. However, prior to an assessment of the objective function 
+value, PSDF are assessed (with consideration of the applied non-PST action), and PSTs are optimised.
+
+RA1 alone could have led to bigger objective function value than RA2 or RA3. However, when taking PSTs into account, 
+RA2 with optimised PSTs is more efficient than other RA and optimised tap settings.
