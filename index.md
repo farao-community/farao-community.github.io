@@ -61,7 +61,9 @@ natively compatible with both UCTE and CGMES network formats.
 
 [OR-Tools](https://developers.google.com/optimization) is an open source software suite for
 optimization, tuned for tackling the world's toughest problems in vehicle routing, flows,
-integer and linear programming, and constraint programming.
+integer and linear programming, and constraint programming. 
+The choice of Google OR-tools was driven by its large compatibility with most of existing open source/commercial solvers,
+including commercial solvers such Gurobi and Xpress when high performance is required.
 
 {:refdef: style="text-align: center;"}
 ![Docker logo](../assets/img/logos/horizontal-logo-monochromatic-white.png){: width="600px"}
