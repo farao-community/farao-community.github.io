@@ -20,7 +20,7 @@ So far, the search-tree algorithm has proved for many years its relevance and ef
 operational process on CWE, Northern Italy and SWE Capacity calculation. 
 
 For each topological remedial action applied, the search-tree will systematically optimize PST taps/HVDC
-by applying a linear optimization. By optimizing topological remedial actions and linear remedial actions at
+by applying a [linear optimization](/docs/linear-rao). By optimizing topological remedial actions and linear remedial actions at
 the same time, this ensures better optimality of the results.
 
 The optimization problem is a non-convex and non-linear one, dealing with topology changes on the network, which 
