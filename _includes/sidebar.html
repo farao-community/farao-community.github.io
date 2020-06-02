@@ -4,14 +4,15 @@
     {% assign name_page = "" %}
 
     {% if page.docu == true %}
-    {% for page_section in site.pages %}
+    {% assign sorted_pages = site.pages | sort:"order" %}
+    {% for page_section in sorted_pages %}
     {% if page_section.title and page_section.docu == true and page_section.docu-parent == "none" %}
     <li>
         <a class="sidebar-section" href="{{ page_section.url | relative_url }}">
             {{ page_section.title }}
         </a>
         {% if page_section.title == page.title or page_section.title == page.docu-parent %}
-        {% for page_elem in site.pages %}
+        {% for page_elem in sorted_pages %}
         {% if page_elem.title and page_elem.docu-parent contains page_section.title %}
         <li>
             <a class="sidebar-element" href="{{ page_elem.url | relative_url }}">

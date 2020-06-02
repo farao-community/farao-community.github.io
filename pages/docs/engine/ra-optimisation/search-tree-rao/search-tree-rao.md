@@ -5,6 +5,7 @@ permalink: /docs/engine/ra-optimisation/search-tree-rao
 hide: true
 docu: true
 docu-parent: none
+order: 4
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Search Tree RAO]
 ---
