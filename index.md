@@ -42,6 +42,13 @@ local validation of the 70% margin required by the Clean Energy Package) or stud
 Transparency is in the DNA of this project. Functional and technical specifications, project's roadmap, code and its 
 level of quality are vailable on the website and updated frequently.
 
+As ENTSO-E stated in 2020 [Annual Work Programme](https://consultations.entsoe.eu/entso-e-general/have-your-say-on-entso-es-annual-work-programme-20/supporting_documents/191017_ENTSOE%20AWP%202020_Stakeholder%20consultation.pdf):
+> The future of regional TSO coordination and focus of the RCCs in the next years will be strongly driven by
+> the integration of costly remedial actions in complex capacity calculation methodologies [...].
+>
+> Transparency and timely implementation of the [...] Network Codes are seen as paramount for
+> achieving the optimal integration of the European market.
+
 # Under the hood
 FARAO is based on high quality open source frameworks.
 
@@ -51,7 +58,7 @@ FARAO is based on high quality open source frameworks.
 
 [PowSyBl](https://www.powsybl.org/) is an open source Java library to assemble applications
 for electrical power systems' simulation and analysis. This project is part of Linux Foundation
-[LF Energy initiative](https://www.lfenergy.org/). Thanks to its internal IIDM format, FAROA is 
+[LF Energy initiative](https://www.lfenergy.org/). Thanks to its internal IIDM format, FARAO is 
 natively compatible with both UCTE and CGMES network formats.
 
 

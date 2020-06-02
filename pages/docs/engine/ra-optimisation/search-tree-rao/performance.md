@@ -51,7 +51,7 @@ Later on, that search tree depth will be configurable per TSO to reflect the max
 by national operators due to the timing constraint for real-time operations. For now only the total depth is taken into
 consideration.
 
-### Network-action-minimum-impact-threshold (Coming later on...)
+### Network-action-minimum-impact-threshold
 
 In addition to search-tree depth, the network-action-minimum-impact-threshold is also configurable to adjust the 
 optimization with performance expected by the operational process. The network-action-minimum-impact-threshold 

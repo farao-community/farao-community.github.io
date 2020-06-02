@@ -6,7 +6,7 @@ feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---
 
-## FARAO search-tree –minimum margin
+## FARAO search-tree - maximization of the minimum margin
 
 #### Example of use cases : 
 
@@ -27,9 +27,9 @@ possible the negative margin on CNEC.
  
 - For RCC - NTC Capacity calculation / Coordinated Security Analysis without costly remedial actions.
 
-To calculate the maximum NTC, FARAO increases progressively the market exchanges (based on GLSK – Generation&Load Shift 
-Key from TSOs). As long as the objective function is null, it means there is a set of remedial actions that avoid any 
-violations of operational limits on CNEC.
+To calculate the maximum NTC, capacity calculation processes increase progressively the market exchanges (based on 
+GLSK – Generation & Load Shift Key from TSOs). As long as FARAO finds a solution where its objective function is 
+positive or null, it means there is a set of remedial actions that avoids all violations of operational limits on CNECs.
 
 Max NTC is the last and highest value of market exchanges where the objective function is positive.
 
@@ -40,9 +40,6 @@ Where required by methodologies approved, sequential optimization of non-costly 
 This allows TSOs to perform an optimized security analysis in order to confirm the operational feasibility of 70% margin.
 
 ## FARAO closed optimization
-
-FARAO closed optimization has been initially designed to work with open source solver (CBC). However, where a process 
-requires high computation performance, it is also compatible with licensed solver.
 
 #### Exemple of use cases :
 
