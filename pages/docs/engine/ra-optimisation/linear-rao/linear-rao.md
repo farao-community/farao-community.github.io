@@ -54,16 +54,22 @@ To see how this is done, you can check the details of the [linear optimization p
 
 In order to control the usage of PST in the optimization, it is possible to set a constraint in the PST optimization 
 problem: the change in phase shifting angle value of one particular PST should not have an impact on the objective 
-function smaller than a configurable value *pst-min-impact*.
+function smaller than a configurable value *pst-sensitivity-threshold*.
 
-This is done by adding a cost for moving the PSTs in the linear problem's objective function:
+When computing the PST sensitivities, only the ones which are higher than *pst-sensitivity-threshold* are considered 
+and the others are considered null. This allows us to filter out the PSTs which don't have a big enough impact on the
+CNECs.
+
+
+Also, while solving the linear optimisation problem, the usage of PSTs is penalised. This is done by adding a 
+configurable cost *pst-penalty-cost* for moving the PSTs in the linear problem's objective function:
 
 $$\begin{equation}
 \max MM - \sum_{p \in \mathcal{P}} \Delta_{p} c^{PST}
 \end{equation}$$
 
 with $$MM$$ the minimum margin, $$\mathcal{P}$$ the set of PSTs, $$\Delta_p$$ the variation of angle of the PST $$p$$, and $$c^{PST}$$
-equal to *pst-min-impact*.
+equal to *pst-penalty-cost*.
 
-This way, if moving a PST does not increase the minimal margin by a big enough amount, it will actually decrease 
-the objective function, and will not be considered in the solution of the problem. 
+This way, if two solutions are very close to each other, the problem will prefer the one that changes the PST taps the 
+least.

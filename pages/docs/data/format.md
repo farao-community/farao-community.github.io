@@ -20,11 +20,11 @@ on which values shall prevail (those from CRAC or from CGM).
 
 The limitations on critical network elements supported by the internal CRAC format are the ones listed here below.
 
-|Physical parameter|    Unit(s)  |
-|------------------|-------------|
-|      Angle       |Degree or Rad|
-|       Flow       |  MW or A    |
-|     Voltage      |     kV      |
+| Physical parameter |    Unit(s)  |
+|--------------------|-------------|
+|   Angle (soon...)  |Degree or Rad|
+|        Flow        |  MW or A    |
+|  Voltage (soon...) |     kV      |
 
 By implementing these types of limitations, FARAO is able to manage most of the operational security limits 
 defined in the network codes (Article 2, Regulation 2015/1222 CACM).

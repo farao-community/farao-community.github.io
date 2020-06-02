@@ -18,14 +18,13 @@ So far, the search-tree algorithm has proved for many years its relevance and ef
 operational process on CWE, Northern Italy and SWE Capacity calculation. 
 
 For each topological remedial action applied, the search-tree will systematically optimize PST taps/HVDC
-by applying a linear optimization. By optimizing topological remedial actions and linear remedial actions at
-the same time, this ensures better optimality of the results.
+by applying a linear optimization. By considering both topological remedial actions and linear remedial actions at
+every step, instead of considering only one and then the other, FARAO's results are better optimized.
 
 The optimization problem is a non-convex and non-linear one, dealing with topology changes on the network, which 
 represent discrete actions by definition. The problem treated by the optimizer is a combinatorial problem.
 Search-tree algorithms are commonly used for high complexity mathematical problems, containing combinatorial and 
-discrete aspects. One of the main interest of such an approach is that it avoids combinatorial explosion of computation 
-time and memory usage, without adding any approximation to the grid behaviour.
+discrete aspects.
 
 Some remedial actions such as PSTs/HVDC are treated via a linear optimization. It has to be noticed that approximation 
 of discrete PST taps treated as linear variable can be valid in DC but a security analysis is performed by FARAO after 
@@ -48,7 +47,7 @@ also identify optimized remedial actions for CNE1C2, CNE1C3…
 
 For Capacity calculation process, FARAO search-tree considers the following remedial actions :
 - Preventive remedial actions (fully shared) hereafter “PRA” 
-- Curative remedial actions (shared after critical outage) hereafter “CRA”
+- Curative remedial actions (shared after critical outage) hereafter “CRA” (not yet implemented...)
 
 ### Linear Remedial actions
 
@@ -78,7 +77,8 @@ for Capacity calculation (without element of costs).
 
 #### For Flow-based Capacity calculation – minimum margin
 
-Mathematically speaking, the objective function covered by FARAO search-tree for Flow based Capacity calculation
+The objective function is used to determine at each step of the search tree which remedial action is the best. A 
+variant of it is also used when solving the [linear optimization problem](/docs/engine/ra-optimisation/linear-optimisation-problem).
 
 The active flow $$F_i$$ on a CNEC $$i$$ is:
 
@@ -152,14 +152,15 @@ On both stop criteria, additional constraints can be added, for example:
 
 ### Algorithm
 
-![Search tree RAO algorithm](/assets/img/search-tree-rao-algo.png)
+![Search tree RAO algorithm](/assets/img/search-tree-algo-with-linear.jpg)
 
 
 For each iteration/step (a level of depth in tree):
 
 - Determination of available remedial actions. 
 - Once the list of available remedial actions is defined, candidates are created. Each candidate corresponds to a 
-    grid situation, where one (or more) remedial actions are applied. 
+    grid situation, where one (or more) remedial actions are applied.
+- A skippable [optimization of the linear remedial](/docs/engine/ra-optimisation/linear-rao) actions is done.
 - A security analysis determines for each candidate the value of the objective function. 
 The security analysis consists of a series of DC (or AC) load-flow computations (for each defined contingency).
 - In order to maximise the objective function, values obtained for each candidate are compared: the candidate leading to 
@@ -169,10 +170,12 @@ Note that if no candidate can increase the objective function value more than co
 the current studied perimeter (preventive/curative) stops. All candidates applied in previous steps/iterations of 
 optimisation will be considered as final found remedial actions.
 
-FARAO search-tree can be configured in order to change the way candidates are created, in particular always studying 
-the combination of PST remedial actions with each individual non-PST remedial action. This allows to better take into
-consideration the joint effect of non-PST remedial with available PST (in particular if the non-PST remedial action 
-impacts significantly the PSDF of available PST, typically if both actions are located in a close “electrical vicinity”).
+#### Usefulness of optimizing linear remedial actions at every step
+
+By default, FARAO search-tree always studies the combination of PST and other linear remedial actions with each 
+individual non-PST remedial action. This allows to better take into consideration the joint effect of non-PST remedial 
+with available PST (in particular if the non-PST remedial action impacts significantly the PSDF of available PST, 
+typically if both actions are located in a close “electrical vicinity”).
 
 ![Search Tree example](/assets/img/search-tree-example.png) 
 

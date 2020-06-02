@@ -48,9 +48,9 @@ admissible limit).
 Only TSOs owning curative actions allow CNECs to have a TATL which exceeds the PATL value. Operating the system with 
 curative actions allows to temporarily overload a line. This allows more flexibility on grid operations.
 
-Operationally, curative actions are sized in order to overcome the difference between these the two limits (TATL-PATL). 
+Operationally, curative actions are sized in order to overcome the difference between these two limits (TATL-PATL). 
 While during preventive action, only TATL has to be respected (active flow should remain below this value), curative 
-actions if properly sized, should to be able to reduce the active flow in order to respect the PATL value. 
+actions if properly sized, should be able to reduce the active flow in order to respect the PATL value. 
 Where curative actions are not sized properly and not sufficient to respect the two limits, FARAO will then investigate 
 additional preventive remedial actions.
 

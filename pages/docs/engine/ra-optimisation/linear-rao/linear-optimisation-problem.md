@@ -13,7 +13,8 @@ The main decision variables of the linear optimisation problem are the setpoints
 (PSTs and HVDCs). The linear optimisation aims at finding the combination of Range Action setpoints which maximises 
 a given objective function.
 
-The first objective function which will be implemented for this linear optimisation problem is the maximum margin.
+The first objective function which will be implemented for this linear optimisation problem is the maximizing of the
+maximum margin.
 
 During the [search tree RAO process](/docs/engine/ra-optimisation/search-tree-rao), the linear optimisation problem is solved multiple times:
 - for different perimeters (e.g. before outage, after outage)
