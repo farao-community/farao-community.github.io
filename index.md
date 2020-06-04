@@ -6,27 +6,48 @@ hide: true
 ---
 
 FARAO is an open source project aiming at providing an efficient solution for electrical power systems'
-Coordinated Capacity Calculation and Coordinated Security Assessment.
+Coordinated Capacity Calculation, Local Security Analysis and Coordinated Security Analysis.
 
-In 2020 [Annual Work Programme](https://consultations.entsoe.eu/entso-e-general/have-your-say-on-entso-es-annual-work-programme-20/supporting_documents/191017_ENTSOE%20AWP%202020_Stakeholder%20consultation.pdf),
-ENTSO-E states that:
+# Why choose FARAO?
+Because we are convinced that sharing our expertise and knowledge is the most efficient way for 
+a successful energy transition and creation of a common European market. By contributing to Farao, 
+all can benefit from this collaborative project amongst different national expertise on system operation, 
+without neglecting national specificities due to structural differences in network development between countries.
 
+Results of remedial actions optimization strongly impact the social economical welfare and the congestion costs.
+
+How remedial actions are optimized can :
+- avoid TSOs the need to invest in new infrastructure
+- improve market prices formation and contribute to price convergence on the long term
+- ease the integration of renewable energies
+- reduce the costs due to national tariff
+
+By providing a modular and open source tool, FARAO aims to :
+- increase the global social economical welfare
+- reduce the redispatching/contertrading costs
+- ease the monitoring by national and european regulatory authorities by offering a transparent implementation 
+of the methodologies approved
+
+Unlike tools developed as a "black box", any interested actor can ensure its specifications are properly implemented; 
+this also helps operators to make this tool their own.
+
+Due to multiple specificities between Capacity Calculation Regions and/or control area in terms of remedial actions, 
+FARAO offers a highly configurable solution and a collaborative approach where any actor (TSOs, NRAs, universities...)
+can contribute to improve the tool for the benefits of the European community or adapt it to their local specificities.
+
+The application of FARAO is not limited to Regional Coordination Centers Services, namely Coordinated Capacity 
+Calculation and Coordinated Security Analysis. It could also be used by TSOs for local Security Analysis (for instance, 
+local validation of the 70% margin required by the Clean Energy Package) or studies related to bidding zone review.
+
+Transparency is in the DNA of this project. Functional and technical specifications, project's roadmap, code and its 
+level of quality are vailable on the website and updated frequently.
+
+As ENTSO-E stated in 2020 [Annual Work Programme](https://consultations.entsoe.eu/entso-e-general/have-your-say-on-entso-es-annual-work-programme-20/supporting_documents/191017_ENTSOE%20AWP%202020_Stakeholder%20consultation.pdf):
 > The future of regional TSO coordination and focus of the RCCs in the next years will be strongly driven by
-> the integration of costly remedial actions in complex capacity calculation methodologies [...]
-
-and that:
-
+> the integration of costly remedial actions in complex capacity calculation methodologies [...].
+>
 > Transparency and timely implementation of the [...] Network Codes are seen as paramount for
 > achieving the optimal integration of the European market.
-
-By providing open source solutions for remedial actions coordination, FARAO tools aim at improving electrical system
-social welfare and facilitating renewable energies integration while ensuring security of supply and optimal operations
-of the electrical power network.
-
-# Why choose FARAO
-- Actively developed by a team of experts in network operations and optimization.
-- Open source tools, allowing actors to integrate their own specificities.
-- Focused on code quality and reliability.
 
 # Under the hood
 FARAO is based on high quality open source frameworks.
@@ -37,7 +58,8 @@ FARAO is based on high quality open source frameworks.
 
 [PowSyBl](https://www.powsybl.org/) is an open source Java library to assemble applications
 for electrical power systems' simulation and analysis. This project is part of Linux Foundation
-[LF Energy initiative](https://www.lfenergy.org/).
+[LF Energy initiative](https://www.lfenergy.org/). Thanks to its internal IIDM format, FARAO is 
+natively compatible with both UCTE and CGMES network formats.
 
 
 {:refdef: style="text-align: center;"}
@@ -46,7 +68,9 @@ for electrical power systems' simulation and analysis. This project is part of L
 
 [OR-Tools](https://developers.google.com/optimization) is an open source software suite for
 optimization, tuned for tackling the world's toughest problems in vehicle routing, flows,
-integer and linear programming, and constraint programming.
+integer and linear programming, and constraint programming. 
+The choice of Google OR-tools was driven by its large compatibility with most of existing open source/commercial solvers,
+including commercial solvers such Gurobi and Xpress when high performance is required.
 
 {:refdef: style="text-align: center;"}
 ![Docker logo](../assets/img/logos/horizontal-logo-monochromatic-white.png){: width="600px"}

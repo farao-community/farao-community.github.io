@@ -9,20 +9,25 @@ tags: [Docs, Search Tree RAO]
 
 # Overview
 
-The main decision variables of the linear optimisation problem are the setpoints of the Range Remedial Action (PSTs and HVDCs). The linear optimisation aims at finding the combinaison of Range Action setpoints which maximises a given objective function.
+The main decision variables of the linear optimisation problem are the setpoints of the Range Remedial Action 
+(PSTs and HVDCs). The linear optimisation aims at finding the combination of Range Action setpoints which maximises 
+a given objective function.
 
-The first objective function which will be implemented for this linear optimisation problem is the maximum margin.
+The first objective function which will be implemented for this linear optimisation problem is the maximizing of the
+maximum margin.
 
 During the [search tree RAO process](/docs/engine/ra-optimisation/search-tree-rao), the linear optimisation problem is solved multiple times:
 - for different perimeters (e.g. before outage, after outage)
 - with different activated Network Remedial Action (Network Actions are not optimized within the linear optimisation)
-- with sensitivities computed around different combinaison of Range Action setpoints. During the algorithm of the [linear RAO](/docs/engine/ra-optimisation/linear-rao), the sensitivities are re-computed and the linear optimisation problem re-solved every time that a new optimal combination of PST setpoints is found.
+- with sensitivities computed around different combinaison of Range Action setpoints. During the algorithm of 
+the [linear RAO](/docs/engine/ra-optimisation/linear-rao), the sensitivities are re-computed and the 
+linear optimisation problem re-solved every time that a new optimal combination of PST setpoints is found.
 
 # Problem formulation
 
 For now, the following formulation does not include RA for after-outage instants.
 
-A more generetic formulation will have to be built when curative RA will be integrated in the RAO.
+A more generic formulation will have to be built once curative RA are integrated in the RAO.
 
 ## Sets
 
@@ -84,7 +89,7 @@ The objective function can be configured among the following ones.
 ##### Function
 
 $$\begin{equation}
-\max MPM - \sum_{p \in \mathcal{P}} \Delta_{p} c^{PST}
+\max MM - \sum_{p \in \mathcal{P}} \Delta_{p} c^{PST}
 \end{equation}$$
 
 
@@ -137,3 +142,25 @@ $$\begin{equation}
 $$\begin{equation}
 \Delta_{p} \geq - A_{p} + \alpha^{0}_{p}
 \end{equation}$$
+
+#### Set of PSTs that should remain equal
+
+For a set of PSTs whose taps should remain equal during optimization, extra constraints are added:
+
+$$\begin{equation}
+\alpha_{p_1} = \alpha_{p_0}
+\end{equation}$$
+
+$$\begin{equation}
+\alpha_{p_2} = \alpha_{p_0}
+\end{equation}$$
+
+$$\begin{equation}
+...
+\end{equation}$$
+
+$$\begin{equation}
+\alpha_{p_n} = \alpha_{p_0}
+\end{equation}$$
+
+with $$p_0$$, ... , $$p_n$$ the PSTs in the set.
