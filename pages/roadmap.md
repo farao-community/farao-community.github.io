@@ -13,7 +13,7 @@ change due to unforeseen complexity in implementing features or priority changes
 ### Partial release of the search-tree RAO: v*2.0.0* (March 2020)
 
 - Optimisation of **preventive** PST and **topological** remedial actions
-- **Objective function** : maximize (min. margin)
+- **Objective function** : min. margin positive
 - Branch monitored in both directions, with **thresholds defined in MW**
 - Branch monitored in **N and N-1 states**
 - **AC computations** (for load flow and sensitivity analyses)
@@ -22,7 +22,7 @@ change due to unforeseen complexity in implementing features or priority changes
 ### First operational release of the search-tree RAO: v*3.0.0* (July 2020)
 
 - Optimisation of **preventive** PST and **topological** remedial actions
-- **Two possible objective functions** : maximize (min. margin) and maximize (pos. margin)
+- **Two possible objective functions** : min. margin positive or min. margin maximized
 - Branch monitored in one or both directions, with **thresholds defined in MW, I or %Imax**
 - Branch monitored in **N and N-1 states**
 - **AC and DC computations** (for load flow and sensitivity analyses)
