@@ -3,6 +3,7 @@ layout: page
 title: Remedial Actions Optimization interface
 permalink: /docs/engine/ra-optimisation
 hide: true
+docu: true
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---

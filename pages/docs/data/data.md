@@ -3,6 +3,9 @@ layout: page
 title: Business data
 permalink: /docs/data/
 hide: true
+docu: true
+docu-parent: Exchange formats
+order: 1
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Data]
 ---

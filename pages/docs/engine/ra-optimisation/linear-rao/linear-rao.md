@@ -1,8 +1,11 @@
 ---
 layout: page
-title: Linear RAO
+title: Linear remedial actions optimization
 permalink: /docs/engine/ra-optimisation/linear-rao
 hide: true
+docu: true
+docu-parent: Search tree RAO
+order: 3
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Search Tree RAO]
 ---

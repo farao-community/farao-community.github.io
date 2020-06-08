@@ -2,6 +2,9 @@
 layout: page
 title: Documentation
 permalink: /docs/
+docu: true
+docu-parent: none
+order: 1
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---

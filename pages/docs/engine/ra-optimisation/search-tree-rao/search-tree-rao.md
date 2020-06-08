@@ -3,6 +3,9 @@ layout: page
 title: Search tree RAO
 permalink: /docs/engine/ra-optimisation/search-tree-rao
 hide: true
+docu: true
+docu-parent: none
+order: 3
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs, Search Tree RAO]
 ---
@@ -18,8 +21,8 @@ So far, the search-tree algorithm has proved for many years its relevance and ef
 operational process on CWE, Northern Italy and SWE Capacity calculation. 
 
 For each topological remedial action applied, the search-tree will systematically optimize PST taps/HVDC
-by applying a linear optimization. By considering both topological remedial actions and linear remedial actions at
-every step, instead of considering only one and then the other, FARAO's results are better optimized.
+by applying a [linear optimization](/docs/linear-rao). By considering both topological remedial actions and linear 
+remedial actions at every step, instead of considering only one and then the other, FARAO results are better optimized.
 
 The optimization problem is a non-convex and non-linear one, dealing with topology changes on the network, which 
 represent discrete actions by definition. The problem treated by the optimizer is a combinatorial problem.
@@ -110,8 +113,8 @@ of CNEC $$i$$ relatively to a commercial border (zone-to-zone) of the capacity c
  = one commercial border in the capacity calculation region (e-g FR-BE)
 
 The objective function of FARAO search-tree is also configurable. The constraints taken into account within the 
-optimization are also configurable in order to comply with process specificities (i.e limitation of loop flows 
-required for Flow based CORE Capacity Calculation).
+optimization are also configurable in order to comply with process specificities (i.e limitation of 
+[loop flows](/docs/engine/ra-optimisation/loopflows) required for Flow based CORE Capacity Calculation).
 
 
 #### For NTC Capacity calculation/CEP Validation
