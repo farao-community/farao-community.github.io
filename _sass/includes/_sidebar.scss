@@ -2,7 +2,6 @@
 .sidebar {
     position: absolute;
     left: 0;
-    top: calc(23vw + 115px);
     width: 15%;
     font-size: 80%;
     background-color: #f1f1f1;
@@ -61,6 +60,6 @@
 
 @media (max-width: 1200px) {
     .sidebar {
-        width: 100%;
+        width: calc(100% - 40px);
     }
 }
