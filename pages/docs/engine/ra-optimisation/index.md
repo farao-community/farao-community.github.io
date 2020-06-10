@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Remedial Actions Optimization interface
 permalink: /docs/engine/ra-optimisation
 hide: true

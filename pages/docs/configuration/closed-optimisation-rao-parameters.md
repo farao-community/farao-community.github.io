@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Closed optimisation RAO parameters configuration
 permalink: /docs/configuration/closed-optimisation-rao-parameters
 hide: true

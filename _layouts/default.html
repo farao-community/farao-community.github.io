@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   {% include head.html %}
-  <body  onload="changeContentTop()" onresize="changeContentTop()">
+  <body>
     {% include navbar.html %}
     <div class="content">
-      {% include sidebar.html %}
       {{ content }}
     </div>
     {% include footer.html %}

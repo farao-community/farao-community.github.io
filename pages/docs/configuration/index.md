@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: FARAO platform configuration
 permalink: /docs/configuration
 hide: true

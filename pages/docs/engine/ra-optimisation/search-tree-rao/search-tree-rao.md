@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Search tree RAO
 permalink: /docs/engine/ra-optimisation/search-tree-rao
 hide: true

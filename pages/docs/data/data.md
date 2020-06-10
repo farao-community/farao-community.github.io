@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Business data
 permalink: /docs/data/
 hide: true

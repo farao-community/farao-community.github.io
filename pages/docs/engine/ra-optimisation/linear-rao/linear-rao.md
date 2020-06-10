@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Linear remedial actions optimization
 permalink: /docs/engine/ra-optimisation/linear-rao
 hide: true

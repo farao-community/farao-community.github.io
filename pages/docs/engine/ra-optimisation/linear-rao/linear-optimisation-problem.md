@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Linear optimisation problem
 permalink: /docs/engine/ra-optimisation/linear-optimisation-problem
 hide: true
