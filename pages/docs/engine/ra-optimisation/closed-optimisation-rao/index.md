@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Closed optimisation modular engine
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao
 hide: true

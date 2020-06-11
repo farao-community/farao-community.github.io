@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Combine Performance and Complexity
 permalink: /docs/engine/ra-optimisation/performance
 hide: true

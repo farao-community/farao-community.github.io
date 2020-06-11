@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Documentation
 permalink: /docs/
 docu: true

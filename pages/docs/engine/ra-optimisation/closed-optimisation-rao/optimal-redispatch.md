@@ -1,9 +1,11 @@
 ---
-layout: page
+layout: documentation
 title: Optimal redispatch
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao/optimal-redispatch
 hide: true
+docu: true
 docu-parent: Closed optimisation modular engine
+order: 1
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [Docs]
 ---

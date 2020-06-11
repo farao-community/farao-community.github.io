@@ -1,5 +1,7 @@
 <!-- Menu -->
-<ul class="sidebar">
+<ul class="sidebar" id="sidebar" media="(max-width: 1000px)">
+
+    <ul>
     <!-- Auto Generation of NORMAL pages in the navbar -->
     {% assign name_page = "" %}
 
@@ -8,7 +10,7 @@
     {% for page_section in sorted_pages %}
     {% if page_section.title and page_section.docu == true and page_section.docu-parent == "none" %}
     <li>
-        <a class="sidebar-section" href="{{ page_section.url | relative_url }}">
+        <a class="sidebar-section clear" href="{{ page_section.url | relative_url }}">
             {{ page_section.title }}
         </a>
         {% if page_section.title == page.title or page_section.title == page.docu-parent %}
@@ -27,6 +29,7 @@
     {% endif %}
     {% endfor %}
     {% endif %}
+    </ul>
 </ul>
 
 

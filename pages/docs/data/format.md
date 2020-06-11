@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Exchange formats
 permalink: /docs/format/
 hide: true

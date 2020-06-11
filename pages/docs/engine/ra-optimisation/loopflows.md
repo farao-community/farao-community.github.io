@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Loopflows
 permalink: /docs/engine/ra-optimisation/loopflows
 hide: true

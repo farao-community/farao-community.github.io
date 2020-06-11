@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Curative and Second Preventive
 permalink: /docs/engine/ra-optimisation/curative
 hide: true

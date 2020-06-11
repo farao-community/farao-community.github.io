@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: documentation
 title: Computation engines
 permalink: /docs/engine
 hide: true
