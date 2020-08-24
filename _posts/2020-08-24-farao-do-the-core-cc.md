@@ -7,7 +7,7 @@ tags: [RAO, FARAO, release, CORE]
 excerpt_separator: <!--more-->
 ---
 
-FARAO v2.1.1 has been recently released. FARAO v2.1.1 notably includes all the featues which were planned in the July's milestones of our [roadmap](/roadmap), that is to say :
+FARAO v2.1.1 has been recently released. FARAO v2.1.1 notably includes all the featues which were planned in the July's milestone of our [roadmap](/roadmap) <!--more-->, that is to say:
 
 - Optimisation of preventive PST and topological remedial actions
 - Two possible objective functions : min. margin positive or min. margin maximized
@@ -25,4 +25,3 @@ Our efforts in designing and developping FARAO are still ongoing, and [new featu
 More information about FARAO v2.1.1 can be found in the [release note](https://github.com/farao-community/farao-core/releases/tag/v2.1.0)
  
 For any question, don't hesitate to contact us using the [FARAO Spectrum community](https://spectrum.chat/farao-community).
-
