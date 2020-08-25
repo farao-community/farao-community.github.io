@@ -1,6 +1,6 @@
 ---
 layout: post
-title: FARAO optimizes the remedial action for the capacity calculation of the CORE region
+title: FARAO optimizes the remedial actions for the capacity calculation of the CORE region
 category: news
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
 tags: [RAO, FARAO, release, CORE]
