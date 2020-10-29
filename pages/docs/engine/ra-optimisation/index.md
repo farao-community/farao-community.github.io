@@ -28,9 +28,9 @@ please refer to the [dedicated documentation](/docs/engine/ra-optimisation/close
 
 ### Search tree remedial action optimisation
 
-[Branch & Bound algorithm](https://en.wikipedia.org/wiki/Branch_and_bound) is an efficient implementation of RAO interface for dealing with combinatorial
+The search-tree is an efficient implementation of RAO interface for dealing with combinatorial
 and non linear problem of remedial actions optimisation mixing topological actions, and combined
-preventive/curative optimisation. The search tree RAO developed in FARAO is based on this algorithm.
+preventive/curative optimisation. The search tree RAO developed in FARAO, named CASTOR, is based on this algorithm.
 
 This module is being developed in FARAO toolbox. Please refer to [FARAO roadmap](/roadmap) for
 information about current implementation plan. For more information on this implementation, please refer to the [dedicated documentation](/docs/engine/ra-optimisation/search-tree-rao).

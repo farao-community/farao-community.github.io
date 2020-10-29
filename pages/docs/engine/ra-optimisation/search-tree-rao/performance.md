@@ -4,10 +4,10 @@ title: Combine Performance and Complexity
 permalink: /docs/engine/ra-optimisation/performance
 hide: true
 docu: true
-docu-parent: Search tree RAO
+docu-parent: CASTOR
 order: 5
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Docs, Search Tree RAO]
+tags: [Docs, Search Tree RAO, CASTOR]
 ---
 
 ### Parallelization
@@ -46,7 +46,7 @@ accordingly in order to assess more combinations.
 For operational process (such as capacity calculation/security analysis), where expectation for performance can be high, 
 search-tree depth will be configured in order to match the allotted time for the calculation process.
 
-By defining the search-tree depth as a parameter, FARAO can be used easily in both applications.
+By defining the search-tree depth as a parameter, CASTOR can be used easily in both applications.
 
 Later on, that search tree depth will be configurable per TSO to reflect the maximum consecutive remedial actions allowed
 by national operators due to the timing constraint for real-time operations. For now only the total depth is taken into
