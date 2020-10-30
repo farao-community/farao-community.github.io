@@ -1,16 +1,17 @@
 ---
 layout: documentation
-title: Search tree RAO
+title: CASTOR
 permalink: /docs/engine/ra-optimisation/search-tree-rao
 hide: true
 docu: true
 docu-parent: none
 order: 3
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Docs, Search Tree RAO]
+tags: [Docs, Search Tree RAO, CASTOR]
 ---
-FARAO search-tree is initially designed to optimize non-costly remedial actions (including generation unit trip 
-where applicable).
+
+CASTOR (CAlculation with Scalable and Transparent OptimizeR) is initially designed to optimize non-costly remedial actions (including generation unit trip 
+where applicable). It relies on a search-tree algorithm which is explained in this page.
 
 Unlike purely linear optimization, a search-tree algorithm does not neglect the non-linearity of efficient remedial 
 actions such as curative and preventive topological actions. Incorrect modeling of remedial actions such as topological 
@@ -22,7 +23,7 @@ operational process on CWE, Northern Italy and SWE Capacity calculation.
 
 For each topological remedial action applied, the search-tree will systematically optimize PST taps/HVDC
 by applying a [linear optimization](/docs/linear-rao). By considering both topological remedial actions and linear 
-remedial actions at every step, instead of considering only one and then the other, FARAO results are better optimized.
+remedial actions at every step, instead of considering only one and then the other, CASTOR results are better optimized.
 
 The optimization problem is a non-convex and non-linear one, dealing with topology changes on the network, which 
 represent discrete actions by definition. The problem treated by the optimizer is a combinatorial problem.
@@ -30,7 +31,7 @@ Search-tree algorithms are commonly used for high complexity mathematical proble
 discrete aspects.
 
 Some remedial actions such as PSTs/HVDC are treated via a linear optimization. It has to be noticed that approximation 
-of discrete PST taps treated as linear variable can be valid in DC but a security analysis is performed by FARAO after 
+of discrete PST taps treated as linear variable can be valid in DC but a security analysis is performed by CASTOR after 
 their optimization to ensure security of the grid despite of the approximation.
 
 
@@ -48,14 +49,14 @@ also identify optimized remedial actions for CNE1C2, CNE1C3…
 
 ### Remedial actions considered
 
-For Capacity calculation process, FARAO search-tree considers the following remedial actions :
+For Capacity calculation process, CASTOR considers the following remedial actions :
 - Preventive remedial actions (fully shared) hereafter “PRA” 
 - Curative remedial actions (shared after critical outage) hereafter “CRA” (not yet implemented...)
 
 ### Linear Remedial actions
 
 The impact of some types of remedial actions on flows could be considered to be linear: optimization of HVDC setpoints 
-and optimization of generation unit setpoints. In addition to these, FARAO search-tree also considers phase shifter 
+and optimization of generation unit setpoints. In addition to these, CASTOR also considers phase shifter 
 transformers as linear remedial actions.
 
 A phase shifter transformer (PST) is defined by its range of acceptable tap settings.
@@ -68,12 +69,11 @@ around the tap position selected in preventive)
 ### Non-linear remedial action
 
 Topological and other discrete remedial actions are considered without any approximation, and can be optimized in both 
-instants (preventive or curative). This is a non-exhaustive list of discrete remedial actions considered by FARAO 
-search-tree :
+instants (preventive or curative). This is a non-exhaustive list of discrete remedial actions considered by CASTOR :
 - Change of circuit breaker position (open/close): line opening or busbar coupler opening/closing
 - Change of switch position
 
-As a matter of clarification, connecting/disconnecting a generation unit can also be considered by FARAO search-tree 
+As a matter of clarification, connecting/disconnecting a generation unit can also be considered by CASTOR 
 for Capacity calculation (without element of costs).
 
 ### Objective function
@@ -112,7 +112,7 @@ $$\rho_i = \frac{1}{\sum_{ma}|PTDF_{ma,i}|}\ \ \forall i\quad$$ if all margins a
 of CNEC $$i$$ relatively to a commercial border (zone-to-zone) of the capacity calculation region
  = one commercial border in the capacity calculation region (e-g FR-BE)
 
-The objective function of FARAO search-tree is also configurable. The constraints taken into account within the 
+The objective function of CASTOR is also configurable. The constraints taken into account within the 
 optimization are also configurable in order to comply with process specificities (i.e limitation of 
 [loop flows](/docs/engine/ra-optimisation/loopflows) required for Flow based CORE Capacity Calculation).
 
@@ -175,7 +175,7 @@ optimisation will be considered as final found remedial actions.
 
 #### Usefulness of optimizing linear remedial actions at every step
 
-By default, FARAO search-tree always studies the combination of PST and other linear remedial actions with each 
+By default, CASTOR always studies the combination of PST and other linear remedial actions with each 
 individual non-PST remedial action. This allows to better take into consideration the joint effect of non-PST remedial 
 with available PST (in particular if the non-PST remedial action impacts significantly the PSDF of available PST, 
 typically if both actions are located in a close “electrical vicinity”).

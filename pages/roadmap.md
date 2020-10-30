@@ -10,25 +10,32 @@ Below is the roadmap of future major releases of FARAO, with the associated func
 and a foreseen due date. It is important to understand that these due dates may be subject to
 change due to unforeseen complexity in implementing features or priority changes. 
 
-### Partial release of the search-tree RAO: v*2.0.0* (March 2020)
+### Curative optimization in CASTOR: v*3.0.0* (November 2020)
 
-- Optimisation of **preventive** PST and **topological** remedial actions
-- **Objective function** : min. margin positive
-- Branch monitored in both directions, with **thresholds defined in MW**
-- Branch monitored in **N and N-1 states**
-- **AC computations** (for load flow and sensitivity analyses)
+- Optimization of **curative** PST and topological remedial actions
 
+### Enhancement of CASTOR to fit additional CORE j-2 CC needs (October 2020)
 
-### First operational release of the search-tree RAO: v*3.0.0* (July 2020)
+- One additional **objective function** : maximization of the min. relative margin 
+- Consideration of the MNEC **Monitored Network Elements** in the RAO
+- Additional input used for the loop-flow calculation : the **reference program** file
 
-- Optimisation of **preventive** PST and **topological** remedial actions
+### First operational release of CASTOR: v*2.2.0* (July 2020)
+
+- Optimization of **preventive** PST and **topological** remedial actions
 - **Two possible objective functions** : min. margin positive or min. margin maximized
 - Branch monitored in one or both directions, with **thresholds defined in MW, I or %Imax**
 - Branch monitored in **N and N-1 states**
 - **AC and DC computations** (for load flow and sensitivity analyses)
 - Limitation of **loopflows** in the RAO, as described in the ACER methodology
 
-### Enhancement of the search-tree RAO to fit CORE j-2 CC needs: v*4.0.0* (October 2020)
+### Partial release of CASTOR: v*2.0.0* (March 2020)
 
-- Optimisation of **curative** PST and topological remedial actions
+- Optimization of **preventive** PST and **topological** remedial actions
+- **Objective function** : min. margin positive
+- Branch monitored in both directions, with **thresholds defined in MW**
+- Branch monitored in **N and N-1 states**
+- **AC computations** (for load flow and sensitivity analyses)
+
+
 

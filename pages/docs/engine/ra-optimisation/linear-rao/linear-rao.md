@@ -4,17 +4,17 @@ title: Linear remedial actions optimization
 permalink: /docs/engine/ra-optimisation/linear-rao
 hide: true
 docu: true
-docu-parent: Search tree RAO
+docu-parent: CASTOR
 order: 3
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Docs, Search Tree RAO]
+tags: [Docs, Search Tree RAO, CASTOR]
 ---
 
 ### Overview
 
 The Linear RAO optimizes the Range Actions (for now, only PSTs) according to a configurable objective function (e.g. maximization of the minimum margin). The solving algorithm approximates the impact of the Remedial Actions on the network flows with linear sensitivity coefficients. It therefore solves [linear optimisation problems](/docs/engine/ra-optimisation/linear-optimisation-problem) to find the optimal application of the Remedial Actions. Moreover, it can iterate over several reference points in order to mitigate the linear approximation inherent to its optimisation problem.
 
-In particular, the Linear RAO module is called from the [Search Tree RAO module](/docs/engine/ra-optimisation/search-tree-rao).
+In particular, the Linear RAO module is called from [CASTOR](/docs/engine/ra-optimisation/search-tree-rao).
 
 ### Inputs
 
@@ -50,7 +50,7 @@ Hereunder, the specific workflow related to linear optimization.
 
 #### Forcing tap positions of a defined set of PSTs to be equal
 
-FARAO search-tree can be also configured to define sets of PSTs whose taps should be maintained equal during optimisation.
+CASTOR can be also configured to define sets of PSTs whose taps should be maintained equal during optimisation.
 To see how this is done, you can check the details of the [linear optimization problem](/docs/engine/ra-optimisation/linear-optimisation-problem).
 
 #### Minimum impact of PST in the linear optimization

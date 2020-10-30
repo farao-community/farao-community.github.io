@@ -4,10 +4,10 @@ title: Curative and Second Preventive
 permalink: /docs/engine/ra-optimisation/curative
 hide: true
 docu: true
-docu-parent: Search tree RAO
+docu-parent: CASTOR
 order: 1
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Docs, Search Tree RAO]
+tags: [Docs, Search Tree RAO, CASTOR]
 ---
 
 ## Preventive and curative parameters (Coming later on...)
@@ -54,7 +54,7 @@ curative actions allows to temporarily overload a line. This allows more flexibi
 Operationally, curative actions are sized in order to overcome the difference between these two limits (TATL-PATL). 
 While during preventive action, only TATL has to be respected (active flow should remain below this value), curative 
 actions if properly sized, should be able to reduce the active flow in order to respect the PATL value. 
-Where curative actions are not sized properly and not sufficient to respect the two limits, FARAO will then investigate 
+Where curative actions are not sized properly and not sufficient to respect the two limits, CASTOR will then investigate 
 additional preventive remedial actions.
 
 Therefore, preventive optimisation is more permissive with CNEC defined with a TATL larger than the PATL: this allows 

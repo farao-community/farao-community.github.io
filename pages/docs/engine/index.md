@@ -27,7 +27,7 @@ this difficult problem:
 and CRAC objects. A first prototype is currently available in FARAO. Please refer to the
 [dedicated documentation page](/docs/engine/ra-optimisation/closed-optimisation-rao) to get more information
 about closed optimisation RAO module.
-- ***Search tree RAO*** engine: an efficient implementation of RAO interface for dealing with combinatorial problem of remedial actions optimisation mixing topological actions, and combined preventive/curative optimisation. This module is being developed in FARAO toolbox. Please refer to the [dedicated documentation page](/docs/engine/ra-optimisation/search-tree-rao) to get more information about the module, and to the [FARAO roadmap](/roadmap) for information about current implementation plan.
+- ***Search tree RAO*** engine: an efficient implementation of RAO interface for dealing with combinatorial problem of remedial actions optimisation mixing topological actions, and combined preventive/curative optimisation. This module - called CASTOR, for CAlculation with Scalable and Transparent OptimizeR - is being developed in FARAO toolbox. Please refer to the [dedicated documentation page](/docs/engine/ra-optimisation/search-tree-rao) to get more information about the module, and to the [FARAO roadmap](/roadmap) for information about current implementation plan.
 
 ### Flowbased
 
