@@ -10,9 +10,9 @@ Below is the roadmap of future major releases of FARAO, with the associated func
 and a foreseen due date. It is important to understand that these due dates may be subject to
 change due to unforeseen complexity in implementing features or priority changes. 
 
-### Curative optization in CASTOR: v*3.0.0* (November 2020)
+### Curative optimization in CASTOR: v*3.0.0* (November 2020)
 
-- Optimisation of **curative** PST and topological remedial actions
+- Optimization of **curative** PST and topological remedial actions
 
 ### Enhancement of CASTOR to fit additional CORE j-2 CC needs (October 2020)
 
@@ -22,7 +22,7 @@ change due to unforeseen complexity in implementing features or priority changes
 
 ### First operational release of CASTOR: v*2.2.0* (July 2020)
 
-- Optimisation of **preventive** PST and **topological** remedial actions
+- Optimization of **preventive** PST and **topological** remedial actions
 - **Two possible objective functions** : min. margin positive or min. margin maximized
 - Branch monitored in one or both directions, with **thresholds defined in MW, I or %Imax**
 - Branch monitored in **N and N-1 states**
@@ -31,7 +31,7 @@ change due to unforeseen complexity in implementing features or priority changes
 
 ### Partial release of CASTOR: v*2.0.0* (March 2020)
 
-- Optimisation of **preventive** PST and **topological** remedial actions
+- Optimization of **preventive** PST and **topological** remedial actions
 - **Objective function** : min. margin positive
 - Branch monitored in both directions, with **thresholds defined in MW**
 - Branch monitored in **N and N-1 states**
