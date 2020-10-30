@@ -1,13 +1,13 @@
 ---
 layout: post
-title: FARAO optimizes the remedial actions for the capacity calculation of the CORE region
+title: CASTOR optimizes the remedial actions for the capacity calculation of the CORE region
 category: news
 feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [RAO, FARAO, release, CORE]
+tags: [RAO, FARAO, release, CORE, CASTOR]
 excerpt_separator: <!--more-->
 ---
 
-FARAO v2.1.1 has been recently released. FARAO v2.1.1 notably includes all the features which were planned in July's milestone of our [roadmap](/roadmap) <!--more-->, that is to say:
+FARAO v2.1.1 has been recently released. FARAO v2.1.1 notably includes all the features which were planned in July's milestone of our CASTOR'[roadmap](/roadmap) <!--more-->, that is to say:
 
 - Optimization of preventive PST and topological remedial actions
 - Two possible objective functions : min. margin positive or min. margin maximized
