@@ -34,3 +34,11 @@ and extandable implementation of the tools used for an efficient usage of the el
 and distribution system.
 
 
+Thanks to our modular architecture, implementing a new process in existing RAO modules or creating a new RAO based on an existing input format is fastened (see concrete example below)
+
+![FARAO modules](/assets/img/modular.png) 
+
+
+Take benefit from our platform for optimization with different methodologies already implemented for CACM/SO methodologies. Moreover, it is possible to contribute by adding your features/improvements in existing RAO modules and creating new ones if needed.
+
+![FARAO modules usage](/assets/img/modular2.png) 

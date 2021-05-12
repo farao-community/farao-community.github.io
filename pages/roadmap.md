@@ -10,7 +10,14 @@ Below is the roadmap of future major releases of FARAO, with the associated func
 and a foreseen due date. It is important to understand that these due dates may be subject to
 change due to unforeseen complexity in implementing features or priority changes. 
 
-### Curative optimization in CASTOR: v*3.0.0* (November 2020)
+### Readiness of CASTOR for Italy North Capacity Calculation (Summer 2021)
+
+- Modify voltage level topology as a remedial action
+- Handle HVDC setpoint as a remedial action
+
+### Readiness of CASTOR for local CEP Validation for Italy North (May 2021)
+
+### Curative optimization in CASTOR: v*2.3.0* (February 2021)
 
 - Optimization of **curative** PST and topological remedial actions
 
