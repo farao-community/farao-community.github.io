@@ -3,10 +3,11 @@ layout: documentation
 title: CASTOR
 permalink: /docs/engine/ra-optimisation/search-tree-rao
 hide: true
-docu: true
+root-page: Documentation
+docu-section: none
 docu-parent: none
 order: 3
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
 

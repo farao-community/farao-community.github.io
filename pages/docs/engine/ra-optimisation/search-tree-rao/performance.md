@@ -3,10 +3,11 @@ layout: documentation
 title: Combine Performance and Complexity
 permalink: /docs/engine/ra-optimisation/performance
 hide: true
-docu: true
+root-page: Documentation
+docu-section: CASTOR
 docu-parent: CASTOR
 order: 5
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
 

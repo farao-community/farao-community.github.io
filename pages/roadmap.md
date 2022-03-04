@@ -3,7 +3,7 @@ layout: page
 title: Roadmap
 hide: false
 permalink: /roadmap/
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 ---
 
 Below is the roadmap of future major releases of FARAO, with the associated functional perimeter,

@@ -2,7 +2,7 @@
 layout: post
 title: CASTOR optimizes the remedial actions for the capacity calculation of the CORE region
 category: news
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [RAO, FARAO, release, CORE, CASTOR]
 excerpt_separator: <!--more-->
 ---

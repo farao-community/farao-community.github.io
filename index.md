@@ -1,11 +1,12 @@
 ---
 layout: home
 permalink: /
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao.png"
+logo: "assets/img/logos/farao.png"
 hide: true
 ---
 
-FARAO is an open source project aiming at providing an efficient solution for electrical power systems'
+Open-source project aiming at providing an efficient solution for electrical power systems'
 Coordinated Capacity Calculation, Local Security Analysis and Coordinated Security Analysis.
 
 # Why choose FARAO?
@@ -76,5 +77,12 @@ including commercial solvers such Gurobi and Xpress when high performance is req
 ![Docker logo](../assets/img/logos/horizontal-logo-monochromatic-white.png){: width="600px"}
 {: refdef}
 
-[Docker](http://www.docker.com) is an open source container platform that packages applications as
+[Docker](https://www.docker.com/) is an open source container platform that packages applications as
 lightweight, portable containers. 
+
+{:refdef: style="text-align: center;"}
+![Kubernetes logo](../assets/img/logos/kubernetes.png){: width="500px"}
+{: refdef}
+
+[Kubernetes](https://kubernetes.io/), also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+

@@ -3,10 +3,11 @@ layout: documentation
 title: Closed optimisation modular engine
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao
 hide: true
-docu: true
+root-page: Documentation
+docu-section: none
 docu-parent: none
 order: 4
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [Docs]
 ---
 

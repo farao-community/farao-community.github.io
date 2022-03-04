@@ -1,12 +1,14 @@
 ---
 layout: documentation
 title: Closed optimisation RAO parameters configuration
-permalink: /docs/configuration/closed-optimisation-rao-parameters
+permalink: /docs/parameters/itools-configuration/closed-optimisation-rao-parameters
 hide: true
-docu: true
-docu-parent: FARAO platform configuration
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
-tags: [Docs]
+root-page: Documentation
+docu-section: Parameters
+docu-parent: Platform configuration
+feature-img: "assets/img/farao3.jpg"
+tags: [Docs, Parameters]
+order: 1
 ---
 
 The ```closed-optimisation-rao-parameters``` module is used everytime a closed optimisation RAO job is run.

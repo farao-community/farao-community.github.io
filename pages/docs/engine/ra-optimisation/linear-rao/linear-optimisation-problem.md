@@ -3,10 +3,11 @@ layout: documentation
 title: Linear optimisation problem
 permalink: /docs/engine/ra-optimisation/linear-optimisation-problem
 hide: true
-docu: true
+root-page: Documentation
+docu-section: CASTOR
 docu-parent: CASTOR
 order: 4
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
 

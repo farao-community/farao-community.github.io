@@ -5,31 +5,64 @@
     <!-- Auto Generation of NORMAL pages in the navbar -->
     {% assign name_page = "" %}
 
-    {% if page.docu == true %}
+    {% if page.root-page %}
     {% assign sorted_pages = site.pages | sort:"order" %}
+
+    <!-- List all sections -->
     {% for page_section in sorted_pages %}
-    {% if page_section.title and page_section.docu == true and page_section.docu-parent == "none" %}
+    {% if page_section.title and page_section.root-page == page.root-page and page_section.docu-parent == "none" %}
+    {% if page_section.title != page.root-page %}
     <li>
-        <a class="sidebar-section clear" href="{{ page_section.url | relative_url }}">
+        {% if page.title == page_section.title %}
+        {% assign clazz = "sidebar-section selected" %}
+        {% else %}
+        {% assign clazz = "sidebar-section" %}
+        {% endif %}
+        <a class="{{ clazz }}" href="{{ page_section.url | relative_url }}">
             {{ page_section.title }}
         </a>
-        {% if page_section.title == page.title or page_section.title == page.docu-parent %}
-        {% for page_elem in sorted_pages %}
-        {% if page_elem.title and page_elem.docu-parent contains page_section.title %}
-        <li>
-            <a class="sidebar-element" href="{{ page_elem.url | relative_url }}">
-                {{ page_elem.title }}
-                {{ section_title }}
-            </a>
-        </li>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
     </li>
+    {% endif %}
+
+    <!-- If section is selected, list its children level-1 elements -->
+    {% if page_section.title == page.title or page_section.title == page.docu-section %}
+    {% for page_elem in sorted_pages %}
+    {% if page_elem.title and page_elem.docu-parent == page_section.title %}
+    <li>
+        {% if page.title == page_elem.title %}
+        {% assign clazz = "sidebar-element selected" %}
+        {% else %}
+        {% assign clazz = "sidebar-element" %}
+        {% endif %}
+        <a class="{{ clazz }}" href="{{ page_elem.url | relative_url }}">
+            {{ page_elem.title }}
+            {{ section_title }}
+        </a>
+    </li>
+
+    <!-- If level-1 element is selected, list its children level-2 elements -->
+    {% if page.title == page_elem.title or page.docu-parent == page_elem.title %}
+    {% for page_elem2 in sorted_pages %}
+    {% if page_elem2.docu-parent and page_elem2.docu-parent == page_elem.title %}
+    <li>
+        {% if page.title == page_elem2.title %}
+        {% assign clazz = "sidebar-element selected double-padding" %}
+        {% else %}
+        {% assign clazz = "sidebar-element double-padding" %}
+        {% endif %}
+        <a class="{{ clazz }}" href="{{ page_elem2.url | relative_url }}">
+            {{ page_elem2.title }}
+            {{ section_title }}
+        </a>  
+    </li>
+    {% endif %}
+    {% endfor %}     
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     {% endif %}
     {% endfor %}
     {% endif %}
     </ul>
 </ul>
-
-

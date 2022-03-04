@@ -2,11 +2,12 @@
 layout: documentation
 title: Optimisation problem fillers
 hide: true
-docu: true
+root-page: Documentation
+docu-section: Closed optimisation modular engine
 docu-parent: Closed optimisation modular engine
 order: 2
 permalink: /docs/engine/ra-optimisation/closed-optimisation-rao/problem-fillers
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [Docs]
 ---
 

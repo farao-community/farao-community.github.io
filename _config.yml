@@ -19,7 +19,7 @@ theme_settings:
   header_text: > #two or three lines to describe your site
      <p>Open-source modular toolbox for<br/>
      power system coordination process
-  header_text_feature_image: assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg
+  header_text_feature_image: assets/img/farao3.jpg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
