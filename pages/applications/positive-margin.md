@@ -13,7 +13,7 @@ order: 3
 
 ## CASTOR - positive margin stop criterion
 
-#### Example of use cases :
+#### Examples of use cases :
  
 - For RCC - NTC Capacity calculation / Coordinated Security Analysis without costly remedial actions.
 

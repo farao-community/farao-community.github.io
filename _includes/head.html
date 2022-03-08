@@ -50,6 +50,13 @@
     </script>
     {% endif %}
 
+    <!-- Jekyll Tabs -->
+    {% if site.theme_settings.tabs %}
+    <script src="{{ site.baseurl }}/assets/js/vendor/tabs.js" type="text/javascript">
+    </script>
+    <link rel="stylesheet" href="/assets/css/vendor/tabs.css">
+    {% endif %}
+
     <!-- Google Analytics -->
     {% if site.theme_settings.google_analytics %}
     <script>

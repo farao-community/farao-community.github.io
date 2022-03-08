@@ -2,13 +2,29 @@
 layout: page
 title: Roadmap
 hide: false
-permalink: /roadmap/
+permalink: /roadmap
 feature-img: "assets/img/farao3.jpg"
 ---
 
 Below is the roadmap of future major releases of FARAO, with the associated functional perimeter,
 and a foreseen due date. It is important to understand that these due dates may be subject to
 change due to unforeseen complexity in implementing features or priority changes. 
+
+### Deployment of CASTOR for South-West Europe Capacity Calculation go-live (July 2022)
+
+- For the South-West Europe region, CASTOR will go into production without a prior external parallel run phase
+
+### Deployment of CASTOR for Italy North Capacity Calculation go-live (April 2022)
+
+- For the Italy North region, CASTOR will go into production without a prior external parallel run phase
+
+### Deployment of CASOTR for CORE Capacity Calculation go-live (April 2022)
+
+- The go-live step will happen when TSOs have all validated the parallel run results
+
+### Deployment of CASTOR for CORE Capacity Calculation parallel run (February 2022)
+
+- The parallel run phase will allow the TSOs to get familiar with the processes for the new region
 
 ### Readiness of CASTOR for Italy North Capacity Calculation (Summer 2021)
 

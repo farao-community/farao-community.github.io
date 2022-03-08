@@ -17,7 +17,7 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Open-source modular toolbox for<br/>
+     <p>An open-source modular toolbox for<br/>
      power system coordination process
   header_text_feature_image: assets/img/farao3.jpg
   footer_text: >
@@ -66,6 +66,7 @@ theme_settings:
   disqus_shortname:
   katex: false # Enable if using math markup
   mathjax: true # Enable if using math markup
+  tabs: true # Enable usage of tabs container
   
   special_page:
     search: 
@@ -125,6 +126,8 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-relative-links
+  - jekyll-tabs
+  - jemoji
 
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
 exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png", "package.json", "node_modules", "gulpfile.js", ".idea/*"]

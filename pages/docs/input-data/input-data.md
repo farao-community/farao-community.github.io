@@ -46,7 +46,7 @@ on PowSyBl website.
 
 ### CRAC
 
-CRAC (for "*Contingency list, Remedial Actions and additional Constraints*") are objects dedicated to define security
+CRAC (for "***C**ontingency list, **R**emedial **A**ctions and additional **C**onstraints*") are objects dedicated to define security
 domain of the network object. They define contingencies to take into account in business
 process, constraint to monitor and remedial actions available to get rid of potential
 active constraints.
@@ -55,10 +55,10 @@ Please refer to the [dedicated documentation page](/docs/data/crac) to get more 
 
 #### CRAC exchange formats supported:
 
-- JSON CRAC (FARAO-specific)
-- FbConstraint CRAC (used in CORE region)
-- CSE CRAC (used in CSE region)
-- CIM CRAC (used in SWE region)
+- [JSON CRAC](/docs/data/crac/json) (FARAO-specific)
+- [FlowBasedConstraint CRAC](/docs/data/crac/fbconstraint) (used in CORE region)
+- [CSE CRAC](/docs/data/crac/cse) (used in CSE region)
+- [CIM CRAC](/docs/data/crac/cim) (used in SWE region)
 
 ### GLSK
 
