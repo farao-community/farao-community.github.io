@@ -6,7 +6,7 @@ hide: true
 root-page: Documentation
 docu-section: CASTOR
 docu-parent: CASTOR
-order: 2
+order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
@@ -50,5 +50,10 @@ $$\begin{equation}
 \max MM - \sum_{p \in \mathcal{P}} \Delta_{p} c^{PST} - \sum_{i \in \mathcal{I}} LF^{violation}_i c^{LFviolation}_i
 \end{equation}$$
 
-where c^{LFviolation} is a configurable input, and represents what gain on the minimal margin (in MW) we need per MW of
+where $$c^{LFviolation}$$ is a configurable input, and represents what gain on the minimal margin (in MW) we need per MW of
 violation on Loopflows.
+
+---
+See also: [LoopFlow parameters](/docs/parameters/json-parameters#loopflow-parameters)
+
+---

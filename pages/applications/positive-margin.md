@@ -23,8 +23,8 @@ positive or null, it means there is a set of remedial actions that avoids all vi
 
 Max NTC is the last and highest value of market exchanges where the objective function is positive.
 
-Where required by methodologies approved, sequential optimization of non-costly remedial actions (CASTOR 
-« positive margin ») and costly remedial actions (FARAO closed optimization) is possible. 
+Where required by methodologies approved, sequential optimisation of non-costly remedial actions (CASTOR 
+« positive margin ») and costly remedial actions (FARAO closed optimisation) is possible. 
 
 - For TSOs - Local validation of 70% margin required by Regulation EU 2019/943, Article 8 (Clean Energy Package). 
-This allows TSOs to perform an optimized security analysis in order to confirm the operational feasibility of 70% margin.
+This allows TSOs to perform an optimised security analysis in order to confirm the operational feasibility of 70% margin.

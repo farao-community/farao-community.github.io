@@ -6,7 +6,7 @@ hide: true
 root-page: Documentation
 docu-section: CASTOR
 docu-parent: CASTOR
-order: 5
+order: 4
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
@@ -26,16 +26,21 @@ The consequences of each topological action must be evaluated independently. The
 in parallel threads
 
 - Parallelization of curative perimeters optimisation:
-After the preventive optimization finished, all the curative perimeters can be optimized independently. 
-These optimizations can also be done in parallel, using dedicated threads.
+After the preventive optimisation finished, all the curative perimeters can be optimised independently. 
+These optimisations can also be done in parallel, using dedicated threads.
  
 - Parallelization of studied situations (timestamps):
 When performing optimisation on multiple timestamps, it is also possible to separate the computation of 
-the different studied situations on different threads. 
+the different studied situations on different threads.
+
+---
+See also: [Computations parallelism parameters](/docs/parameters/json-parameters#parallelism), [Parallelizing perimeters parameter](/docs/parameters/json-parameters#perimeters-in-parallel)
+
+---
 
 ### Search-tree depth
 The higher the number of critical branches, critical outages and remedial actions, the longer the calculation. 
-For instance, an optimizer will try different combinations of topological actions to solve one constraint 
+For instance, an optimiser will try different combinations of topological actions to solve one constraint 
 (RA1+RA2, RA1+RA3, RA2+RA3, RA1+RA2+RA3….). Simulating all combinations to find the best set would require 
 more time than finding the first set respecting the criteria.
 
@@ -53,10 +58,15 @@ Later on, that search tree depth will be configurable per TSO to reflect the max
 by national operators due to the timing constraint for real-time operations. For now only the total depth is taken into
 consideration.
 
+---
+See also: [Search stop criterion parameters](/docs/parameters/json-parameters#stop-criterion-parameters)
+
+---
+
 ### Network-action-minimum-impact-threshold
 
 In addition to search-tree depth, the network-action-minimum-impact-threshold is also configurable to adjust the 
-optimization with performance expected by the operational process. The network-action-minimum-impact-threshold 
+optimisation with performance expected by the operational process. The network-action-minimum-impact-threshold 
 represents the minimal relative/absolute increase of objective function between two consecutive chosen network actions.
  
 This minimal relative gain is expressed as a percentage of previous objective function (0.2 for 20%). 
@@ -67,3 +77,8 @@ a small gain on a single CNEC.
 This parameter can be defined also through absolute increase :
 - minimum impact (in MW or A) for the application of topological remedial action 
 - minimum impact (in MW/degree or A/degree) for the use of PST/HVDC
+
+---
+See also: [Network actions impact parameters](/docs/parameters/json-parameters#ra-usage-impact), [Range actions impact parameters](/docs/parameters/json-parameters#range-action-usage-limitation)
+
+---

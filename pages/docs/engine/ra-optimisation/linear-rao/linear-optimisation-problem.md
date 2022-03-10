@@ -5,7 +5,7 @@ permalink: /docs/engine/ra-optimisation/linear-optimisation-problem
 hide: true
 root-page: Documentation
 docu-section: CASTOR
-docu-parent: CASTOR
+docu-parent: Linear Remedial Actions Optimisation
 order: 4
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
@@ -13,8 +13,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 # Overview
 
-The main decision variables of the linear optimisation problem are the setpoints of the Range Remedial Action 
-(PSTs and HVDCs). The linear optimisation aims at finding the combination of Range Action setpoints which maximises 
+The main decision variables of the linear optimisation problem are the setpoints of the linear remedial actions (PSTs, HVDCs, injection range actions). The linear optimisation aims at finding the combination of Range Action setpoints which maximises 
 a given objective function.
 
 The first objective function which will be implemented for this linear optimisation problem is the maximizing of the
@@ -22,7 +21,7 @@ maximum margin.
 
 During the [search tree RAO process](/docs/engine/ra-optimisation/search-tree-rao), the linear optimisation problem is solved multiple times:
 - for different perimeters (e.g. before outage, after outage)
-- with different activated Network Remedial Action (Network Actions are not optimized within the linear optimisation)
+- with different activated Network Remedial Action (Network Actions are not optimised within the linear optimisation)
 - with sensitivities computed around different combinaison of Range Action setpoints. During the algorithm of 
 the [linear RAO](/docs/engine/ra-optimisation/linear-rao), the sensitivities are re-computed and the 
 linear optimisation problem re-solved every time that a new optimal combination of PST setpoints is found.
@@ -149,7 +148,7 @@ $$\begin{equation}
 
 #### Set of PSTs that should remain equal
 
-For a set of PSTs whose taps should remain equal during optimization, extra constraints are added:
+For a set of PSTs whose taps should remain equal during optimisation, extra constraints are added:
 
 $$\begin{equation}
 \alpha_{p_1} = \alpha_{p_0}

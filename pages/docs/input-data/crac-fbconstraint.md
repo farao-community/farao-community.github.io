@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
 
-### Header overview
+### Header overview {#header}
 
 ```xml
 <FlowBasedConstraintDocument DtdRelease="4" DtdVersion="0" xmlns="flowbased" xmlns:xsi="..." xsi:noNamespaceSchemaLocation="...">
@@ -32,7 +32,7 @@ tags: [Docs, Data]
 ```
 A flow-based constraint document has a time interval for its validity and a lot of its sub-objects have their own time interval of validity as well. Therefore, **this document has to be imported for a specific datetime** – hourly-precise – to be able to select only the available elements for this datetime.
 
-### Critical branches
+### Critical branches {#critical-branches}
 
 ```xml
 <criticalBranch id="de2_nl3_N">
@@ -66,7 +66,7 @@ As it has been precised previously a critical branch has a time interval of vali
 
 As it is defined in the CRAC model a CNEC is associated to a state. If the &lt;outage&gt; tag is not present as it is in the first example the CNEC is associated to the "preventive state" otherwise **two different CNECs will be created** one on state ("Ouatge", contingency_id) and another one on state ("Curative", contingency_id). These two CNECs will be on the same network element but will have different thresholds as it is explained in the **thresholds section**. As two CNECs are created from a unique CNEC with its ID, a suffix is added to the IDs of the new CNECs " - Outage" and " - Curative".
 
-#### Branch definition
+#### Branch definition {#branch-definition}
 
 n the definitions of critical branches or outages appear the &lt;branch&gt; tag, it can be quite singular. This type of CRAC has to be associated with a network in UCTE format therefore a branch is designated by two nodes – from and to – that are UCTE nodes and an order code which is defined in the UCTE format literature. The name represents only a more human readable name but there is no garanty on its unicity.
 
@@ -78,9 +78,9 @@ A branch can also be defined this way :
 
 Instead of using order code as third identifier, the element name can be used as it is defined in the UCTE format literature as well. This implies that network elements from the IIDM network have to be identifiable with two different type of IDs "fromNode toNode orderCode" and "fromNode toNode elementName". This is handled by the aliases, a network elementhas its ID "fromNode toNode orderCode" when it's imported from UCTE format, but aliases can be created to identify it with other names.
 
-Another problem is that from/to nodes can be inverted in the CRAC compared to what is present in the network. Such branches are correctly identified when the file is imported, but appears to be inverted in the resulting Crac - meaning that their flow sign might be different between the 'CORE-definition' of the branch and the 'FARAO-definition' of the branch. The inversion of the branch is tracked in the [CracCreationContext](/docs/input-data/crac/creation-context) so as to handle properly the sign of the flow when the results of the RAO are exported.
+Another problem is that from/to nodes can be inverted in the CRAC compared to what is present in the network. Such branches are correctly identified when the file is imported, but appears to be inverted in the resulting CRAC - meaning that their flow sign might be different between the 'CORE-definition' of the branch and the 'FARAO-definition' of the branch. The inversion of the branch is tracked in the [CracCreationContext](import#crac-creator) so as to handle properly the sign of the flow when the results of the RAO are exported.
 
-#### Thresholds
+#### Thresholds {#thresholds}
 
 Thresholds can be defined in several ways in this format. There are two types of thresholds – permanent and temporary. In our model  permanent limits make sense on preventive and curative states whereas temporary limits make sense only the outage states.
 
@@ -88,7 +88,7 @@ Permanent thresholds:
 
 - &lt;imaxA&gt; and &lt;imaxFactor&gt; : the first one is an absolute threshold in Amps the second one is a percentage of Imax as a limit – Imax being defined for each line in the UCTE network file.
 - &lt;permanentImaxA&gt; and &lt;permanentImaxFactor&gt; : same definition of absolute and relative limits as defined previously.
-Both tags can be present, they will be added, the most limiting will be the effective one during the optimization.
+Both tags can be present, they will be added, the most limiting will be the effective one during the optimisation.
 
 Temporary thresholds:
 
@@ -96,13 +96,13 @@ Temporary thresholds:
 
 To define thresholds we also have to take &lt;direction&gt; tag into account. As mentionned in the model a network element has a direction – from/to node – then a threshold can be effective only for positive values of the flow for this direction for example, this is the definition of DIRECT. If the value is OPPOSITE the threshold will be effective only for negative values of the flow on this line. And eventually the value BOTH will make it effective for both negative and positive values.
 
-#### Additonnal values
+#### Additonnal values {#additional-values}
 
-- A FRM value in specified for each CNEC, its value is in MW. Then the effective threshold value for the optimizer will be the one of the threshold diminished by the FRM value. Several conversions might take place whether we want the threshold in A or in MW.
-- A critical branch can be either a CNEC (optimized) or a MNEC (monitored) or actually both of these. For those that are neither a CNEC nor a MNEC they will be ignored.
+- A FRM value in specified for each CNEC, its value is in MW. Then the effective threshold value for the optimiser will be the one of the threshold diminished by the FRM value. Several conversions might take place whether we want the threshold in A or in MW.
+- A critical branch can be either a CNEC (optimised) or a MNEC (monitored) or actually both of these. For those that are neither a CNEC nor a MNEC they will be ignored.
 - TSO origin for the critical branch is also specified. As tie-lines are usually defined in two parts in the CRAC there will always be only one TSO implied per CNEC.
 
-### Remedial actions
+### Remedial actions {#remedial-actions}
 
 ```xml
 <complexVariant id="01_REMEDIAL_ACTION_FR" name="OPEN_LINE_A">
@@ -128,7 +128,7 @@ Then it has the &lt;actionSet&gt; tag :
 - &lt;enforced&gt; tag : it is not used for now
 Eventually different &lt;action&gt; tags can be used to define the concrete actions on the network for the remedial action.
 
-#### Network actions
+#### Network actions {#network-actions}
 ```xml
 <action type="STATUS">
     <branch from="FROM__11" to="TO____11"  elementName="NAME1"/>
@@ -139,7 +139,7 @@ Network actions are defined with the type "STATUS". The information they need is
 - The network element that is modified
 - The type of action (OPEN/CLOSE)
 
-#### Range actions
+#### Range actions {#range-actions}
 ```xml
 <action type="PSTTAP">
     <branch from="FROM__22" to="TO____22"  elementName="NAME2"/>
@@ -156,7 +156,7 @@ Only PST range ations can be defined in FlowBasedConstraint documents. They are 
 - Eventually, if they belong to a group of aligned PSTs, the ID of the group 
 
 
-#### Special rules
+#### Special rules {#special-rules}
 In order to ensure the imported CRAC is usable in the RAO, FARAO implements these special rules for FlowBasedConstraint documents:
 - If multiple PST remedial actions are defined for the same network element and the same state, only one is imported (priority is given to PSTs that have a group ID defined)
 - FARAO adds LoopFlow constraints for all critical branches with names ending with "[XX]" (where "XX" is a country code), even if the critical branch is internal to a country

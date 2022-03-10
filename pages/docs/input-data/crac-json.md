@@ -22,11 +22,11 @@ It is typically used in European coordinated processes. It enables, for a given 
 
 **A CRAC object model has been designed in FARAO** in order to store all the aforementioned information. This page aims at presenting: 
 
-the content and the organization of the data present in the FARAO CRAC object model,
-how a FARAO CRAC object can be built, either using the java API,
-or using the FARAO internal Json CRAC format.
+- the content and the organization of the data present in the FARAO CRAC object model,
+- how a FARAO CRAC object can be built, either using the java API,
+- or using the FARAO internal Json CRAC format.
 
-Note that other pages of this documentation describe how the FARAO CRAC object model can be built with other standard CRAC formats, such as the CORE Merged-CB Crac format, the security limit format, or the CRAC CSE Format.
+Note that other pages of this documentation describe how the [FARAO CRAC object model can be built with other standard CRAC formats](crac-import), such as the CORE Merged-CB CRAC format, the security limit format, or the CRAC CSE Format.
 
 
 ### Full CRAC examples
@@ -55,14 +55,11 @@ example on github
 
 The following paragraphs of this page explain, step by step, the content of those examples.
 
----
-**KEY**  
-🔴 marks a mandatory field  
-⚪ marks an optional field  
-🔵 marks a field that can be mandatory in some cases  
-⭐ marks a field that must be unique in the CRAC  
-
----
+> **KEY**  
+> 🔴 marks a mandatory field  
+> ⚪ marks an optional field  
+> 🔵 marks a field that can be mandatory in some cases  
+> ⭐ marks a field that must be unique in the CRAC  
 
 ### Network elements {#network-elements}
 FARAO relies on [PowSyBl framework](https://www.powsybl.org/), and FARAO's CRAC relies on some elements of the PowSyBl's iidm Network object: the so-called network elements.
@@ -162,12 +159,9 @@ The instant is a hypothetical moment in the chronology of a contingency. Three i
 - the outage instant, which occur just after a contingency, in a time too short which does not permit the activation of curative remedial actions
 - the curative instant, which occur after a contingency, after a duration sufficient enough to allow the activation of curative remedial actions
 
----
-💡**NOTE**  
-Current limits on network elements are usually different in the outage and curative instants. The outage instant is supposed to be exceptional and not to last longer than a few minutes, it therefore allows to consider less restrictive temporary limits (TATL). On the contrary, the curative instant is supposed to be a lasting moment where the grid operation goes back to normal, and usually goes with more restrictive permanent limits (PATL).  
-Even though this PATL/TATL difference is commonly seen in the data of many processes, it is not set in stone, and the current limits can be defined freely in the CRAC of FARAO whatever the instant considered (see next section on CNECs).
-
----
+> 💡  **NOTE**  
+> Current limits on network elements are usually different in the outage and curative instants. The outage instant is supposed to be exceptional and not to last longer than a few minutes, it therefore allows to consider less restrictive temporary limits (TATL). On the contrary, the curative instant is supposed to be a lasting moment where the grid operation goes back to normal, and usually goes with more restrictive permanent limits (PATL).  
+> Even though this PATL/TATL difference is commonly seen in the data of many processes, it is not set in stone, and the current limits can be defined freely in the CRAC of FARAO whatever the instant considered (see next section on CNECs).
 
 Farao object model includes the notion of 'state'. A state is either:
 
@@ -190,13 +184,10 @@ A CNEC is a **network element**, which is considered at a given **instant** afte
 - the CNEC is considered at instant preventive, after NO contingency (i.e. in the basecase network situation, at the preventive state)
 - the CNEC is considered at instant outage or curative, after a given contingency.
 
----
-💡**NOTE**  
-Note that in FARAO a CNEC is associated to only one instant and one contingency. This is not the case of every CRAC formats, for instance, in the CORE merged-CB CRAC format, the post-outage CNECs are implicitely defined for the two instants outage and curative, and in the security-limit format, a same CNEC can be defined for the preventive state and several contingencies.
-
-(see also the pages on the [Crac importers](import) to see how each format is mapped on FARAO internal format)
-
----
+> 💡  **NOTE**  
+> Note that in FARAO a CNEC is associated to only one instant and one contingency. This is not the case of every CRAC formats, for instance, in the CORE merged-CB CRAC format, the post-outage CNECs are implicitely defined for the two instants outage and curative, and in the security-limit format, a same CNEC can be defined for the preventive state and several contingencies.
+> 
+> (see also the pages on the [CRAC importers](import) to see how each format is mapped on FARAO internal format)
 
 
 A CNEC have an operator, which is the name of the TSO which operates the network element of the CNEC.
@@ -226,26 +217,22 @@ Thresholds are defined for a given side of the FlowCnec. Several "threshold rule
 - on high voltage level side
 - on low voltage level side
 
----
-💡**NOTE**  
-The side of the threshold is particularly crucial for thresholds:  
-- in ampere or %Imax of **transformers**, as the current on both sides of a transformer are different
-- in %Imax of **tie-lines**, as the current limits are usually different on both sides of a tie-line.
-- used in applications which involve **AC load-flow** computation, as the flow in one side of a branch is not equal to the flow on its other side (due to losses)
-
----
-
+> 💡  **NOTE**  
+> The side of the threshold is particularly crucial for thresholds:  
+> - in ampere or %Imax of **transformers**, as the current on both sides of a transformer are different
+> - in %Imax of **tie-lines**, as the current limits are usually different on both sides of a tie-line.
+> - used in applications which involve **AC load-flow** computation, as the flow in one side of a branch is not equal to the flow on its other side (due to losses)
 
 In the examples of the picture above, all the thresholds are defined in megawatt. If the thresholds are defined in ampere, or in %Imax, additional data are required in order to handle the conversions:
 - if one threshold of the FlowCnec is in ampere or in percentage of Imax, the nominal voltage on both sides of the threshold must be defined
 - if one threshold of the FlowCnec is in percentage of Imax, the Imax of the FlowCnec on the side of the threshold must be defined
 
-[Utiity methods](creation-methods) have been developped in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
+[Utility methods](creation-methods) have been developped in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
 
-#### Optimized and monitored FlowCnecs
-FlowCnecs can be monitored and/or optimized.
+#### Optimised and monitored FlowCnecs
+FlowCnecs can be monitored and/or optimised.
 
-This notion of monitored/optimized has been introduced by the capacity calculation on the CORE region, and is inherent to the RAO of this region which:
+This notion of monitored/optimised has been introduced by the capacity calculation on the CORE region, and is inherent to the RAO of this region which:
 
 - maximizes the margin of the FlowCnec with are 'optimzed'
 - ensures that the margin of the 'monitored' FlowCnec is positive.
@@ -592,13 +579,10 @@ FARAO has three types of RangeAction : PstRangeAction, HvdcRangeAction, and Inje
 #### PST Range Action {#pst-range-action}
 A PstRangeAction contains a network element which must point toward a PST of the iidm PowSyBl network model. The PstRangeAction will be able to modify the setpoint of this PST.
 
----
-💡**NOTE**  
-- the setpoint of the PstRangeAction is the angle of the PST, given in degree
-- all the methods of the PST which mention a setpoint implicity ask for/return an angle
-- though, those methods are usually doubled with methods which ask for/return a tap
-
----
+> 💡  **NOTE** 
+> - the setpoint of the PstRangeAction is the angle of the PST, given in degree
+> - all the methods of the PST which mention a setpoint implicity ask for/return an angle
+> - though, those methods are usually doubled with methods which ask for/return a tap
 
 The domain in which the PstRangeAction can modify the tap of the PST is delimited by 'TapRanges'. A PstRangeAction contains a list (which can be empty) of TapRanges.  
 
@@ -608,7 +592,7 @@ TapRanges can be of different types:
 - **relative to prevous instant**: the maximum variation of the tap of the PST relatively to its tap in the previous instant. Note that this type of range does not make make sense for PstRangeAction which are only available in the preventive instant, as there is no instant before the preventive one.  
 
 The final validity range of the PstRangeAction is the intersection of its TapRanges, with the intersection of the min/max feasible taps of the PST.  
-The PstRangeAction also requires additional data, notably to be able to interpret the TapRanges. Those additional data are: the initial tap of the PST, and a conversion map which gives for each feasible tap of the PST its corresponding angle. Utiity methods have been developped in FARAO to ease the management of these additional data during the creation of a PstRangeAction.
+The PstRangeAction also requires additional data, notably to be able to interpret the TapRanges. Those additional data are: the initial tap of the PST, and a conversion map which gives for each feasible tap of the PST its corresponding angle. Utility methods have been developped in FARAO to ease the management of these additional data during the creation of a PstRangeAction.
 
 {% tabs aTab %}
 {% tab aTab JAVA creation API %}
@@ -797,5 +781,3 @@ This means the setpoint of "network-element-1" (key = 1) can be changed between 
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on usage rules)  
 {% endtab %}
 {% endtabs %}
-
-<br><br>

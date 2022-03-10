@@ -32,9 +32,9 @@
     .sidebar-element {
         border: 1px solid #ddd;
         margin-top: -1px; /* Prevent double borders */
-        background-color: #f6f6f6;
+        background-color: #d4d4d4;
         padding: 12px;
-        padding-left: 36px; /* Indicate that it belongs to a section */
+        padding-left: 24px; /* Indicate that it belongs to a section */
         text-decoration: none;
         font-size: 18px;
         color: #383838;
@@ -42,13 +42,14 @@
         position: relative;
     }
 
+    .double-padding {
+        padding-left: 36px;
+        background-color: #f6f6f6;
+    }
+
     .selected {
         background-color: #f76908;
         color: white;
-    }
-
-    .double-padding {
-        padding-left: 48px;
     }
 
     .sidebar-section:hover {

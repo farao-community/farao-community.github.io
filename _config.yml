@@ -3,8 +3,7 @@ baseurl: ''
 url: http://farao-community.github.io/
 title: FARAO # site's title
 description: >
-  FARAO (for Fully Autonomous Remedial Actions Optimization) is a modular toolbox based on powsybl framework.
-  It provides tools for coordination studies in power systems.
+  open-source tools for coordination studies in power systems
 
 
 # THEME-SPECIFIC CONFIGURATION

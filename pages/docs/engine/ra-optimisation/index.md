@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Remedial Actions Optimization interface
+title: Remedial Actions Optimisation interface
 permalink: /docs/engine/ra-optimisation
 hide: true
 root-page: Documentation
@@ -140,7 +140,7 @@ To use the RAO computation feature, add the following dependency to your `pom.xm
 ```java
 // Get RAO inputs
 Network network = ...
-CracFile cracFile = ...
+CRACFile cracFile = ...
 
 // Create RAO engine
 ComputationManager computationManager = LocalComputationManager.getDefault();

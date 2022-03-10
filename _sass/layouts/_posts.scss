@@ -70,6 +70,7 @@ header {
     .post-content {
         @extend %padding-regular;
         padding-bottom: 0;
+        font-size: medium;
     }
     footer {
         @extend %padding-regular;

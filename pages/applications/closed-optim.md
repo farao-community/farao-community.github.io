@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Closed optimization
+title: Closed optimisation
 permalink: /applications/closed-optim
 hide: true
 root-page: Operational applications
@@ -11,14 +11,14 @@ tags: [Applications]
 order: 4
 ---
 
-## FARAO closed optimization
+## FARAO closed optimisation
 
 #### Example of use cases :
 
-For RCC - Coordinated Security Analysis (sequential optimization of non-costly remedial actions and costly remedial actions). 
+For RCC - Coordinated Security Analysis (sequential optimizsation of non-costly remedial actions and costly remedial actions). 
 
 Yearly congestion costs due to the use of costly remedial actions reach millions or even billions of euros for some 
-countries. All TSOs shall share the congestion costs resulting from the remedial actions optimization of the Coordinated 
+countries. All TSOs shall share the congestion costs resulting from the remedial actions optimisation of the Coordinated 
 Security Analysis, in accordance with the Regulation EU 2015/1222 (Capacity Allocation and Congestion Management), 
 Article 74. Given the financial amounts at stake, the implementation of the methodology shall be as transparent as 
 possible to limit any potential disputes and ease the auditability of the solution by regulatory authorities or external parties.

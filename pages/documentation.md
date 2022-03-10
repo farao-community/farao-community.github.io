@@ -40,6 +40,6 @@ Thanks to our modular architecture, implementing a new process in existing RAO m
 ![FARAO modules](/assets/img/modular.png) 
 
 
-Take benefit from our platform for optimization with different methodologies already implemented for CACM/SO methodologies. Moreover, it is possible to contribute by adding your features/improvements in existing RAO modules and creating new ones if needed.
+Take benefit from our platform for optimisation with different methodologies already implemented for CACM/SO methodologies. Moreover, it is possible to contribute by adding your features/improvements in existing RAO modules and creating new ones if needed.
 
 ![FARAO modules usage](/assets/img/modular2.png) 

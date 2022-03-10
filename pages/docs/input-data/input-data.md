@@ -35,14 +35,15 @@ defined in the network codes (Article 2, Regulation 2015/1222 CACM).
 ### Network
 
 The network data model used by FARAO toolbox is the PowSyBl IIDM format.
-To get detailed information about the network model, please refer to [dedicated documentation](https://powsybl.github.io/docs/iidm/model)
+To get detailed information about the network model, please refer to [dedicated documentation](https://www.powsybl.org/pages/documentation/index.html#grid-model)
 on PowSyBl website.
 
 #### Network exchange formats supported (as part of PowSyBl project):
 
 - CGMES
 - UCTE
-- IIDM
+- XIIDM
+- ...
 
 ### CRAC
 
@@ -51,25 +52,27 @@ domain of the network object. They define contingencies to take into account in 
 process, constraint to monitor and remedial actions available to get rid of potential
 active constraints.
 
-Please refer to the [dedicated documentation page](/docs/data/crac) to get more information about FARAO CRAC data model.
+Please refer to the [dedicated documentation page](/docs/input-data/crac) to get more information about FARAO CRAC data model.
 
 #### CRAC exchange formats supported:
 
-- [JSON CRAC](/docs/data/crac/json) (FARAO-specific)
-- [FlowBasedConstraint CRAC](/docs/data/crac/fbconstraint) (used in CORE region)
-- [CSE CRAC](/docs/data/crac/cse) (used in CSE region)
-- [CIM CRAC](/docs/data/crac/cim) (used in SWE region)
+- [JSON CRAC](/docs/input-data/crac/json) (FARAO-specific)
+- [FlowBasedConstraint CRAC](/docs/input-data/crac/fbconstraint) (used in CORE region)
+- [CSE CRAC](/docs/input-data/crac/cse) (used in CSE region)
+- [CIM CRAC](/docs/input-data/crac/cim) (used in SWE region)
 
 ### GLSK
 
 GLSK (for "*Generation and Load Shift Keys*") are objects dedicated to define scaling strategies
 to simulate injections modification on network model.
 
+Please refer to the [dedicated documentation page](/docs/input-data/glsk) to get more information about GLSK data model.
+
 #### GLSK exchange formats supported:
 
-- CIM GLSK
-- JSON GLSK
-- UCT GLSK
+- [CIM GLSK](/docs/input-data/glsk/cim)
+- [CSE GLSK](/docs/input-data/glsk/cse)
+- [UCTE GLSK](/docs/input-data/glsk/ucte)
 
 
 
