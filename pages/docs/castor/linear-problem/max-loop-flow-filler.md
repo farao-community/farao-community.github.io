@@ -51,13 +51,13 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 $$
 \begin{equation}
-F(c) - f^{commercial}_{n} (c) <= \overline{f^{loop} (c)} + S^{lf} (c), \forall c \in \mathcal{C} ^{lf}
+F(c) - f^{commercial}_{n} (c) \leq \overline{f^{loop} (c)} + S^{lf} (c), \forall c \in \mathcal{C} ^{lf}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-F(c) - f^{commercial}_{n} (c) >= - \overline{f^{loop} (c)} - S^{lf} (c), \forall c \in \mathcal{C} ^{lf}
+F(c) - f^{commercial}_{n} (c) \geq - \overline{f^{loop} (c)} - S^{lf} (c), \forall c \in \mathcal{C} ^{lf}
 \end{equation}
 $$  
 

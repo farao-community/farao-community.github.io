@@ -47,13 +47,13 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 $$
 \begin{equation}
-F(c) <= \overline{f(c)} + S^{m} (c) , \forall c \in \mathcal{C} ^{m}
+F(c) \leq \overline{f(c)} + S^{m} (c) , \forall c \in \mathcal{C} ^{m}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-F(c) >= \underline{f(c)} - S^{m} (c), \forall c \in \mathcal{C} ^{m}
+F(c) \geq \underline{f(c)} - S^{m} (c), \forall c \in \mathcal{C} ^{m}
 \end{equation}
 $$  
 

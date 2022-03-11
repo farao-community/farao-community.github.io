@@ -51,13 +51,13 @@ It should be equal to 1 if the optimizer wants to degrade the margin of a given 
 
 $$
 \begin{equation}
-F(c) - f^{-}_{threshold} (c) >= RAM_{preperim}(c) - worstMarginDecrease \times MD(c), \forall c \in \mathcal{C} ^{uo}
+F(c) - f^{-}_{threshold} (c) \geq RAM_{preperim}(c) - worstMarginDecrease \times MD(c), \forall c \in \mathcal{C} ^{uo}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-f^{+}_{threshold} (c) - F(c) >= RAM_{preperim}(c) - worstMarginDecrease \times MD(c), \forall c \in \mathcal{C} ^{uo}
+f^{+}_{threshold} (c) - F(c) \geq RAM_{preperim}(c) - worstMarginDecrease \times MD(c), \forall c \in \mathcal{C} ^{uo}
 \end{equation}
 $$  
 

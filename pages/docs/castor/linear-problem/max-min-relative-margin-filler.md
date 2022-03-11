@@ -53,13 +53,13 @@ The absolute minimum margin defined in [MaxMinMarginFiller](max-min-margin-fille
 
 $$
 \begin{equation}
-MM <= 0
+MM \leq 0
 \end{equation}
 $$
 
 $$
 \begin{equation}
-MM >= -(1 - P) * m_{min}^{RAM}
+MM \geq -(1 - P) * m_{min}^{RAM}
 \end{equation}
 $$
 

@@ -55,13 +55,13 @@ $$
 
 $$
 \begin{equation}
-\Delta A(r) >= A(r) - \alpha_{0}(r) , \forall (r) \in \mathcal{RA}
+\Delta A(r) \geq A(r) - \alpha_{0}(r) , \forall (r) \in \mathcal{RA}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-\Delta A(r) >= - A(r) + \alpha_{0}(r) , \forall (r) \in \mathcal{RA}
+\Delta A(r) \geq - A(r) + \alpha_{0}(r) , \forall (r) \in \mathcal{RA}
 \end{equation}
 $$  
 

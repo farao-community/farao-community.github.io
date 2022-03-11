@@ -46,13 +46,13 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 $$
 \begin{equation}
-MM <= f^{+}_{threshold} (c) - F(c), \forall c \in \mathcal{C} ^{o}
+MM \leq f^{+}_{threshold} (c) - F(c), \forall c \in \mathcal{C} ^{o}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-MM <= F(c) - f^{-}_{threshold} (c), \forall c \in \mathcal{C} ^{o}
+MM \leq F(c) - f^{-}_{threshold} (c), \forall c \in \mathcal{C} ^{o}
 \end{equation}
 $$  
 
@@ -63,13 +63,13 @@ Note that OptimizedFlowCnec might have only one threshold (upper or lower), in t
 
 $$
 \begin{equation}
-MM <= \frac{f^{+}_{threshold} (c) - F(c)}{c^{A->MW}(c)}, \forall c \in \mathcal{C} ^{o}
+MM \leq \frac{f^{+}_{threshold} (c) - F(c)}{c^{A->MW}(c)}, \forall c \in \mathcal{C} ^{o}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-MM <= \frac{F(c) - f^{-}_{threshold} (c)}{c^{A->MW}(c)}, \forall c \in \mathcal{C} ^{o}
+MM \leq \frac{F(c) - f^{-}_{threshold} (c)}{c^{A->MW}(c)}, \forall c \in \mathcal{C} ^{o}
 \end{equation}
 $$  
 
