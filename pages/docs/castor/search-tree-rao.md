@@ -62,7 +62,7 @@ As a matter of clarification, connecting/disconnecting a generation unit can als
 
 #### For Flow-based Capacity calculation – minimum margin
 
-The objective function is used to determine at each step of the search tree which remedial action is the best. A variant of it is also used when solving the [linear optimisation problem](/docs/engine/ra-optimisation/linear-optimisation-problem).
+The objective function is used to determine at each step of the search tree which remedial action is the best. A variant of it is also used when solving the [linear optimisation problem](/docs/castor/linear-optimisation-problem).
 
 The active flow $$F_i$$ on a CNEC $$i$$ is:
 

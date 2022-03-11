@@ -1,12 +1,12 @@
 ---
 layout: documentation
-title: Linear optimisation problem
-permalink: /docs/engine/ra-optimisation/linear-optimisation-problem
+title: [obsolete] Linear optimisation problem
+permalink: /docs/castor/linear-optimisation-problem
 hide: true
 root-page: Documentation
 docu-section: CASTOR
 docu-parent: Linear Remedial Actions Optimisation
-order: 4
+order: 400
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---

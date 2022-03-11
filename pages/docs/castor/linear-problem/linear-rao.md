@@ -13,7 +13,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 ### Overview
 
-The Linear RAO optimises the linear remedial actions (for now: PSTs, HVDCs, injection range actions) according to a configurable objective function (e.g. maximization of the minimum margin). The solving algorithm approximates the impact of the remedial actions on the network flows with linear sensitivity coefficients. It therefore solves [linear optimisation problems](/docs/engine/ra-optimisation/linear-optimisation-problem) to find the optimal setpoints for the remedial actions. Moreover, it can iterate over several reference points in order to mitigate the linear approximation inherent to its optimisation problem.
+The Linear RAO optimises the linear remedial actions (for now: PSTs, HVDCs, injection range actions) according to a configurable objective function (e.g. maximization of the minimum margin). The solving algorithm approximates the impact of the remedial actions on the network flows with linear sensitivity coefficients. It therefore solves [linear optimisation problems](/docs/castor/linear-optimisation-problem) to find the optimal setpoints for the remedial actions. Moreover, it can iterate over several reference points in order to mitigate the linear approximation inherent to its optimisation problem.
 
 In particular, the Linear RAO module is used in [CASTOR](/docs/engine/ra-optimisation/search-tree-rao).
 
@@ -42,7 +42,7 @@ Hereunder, the specific workflow related to linear optimisation.
 
 #### Forcing setpoints of a defined set of linear remedial actions to be equal
 
-CASTOR can be configured to define groups of LRAs whose taps should be maintained equal during optimisation. To see how this is done, you can check the details of the [linear optimisation problem](/docs/engine/ra-optimisation/linear-optimisation-problem).
+CASTOR can be configured to define groups of LRAs whose taps should be maintained equal during optimisation. To see how this is done, you can check the details of the [linear optimisation problem](/docs/castor/linear-optimisation-problem).
 
 #### Minimum impact of a LRA in the linear optimisation
 

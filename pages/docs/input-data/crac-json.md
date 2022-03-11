@@ -229,12 +229,12 @@ In the examples of the picture above, all the thresholds are defined in megawatt
 
 [Utility methods](creation-methods) have been developped in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
 
-#### Optimised and monitored FlowCnecs
+#### Optimised and monitored FlowCnecs {#optimised-vs-monitored}
 FlowCnecs can be monitored and/or optimised.
 
 This notion of monitored/optimised has been introduced by the capacity calculation on the CORE region, and is inherent to the RAO of this region which:
 
-- maximizes the margin of the FlowCnec with are 'optimzed'
+- maximizes the margin of the FlowCnec with are 'optimised'
 - ensures that the margin of the 'monitored' FlowCnec is positive.
 
 #### Create a CNEC
