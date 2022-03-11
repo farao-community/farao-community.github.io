@@ -89,8 +89,8 @@ For example, here is the value set for CORE CC when using XPRESS: "THREADS 1 MAX
 ### relative-mip-gap {#relative-mip-gap}
 - **Expected value**: double
 - **Default value**: 0.0001
-- **Usage**: the relative MIP (Mixed-Integer-Programming) target gap.  
-During branch-and-bound algorithm (only in MIP case), the solver will stop branching when this relative gap is reached between the best found objective function and the estimated objective function best bound.
+- **Usage**: the relative MILP (Mixed-Integer-Linear-Programming) target gap.  
+During branch-and-bound algorithm (only in MILP case), the solver will stop branching when this relative gap is reached between the best found objective function and the estimated objective function best bound.
 
 ## Search-tree parameters (extension) {#search-tree-parameters}
 The [SearchTreeRaoParameters](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/castor/parameters/SearchTreeRaoParameters.java) class is a RaoParameters extension used to tune the search-tree RAO's behaviour.

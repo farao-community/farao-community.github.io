@@ -92,7 +92,7 @@ $$
 
 <br>
 
-- where $$\sigma^{\prime}_{ptdf}(c)$$ is a "safe" version of the zone-to-zone absolute PTDF sum, where small values are lifted to avoid bad conditioning of the LP:  
+- where $$\sigma^{\prime}_{ptdf}(c)$$ is a "safe" version of the zone-to-zone absolute PTDF sum, where small values are lifted to avoid bad conditioning of the MILP:  
 $$\sigma^{\prime}_{ptdf}(c) = \max{(\sigma_{ptdf}(c), \varepsilon_{PTDF})} $$  
 
 - the max possible positive relative RAM is:  

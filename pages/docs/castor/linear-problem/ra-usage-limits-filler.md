@@ -21,7 +21,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Range lower bound | $$\overline{\alpha(r)(\alpha _0(r))}$$ | Lowest allowed setpoint for a range action r, given its pre-perimeter setpoint $$\alpha _0(r)$$ |
 | Maximum number of RAs | $$nRA^{max}$$ | Maximum number of range actions that can be used |
 | Maximum number of TSOs | $$nTSO^{max}$$ | Maximum number of TSOs that can use at least one range action (those in "TSO exclusions" do not count) |
-| TSO exclusions | $$tso \in \mathcal{TSO_{ex}}$$ | TSOs that do not count in the "Maximum number of TSOs" constraint (typically because they already have an activated network action outside the LP, and that maxTso has been decremented, so using range actions for these TSOs is "free") |
+| TSO exclusions | $$tso \in \mathcal{TSO_{ex}}$$ | TSOs that do not count in the "Maximum number of TSOs" constraint (typically because they already have an activated network action outside the MILP, and that maxTso has been decremented, so using range actions for these TSOs is "free") |
 | Maximum number of PSTs per TSO | $$nPST^{max}(tso)$$ | Maximum number of PSTs that can be used by a given TSO |
 | Maximum number of RAs per TSO | $$nRA^{max}(tso)$$ | Maximum number of range actions to use by a given TSO |
 | TSOs | $$tso \in \mathcal{TSO}$$ | Set of all TSOs operating a range action in RangeActions |

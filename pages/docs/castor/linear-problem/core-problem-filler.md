@@ -15,18 +15,18 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details |
 |---|---|---|
-| FlowCnecs | $$c \in \mathcal{C}$$ | set of FlowCnecs. Note that FlowCnecs are all the CBCO for which we compute the flow in the LP, either: <br> - because we are optimizing their flow (optimized flowCnec = CNEC) <br> - because we are monitoring their flow, and ensuring it does not exceed its threshold (monitored flowCnec = MNEC) <br> - or both |
+| FlowCnecs | $$c \in \mathcal{C}$$ | set of FlowCnecs. Note that FlowCnecs are all the CBCO for which we compute the flow in the MILP, either: <br> - because we are optimizing their flow (optimized flowCnec = CNEC) <br> - because we are monitoring their flow, and ensuring it does not exceed its threshold (monitored flowCnec = MNEC) <br> - or both |
 | RangeActions | $$r \in \mathcal{RA}$$ | set of RangeActions, could be PSTs, HVDCs, or injection range actions |
-| ReferenceFlow | $$f_{n}(c)$$ | reference flow, for FlowCnec c. <br>The reference flow is the flow at the beginning of the current iteration of the LP, around which the sensitivities are computed |
+| ReferenceFlow | $$f_{n}(c)$$ | reference flow, for FlowCnec c. <br>The reference flow is the flow at the beginning of the current iteration of the MILP, around which the sensitivities are computed |
 | PrePerimeterSetpoints | $$\alpha _0(r)$$ | setpoint of RangeAction r at the beginning of the optimization |
-| ReferenceSetpoints | $$\alpha _n(r)$$ | setpoint of RangeAction r at the beginning of the current iteration of the LP, around which the sensitivities are computed |
+| ReferenceSetpoints | $$\alpha _n(r)$$ | setpoint of RangeAction r at the beginning of the current iteration of the MILP, around which the sensitivities are computed |
 | Sensitivities | $$\sigma _{n}(r,c)$$ | sensitivity of RangeAction r on FlowCnec c |
 
 ## Used parameters {#parameters}
 
 | Name | Symbol | Details | Source |
 |---|---|---|---|
-| sensitivityThreshold |  | Set to zero the sensitivities of RangeActions below this threshold; thus avoiding the activation of RangeActions which have too small an impact on the flows (can also be achieved with penaltyCost). This simplifies & speeds up the resolution of the optimization problem (can be necessary when the problem contains integer variables). However, it also adds an approximation in the computation of the flows within the MIP, which can be tricky to handle when the MIP contains hard constraints on loop-flows or monitored FlowCnecs. | Equal to [pst-sensitivity-threshold](/docs/parameters/json-parameters#pst-sensitivity-threshold) for PSTs, [hvdc-sensitivity-threshold](/docs/parameters/json-parameters#hvdc-sensitivity-threshold) for HVDCs, and [injection-ra-sensitivity-threshold](/docs/parameters/json-parameters#injection-ra-sensitivity-threshold) for injection range actions |
+| sensitivityThreshold |  | Set to zero the sensitivities of RangeActions below this threshold; thus avoiding the activation of RangeActions which have too small an impact on the flows (can also be achieved with penaltyCost). This simplifies & speeds up the resolution of the optimization problem (can be necessary when the problem contains integer variables). However, it also adds an approximation in the computation of the flows within the MILP, which can be tricky to handle when the MILP contains hard constraints on loop-flows or monitored FlowCnecs. | Equal to [pst-sensitivity-threshold](/docs/parameters/json-parameters#pst-sensitivity-threshold) for PSTs, [hvdc-sensitivity-threshold](/docs/parameters/json-parameters#hvdc-sensitivity-threshold) for HVDCs, and [injection-ra-sensitivity-threshold](/docs/parameters/json-parameters#injection-ra-sensitivity-threshold) for injection range actions |
 | penaltyCost | $$c^{penalty}_{ra}$$ | Supposedly a small penalization, in the use of the RangeActions. When several solutions are equivalent, this favours the one with the least change in the RangeActions' setpoints (compared to the initial situation). It also avoids the activation of RangeActions which have to small an impact on the objective function. | Equal to [pst-penalty-cost](/docs/parameters/json-parameters#pst-penalty-cost) for PSTs, [hvdc-penalty-cost](/docs/parameters/json-parameters#hvdc-penalty-cost) for HVDCs, and [injection-ra-penalty-cost](/docs/parameters/json-parameters#injection-ra-penalty-cost) for injection range actions |
 
 ## Defined optimization variables {#defined-variables}

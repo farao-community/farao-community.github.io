@@ -16,8 +16,8 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | PstRangeActions | $$r \in \mathcal{RA}^{PST}$$ | Set of PST RangeActions |
-| reference angle | $$\alpha _n(r)$$ | angle of PstRangeAction r at the beginning of the current iteration of the LP |
-| reference tap position | $$t_{n}(r)$$ | tap of PstRangeAction r at the beginning of the current iteration of the LP |
+| reference angle | $$\alpha _n(r)$$ | angle of PstRangeAction r at the beginning of the current iteration of the MILP |
+| reference tap position | $$t_{n}(r)$$ | tap of PstRangeAction r at the beginning of the current iteration of the MILP |
 | PstRangeAction angle bounds | $$\underline{\alpha(r)} \: , \: \overline{\alpha(r)}$$ | min and max angle[^1] of PstRangeAction r |
 | PstRangeAction tap bounds | $$\underline{t(r)} \: , \: \overline{t(r)}$$ | min and max tap[^1] of PstRangeAction r |
 | tap-to-angle conversion function | $$f_r(t) = \alpha$$ | Discrete function f, which gives, for a given tap of the PstRangeAction r, its associated angle value |
