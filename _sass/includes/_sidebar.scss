@@ -20,33 +20,45 @@
         text-decoration:none;
         border: 1px solid #ddd;
         margin-top: -1px; /* Prevent double borders */
-        background-color: #111;
+        background-color: #383838;
         padding: 12px;
         font-size: 18px;
         color: white;
         display: block;
         position: relative;
+        font-weight: bolder;
     }
 
     .sidebar-element {
         border: 1px solid #ddd;
         margin-top: -1px; /* Prevent double borders */
-        background-color: #f6f6f6;
+        background-color: #d4d4d4;
         padding: 12px;
+        padding-left: 24px; /* Indicate that it belongs to a section */
         text-decoration: none;
         font-size: 18px;
-        color: black;
+        color: #383838;
         display: block;
         position: relative;
     }
 
+    .double-padding {
+        padding-left: 36px;
+        background-color: #f6f6f6;
+    }
+
+    .selected {
+        background-color: #f76908;
+        color: white;
+    }
+
     .sidebar-section:hover {
-      background-color: #050;
+      background-color: #f59b5e;
       color: white;
     }
 
     .sidebar-element:hover {
-       background-color: #050;
+       background-color: #f59b5e;
        color: white;
     }
 

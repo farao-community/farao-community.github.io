@@ -1,11 +1,12 @@
 ---
 layout: home
 permalink: /
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao.png"
+logo: "assets/img/logos/farao.png"
 hide: true
 ---
 
-FARAO is an open source project aiming at providing an efficient solution for electrical power systems'
+Open-source project aiming at providing an efficient solution for electrical power systems'
 Coordinated Capacity Calculation, Local Security Analysis and Coordinated Security Analysis.
 
 # Why choose FARAO?
@@ -14,9 +15,9 @@ a successful energy transition and creation of a common European market. By cont
 all can benefit from this collaborative project amongst different national expertise on system operation, 
 without neglecting national specificities due to structural differences in network development between countries.
 
-Results of remedial actions optimization strongly impact the social economical welfare and the congestion costs.
+Results of remedial actions optimisation strongly impact the social economical welfare and the congestion costs.
 
-How remedial actions are optimized can :
+How remedial actions are optimised can:
 - avoid TSOs the need to invest in new infrastructure
 - improve market prices formation and contribute to price convergence on the long term
 - ease the integration of renewable energies
@@ -67,7 +68,7 @@ natively compatible with both UCTE and CGMES network formats.
 {: refdef}
 
 [OR-Tools](https://developers.google.com/optimization) is an open source software suite for
-optimization, tuned for tackling the world's toughest problems in vehicle routing, flows,
+optimisation, tuned for tackling the world's toughest problems in vehicle routing, flows,
 integer and linear programming, and constraint programming. 
 The choice of Google OR-tools was driven by its large compatibility with most of existing open source/commercial solvers,
 including commercial solvers such Gurobi and Xpress when high performance is required.
@@ -76,5 +77,12 @@ including commercial solvers such Gurobi and Xpress when high performance is req
 ![Docker logo](../assets/img/logos/horizontal-logo-monochromatic-white.png){: width="600px"}
 {: refdef}
 
-[Docker](http://www.docker.com) is an open source container platform that packages applications as
+[Docker](https://www.docker.com/) is an open source container platform that packages applications as
 lightweight, portable containers. 
+
+{:refdef: style="text-align: center;"}
+![Kubernetes logo](../assets/img/logos/kubernetes.png){: width="500px"}
+{: refdef}
+
+[Kubernetes](https://kubernetes.io/), also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+

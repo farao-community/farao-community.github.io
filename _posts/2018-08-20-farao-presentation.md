@@ -2,7 +2,7 @@
 layout: post
 title: Welcome in FARAO community
 category: edito
-feature-img: "assets/img/Hans_Otto_Theater_Potsdam_-_fake_colors_cut.jpg"
+feature-img: "assets/img/farao3.jpg"
 tags: [Edito, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---
@@ -25,7 +25,7 @@ In FARAO team, we have one ambition: create an open, transparent and modular too
 We want these tools to be shared, developed and improved with the community, including:
 - CGMES integration and associated files (GLSK, CRAC, CNE)
 - Flowbased computation module
-- Remedial actions optimization module
+- Remedial actions optimisation module
 
 The first complete release of FARAO is expected on June 2019, but modules will be released regularly as they are ready.
 

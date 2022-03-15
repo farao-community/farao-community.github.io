@@ -4,9 +4,7 @@ layout: default
 
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
     <header id="main" style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
-        <h1 id="{{ site.theme_settings.title }}" class="title">
-        {{ site.theme_settings.title }}
-        </h1>
+        <img src="{{ page.logo }}" alt="" height="100px"/>
 
         {% if site.theme_settings.header_text %}
         <h2 class="subtitle">{{ site.theme_settings.header_text }}</h2>
