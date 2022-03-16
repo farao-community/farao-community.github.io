@@ -65,7 +65,6 @@ theme_settings:
   disqus_shortname:
   katex: false # Enable if using math markup
   mathjax: true # Enable if using math markup
-  tabs: true # Enable usage of tabs container
   
   special_page:
     search: 
@@ -125,7 +124,6 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-relative-links
-  - jekyll-tabs
   - jemoji
 
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
