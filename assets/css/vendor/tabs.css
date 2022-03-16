@@ -1,53 +1,39 @@
+/* Style the tab */
 .tab {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 0px;
-    padding: 0;
-    list-style: none;
-    position: relative;
-    margin-bottom: 0px;
-}
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    padding: 0px;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    margin: -1px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    color: white;
+    background-color: #f76908;
+  }
 
-.tab > * {
-    flex: none;
-    padding-left: 0px;
-    position: relative;
-    font-weight: bold;
-    background-color: rgb(240, 240, 240);
-}
-
-.tab > * > a {
-    display: block;
-    text-align: center;
-    padding: 9px 20px;
-    color: #999;
-    border-bottom: 2px solid transparent;
-    border-bottom-color: transparent;
-    font-size: 12px;
-    text-transform: uppercase;
-    transition: color .1s ease-in-out;
-    line-height: 20px;
-}
-
-.tab > .active > a {
-    color:#222;
-    border-color: #f76908;
-}
-
-.tab li a {
-    text-decoration: none;
-        cursor: pointer;
-}
-
-.tab-content{
-    padding: 20px;
-    background-color: rgb(245, 245, 245);
-    margin: 0px;
-}
-
-.tab-content li {
+  /* Style the tab content */
+  .tabcontent {
     display: none;
-}
-.tab-content li.active {
-    display: initial;
-}
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }

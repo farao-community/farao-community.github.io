@@ -90,32 +90,26 @@ This field contains the status of the RAO computation. It can have one of the fo
 - **FALLBACK**: fallback parameters have been used for sensitivity computation at least once, because default parameters resulted in error
 - **FAILURE**: the RAO computation failed
 
-{% tabs raoResultTab %}
-
-{% tab raoResultTab JAVA API %}
+{% capture t1_java %}
 ~~~java
 ComputationStatus getComputationStatus();
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t1_json %}
 ~~~json
 {
   "computationStatus" : "default",
   ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t1" tab1name="JAVA API" tab1content=t1_java tab2name="JSON file" tab2content=t1_json %}
 
 ### Objective function cost results {#cost-results}
 Contains information about the atteined objective function value, divided into functional and virtual costs:
 - the **functional** cost reflects the business value of the objective (eg the cost associated to the minimum margin and the business penalties on usage of remedial actions)
 - the **virtual** cost reflects the violation of certain constraints (eg MNEC & LoopFlow constraints)
 
-{% tabs raoResultTab %}
-
-{% tab raoResultTab JAVA API %}
+{% capture t2_java %}
 ~~~java
 // get the functional cost at a given state
 double getFunctionalCost(OptimizationState optimizationState);
@@ -132,9 +126,8 @@ Set<String> getVirtualCostNames();
 // get the overall cost (functional + total virtual) at a given state
 double getCost(OptimizationState optimizationState);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t2_json %}
 Example: 
 ~~~json
 "costResults" : {
@@ -168,10 +161,8 @@ Example:
     }
   },
 ~~~
-{% endtab %}
-
-{% endtabs %}
-
+{% endcapture %}
+{% include /tabs.html id="t2" tab1name="JAVA API" tab1content=t2_java tab2name="JSON file" tab2content=t2_json %}
 
 ### Flow CNECs results {#flow-cnecs-results}
 
@@ -183,16 +174,14 @@ Most results are power flow results (like flows & margins), and can be queried i
 
 #### Flow {#flowcnec-flow}
 The actual power flow on the branch.
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t3_java %}
 ~~~java
 // get the flow on a given flow cnec, in a given unit, at a given state
 double getFlow(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t3_json %}
 Example: 
 ~~~json
 "flowCnecResults" : [ {
@@ -224,22 +213,19 @@ Example:
     "initial" : {
         ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t3" tab1name="JAVA API" tab1content=t3_java tab2name="JSON file" tab2content=t3_json %}
 
 #### Margin {#flowcnec-margin}
 The flow margin to the closest threshold of the CNEC.
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t4_java %}
 ~~~java
 // get the margin of a given flow cnec, in a given unit, at a given state
 double getMargin(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t4_json %}
 Example: 
 ~~~json
 "flowCnecResults" : [ {
@@ -275,23 +261,20 @@ Example:
     "initial" : {
         ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t4" tab1name="JAVA API" tab1content=t4_java tab2name="JSON file" tab2content=t4_json %}
 
 #### Relative margin {#flowcnec-rel-margin}
 The flow margin to the closest threshold of the CNEC. It is equal to the margin, divided by the zonal PTDF absolute sum.
 It is used to artificially increase the margin on flow cnecs that are less impacted by changes in power exchanges between commercial zones.
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t5_java %}
 ~~~java
 // get the relative margin of a given flow cnec, in a given unit, at a given state
 double getRelativeMargin(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t5_json %}
 Example: 
 ~~~json
 "flowCnecResults" : [ {
@@ -327,23 +310,20 @@ Example:
     "initial" : {
         ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t5" tab1name="JAVA API" tab1content=t5_java tab2name="JSON file" tab2content=t5_json %}
 
 #### Loop-Flow {#flowcnec-loopflow}
 The loop-flow value on a CNEC.  
 *Can only be queried for flow CNECs limited by loop-flow thresholds (info in the CRAC).*
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t6_java %}
 ~~~java
 // get the loop-flow on a given flow cnec, in a given unit, at a given state
 double getLoopFlow(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t6_json %}
 Example: 
 ~~~json
 "flowCnecResults" : [ {
@@ -379,23 +359,20 @@ Example:
     "initial" : {
         ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t6" tab1name="JAVA API" tab1content=t6_java tab2name="JSON file" tab2content=t6_json %}
 
 #### Commercial flow {#flowcnec-commercial-flow}
 The commercial flow on a CNEC.  
 *Can only be queried for flow CNECs limited by loop-flow thresholds (info in the CRAC).*
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t7_java %}
 ~~~java
 // get the commercial flow on a given flow cnec, in a given unit, at a given state
 double getLoopFlow(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t7_json %}
 Example: 
 ~~~json
 "flowCnecResults" : [ {
@@ -427,23 +404,20 @@ Example:
     "initial" : {
         ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t7" tab1name="JAVA API" tab1content=t7_java tab2name="JSON file" tab2content=t7_json %}
 
 #### Zonal PTDF absolute sum {#flowcnec-ptdf-sum}
 The absolute sum of zonal PTDFs (influence factors) on a given CNEC. Reflects the influence of power exchanges between commercial zones on the CNEC.  
 *Note that this value does not have a unit*
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t8_java %}
 ~~~java
 // get the absolute sum of zonal PTDFs for a given flow cnec, at a given state
 double getPtdfZonalSum(OptimizationState optimizationState, FlowCnec flowCnec);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t8_json %}
 Example: 
 ~~~json
 "flowCnecResults" : [ {
@@ -461,14 +435,12 @@ Example:
     "initial" : {
         ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t8" tab1name="JAVA API" tab1content=t8_java tab2name="JSON file" tab2content=t8_json %}
 
 
 #### Full JSON example {#flowcnec-json-example}
-{% tabs jsonExample %}
-{% tab jsonExample JSON file %}
+{% capture t12_json %}
 ~~~json
 "flowCnecResults" : [ {
     "flowCnecId" : "cnec1outageId",
@@ -550,16 +522,15 @@ Example:
     }
   }, ...
 ~~~
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t12" tab1name="JSON file" tab1content=t12_json %}
 
 ### Network actions results {#network-actions-results}
 These results hold information about the application of network actions by the RAO.
 *Note that you will need to use NetworkAction objects from the CRAC for querying the Java API.*
 
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t9_java %}
 ~~~java
 // query if a network action was already activated before a given state was studied
 boolean wasActivatedBeforeState(State state, NetworkAction networkAction);
@@ -573,9 +544,8 @@ Set<NetworkAction> getActivatedNetworkActionsDuringState(State state);
 // query if a network action was during or before a given state
 boolean isActivated(State state, NetworkAction networkAction);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t9_json %}
 Example: 
 ~~~json
 "networkActionResults" : [ {
@@ -592,9 +562,8 @@ Example:
   }
   ...
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t9" tab1name="JAVA API" tab1content=t9_java tab2name="JSON file" tab2content=t9_json %}
 
 ### Standard range actions results {#standard-range-action-results}
 These results hold information about the application of standard range actions by the RAO.  
@@ -602,9 +571,8 @@ Standard range actions are range actions that have a continuous setpoint that ca
 Actually, standard range actions handled by FARAO are: **HVDC range actions** and **Injection range actions**.  
 *Note that you will need to use RangeAction objects from the CRAC for querying the Java API.*
 
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t10_java %}
 ~~~java
 /* --- Standard RangeAction methods only: --- */
 
@@ -623,9 +591,8 @@ double getOptimizedSetPointOnState(State state, RangeAction<?> rangeAction);
 // get all range actions' optimal setpoints, that were chosen by the RAO in a given state
 Map<RangeAction<?>, Double> getOptimizedSetPointsOnState(State state);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t10_json %}
 Example: 
 ~~~json
 "standardRangeActionResults" : [ {
@@ -657,18 +624,16 @@ Example:
     } ]
   } ]
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t10" tab1name="JAVA API" tab1content=t10_java tab2name="JSON file" tab2content=t10_json %}
 
 ### PST range actions results {#pst-results}
 These results hold information about the application of PST range actions by the RAO.  
 PSTs are not standard range actions, because they have integer tap positions; a few extra methods in the API allow querying the tap positions.  
 *Note that you will need to use PstRangeAction or RangeAction objects from the CRAC for querying the Java API.*
 
-{% tabs raoResultTab %}
 
-{% tab raoResultTab JAVA API %}
+{% capture t11_java %}
 ~~~java
 /* --- Standard RangeAction methods: --- */
 
@@ -698,9 +663,8 @@ int getOptimizedTapOnState(State state, PstRangeAction pstRangeAction);
 // get all PST range actions' optimal tap positions, that were chosen by the RAO in a given state
 Map<PstRangeAction, Integer> getOptimizedTapsOnState(State state);
 ~~~
-{% endtab %}
-
-{% tab raoResultTab JSON file %}
+{% endcapture %}
+{% capture t11_json %}
 Example: 
 ~~~json
   "pstRangeActionResults" : [ {
@@ -719,7 +683,6 @@ Example:
     "activatedStates" : [ ]
   } ],
 ~~~
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t11" tab1name="JAVA API" tab1content=t11_java tab2name="JSON file" tab2content=t11_json %}
 

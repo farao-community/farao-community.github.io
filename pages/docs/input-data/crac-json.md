@@ -32,26 +32,21 @@ Note that other pages of this documentation describe how the [FARAO CRAC object 
 ### Full CRAC examples
 Example of complete CRACs are given below
 
-{% tabs aTab %}
-
-{% tab aTab JAVA creation API %}
+{% capture t1_java %}
 The creation of a small CRAC is for instance made in this test class of farao-core repository:
 <a href="
 https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/test/java/com/farao_community/farao/data/crac_impl/utils/CommonCracCreation.java"> 
 example on github
 </a>
-{% endtab %}
-
-
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t1_json %}
 An example of a small CRAC in the json internal format of FARAO is given below:
 <a href="
 https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/test/resources/crac/small-crac-with-network-actions.json"> 
 example on github
 </a>
-{% endtab %}
-
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t1" tab1name="JAVA creation API" tab1content=t1_java tab2name="JSON file" tab2content=t1_json %}
 
 The following paragraphs of this page explain, step by step, the content of those examples.
 
@@ -74,16 +69,15 @@ Network elements are referenced in the CRAC with:
 ⚪ a name
 : The name shouldn't be absolutely required by the application relying on the CRAC object, but it could be usefull to make the CRAC or some logs easier to read from a business viewpoint.
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t2_java %}
 Network elements are never built on their own in the CRAC object, they always are a component of a bigger object, for example the component of a Contingency, or the component of a Cnec. When building one of those bigger object, one of the two following methods can be used to define (one of) its network element, either with an id only, or an id and a name.
 ~~~java
 withNetworkElement("network_element_id")
 withNetworkElement("network_element_id", "network_element_name")
 ~~~
 The first method will be depicted in the following example of this page, but note that it can always be switched to the second one to define as well a name to the network element.
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t2_json %}
 Network elements id are defined within the object that contains them. Examples are given later in this page, for contingencies, CNECs and remedial actions.
 Moreover, the internal Json CRAC format contains an index of network element names, in which, network elements which have a name are listed, with their name and their id.
 ~~~json
@@ -92,8 +86,8 @@ Moreover, the internal Json CRAC format contains an index of network element nam
     "network_element_id_4" : "[DE-DE] Internal PST in Germany"
   },
 ~~~
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t2" tab1name="JAVA creation API" tab1content=t2_java tab2name="JSON file" tab2content=t2_json %}
 
 ### Contingencies {#contingencies}
 A CRAC contains contingencies. 'Contingency' is the denomination which has been chosen within FARAO internal format, but contingencies are also commonly called 'outages', 'CO' for 'Critical Outages', or 'N-k'.
@@ -107,8 +101,7 @@ A contingency is a probable event, whose consequences are putting at risk the gr
 
 In FARAO, contingencies can be defined as below:
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t3_java %}
 ~~~java
 crac.newContingency()
     .withId("CO_0001")
@@ -123,8 +116,8 @@ crac.newContingency()
 	.withNetworkElement("powsybl_electrical_line_2_id")
     .add();
 ~~~
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t3_json %}
 ~~~json
 "contingencies" : [ {
   "id" : "CO_0001",
@@ -136,8 +129,8 @@ crac.newContingency()
     "networkElementsIds" : [ "powsybl_electrical_line_1_id", "powsybl_electrical_line_2_id" ]
   }],
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t3_objects %}
 🔴⭐ **identifier**  
 ⚪ **name**  
 ⚪ **network elements**: list of 0 to N network elements  
@@ -145,8 +138,8 @@ crac.newContingency()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚪ **network element names**  
 Names are optional, they can be used to make the CRAC more understandable from a business viewpoint, but applications relying on the CRAC does not necessarily need them.  
 (see also paragraph on [network elements](#network-elements) to see how they should be defined)
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t3" tab1name="JAVA creation API" tab1content=t3_java tab2name="JSON file" tab2content=t3_json tab3name="Object fields" tab3content=t3_objects %}
 
 The network elements currently handled by FARAO's contingencies are: internal lines, interconnections, transformers, PSTs, generators, HVDCs, BusBar sections and dangling lines.
 
@@ -239,8 +232,8 @@ This notion of monitored/optimised has been introduced by the capacity calculati
 
 #### Create a CNEC
 In FARAO, FlowCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+
+{% capture t4_java %}
 ~~~java
 crac.newFlowCnec()
     .withId("preventive-cnec-with-one-threshold-id")
@@ -282,8 +275,8 @@ crac.newFlowCnec()
 	.withIMax(500.) // the value is supposed to be the same on both side, though the side could have been specificied with withImax(500., Side.RIGHT) 
     .add();
 ~~~
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t4_json %}
 ~~~json
   "flowCnecs" : [ {
     "id" : "preventive-cnec-with-one-threshold-id",
@@ -323,8 +316,8 @@ crac.newFlowCnec()
     } ]
   } ]
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t4_objects %}
 🔴⭐ **identifier**  
 ⚪ **name**  
 🔴 **network element**: one network element  
@@ -343,8 +336,8 @@ crac.newFlowCnec()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **maxValue**: at least one of these two values (min/max) is required  
 🔵 **nominal voltages**: mandatory if the FlowCnec has at least one threshold in %Imax or A  
 🔵 **iMax**:  mandatory if the FlowCnec has at least one threshold in %Imax  
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t4" tab1name="JAVA creation API" tab1content=t4_java tab2name="JSON file" tab2content=t4_json tab3name="Object fields" tab3content=t4_objects %}
 
 ### Remedial actions and usages rules {#remedial-actions}
 
@@ -361,8 +354,7 @@ Both Network Actions and Range Actions have usage rules which define the conditi
 
 A remedial action has an operator, which is the name of the TSO which operates the remedial action.
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t5_java %}
 The examples below are given for a Network Action, but the same methods exists for Range Actions.  
 Complete examples of Network and Range Action creation are given in the following paragraphs.  
 ~~~java
@@ -385,8 +377,8 @@ crac.newNetworkAction()
         .withFlowCnec("flow-cnec-id")
         .add();
 ~~~
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t5_json %}
 Complete examples of Network and Range Action in Json format are given in the following paragraphs
 ~~~json
   "freeToUseUsageRules" : [ {
@@ -403,8 +395,8 @@ Complete examples of Network and Range Action in Json format are given in the fo
 		"flowCnecId" : "flow-cnec-id"
 	} ],
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t5_objects %}
 #### For FreeToUse usage rules
 🔴 **instant**  
 🔴 **usageMethod**  
@@ -421,8 +413,8 @@ FARAO handles three different types of usage methods:
 2 - **FORCED**: the RAO must activate the remedial action (under the condition described by the usage rule)  
 3 - **TO_BE_EVALUATED**: the RAO must evaluate the applicability of the remedial action before trying to apply it (only for OnFlowConstraint usage rules)  
 *NB*: even though OnState usage rules on the preventive state is theoretically possible, it is forbidden by FARAO as the same purpose can be achieved with a FreeToUse usage rule on the preventive instant.  
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t5" tab1name="JAVA creation API" tab1content=t5_java tab2name="JSON file" tab2content=t5_json tab3name="Object fields" tab3content=t5_objects %}
 
 ### Network Actions {#network-actions}
 
@@ -433,8 +425,7 @@ A Network Action is a combination of at least one elementary actions. The elemen
 - Injection setpoint: which consists in the modification of an injection (load, generator or dangling line) to a pre-defined setpoint.
 - Switch pair: which consists in opening a switch and closing another.
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t6_java %}
 ~~~java
 // combination of two topological actions
 crac.newNetworkAction()
@@ -487,8 +478,8 @@ crac.newNetworkAction()
     .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .add();
 ~~~
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t6_json %}
 ~~~json
  "networkActions" : [ {
     "id" : "topological-na-id",
@@ -548,8 +539,8 @@ crac.newNetworkAction()
     } ]
   } ]
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t6_objects %}
 🔴⭐ **identifier**  
 ⚪ **name**  
 ⚪ **operator**  
@@ -570,8 +561,8 @@ crac.newNetworkAction()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **switch to close (network element)**: id is mandatory, name is optional, must be different from switch to open  
 <br>
 *NB*: A Network Action must contain at least on elementary action.
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t6" tab1name="JAVA creation API" tab1content=t6_java tab2name="JSON file" tab2content=t6_json tab3name="Object fields" tab3content=t6_objects %}
 
 ### Range Actions {#range-actions}
 FARAO has three types of RangeAction : PstRangeAction, HvdcRangeAction, and InjectionRangeAction.
@@ -594,8 +585,7 @@ TapRanges can be of different types:
 The final validity range of the PstRangeAction is the intersection of its TapRanges, with the intersection of the min/max feasible taps of the PST.  
 The PstRangeAction also requires additional data, notably to be able to interpret the TapRanges. Those additional data are: the initial tap of the PST, and a conversion map which gives for each feasible tap of the PST its corresponding angle. Utility methods have been developped in FARAO to ease the management of these additional data during the creation of a PstRangeAction.
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t7_java %}
 ~~~java
 crac.newPstRangeAction()
     .withId("pst-range-action-id")
@@ -619,8 +609,8 @@ crac.newPstRangeAction()
 ~~~
 In that case, the validity domain of the PST (intersection of its ranges and feasible taps) is [1; 3]
 Note that the [PstHelper utility class](creation-methods) can ease the creation of the TapToAngleConversionMap.
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t7_json %}
 ~~~json
 "pstRangeActions" : [ {
     "id" : "pst-range-action-id",
@@ -652,8 +642,8 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
     } ]
 } ]
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t7_objects %}
 🔴⭐ **identifier**  
 ⚪ **name**  
 ⚪ **operator**  
@@ -667,8 +657,8 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
 ⚪ **freeToUse usage rules**: list of 0 to N FreeToUse usage rules (see paragraph on [usage rules](#remedial-actions))  
 ⚪ **onState usage rules**: list of 0 to N OnState usage rules (see paragraph on [usage rules](#remedial-actions))  
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on [usage rules](#remedial-actions))  
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t7" tab1name="JAVA creation API" tab1content=t7_java tab2name="JSON file" tab2content=t7_json tab3name="Object fields" tab3content=t7_objects %}
 
 #### HVDC Range Action {#hvdc-range-action}
 An HvdcRangeAction contains a network element that must point towards an HvdcLine of the iidm PowSyBl network model. The HvdcRangeAction will be able to modify its setpoint, in MW.  
@@ -677,8 +667,7 @@ The domain in which the HvdcRangeAction can modify the HvdcSetpoint is delimited
 
 HvdcRanges can only be absolute : the mix/max admissible setpoint of the HVDC. ⚠️ *There isn't any check performed to verify that an applied setpoint is between the ranges' min and max.*
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t8_java %}
 ~~~java
  crac.newHvdcRangeAction()
         .withId("hvdc-range-action-id")
@@ -690,8 +679,8 @@ HvdcRanges can only be absolute : the mix/max admissible setpoint of the HVDC. �
         .add();  
 ~~~
 In that case, the validity domain of the HVDC is [-5; 10].
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t8_json %}
 ~~~json
 "hvdcRangeActions" : [ {
     "id" : "hvdc-range-action-id",
@@ -708,8 +697,8 @@ In that case, the validity domain of the HVDC is [-5; 10].
     } ]
 } ]
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t8_objects %}
 🔴⭐ **identifier**  
 ⚪ **name**  
 ⚪ **operator**  
@@ -720,8 +709,8 @@ In that case, the validity domain of the HVDC is [-5; 10].
 ⚪ **freeToUse usage rules**: list of 0 to N FreeToUse usage rules (see paragraph on [usage rules](#remedial-actions))  
 ⚪ **onState usage rules**: list of 0 to N OnState usage rules (see paragraph on [usage rules](#remedial-actions))  
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on [usage rules](#remedial-actions))  
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t8" tab1name="JAVA creation API" tab1content=t8_java tab2name="JSON file" tab2content=t8_json tab3name="Object fields" tab3content=t8_objects %}
 
 #### Injection Range Action {#injection-range-action}
 
@@ -731,8 +720,7 @@ The impacted generators and loads each have a coefficient ("keys") of impact app
 
 This range action is mainly used to represent an HVDC line in AC equivalent model (where the line is disconnected and replaced by two injections, one on each side of the line, with opposite keys of 1 and -1).
 
-{% tabs aTab %}
-{% tab aTab JAVA creation API %}
+{% capture t9_java %}
 ~~~java
  crac.newInjectionRangeAction()
         .withId("injection-range-action-id")
@@ -746,8 +734,8 @@ This range action is mainly used to represent an HVDC line in AC equivalent mode
 ~~~
 In that case, the validity domain of the injection range action's reference setpoint is [-1200; 500].  
 This means the setpoint of "network-element-1" (key = 1) can be changed between -1200 and +500, while that of "network-element-2" (key = -0.5) will be changed between -250 and +600
-{% endtab %}
-{% tab aTab JSON file %}
+{% endcapture %}
+{% capture t9_json %}
 ~~~json
 "injectionRangeActions" : [ {
     "id" : "injection-range-action-id",
@@ -767,8 +755,8 @@ This means the setpoint of "network-element-1" (key = 1) can be changed between 
     } ]
 } ]
 ~~~
-{% endtab %}
-{% tab aTab Objects fields %}
+{% endcapture %}
+{% capture t9_objects %}
 🔴⭐ **identifier**  
 ⚪ **name**  
 ⚪ **operator**  
@@ -779,5 +767,5 @@ This means the setpoint of "network-element-1" (key = 1) can be changed between 
 ⚪ **freeToUse usage rules**: list of 0 to N FreeToUse usage rules (see paragraph on usage rules)  
 ⚪ **onState usage rules**: list of 0 to N OnState usage rules (see paragraph on usage rules)  
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on usage rules)  
-{% endtab %}
-{% endtabs %}
+{% endcapture %}
+{% include /tabs.html id="t9" tab1name="JAVA creation API" tab1content=t9_java tab2name="JSON file" tab2content=t9_json tab3name="Object fields" tab3content=t9_objects %}
