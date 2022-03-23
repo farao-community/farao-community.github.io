@@ -17,7 +17,7 @@ Unlike purely linear optimisation, a search-tree algorithm does not neglect the 
 
 So far, the search-tree algorithm has proved for many years its relevance and efficiency on current daily operational processes on CWE, Northern Italy and SWE Capacity calculation. 
 
-For each topological remedial action applied, the search-tree will systematically optimise PST taps & HVDC setpoints by applying a [linear optimisation](/docs/linear-rao). By considering both topological remedial actions and linear remedial actions at every step, instead of considering only one after the other, CASTOR's results are optimal.
+For each topological remedial action applied, the search-tree will systematically optimise PST taps & HVDC setpoints by applying a [linear optimisation](/docs/engine/ra-optimisation/linear-rao). By considering both topological remedial actions and linear remedial actions at every step, instead of considering only one after the other, CASTOR's results are optimal.
 
 The optimisation problem is a non-convex and non-linear one, dealing with topology changes on the network, which represent discrete actions by definition. The problem treated by the optimiser is a combinatorial problem. Search-tree algorithms are commonly used for high complexity mathematical problems, containing combinatorial and discrete aspects.
 
