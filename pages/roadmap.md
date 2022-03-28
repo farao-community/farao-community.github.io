@@ -18,7 +18,9 @@ change due to unforeseen complexity in implementing features or priority changes
 
 - For the Italy North region, CASTOR will go into production without a prior external parallel run phase
 
-### Deployment of CASOTR for CORE Capacity Calculation go-live (April 2022)
+### Deployment of CASTOR for local CEP validation for CORE go-live (April 2022)
+
+### Deployment of CASTOR for CORE Capacity Calculation go-live (April 2022)
 
 - The go-live step will happen when TSOs have all validated the parallel run results
 

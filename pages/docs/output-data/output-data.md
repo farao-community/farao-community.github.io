@@ -11,15 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
 
-### CNE
+During input data import & RAO computation, CASTOR produces human-readable logs that detail each step of the optimisation. More info on logs [here](rao-logs).  
 
-CNE (for "*Critical Network Elements*") are objects dedicated to store security analysis
-and computation results from all business process. It defines actual state of monitored branches,
-activated remedial actions, and more generally the security state of the associated network object.
-
-It is tightly connected to the CRAC model, as it is the result of the security assessment
-by a computation engine given CRAC security domain.
-
-#### CNE exchange formats supported:
-
-- CORE CNE RAO report
+At the end of the RAO computation, CASTOR produces RAO results detailing the outcome of the optimisation. More info on this [here](rao-result-json).  
+These results can be used, along with the [input data](/docs/input-data/), in order to produce context-specific output files. You can find examples of such workflows in one of the many [GridCapa applications](https://github.com/farao-community?q=gridcapa&type=all&language=&sort=).  

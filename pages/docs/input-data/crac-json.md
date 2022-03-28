@@ -324,7 +324,7 @@ crac.newFlowCnec()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **network element id**: must be the id of a PowSyBl network identifiable  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚪ **network element name**  
 🔴 **instant**  
-🔵 **contingency**: mandatory, expect if the instant is preventive. Must be the id of a contingency which exists in the CRAC  
+🔵 **contingency**: mandatory, except if the instant is preventive. Must be the id of a contingency which exists in the CRAC  
 ⚪ **operator**  
 ⚪ **reliability margin**: default value = 0 MW  
 ⚪ **optimized**: default value = false  
