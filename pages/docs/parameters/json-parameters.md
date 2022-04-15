@@ -257,6 +257,11 @@ This parameter should be set to true for CORE CC.
 These combinations will be tested in the first search depth of the search-tree
 ![Search-tree-with-combinations](/assets/img/Search-tree-with-combinations.png)
 
+#### second-preventive-hint-from-first-preventive {#second-preventive-hint-from-first-preventive}
+- **Expected value**: true/false
+- **Default value**: false
+- **Usage**: if set to true, the RAO will use the optimal combination of network actions found in the first preventive RAO, as a combination ("hint") to test at the first search depth of the second preventive RAO. This way, if this combination is optimal for the second preventive RAO as well, getting to the optimal solution will be much faster.
+
 ## RangeAction usage limitation {#range-action-usage-limitation}
 
 ### pst-sensitivity-threshold {#pst-sensitivity-threshold}
