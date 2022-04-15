@@ -16,11 +16,11 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | PstRangeActions | $$r \in \mathcal{RA}^{PST}$$ | Set of PST RangeActions |
-| reference angle | $$\alpha _n(r)$$ | angle of PstRangeAction r at the beginning of the current iteration of the MILP |
-| reference tap position | $$t_{n}(r)$$ | tap of PstRangeAction r at the beginning of the current iteration of the MILP |
-| PstRangeAction angle bounds | $$\underline{\alpha(r)} \: , \: \overline{\alpha(r)}$$ | min and max angle[^1] of PstRangeAction r |
-| PstRangeAction tap bounds | $$\underline{t(r)} \: , \: \overline{t(r)}$$ | min and max tap[^1] of PstRangeAction r |
-| tap-to-angle conversion function | $$f_r(t) = \alpha$$ | Discrete function f, which gives, for a given tap of the PstRangeAction r, its associated angle value |
+| reference angle | $$\alpha _n(r)$$ | angle of PstRangeAction $$r$$ at the beginning of the current iteration of the MILP |
+| reference tap position | $$t_{n}(r)$$ | tap of PstRangeAction $$r$$ at the beginning of the current iteration of the MILP |
+| PstRangeAction angle bounds | $$\underline{\alpha(r)} \: , \: \overline{\alpha(r)}$$ | min and max angle[^1] of PstRangeAction $$r$$ |
+| PstRangeAction tap bounds | $$\underline{t(r)} \: , \: \overline{t(r)}$$ | min and max tap[^1] of PstRangeAction $$r$$ |
+| tap-to-angle conversion function | $$f_r(t) = \alpha$$ | Discrete function $$f$$, which gives, for a given tap of the PstRangeAction $$r$$, its associated angle value |
 
 [^1]: PST range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
@@ -34,10 +34,10 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details | Type | Index | Unit | Lower bound | Upper bound |
 |---|---|---|---|---|---|---|---|
-| PstRangeAction tap upward variation | $$\Delta t^{+} (r)$$ | upward tap variation of PstRangeAction r, between two iterations of the optimisation | Integer | One variable for every element of PstRangeActions | No unit (number of taps) | $$-\infty$$ | $$+\infty$$ |
-| PstRangeAction tap downward variation | $$\Delta t^{-} (r)$$ | downward tap variation of PstRangeAction r, between two iterations of the optimisation | Integer | One variable for every element of PstRangeActions | No unit (number of taps) | $$-\infty$$ | $$+\infty$$ |
-| PstRangeAction tap upward variation binary | $$\delta ^{+} (r)$$ | indicates whether the tap of PstRangeAction r has increased, between two iterations of the optimisation | Binary | One variable for every element of PstRangeActions | No unit | 0 | 1 |
-| PstRangeAction tap downward variation binary | $$\delta ^{-} (r)$$ | indicates whether the tap of PstRangeAction r has decreased, between two iterations of the optimisation | Binary | One variable for every element of PstRangeActions | No unit | 0 | 1 |
+| PstRangeAction tap upward variation | $$\Delta t^{+} (r)$$ | upward tap variation of PstRangeAction $$r$$, between two iterations of the optimisation | Integer | One variable for every element of PstRangeActions | No unit (number of taps) | $$-\infty$$ | $$+\infty$$ |
+| PstRangeAction tap downward variation | $$\Delta t^{-} (r)$$ | downward tap variation of PstRangeAction $$r$$, between two iterations of the optimisation | Integer | One variable for every element of PstRangeActions | No unit (number of taps) | $$-\infty$$ | $$+\infty$$ |
+| PstRangeAction tap upward variation binary | $$\delta ^{+} (r)$$ | indicates whether the tap of PstRangeAction $$r$$ has increased, between two iterations of the optimisation | Binary | One variable for every element of PstRangeActions | No unit | 0 | 1 |
+| PstRangeAction tap downward variation binary | $$\delta ^{-} (r)$$ | indicates whether the tap of PstRangeAction $$r$$ has decreased, between two iterations of the optimisation | Binary | One variable for every element of PstRangeActions | No unit | 0 | 1 |
 
 ## Used optimization variables {#used-variables}
 

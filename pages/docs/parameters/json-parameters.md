@@ -147,6 +147,12 @@ If the stop criterion is **SECURE**, the search-tree will stop at the depth wher
   - **PREVENTIVE_OBJECTIVE**: if one curative perimeter reached an objective function value after optimisation that is worse than the preventive perimeter's (eventually decreased by curative-rao-min-obj-improvement)
   - **PREVENTIVE_OBJECTIVE_AND_SECURE**: if one of the two conditions above is met
   - **MIN_OBJECTIVE**: always  
+  
+#### global-opt-in-second-preventive {#global-opt-in-second-preventive}
+- **Expected value**: true/false
+- **Default value**: false
+- **Usage**: configures whether the 2nd preventive RAO should optimize only the preventive remedial actions and keep all curative remedial actions as computed in the curative perimeters (when the parameter is set to false),
+or if it should optimize preventive remedial actions and curative range actions keeping only the curative topological actions computed in the curative perimeters (when the parameter is set to true).
 
 ### Number of RA limitation {#ra-usage-limits}
 Three families of parameters exist in order to limit the number of remedial actions used in the search-tree RAO.

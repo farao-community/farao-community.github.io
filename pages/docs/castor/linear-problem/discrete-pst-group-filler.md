@@ -16,7 +16,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | DiscretePstGroups | $$g \in \mathcal{G}^{pst}_{RA}$$ | Set of discrete PstRangeAction groups. <br> Each RangeActionGroup contains a set of PstRangeActions, the PstRangeActions of the group have to be "aligned" between each other. <br> $$r \in \mathcal{RA}(g)$$ <br> with: <br> $$\mathcal{RA}(g) \subset \mathcal{RA} ^{PST}$$ |
-| Reference tap | $$t_{n}(r)$$ | Tap of PstRangeAction r at the beginning of the current iteration of the MILP |
+| Reference tap | $$t_{n}(r)$$ | Tap of PstRangeAction $$r$$ at the beginning of the current iteration of the MILP |
 
 ## Used parameters {#parameters}
 
@@ -28,7 +28,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details | Type | Index | Unit | Lower bound | Upper bound |
 |---|---|---|---|---|---|---|---|
-| Group tap | $$T^{group}(g)$$ | The tap of the group g | Defined as real value, but implicitely acts as an integer variables (see [constraints](#defined-constraints)) | One variable for every element of (DiscretePstGroups) | no unit | $$-\infty$$ | $$+\infty$$ |
+| Group tap | $$T^{group}(g)$$ | The tap of the group $$g$$ | Defined as real value, but implicitely acts as an integer variables (see [constraints](#defined-constraints)) | One variable for every element of (DiscretePstGroups) | no unit | $$-\infty$$ | $$+\infty$$ |
 
 ## Used optimization variables {#used-variables}
 
