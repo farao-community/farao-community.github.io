@@ -16,11 +16,12 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | FlowCnecs | $$c \in \mathcal{C}$$ | set of FlowCnecs. Note that FlowCnecs are all the CBCO for which we compute the flow in the MILP, either: <br> - because we are optimizing their flow (optimized flowCnec = CNEC) <br> - because we are monitoring their flow, and ensuring it does not exceed its threshold (monitored flowCnec = MNEC) <br> - or both |
-| RangeActions | $$r \in \mathcal{RA}$$ | set of RangeActions, could be PSTs, HVDCs, or injection range actions |
-| ReferenceFlow | $$f_{n}(c)$$ | reference flow, for FlowCnec c. <br>The reference flow is the flow at the beginning of the current iteration of the MILP, around which the sensitivities are computed |
-| PrePerimeterSetpoints | $$\alpha _0(r)$$ | setpoint of RangeAction r at the beginning of the optimization |
-| ReferenceSetpoints | $$\alpha _n(r)$$ | setpoint of RangeAction r at the beginning of the current iteration of the MILP, around which the sensitivities are computed |
-| Sensitivities | $$\sigma _{n}(r,c)$$ | sensitivity of RangeAction r on FlowCnec c |
+| RangeActions | $$r,s \in \mathcal{RA}$$ | set of RangeActions and state on which they are applied, could be PSTs, HVDCs, or injection range actions |
+| RangeActions | $$r \in \mathcal{RA(s)}$$ | set of RangeActions available on state $$s$$, could be PSTs, HVDCs, or injection range actions |
+| ReferenceFlow | $$f_{n}(c)$$ | reference flow, for FlowCnec $$c$$. <br>The reference flow is the flow at the beginning of the current iteration of the MILP, around which the sensitivities are computed |
+| PrePerimeterSetpoints | $$\alpha _0(r)$$ | setpoint of RangeAction $$r$$ at the beginning of the optimization |
+| ReferenceSetpoints | $$\alpha _n(r)$$ | setpoint of RangeAction $$r$$ at the beginning of the current iteration of the MILP, around which the sensitivities are computed |
+| Sensitivities | $$\sigma _{n}(r,c,s)$$ | sensitivity of RangeAction $$r$$ on FlowCnec $$c$$ for state $$s$$ |
 
 ## Used parameters {#parameters}
 
@@ -33,11 +34,11 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details | Type | Index | Unit | Lower bound | Upper bound |
 |---|---|---|---|---|---|---|---|
-| Flow | $$F(c)$$ | flow of FlowCnec c | Real value | One variable for every element of (FlowCnecs) | MW | $$-\infty$$ | $$+\infty$$ |
-| RA setpoint | $$A(r)$$ | setpoint of RangeAction r | Real value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | Range lower bound[^1] | Range upper bound[^1] |
-| RA setpoint absolute variation | $$\Delta A(r)$$ | The absolute setpoint variation of RangeAction r, from "PrePerimeterSetpoint" to "RA setpoint" | Real positive value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | 0 | $$+\infty$$ |
+| Flow | $$F(c)$$ | flow of FlowCnec $$c$$ | Real value | One variable for every element of (FlowCnecs) | MW | $$-\infty$$ | $$+\infty$$ |
+| RA setpoint | $$A(r,s)$$ | setpoint of RangeAction $$r$$ on state $$s$$| Real value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | Range lower bound[^1] | Range upper bound[^1] |
+| RA setpoint absolute variation | $$\Delta A(r,s)$$ | The absolute setpoint variation of RangeAction $$r$$ on state $$s$$, from setpoint on previous state to "RA setpoint" | Real positive value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | 0 | $$+\infty$$ |
 
-[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
 ## Defined constraints {#defined-constraints}
 
@@ -45,9 +46,11 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 $$
 \begin{equation}
-F(c) = f_{n}(c) + \sum_{r \in \mathcal{RA}} \sigma (r,c) * [A(r) - \alpha_{n}(r)] , \forall (c) \in \mathcal{C}
+F(c) = f_{n}(c) + \sum_{r \in \mathcal{RA(s)}} \sigma_n (r,c,s) * [A(r,s) - \alpha_{n}(r,s)] , \forall (c) \in \mathcal{C}
 \end{equation}
-$$  
+$$ 
+
+with $$s$$ the state on $$c$$ which is evaluated
 
 <br>
 
@@ -55,15 +58,18 @@ $$
 
 $$
 \begin{equation}
-\Delta A(r) \geq A(r) - \alpha_{0}(r) , \forall (r) \in \mathcal{RA}
+\Delta A(r,s) \geq A(r,s) - A(r,s') , \forall (r,s) \in \mathcal{RA}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-\Delta A(r) \geq - A(r) + \alpha_{0}(r) , \forall (r) \in \mathcal{RA}
+\Delta A(r,s) \geq - A(r,s) + A(r,s') , \forall (r,s) \in \mathcal{RA}
 \end{equation}
 $$  
+
+with $$A(r,s')$$ the setpoint of the last range action on the same element as $$r$$ but a state preceding $$s$$. If none such range actions exists, then $$A(r,s') = \alpha_{0}(r)$$
+  
 
 <br>
 
@@ -74,7 +80,7 @@ Small penalisation for the use of RangeActions:
 
 $$
 \begin{equation}
-\min \sum_{r \in \mathcal{RA}} (c^{penalty}_{ra}(r) \Delta A(r))
+\min \sum_{r,s \in \mathcal{RA}} (c^{penalty}_{ra}(r) \Delta A(r,s))
 \end{equation}
 $$
 

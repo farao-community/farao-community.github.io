@@ -16,9 +16,9 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | OptimisedFlowCnecs | $$c \in \mathcal{C} ^{o}$$ | Set of FlowCnecs which are ['optimised'](/docs/input-data/crac/json#optimised-vs-monitored). OptimisedFlowCnecs is a subset of [FlowCnecs](core-problem-filler#input-data): $$\mathcal{C} ^{o} \subset \mathcal{C}$$ |
-| upper threshold | $$f^{+}_{threshold} (c)$$ | Upper threshold of FlowCnec c, in MW, as defined in the CRAC |
-| lower threshold | $$f^{-}_{threshold} (c)$$ | Lower threshold of FlowCnec c, in MW, defined in the CRAC |
-| nominal voltage | $$U_{nom}(c)$$ | Nominal voltage of OptimizedFlowCnec c |
+| upper threshold | $$f^{+}_{threshold} (c)$$ | Upper threshold of FlowCnec $$c$$, in MW, as defined in the CRAC |
+| lower threshold | $$f^{-}_{threshold} (c)$$ | Lower threshold of FlowCnec $$c$$, in MW, defined in the CRAC |
+| nominal voltage | $$U_{nom}(c)$$ | Nominal voltage of OptimizedFlowCnec $$c$$ |
 
 ## Used parameters {#parameters}
 

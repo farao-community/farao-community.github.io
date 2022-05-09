@@ -27,7 +27,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details | Type | Index | Unit | Lower bound | Upper bound |
 |---|---|---|---|---|---|---|---|
-| Group setpoint | $$A^{group}(g)$$ | The setpoint of the group g | Real value | One variable for every element of (ContinuousRangeActionGroups) | Degrees for PST range action groups; MW for HVDC range action groups | $$-\infty$$ | $$+\infty$$ |
+| Group setpoint | $$A^{group}(g)$$ | The setpoint of the group $$g$$ | Real value | One variable for every element of (ContinuousRangeActionGroups) | Degrees for PST range action groups; MW for HVDC range action groups | $$-\infty$$ | $$+\infty$$ |
 
 ## Used optimization variables {#used-variables}
 
