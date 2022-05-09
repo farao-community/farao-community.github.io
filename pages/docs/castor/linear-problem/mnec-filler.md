@@ -16,9 +16,9 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | MonitoredFlowCnecs | $$c \in \mathcal{C} ^{m}$$ | Set of FlowCnecs which are ['monitored'](/docs/input-data/crac/json#optimised-vs-monitored). MonitoredFlowCnecs is a subset of [FlowCnecs](core-problem-filler#input-data): $$\mathcal{C} ^{o} \subset \mathcal{C}$$ |
-| Initial flow | $$f_{0} (c)$$ | flow before RAO of MonitoredFlowCnec c, in MW |
-| Upper threshold | $$f^{+}_{threshold} (c)$$ | Upper threshold of FlowCnec c, in MW, defined in the CRAC |
-| Lower threshold | $$f^{-}_{threshold} (c)$$ | Lower threshold of FlowCnec c, in MW, defined in the CRAC |
+| Initial flow | $$f_{0} (c)$$ | flow before RAO of MonitoredFlowCnec $$c$$, in MW |
+| Upper threshold | $$f^{+}_{threshold} (c)$$ | Upper threshold of FlowCnec $$c$$, in MW, defined in the CRAC |
+| Lower threshold | $$f^{-}_{threshold} (c)$$ | Lower threshold of FlowCnec $$c$$, in MW, defined in the CRAC |
 
 ## Used parameters {#parameters}
 

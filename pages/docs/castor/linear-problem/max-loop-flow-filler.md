@@ -16,9 +16,9 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Name | Symbol | Details |
 |---|---|---|
 | LoopFlowCnecs | $$c \in \mathcal{C} ^{lf}$$ | Set of FlowCnecs with a loop-flow threshold. (for example, in CORE CC, loop-flows are monitored on cross-border CNECs). LoopFlowCnecs is a subset of [FlowCnecs](core-problem-filler#input-data): $$\mathcal{C} ^{lf} \subset \mathcal{C}$$ |
-| Reference commercial flow | $$f^{commercial}_{n} (c)$$ | Commercial flow[^1], of LoopFlowCnec c, at the beginning of the optimization, in MW. |
-| initial loop-flow | $$f^{loop} _ {0} (c)$$ | loop flow before RAO of LoopFlowCnec c, in MW |
-| loop-flow threshold | $$lf^{threshold} (c)$$ | loop flow threshold of the LoopFlowCnec c, in MW, as defined in the CRAC. |
+| Reference commercial flow | $$f^{commercial}_{n} (c)$$ | Commercial flow[^1], of LoopFlowCnec $$c$$, at the beginning of the optimization, in MW. |
+| initial loop-flow | $$f^{loop} _ {0} (c)$$ | loop flow before RAO of LoopFlowCnec $$c$$, in MW |
+| loop-flow threshold | $$lf^{threshold} (c)$$ | loop flow threshold of the LoopFlowCnec $$c$$, in MW, as defined in the CRAC. |
 
 [^1]: The commercial flow is computed oustide the MILP, as follows: <br> $$f^{commercial}_{n} (c) = \sum_{z \in LFC} PTDF(c,z) * NP^{ref}(z)$$ <br> With: <br> - LFC, the set of countries for whose we compute the commercial flows, set in the configuration under the parameter 'loop-flow-countries' <br> - NP, the net position of country z, read from the ReferenceProgram given as input of the RAO <br> - PTDF, the PTDF of country z on the FlowCnec c, eventually recomputed within the RAO depending on the value of the configuration parameter 'loop-flow-approximation'
 
