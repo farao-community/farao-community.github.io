@@ -39,8 +39,8 @@ A propotional GLSK gives a percentage as repartition key. Within the zone, the a
 > - G2 +200 * 0.1 = +20MW of production
 > - G3 +200 * 0.15 = +30MW of production
 > - G4 +200 * 0.15 = +30MW of production
-> - L1 +200 * 0.2 = +40MW of consumption
-> - L2 +200 * 0.1 = +20MW of consumption
+> - L1 +200 * 0.2 = -40MW of consumption
+> - L2 +200 * 0.1 = -20MW of consumption  
 > As the sum of coefficients is 1, in the end the variation of the net postion is 60+20+30+30+40+20=+200MW
 
 

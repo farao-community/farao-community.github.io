@@ -30,6 +30,7 @@ Using the RaoParameters Java object or the JSON file is pretty straight forward,
     - [Objective function impact](#ra-usage-impact)
     - [Simultaneous usage of remedial action limitations](#ra-usage-number)
   - [Computations parallelism](#parallelism)
+  - [Second preventive optimization parameters](#second-prao-parameters)
   - [Other SearchTreeRao parameters](#other-search-tree-parameters)
 * [RangeAction usage limitation](#range-action-usage-limitation)
 * [Relative margin parameters](#relative-margin-parameters)
@@ -132,28 +133,6 @@ If the stop criterion is **SECURE**, the search-tree will stop at the depth wher
 - **Default value**: 0
 - **Usage**: used as a minimum improvement of the preventive RAO objective value for the curative RAO stop criterion, when it is set to PREVENTIVE_OBJECTIVE or PREVENTIVE_OBJECTIVE_AND_SECURE.
 
-#### second-preventive-optimization-condition {#second-preventive-optimization-condition}
-- **Expected value**: one of the following:
-  - "DISABLED"
-  - "COST_INCREASE"
-  - "POSSIBLE_CURATIVE_IMPROVEMENT"
-- **Default value**: "DISABLED"
-- **Usage**: configures whether a 2nd preventive RAO should be run after the curative RAO.  
-*(Note that if there are automatons, and if a 2nd preventive RAO is run, then a 2nd automaton RAO is run)*
-**DISABLED**: no 2nd preventive RAO is run  
-**COST_INCREASE**: a 2nd preventive RAO is run if the RAO's overall cost has increased after optimisation compared to before optimisation; for example due to a curative MNEC constraint violated in 1st preventive RAO and not solved during curative RAO  
-**POSSIBLE_CURATIVE_IMPROVEMENT**: a 2nd preventive RAO is run only if it is possible to improve a curative perimeter, depending on the curative-rao-stop-criterion (ie if the curative RAO stop criterion on at least one perimeter is not reached):
-  - **SECURE**: if one curative perimeter is not secure after optimisation
-  - **PREVENTIVE_OBJECTIVE**: if one curative perimeter reached an objective function value after optimisation that is worse than the preventive perimeter's (eventually decreased by curative-rao-min-obj-improvement)
-  - **PREVENTIVE_OBJECTIVE_AND_SECURE**: if one of the two conditions above is met
-  - **MIN_OBJECTIVE**: always  
-  
-#### global-opt-in-second-preventive {#global-opt-in-second-preventive}
-- **Expected value**: true/false
-- **Default value**: false
-- **Usage**: configures whether the 2nd preventive RAO should optimize only the preventive remedial actions and keep all curative remedial actions as computed in the curative perimeters (when the parameter is set to false),
-or if it should optimize preventive remedial actions and curative range actions keeping only the curative topological actions computed in the curative perimeters (when the parameter is set to true).
-
 ### Number of RA limitation {#ra-usage-limits}
 Three families of parameters exist in order to limit the number of remedial actions used in the search-tree RAO.
 
@@ -240,6 +219,35 @@ It should therefore not exceed the number of cores of the computer on which the 
 - **Usage**: this parameter sets the number of combination of remedial action that the search tree will investigate in parallel during the **curative RAO**.  
 It is seperated from [preventive-leaves-in-parallel](#preventive-leaves-in-parallel) because during the curative RAO we also have the option to parallelize the curative perimeters, so a compromise should be found. It may be optimal to set this parameter to 1 and maximize [perimeters-in-parallel](#perimeters-in-parallel)
 
+### Second preventive optimization parameters {#second-prao-parameters}
+
+#### second-preventive-optimization-condition {#second-preventive-optimization-condition}
+- **Expected value**: one of the following:
+  - "DISABLED"
+  - "COST_INCREASE"
+  - "POSSIBLE_CURATIVE_IMPROVEMENT"
+- **Default value**: "DISABLED"
+- **Usage**: configures whether a 2nd preventive RAO should be run after the curative RAO.  
+*(Note that if there are automatons, and if a 2nd preventive RAO is run, then a 2nd automaton RAO is run)*
+**DISABLED**: no 2nd preventive RAO is run  
+**COST_INCREASE**: a 2nd preventive RAO is run if the RAO's overall cost has increased after optimisation compared to before optimisation; for example due to a curative MNEC constraint violated in 1st preventive RAO and not solved during curative RAO  
+**POSSIBLE_CURATIVE_IMPROVEMENT**: a 2nd preventive RAO is run only if it is possible to improve a curative perimeter, depending on the curative-rao-stop-criterion (ie if the curative RAO stop criterion on at least one perimeter is not reached):
+  - **SECURE**: if one curative perimeter is not secure after optimisation
+  - **PREVENTIVE_OBJECTIVE**: if one curative perimeter reached an objective function value after optimisation that is worse than the preventive perimeter's (eventually decreased by curative-rao-min-obj-improvement)
+  - **PREVENTIVE_OBJECTIVE_AND_SECURE**: if one of the two conditions above is met
+  - **MIN_OBJECTIVE**: always  
+  
+#### global-opt-in-second-preventive {#global-opt-in-second-preventive}
+- **Expected value**: true/false
+- **Default value**: false
+- **Usage**: configures whether the 2nd preventive RAO should optimize only the preventive remedial actions and keep all curative remedial actions as computed in the curative perimeters (when the parameter is set to false),
+or if it should optimize preventive remedial actions and curative range actions keeping only the curative topological actions computed in the curative perimeters (when the parameter is set to true).
+
+#### second-preventive-hint-from-first-preventive {#second-preventive-hint-from-first-preventive}
+- **Expected value**: true/false
+- **Default value**: false
+- **Usage**: if set to true, the RAO will use the optimal combination of network actions found in the first preventive RAO, as a combination ("hint") to test at the first search depth of the second preventive RAO. This way, if this combination is optimal for the second preventive RAO as well, getting to the optimal solution will be much faster.
+
 ### Other SearchTreeRao parameters {#other-search-tree-parameters}
 
 #### curative-rao-optimize-operators-not-sharing-cras {#curative-rao-optimize-operators-not-sharing-cras}
@@ -256,11 +264,6 @@ This parameter should be set to true for CORE CC.
 - **Usage**: this parameter contains hints for the search-tree RAO, consisting of combinations of multiple network actions that the user considers interesting to test together during the RAO.  
 These combinations will be tested in the first search depth of the search-tree
 ![Search-tree-with-combinations](/assets/img/Search-tree-with-combinations.png)
-
-#### second-preventive-hint-from-first-preventive {#second-preventive-hint-from-first-preventive}
-- **Expected value**: true/false
-- **Default value**: false
-- **Usage**: if set to true, the RAO will use the optimal combination of network actions found in the first preventive RAO, as a combination ("hint") to test at the first search depth of the second preventive RAO. This way, if this combination is optimal for the second preventive RAO as well, getting to the optimal solution will be much faster.
 
 ## RangeAction usage limitation {#range-action-usage-limitation}
 
