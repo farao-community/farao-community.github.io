@@ -115,7 +115,7 @@ A merit order GLSK gives a priority to individual generators and loads. So **thi
 > 
 > Here for each generator and load a minimum and maximum active power have to be defined:
 > - G1 : 100MW - 600MW
-> - G2 : 50MW - 800MW
+> - G2 : 50MW - 600MW
 > - G3 : 50MW - 200MW
 > - G4 : 100MW - 600MW
 > - L1 : 0MW - 1000MW
