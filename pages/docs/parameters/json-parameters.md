@@ -256,7 +256,7 @@ or if it should optimize preventive remedial actions and curative range actions 
 - **Usage**: if this parameter is set to false, the RAO will detect TSOs not sharing any curative remedial actions (in the CRAC). During the curative RAO, these TSO's CNECs will not be taken into account in the minimum margin objective function, unless the applied curative remedial actions decrease their margins (relatively to the margins in the curative state without any remedial actions).  
 If it is set to false, all CNECs are treated equally in the curative RAO.  
 This parameter has no effect on the preventive RAO.  
-This parameter should be set to true for CORE CC.
+This parameter should be set to false for CORE CC.
 
 #### network-action-combinations {#network-action-combinations}
 - **Expected value**: an array containing arrays of network action IDs
