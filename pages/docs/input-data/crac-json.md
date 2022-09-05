@@ -27,7 +27,7 @@ It is typically used in European coordinated processes. It enables, for a given 
   - either by using the java API,
   - orby  using the FARAO internal Json CRAC format.
 
-Note that other pages of this documentation describe how the [FARAO CRAC object model can be built with other standard CRAC formats](crac-import), such as the CORE Merged-CB CRAC format, the security limit format, or the CRAC CSE Format.
+Note that other pages of this documentation describe how the FARAO CRAC object model can be built with other standard CRAC formats, such as the CORE Merged-CB CRAC format, the security limit format, or the CRAC CSE Format.
 
 
 ### Full CRAC examples
