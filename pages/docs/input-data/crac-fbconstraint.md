@@ -52,7 +52,7 @@ A flow-based constraint document has a time interval for its validity and a lot 
 ```
 A critical branch represents a CNEC. As it is an identifiable it has an ID, here "de2_nl3_N".
 
-As it has been precised previously a critical branch has a time interval of validity, so it will be imported only if the import datetime is contained within the time interval of validity.
+As it has been indicated previously, a critical branch has a time interval of validity, so it will be imported only if the import datetime is contained within the time interval of validity.
 
 ```xml
 <criticalBranch id="fr4_de1_CO1">
@@ -64,11 +64,11 @@ As it has been precised previously a critical branch has a time interval of vali
 </criticalBranch>
 ```
 
-As it is defined in the CRAC model a CNEC is associated to a state. If the &lt;outage&gt; tag is not present as it is in the first example the CNEC is associated to the "preventive state" otherwise **two different CNECs will be created** one on state ("Ouatge", contingency_id) and another one on state ("Curative", contingency_id). These two CNECs will be on the same network element but will have different thresholds as it is explained in the **thresholds section**. As two CNECs are created from a unique CNEC with its ID, a suffix is added to the IDs of the new CNECs " - Outage" and " - Curative".
+As it is defined in the CRAC model a CNEC is associated to a state. If the &lt;outage&gt; tag is not present as it is in the first example the CNEC is associated to the "preventive state" otherwise **two different CNECs will be created** one on state ("Outage", contingency_id) and another one on state ("Curative", contingency_id). These two CNECs will be on the same network element but will have different thresholds as it is explained in the **thresholds section**. As two CNECs are created from a unique CNEC with its ID, a suffix is added to the IDs of the new CNECs " - Outage" and " - Curative".
 
 #### Branch definition {#branch-definition}
 
-n the definitions of critical branches or outages appear the &lt;branch&gt; tag, it can be quite singular. This type of CRAC has to be associated with a network in UCTE format therefore a branch is designated by two nodes – from and to – that are UCTE nodes and an order code which is defined in the UCTE format literature. The name represents only a more human readable name but there is no garanty on its unicity.
+n the definitions of critical branches or outages appear the &lt;branch&gt; tag, it can be quite singular. This type of CRAC has to be associated with a network in UCTE format therefore a branch is designated by two nodes – from and to – that are UCTE nodes and an order code which is defined in the UCTE format literature. The name represents only a more human-readable name but there is no guaranty on its unicity.
 
 A branch can also be defined this way :
 
@@ -76,9 +76,9 @@ A branch can also be defined this way :
 <branch eic="RANDOM_EIC" from="FROM__21" to="TO____21"  elementName="NAME" name="[FR-DE] NAME OF CRITICAL BRANCH [DIR]"/>
 ```
 
-Instead of using order code as third identifier, the element name can be used as it is defined in the UCTE format literature as well. This implies that network elements from the IIDM network have to be identifiable with two different type of IDs "fromNode toNode orderCode" and "fromNode toNode elementName". This is handled by the aliases, a network elementhas its ID "fromNode toNode orderCode" when it's imported from UCTE format, but aliases can be created to identify it with other names.
+Instead of using order code as third identifier, the element name can be used as it is defined in the UCTE format literature as well. This implies that network elements from the IIDM network have to be identifiable with two different type of IDs "fromNode toNode orderCode" and "fromNode toNode elementName". This is handled by the aliases, a network element has its ID "fromNode toNode orderCode" when it's imported from UCTE format, but aliases can be created to identify it with other names.
 
-Another problem is that from/to nodes can be inverted in the CRAC compared to what is present in the network. Such branches are correctly identified when the file is imported, but appears to be inverted in the resulting CRAC - meaning that their flow sign might be different between the 'CORE-definition' of the branch and the 'FARAO-definition' of the branch. The inversion of the branch is tracked in the [CracCreationContext](import#crac-creator) so as to handle properly the sign of the flow when the results of the RAO are exported.
+Another problem is that from/to nodes can be inverted in the CRAC compared to what is present in the network. Such branches are correctly identified when the file is imported, but appears to be inverted in the resulting CRAC - meaning that their flow sign might be different between the 'CORE-definition' of the branch and the 'FARAO-definition' of the branch. The inversion of the branch is tracked in the [CracCreationContext](import#crac-creator) to handle properly the sign of the flow when the results of the RAO are exported.
 
 #### Thresholds {#thresholds}
 
@@ -94,11 +94,11 @@ Temporary thresholds:
 
 - &lt;temporaryImaxA&gt; and &lt;temporaryImaxFactor&gt; : same definitions
 
-To define thresholds we also have to take &lt;direction&gt; tag into account. As mentionned in the model a network element has a direction – from/to node – then a threshold can be effective only for positive values of the flow for this direction for example, this is the definition of DIRECT. If the value is OPPOSITE the threshold will be effective only for negative values of the flow on this line. And eventually the value BOTH will make it effective for both negative and positive values.
+To define thresholds we also have to take &lt;direction&gt; tag into account. As mentioned in the model a network element has a direction – from/to node – then a threshold can be effective only for positive values of the flow for this direction for example, this is the definition of DIRECT. If the value is OPPOSITE the threshold will be effective only for negative values of the flow on this line. And eventually the value BOTH will make it effective for both negative and positive values.
 
-#### Additonnal values {#additional-values}
+#### Additional values {#additional-values}
 
-- A FRM value in specified for each CNEC, its value is in MW. Then the effective threshold value for the optimiser will be the one of the threshold diminished by the FRM value. Several conversions might take place whether we want the threshold in A or in MW.
+- An FRM value in specified for each CNEC, its value is in MW. Then the effective threshold value for the optimiser will be the one of the threshold diminished by the FRM value. Several conversions might take place whether we want the threshold in A or in MW.
 - A critical branch can be either a CNEC (optimised) or a MNEC (monitored) or actually both of these. For those that are neither a CNEC nor a MNEC they will be ignored.
 - TSO origin for the critical branch is also specified. As tie-lines are usually defined in two parts in the CRAC there will always be only one TSO implied per CNEC.
 
@@ -124,7 +124,7 @@ Remedial actions can be of different types but they will always have :
 
 Then it has the &lt;actionSet&gt; tag :
 - &lt;preventive&gt; tag : if true a usage rule will be added to the remedial action to make it available on preventive state
-- &lt;curative&gt; tag : if true some usage rules will be added to the remedial action to make it available on specifed curative states. To specify these states &lt;afterCOId&gt; tag will be used, they defined the outages after which this remedial action will be available.
+- &lt;curative&gt; tag : if true some usage rules will be added to the remedial action to make it available on specified curative states. To specify these states &lt;afterCOId&gt; tag will be used, they defined the outages after which this remedial action will be available.
 - &lt;enforced&gt; tag : it is not used for now
 Eventually different &lt;action&gt; tags can be used to define the concrete actions on the network for the remedial action.
 
@@ -150,7 +150,7 @@ Network actions are defined with the type "STATUS". The information they need is
     <PSTGroupId>PST_G1</PSTGroupId>
 </action>
 ```
-Only PST range ations can be defined in FlowBasedConstraint documents. They are fully defined using:
+Only PST range actions can be defined in FlowBasedConstraint documents. They are fully defined using:
 - Their network element
 - Their allowed tap range
 - Eventually, if they belong to a group of aligned PSTs, the ID of the group 

@@ -25,7 +25,7 @@ It is typically used in European coordinated processes. It enables, for a given 
 - the content and the organization of the data present in the FARAO CRAC object model,
 - how a FARAO CRAC object can be built,
   - either by using the java API,
-  - orby  using the FARAO internal Json CRAC format.
+  - or by using the FARAO internal Json CRAC format.
 
 Note that other pages of this documentation describe how the FARAO CRAC object model can be built with other standard CRAC formats, such as the CORE Merged-CB CRAC format, the security limit format, or the CRAC CSE Format.
 
@@ -71,7 +71,7 @@ Network elements are referenced in the CRAC with:
 : The name shouldn't be absolutely required by the application relying on the CRAC object, but it could be useful to make the CRAC or some logs easier to read from a business viewpoint.
 
 {% capture t2_java %}
-Network elements are never built on their own in the CRAC object, they always are a component of a bigger object, for example the component of a Contingency, or the component of a CNEC. When building one of those bigger objects, one of the two following methods can be used to define (one of) its network elements, either with an id only, or an id and a name.
+Network elements are never built on their own in the CRAC object, they are always a component of a bigger object, for example the component of a Contingency, or the component of a CNEC. When building one of those bigger objects, one of the two following methods can be used to define (one of) its network elements, either with an id only, or an id and a name.
 ~~~java
 withNetworkElement("network_element_id")
 withNetworkElement("network_element_id", "network_element_name")
@@ -93,7 +93,7 @@ Moreover, the internal Json CRAC format contains an index of network element nam
 ### Contingencies {#contingencies}
 A CRAC contains contingencies. 'Contingency' is the denomination which has been chosen within the FARAO internal format, but contingencies are also commonly called 'outages', 'CO' for 'Critical Outages', or 'N-k'.
 
-A contingency is the representation of an incident on the network ie. a cut line or a group/transformer failure, etc. In FARAO, it is modelled by the loss of one or several network elements. Usually we have either a one network element loss that is called "N-1" or a two network elements loss that is called "N-2". For instance
+A contingency is the representation of an incident on the network i.e. a cut line or a group/transformer failure, etc. In FARAO, it is modelled by the loss of one or several network elements. Usually we have either a one network element loss that is called "N-1" or a two network elements loss that is called "N-2". For instance
 
 - The loss of one generator
 - The loss of two parallel electrical lines
@@ -152,19 +152,19 @@ The instant is a hypothetical moment in the chronology of a contingency. Three i
 - the preventive instant, that occurs before any contingency, and describes the 'base case' situation.
 - the outage instant, that occurs just after a contingency, in a time too short which does not permit the activation of curative remedial actions
 - the auto instant, that occurs just after a contingency, during which automatic remedial actions are triggered by the appearance of the contingency, even if these automatic remedial actions generate constraints somewhere else in the network
-- the curative instant, that occurs after a contingency, after a duration sufficient enough to allow the activation of curative remedial actions
+- the curative instant, that occurs after a contingency, after a duration sufficient to allow the activation of curative remedial actions
 
 > 💡  **NOTE**  
-> Current limits on network elements are usually different in the outage and curative instants. The outage instant is supposed to be exceptional and shouln't last longer than a few minutes, therefore less restrictive temporary limits (TATL) are allowed. On the contrary, the curative instant is supposed to be a lasting moment during which the grid operation goes back to normal, and usually comes with with more restrictive permanent limits (PATL).  
+> Current limits on network elements are usually different in the outage and curative instants. The outage instant is supposed to be exceptional and shouldn't last longer than a few minutes, therefore less restrictive temporary limits (TATL) are allowed. On the contrary, the curative instant is supposed to be a lasting moment during which the grid operation goes back to normal, and usually comes with with more restrictive permanent limits (PATL).  
 > Even though this PATL/TATL difference is commonly seen in the data of many processes, it is not set in stone, and the current limits can be defined freely in the CRAC of FARAO whatever the instant considered (see next section on CNECs).
 
 Farao object model includes the notion of 'state'. A state is either:
 
 - the preventive state, that is to say the state with the base-case network, without any contingency, which occur at the preventive instant.
-- the combination of a contingency with instants outage, auto or curative, in that case it corresponds to the network situation after a contingency, with more or less delay after this contingency.
+- the combination of a contingency with instant outage, auto or curative, in that case it corresponds to the network situation after a contingency, with more or less delay after this contingency.
 
 
-The scheme below illustrates these notions of instant and state. It highlights the combinatronics of the situations which can be described in a CRAC, with a base-case situation, but also variants of this situation occuring at different moments in time after different probable and hypothetical contingencies.
+The scheme below illustrates these notions of instant and state. It highlights the combinations of the situations which can be described in a CRAC, with a base-case situation, but also variants of this situation occurring at different moments in time after different probable and hypothetical contingencies.
 
 ![Instants & states](/assets/img/States_AUTO.png)
 
@@ -180,15 +180,15 @@ A CNEC is a **network element**, which is considered at a given **instant** afte
 - the CNEC is considered at instant auto, outage or curative, after a given contingency.
 
 > 💡  **NOTE**  
-> Note that in FARAO a CNEC is associated to only one instant and one contingency. This is not the case of all CRAC formats, for instance, in the CORE merged-CB CRAC format, the post-outage CNECs are implicitely defined for the two instants outage and curative, and in the security-limit format, a same CNEC can be defined for the preventive state and several contingencies.
+> Note that in FARAO a CNEC is associated to only one instant and one contingency. This is not the case of all CRAC formats, for instance, in the CORE merged-CB CRAC format, the post-outage CNECs are implicitly defined for the two instants outage and curative, and in the security-limit format, a same CNEC can be defined for the preventive state and several contingencies.
 > 
 > (see also the pages on the [CRAC importers](import) to see how each format is mapped on FARAO internal format)
 
 
 A CNEC has an operator, which is the name of the TSO which operates the network element of the CNEC.  
-Moreveover, a CNEC can have a reliability margin. It defines a safety buffer to cope with unplanned events or uncertainties of input data. 
+Moreover, a CNEC can have a reliability margin. It defines a safety buffer to cope with unplanned events or uncertainties of input data. 
 
-**Optimized and monitored Cnecs**  
+**Optimised and monitored Cnecs**  
 CNECs can be monitored and/or optimised. This notion of monitored/optimised has been introduced by the capacity calculation on the CORE region, and is inherent to the RAO of this region which:
 
 - maximizes the margin of CNECs that are 'optimised'
@@ -201,12 +201,12 @@ A FlowCnec has the two following specificities:
 - it contains one network element that is a **'Branch'**. In the PowSyBl vocabulary, a 'Branch' is an element which is connected to two terminals. For instance, lines, tie-lines, transformers and PSTs are 'Branches'.
 - the physical parameter which is monitored by the CNEC is the **power flow**.
 
-A FlowCnec is one version (implementation) in FARAO of a generic object : a BranchCnec obect. This allows  fast implementation of other types of CNECs on which other physical parameters than power flow will be monitored.
+A FlowCnec is one version (implementation) in FARAO of a generic object: a BranchCnec object. This allows fast implementation of other types of CNECs on which other physical parameters than power flow will be monitored.
 
 A FlowCnec has **two sides**, which correspond to the two terminals of the PowSyBl network element of the FlowCnec, usually called terminal one and two, or terminal left and right. The notion of **direction** is also inherent to the FlowCnec: a flow in direction "direct" is a flow from terminal one/left to terminal two/right, while a flow in direction "opposite" is a flow from terminal two/right to terminal one/left. The convention of FARAO is that a positive flow is a flow in the "direct" direction, while a negative flow is a flow in the "opposite" direction.
 
 ##### Flow limits on a FlowCnec
-A FlowCnec contains thresholds. Those thresholds define the limits between which the power flow of the FlowCnec should ideally remain. Those limits can be defined in megawatt, ampere, or in percentage of the Imax of the branch (%Imax). A threshold has a mininimum and/or a maximum value. The maximum value represents the maximum value of the flow in the "direct" direction and the minimum value represents the inverse of the maximum value of the flow in the "opposite" direction. Therefore, the flow of FlowCnecs which only have one minium value, or one maximum value is implicitely monitored in only one direction (see example 1 of picture below).
+A FlowCnec contains thresholds. Those thresholds define the limits between which the power flow of the FlowCnec should ideally remain. Those limits can be defined in megawatt, ampere, or in percentage of the Imax of the branch (%Imax). A threshold has a minimum and/or a maximum value. The maximum value represents the maximum value of the flow in the "direct" direction and the minimum value represents the inverse of the maximum value of the flow in the "opposite" direction. Therefore, the flow of FlowCnecs which only have one minimum value, or one maximum value is implicitly monitored in only one direction (see example 1 of picture below).
 
 ![FlowCnec-Threshold](/assets/img/flowcnec.png)
 
@@ -228,10 +228,10 @@ In the examples of the picture above, all the thresholds are defined in megawatt
 - if one threshold of the FlowCnec is in ampere or in percentage of Imax, the nominal voltage on both sides of the threshold must be defined
 - if one threshold of the FlowCnec is in percentage of Imax, the Imax of the FlowCnec on the side of the threshold must be defined
 
-[Utility methods](creation-methods) have been developped in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
+[Utility methods](creation-methods) have been developed in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
 
 
-A FlowCnec has a reliability margin, also known as FRM for Flow Reliability Margin. The reliability margin can only be defined in megawatt. It is substracted from the min/max values of the FlowCnec thresholds when the limits of the FlowCnec are computed.
+A FlowCnec has a reliability margin, also known as FRM for Flow Reliability Margin. The reliability margin can only be defined in megawatt. It is subtracted from the min/max values of the FlowCnec thresholds when the limits of the FlowCnec are computed.
 
 ##### Create a CNEC
 In FARAO, FlowCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
@@ -275,7 +275,7 @@ crac.newFlowCnec()
 	.withMonitored(false)
 	.withNominalVoltage(380., Side.LEFT)
 	.withNominalVoltage(220., Side.RIGHT)
-	.withIMax(500.) // the value is supposed to be the same on both side, though the side could have been specificied with withImax(500., Side.RIGHT) 
+	.withIMax(500.) // the value is supposed to be the same on both side, though the side could have been specified with withImax(500., Side.RIGHT) 
     .add();
 ~~~
 {% endcapture %}
@@ -342,7 +342,7 @@ crac.newFlowCnec()
 {% endcapture %}
 {% include /tabs.html id="t4" tab1name="JAVA creation API" tab1content=t4_java tab2name="JSON file" tab2content=t4_json tab3name="Object fields" tab3content=t4_objects %}
 #### AngleCnec {#angle-cnecs}
-An AngleCnec is a branch which may see a phase angle shift between its two ends when it's disconnected. This may induce insecurities in the network when it's back up. That's why we **monitor** angle CNECs and associate with them remedial actions (generally re-dispatching) that can reduce the phase angle shift between the two ends.
+An AngleCnec is a branch which may see a phase angle shift between its two ends when it's disconnected. This may induce insecurities in the network when it's back up. That's why we monitor angle CNECs and associate with them remedial actions (generally re-dispatching) that can reduce the phase angle shift between the two ends.
 
 In terms of FARAO object model, an AngleCnec is a CNEC. Even though it is associated with a branch, it is not a BranchCnec, because we cannot define on which side it is monitored: it is monitored on both sides (more specifically, we monitor the phase shift between the two sides). 
 
@@ -350,8 +350,10 @@ An AngleCnec has the following specificities:
 
 - it contains two network elements, an importing node and an exporting node, that represent the importing and exporting ends of the branch.
 - the physical parameter which is monitored by the CNEC is the **angle**.
-- it must contain at least one threshold, defined in degrees. A threshold has a mininimum and/or a maximum value.
-- it cannot be optimized.
+- it must contain at least one threshold, defined in degrees. A threshold has a minimum and/or a maximum value.
+
+> 💡  **NOTE**
+> AngleCnecs currently cannot be optimised by the RAO, but they are monitored by an independent [AngleMonitoring](/docs/engine/angle-monitoring) module.
 
 ##### Create an AngleCnec
 In FARAO, AngleCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
@@ -437,11 +439,13 @@ cnec2 = crac.newAngleCnec()
 {% endcapture %}
 {% include /tabs.html id="t5" tab1name="JAVA creation API" tab1content=t5_java tab2name="JSON file" tab2content=t5_json tab3name="Object fields" tab3content=t5_objects %}
 #### VoltageCnec {#voltage-cnecs}
-A VoltageCnec is a CNEC on which we **monitor** the voltage on substations. It has the following specificities :
+A VoltageCnec is a CNEC on which we monitor the voltage on substations. It has the following specificities:
 - it contains one network element
 - the physical parameter which is monitored by the CNEC is the **voltage**.
-- it must contain at least one threshold, defined in kilovolts. A threshold has a mininimum and/or a maximum value.
-- it cannot be optimized.
+- it must contain at least one threshold, defined in kilovolts. A threshold has a minimum and/or a maximum value.  
+
+> 💡  **NOTE**
+> VoltageCnecs currently cannot be optimised by the RAO, but they are monitored by an independent [VoltageMonitoring](/docs/engine/voltage-monitoring) module.
 
 ##### Create a VoltageCnec
 In FARAO, VoltageCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
@@ -523,12 +527,12 @@ A remedial action is an action on the network that is considered as able to redu
 
 Two types of remedial action exists in FARAO:  
 - 'Network Actions', that have the specificity of being binary. A Network Action is either applied on the network, or not applied. Topological actions are a classic example of Network Actions.
-- 'Range Actions', that have the specificity of having a degree of freedom - a setpoint. When a Range Action is activated, it is activated with a given value of its setpoint. PSTs are a classic example of Range Actions.
+- 'Range Actions', that have the specificity of having a degree of freedom - a set-point. When a Range Action is activated, it is activated with a given value of its set-point. PSTs are a classic example of Range Actions.
 
 Both Network Actions and Range Actions have usage rules which define the condition under which they can be activated. The usage rules which exist in FARAO are:  
 - the FreeToUse usage rule: a free-to-use usage rule means that the remedial action is available in all the states of a given instant.
-- the OnState usage rule: a on-state usage rule means that the remedial action is available in a given state.
-- the OnFlowConstraint usage rule: a on-flow-constraint usage rule means that the remedial action is available if a given FlowCnec is constrained (ie has a flow greater than one of its thresholds) in a given state.
+- the OnState usage rule: an on-state usage rule means that the remedial action is available in a given state.
+- the OnFlowConstraint usage rule: an on-flow-constraint usage rule means that the remedial action is available if a given FlowCnec is constrained (ie has a flow greater than one of its thresholds) in a given state.
 - the OnFlowConstraintInCountry usage rule: a on-flow-constraint-in-country usage rule means that the remedial action is available if a FlowCnec in a given country is constrained (ie has a flow greater than one of its thresholds) in a given state.
 
 
@@ -601,8 +605,8 @@ FARAO handles three different types of usage methods:
 A Network Action is a combination of at least one elementary actions. The elementary actions in FARAO are:
 
 - topological actions: they consist in the opening or the closing of one branch or one switch of the network.
-- PST setpoints: they consist in the modification of the tap of a PST to a pre-defined target tap.
-- Injection setpoints: they consist in the modification of an injection (load, generator or dangling line) to a pre-defined setpoint.
+- PST set-points: they consist in the modification of the tap of a PST to a pre-defined target tap.
+- Injection set-points: they consist in the modification of an injection (load, generator or dangling line) to a pre-defined set-point.
 - Switch pairs: they consist in opening a switch and closing another.
 
 {% capture t8_java %}
@@ -623,7 +627,7 @@ crac.newNetworkAction()
     .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .add();
 
-// pst setpoint
+// pst set-point
 crac.newNetworkAction()
 	.withId("pst-setpoint-na-id")
     .withName("pst-setpoint-na-name")
@@ -635,7 +639,7 @@ crac.newNetworkAction()
     .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .add();
 
-// injection setpoint with two usage rules
+// injection set-point with two usage rules
 crac.newNetworkAction()
 	.withId("injection-setpoint-na-id")
 	.withOperator("operator")
@@ -748,11 +752,11 @@ crac.newNetworkAction()
 FARAO has three types of RangeActions : PstRangeAction, HvdcRangeAction, and InjectionRangeAction.
 
 #### PST Range Action {#pst-range-action}
-A PstRangeAction contains a network element which must point toward a PST of the iidm PowSyBl network model. The PstRangeAction will be able to modify the setpoint of this PST.
+A PstRangeAction contains a network element which must point toward a PST of the iidm PowSyBl network model. The PstRangeAction will be able to modify the set-point of this PST.
 
 > 💡  **NOTE** 
-> - the setpoint of the PstRangeAction is the angle of the PST, given in degree
-> - all the methods of the PST which mention a setpoint implicity ask for/return an angle
+> - the set-point of the PstRangeAction is the angle of the PST, given in degree
+> - all the methods of the PST which mention a set-point implicitly ask for/return an angle
 > - though, those methods are usually doubled with methods which ask for/return a tap
 
 The domain in which the PstRangeAction can modify the tap of the PST is delimited by 'TapRanges'. A PstRangeAction contains a list (which can be empty) of TapRanges.  
@@ -760,10 +764,10 @@ The domain in which the PstRangeAction can modify the tap of the PST is delimite
 TapRanges can be of different types:  
 - **absolute**: the mix/max admissible tap of the PST, given in the convention of the PowSyBl network model
 - **relative to initial network**: the maximum variation of the tap of the PST relatively to its initial tap
-- **relative to prevous instant**: the maximum variation of the tap of the PST relatively to its tap in the previous instant. Note that this type of range does not make make sense for PstRangeActions which are only available in the preventive instant, as there is no instant before the preventive one.  
+- **relative to previous instant**: the maximum variation of the tap of the PST relatively to its tap in the previous instant. Note that this type of range does not make sense for PstRangeActions which are only available in the preventive instant, as there is no instant before the preventive one.  
 
 The final validity range of the PstRangeAction is the intersection of its TapRanges, with the intersection of the min/max feasible taps of the PST.  
-The PstRangeAction also requires additional data, notably to be able to interpret the TapRanges. Those additional data are: the initial tap of the PST, and a conversion map which gives for each feasible tap of the PST its corresponding angle. Utility methods have been developped in FARAO to ease the management of these additional data during the creation of a PstRangeAction.
+The PstRangeAction also requires additional data, notably to be able to interpret the TapRanges. Those additional data are: the initial tap of the PST, and a conversion map which gives for each feasible tap of the PST its corresponding angle. Utility methods have been developed in FARAO to ease the management of these additional data during the creation of a PstRangeAction.
 
 {% capture t9_java %}
 ~~~java
@@ -841,11 +845,11 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
 {% include /tabs.html id="t9" tab1name="JAVA creation API" tab1content=t9_java tab2name="JSON file" tab2content=t9_json tab3name="Object fields" tab3content=t9_objects %}
 
 #### HVDC Range Action {#hvdc-range-action}
-An HvdcRangeAction contains a network element that must point towards an HvdcLine of the iidm PowSyBl network model. The HvdcRangeAction will be able to modify its setpoint, in MW.  
+An HvdcRangeAction contains a network element that must point towards an HvdcLine of the iidm PowSyBl network model. The HvdcRangeAction will be able to modify its set-point, in MW.  
 
 The domain in which the HvdcRangeAction can modify the HvdcSetpoint is delimited by 'HvdcRanges'. An HvdcRangeAction contains a list of HvdcRanges. A range must be defined with a min and a max.  
 
-HvdcRanges can only be absolute : the mix/max admissible setpoint of the HVDC. ⚠️ *There isn't any check performed to verify that an applied setpoint is between the ranges' min and max.*
+HvdcRanges can only be absolute : the mix/max admissible set-point of the HVDC. ⚠️ *There isn't any check performed to verify that an applied set-point is between the ranges' min and max.*
 
 {% capture t10_java %}
 ~~~java
@@ -894,9 +898,9 @@ In that case, the validity domain of the HVDC is [-5; 10].
 
 #### Injection Range Action {#injection-range-action}
 
-An InjectionRangeAction modifies given generators' & loads' injection setpoints in a given range of a reference setpoint.
+An InjectionRangeAction modifies given generators' & loads' injection set-points in a given range of a reference set-point.
 
-The impacted generators and loads each have a coefficient ("keys") of impact applied on this reference setpoint.
+The impacted generators and loads each have a coefficient ("keys") of impact applied on this reference set-point.
 
 This range action is mainly used to represent an HVDC line in AC equivalent model (where the line is disconnected and replaced by two injections, one on each side of the line, with opposite keys of 1 and -1).
 
@@ -912,8 +916,8 @@ This range action is mainly used to represent an HVDC line in AC equivalent mode
         .newFreeToUseUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
         .add();     
 ~~~
-In that case, the validity domain of the injection range action's reference setpoint is [-1200; 500].  
-This means the setpoint of "network-element-1" (key = 1) can be changed between -1200 and +500, while that of "network-element-2" (key = -0.5) will be changed between -250 and +600
+In that case, the validity domain of the injection range action's reference set-point is [-1200; 500].  
+This means the set-point of "network-element-1" (key = 1) can be changed between -1200 and +500, while that of "network-element-2" (key = -0.5) will be changed between -250 and +600
 {% endcapture %}
 {% capture t11_json %}
 ~~~json

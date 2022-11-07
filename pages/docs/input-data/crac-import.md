@@ -16,7 +16,7 @@ tags: [Docs, Data]
 
 The [FARAO CRAC object model](json) can be directly imported and exported using the farao-crac-io-api.  
 
-The JSON format - also called FARAO internal format - is a raw image of the CRAC object model of FARAO. It is particularly suited to exchange a CRAC java object through files, for instance to exchange CRAC data between microservices or Kubernetes pods of an application. It has an importer and an exporter. The complete roundtrip (java object → export → json file → import → java object) has been designed so that the CRAC at the beginning of the chain is exactly the same than the one at the end of the chain.  
+The JSON format - also called FARAO internal format - is a raw image of the CRAC object model of FARAO. It is particularly suited to exchange a CRAC java object through files, for instance to exchange CRAC data between microservices or Kubernetes pods of an application. It has an importer and an exporter. The complete round-trip (java object → export → json file → import → java object) has been designed so that the CRAC at the beginning of the chain is exactly the same as the one at the end of the chain.  
 
 Examples of JSON formats are given on this [page](json).  
 Examples of uses of the farao-crac-io-api are given below:  
@@ -67,7 +67,7 @@ The FARAO CRAC object model is not a bijection of all existing formats. To handl
 
 - The CracCreator returns a **CracCreationContext**. It contains:  
 -- the created CRAC object  
--- additional informations which explains how the initial format has been mapped into the FARAO format. This mapping is oftenly not straightforward (see below). The CracCreationContext enables to keep in memory a link between the NativeCrac and the CRAC objects.
+-- additional information which explains how the initial format has been mapped into the FARAO format. This mapping is often not straightforward (see below). The CracCreationContext enables to keep in memory a link between the NativeCrac and the CRAC objects.
 
 
 > 💡  **NOTE**  
@@ -82,7 +82,7 @@ The FARAO CRAC object model is not a bijection of all existing formats. To handl
 > - keep track of the branch which has been inverted because the initial format was not consistent with the iidm network (the Network is needed for that operation, that is an example of the reason why it is required by the CracCreator)
 > - keep some information of the initial format which are not imported in the FARAO CRAC.
 > 
-> In the CORE CC process, this CracCreationContext is re-used when results are exported at the end of the RAO, in order to rollback the modifications which has been made during the creation, and export at the end of the process a CNE file which is consistent with the initial CRAC file.
+> In the CORE CC process, this CracCreationContext is re-used when results are exported at the end of the RAO, in order to roll-back the modifications which has been made during the creation, and export at the end of the process a CNE file which is consistent with the initial CRAC file.
 
 The formats handled by the CracCreator are:	
 - [FbConstraint document](fbconstraint), also known as Merged-CB, CBCORA or F301 ([farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint))
@@ -105,7 +105,7 @@ CracCreationContext cracCreationContext = CracCreators.createCrac(nativeCrac, ne
 Crac crac = cracCreationContext.getCrac();
 
 // if the format is known, use directly the suited implementations of NativeCracImporter and CracCreator
-// if no configuration is explicitely given, use the default one
+// if no configuration is explicitly given, use the default one
 // this approach is preferred as the previous one is the format is known, as it returns directly the expected implementation of the CracCreationContext
 FbConstraint nativeCrac = new FbConstraintImporter().importNativeCrac(new FileInputStream(new File("fbDocument.xml")));
 CracCreationParameters paramaters = CracCreationParameters.load();

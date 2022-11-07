@@ -103,7 +103,7 @@ Contingencies are listed in Series of business type B55. They are defined in Con
   ...
 </Series>
 ```
-CNECs are defined in Monitored_Series elements. A CNEC has one registered resource that defines its' network element via its' mrID. The optimization_MarketObjectStatus indicates if the CNEC is monitored or optimized.   
+CNECs are defined in Monitored_Series elements. A CNEC has one registered resource that defines its network element via its mrID. The optimization_MarketObjectStatus indicates if the CNEC is monitored or optimized.   
 
 As it is defined in the CRAC model, a CNEC is associated to a state. If the Series containing the Monitored_Series has one or many Contingency_Series that have previously been correctly defined [in B55 Series](#contingencies), CNECs shall be created after these referenced contingencies. When no Contingency_Series are present in this Series, CNECs shall be created after all the contingencies defined in B55 series. The Measurements tags define the instants on which CNECs are defined via the measurementType tag, and the CNEC's threshold values.  
 
@@ -142,7 +142,7 @@ Finally, a CNEC can be named in the following way : _[network element name] - [s
   </RemedialAction_Series>
 </Series>
 ```
-AngleCnecs are easily distinguishable thanks to the AdditionalConstraint_Series tag.  They define an AngleCnec in curative with an importing element, an exporting element (cf. the two registered resouces) and with a threshold with a max bound defined by quantity.  
+AngleCnecs are easily distinguishable thanks to the AdditionalConstraint_Series tag.  They define an AngleCnec in curative with an importing element, an exporting element (cf. the two registered resources) and with a threshold with a max bound defined by quantity.  
 In the CIM CRAC, AngleCnecs are actually defined with their corresponding remedial actions in B56 Series (ie Remedial Action series). The Contingency_Series (unique) refers to the contingency after which the AngleCnec is monitored.  
 
 #### VoltageCnecs {#voltageCnecs} 
@@ -226,8 +226,8 @@ PST Range Actions have a unique RegisteredResource with A06 psrType, that stands
 
 #### Network Actions {#networkactions}
 
-Network actions have one or more registered resources, that represent elementary actions. Each elementary action's type is defined by its' psrType :  
-- **pst setpoint** elementary actions have a A06 psrType, that stands for phase shift transformer. They differ from range actions as they have a specific setpoint instead of an allowed range. That's why they have a default capacity tag instead of a minimumCapacity and/or a maximumCapacity tag.  
+Network actions have one or more registered resources, that represent elementary actions. Each elementary action's type is defined by its psrType :  
+- **pst set-point** elementary actions have a A06 psrType, that stands for phase shift transformer. They differ from range actions as they have a specific set-point instead of an allowed range. That's why they have a default capacity tag instead of a minimumCapacity and/or a maximumCapacity tag.  
 
 ```xml
 <Series>
@@ -253,7 +253,7 @@ Network actions have one or more registered resources, that represent elementary
 </Series>
 ```
 
-- **injection setpoint** elementary actions have a A04 or a A05 psrType, that respectively stand for generation and load. In a similar way to pst setpoints, injection setpoints do not have a minimumCapacity nor a maximumCapacity, but they have a defaultCapacity when the marketObjectStatus is A26 (stands for ABSOLUTE) with unitSymbol MAW. The marketObjectStatus may also be A23 for STOP. In that case, no defaultCapacity my be present. 
+- **injection set-point** elementary actions have a A04 or a A05 psrType, that respectively stand for generation and load. In a similar way to pst set-points, injection set-points do not have a minimumCapacity nor a maximumCapacity, but they have a defaultCapacity when the marketObjectStatus is A26 (stands for ABSOLUTE) with unitSymbol MAW. The marketObjectStatus may also be A23 for STOP. In that case, no defaultCapacity may be present. 
 
 ```xml
 <Series>
@@ -279,7 +279,7 @@ Network actions have one or more registered resources, that represent elementary
 </Series>
 ```
 
-- **topological** elementary actions have a A01, AO2, A07 or a B24 psrType, that respectively stand for Tieline, line, circuit breaker and transformer. In a similar way to other elementary actions, topological elementary actions do not have a minimumCapacity nor a maximumCapacity. Since they aren't defined by a setpoint, they don't have a defaultCapacity either. They are entirely defined by the marketObjectStatus : A21 for OPEN, and A22 for CLOSE.
+- **topological** elementary actions have a A01, AO2, A07 or a B24 psrType, that respectively stand for tie-line, line, circuit breaker and transformer. In a similar way to other elementary actions, topological elementary actions do not have a minimumCapacity nor a maximumCapacity. Since they aren't defined by a set-point, they don't have a defaultCapacity either. They are entirely defined by the marketObjectStatus : A21 for OPEN, and A22 for CLOSE.
 
 ```xml
 <Series>
@@ -306,17 +306,17 @@ A network action is imported if all of its elementary actions are imported.
 
 #### HVDC Range Actions {#hvdcRangeActions}
 
-The only HVDC range action defined in the CIM CRAC is the BAIXAS-SANTA LLOGAIA HVDC. It is defined in two separate remedial actions, representing one direction each:
-- the first RemedialAction_Series is a range action in the ES -> FR direction with 0 to XXX MW available.
-- the second RemedialAction_Series is a range action in the FR -> ES direction with 0 to XXX MW available.  
+In the CIM CRAC format as it is actually used, the HVDC remedial action is defined in two separate remedial actions, each representing one direction:
+- the first RemedialAction_Series is a range action in the A -> B direction, with 0 to XXX MW available.
+- the second RemedialAction_Series is a range action in the B -> A direction, with 0 to XXX MW available.  
 
-Each of these RemedialAction_Series contain 4 RegisteredResources:
-- the first RegisteredResource sets 1_HVDC_FRES to P-setpoint mode.
-- the second RegisteredResource defines the actual range on 1_HVDC_FRES.
-- the third RegisteredResource sets 2_HVDC_FRES to P-setpoint mode.
-- the fourth RegisteredResource defines the actual range on 2_HVDC_FRES.  
+Each of these RemedialAction_Series can contain 4 RegisteredResources, allowing to use 2 HVDC lines as a remedial action group (i.e. setting both lines to same set-point):
+- the first RegisteredResource sets the HVDC line #1 to "active power set-point" mode.
+- the second RegisteredResource defines the allowed set-point range on the HVDC line #1.
+- the third RegisteredResource sets the HVDC line #2 to "active power set-point" mode.
+- the fourth RegisteredResource defines the allowed set-point range on the HVDC line #2.
 
-In the end, two HVDC range actions with an absolute range of -XXX MW to XXX MW each are defined, on both HVDC lines. These HVDC range actions are aligned, i.e they share the same group ID. That means that they must have the same setpoint. 
+In the end, two HVDC range actions with an absolute range of -XXX MW to XXX MW each are defined, on both HVDC lines. These HVDC range actions are aligned, i.e. they share the same group ID. That means that they must have the same set-point. 
 
 ### Special rules {#specialrules}
 
