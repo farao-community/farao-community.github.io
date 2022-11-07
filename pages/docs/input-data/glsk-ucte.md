@@ -46,7 +46,7 @@ Proper GLSK are defined within the tag **&lt;GSKSeries&gt;**
 ~~~
 
 - The **&lt;Area&gt;** tag defines the geographical zone handled by the GLSK. codingScheme value at A01 declares that is an EIC code, it will be the case most of the time but other types of code could be used to describe the area.
-- The **&lt;BusinessType&gt;** tag can have two values here: **Z02** means it is a GSK and **Z05** means it is an LSK. The share value represents the proportion of this series for the whole area. For exemple if the RTE area is defined in two different series – one with Z02 share=0.3 and one with Z05 share=0.7 – and that we want to apply a shift of 1000MW in RTE zone, we will apply a shift of 300MW on the generators and a shift of 700MW on the loads.  
+- The **&lt;BusinessType&gt;** tag can have two values here: **Z02** means it is a GSK and **Z05** means it is an LSK. The share value represents the proportion of this series for the whole area. For example if the RTE area is defined in two different series – one with Z02 share=0.3 and one with Z05 share=0.7 – and that we want to apply a shift of 1000MW in RTE zone, we will apply a shift of 300MW on the generators and a shift of 700MW on the loads.  
 
 So according to this format to embrace all the elements of an area we have to **combine potentially 2 series so that GSK and LSK can be gathered**.
 

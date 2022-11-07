@@ -27,20 +27,20 @@ FARAO distinguishes two types of remedial actions, **range actions** and **netwo
 
 #### Range action {#range-action}
 
-Range actions are actions on the network with a degree of freedom: the choice of a **setpoint** within a given range. These actions can be optimised linearly, with some approximations. For more information related to the linear optimisation of range actions in FARAO, please refer to the [dedicated documentation page](/docs/engine/ra-optimisation/linear-rao).
+Range actions are actions on the network with a degree of freedom: the choice of a **set-point** within a given range. These actions can be optimised linearly, with some approximations. For more information related to the linear optimisation of range actions in FARAO, please refer to the [dedicated documentation page](/docs/engine/ra-optimisation/linear-rao).
 
 They can be defined on some categories of network elements:
 - Phase Shift Transformer (PST),
 - HVDC line,
 - Production unit.
 
-The determination of the optimal setpoint improving a network situation requires some data:
+The determination of the optimal set-point improving a network situation requires some data:
 - the current value in a specified network,
 - the minimal reachable value according to the specified network – or the maximal authorized variation for a decreasing variation,
 - the maximal reachable value according to the specified network – or the maximal authorized variation for an increasing variation,
-- the sensitivity of a setpoint variation on every CNEC for the specified nework.
+- the sensitivity of a set-point variation on every CNEC for the specified network.
 
 #### Network action {#network-action}
 
-Network actions are any other kind of action on the network, such as the opening/closing of a network element, setting the tap position of a PST to a given setpoint, etc. They can only be activated, or remain inactive.
+Network actions are any other kind of action on the network, such as the opening/closing of a network element, setting the tap position of a PST to a given set-point, etc. They can only be activated, or remain inactive.
 They are used in the [search-tree RAO](/docs/engine/ra-optimisation/search-tree-rao) only.

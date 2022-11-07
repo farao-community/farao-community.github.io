@@ -6,7 +6,7 @@ hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: Input Data
-order: 2
+order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
@@ -25,7 +25,7 @@ GLSK stands for **Generators and Loads Shift Keys**. The aim of this object is t
 Here we are going to talk about one unique geographical zone.
 
 ### Proportional GLSK {#proportional}
-A propotional GLSK gives a percentage as repartition key. Within the zone, the absolute sum of these percentages must be one. Of course the variation on generators and loads must be of the opposite sign meaning that if the variation on the zone is positive generators target powers must increase and loads consumption must decrease – the aim being to increase net position.
+A proportional GLSK gives a percentage as repartition key. Within the zone, the absolute sum of these percentages must be one. Of course the variation on generators and loads must be of the opposite sign meaning that if the variation on the zone is positive generators target powers must increase and loads consumption must decrease – the aim being to increase net position.
 
 **This type of GLSK is linear** therefore it can be used for PTDF computations.
 
@@ -41,7 +41,7 @@ A propotional GLSK gives a percentage as repartition key. Within the zone, the a
 > - G4 +200 * 0.15 = +30MW of production
 > - L1 +200 * 0.2 = -40MW of consumption
 > - L2 +200 * 0.1 = -20MW of consumption  
-> As the sum of coefficients is 1, in the end the variation of the net postion is 60+20+30+30+40+20=+200MW
+> As the sum of coefficients is 1, in the end the variation of the net position is 60+20+30+30+40+20=+200MW
 
 
 > ⚠️ A proportional GLSK where the sum of the coefficient on a zone is not 1 will be considered invalid
@@ -59,7 +59,7 @@ Given a zone, each element of the GLSK **are rated equally**. So there is no nee
 > To define the coefficient that will be equal for all elements of the zone you divide 1 by the number of elements in the zone. Here 1 / 6 = 0.15.
 
 #### Proportional to target power GLSK {#prop-target-p}
-Given a zone, each element the GLSK is **rated by its particpation to the net position of the zone**. So there is no need to specify the coefficients, we only need to know the set of generators/loads and their associated target active power.
+Given a zone, each element the GLSK is **rated by its participation to the net position of the zone**. So there is no need to specify the coefficients, we only need to know the set of generators/loads and their associated target active power.
 
 > {:refdef: style="text-align: center;"}
 > ![proportional-to-target-power-GLSK](/assets/img/proportional-GLSK.png){: style="width: 600px"}
@@ -92,7 +92,7 @@ Given a zone, each element the GLSK is **rated by its remaining available capaci
 > - G1 : remaining capacity = 100MW
 > - G2 : remaining capacity = 600MW
 > - G3 : remaining capacity = 150MW
-> - G4 : remaining capaciy = 100 MW
+> - G4 : remaining capacity = 100 MW
 > - L1 : remaining capacity = 900MW
 > - L2 : remaining capacity = 950MW
 > 
@@ -106,7 +106,7 @@ Given a zone, each element the GLSK is **rated by its remaining available capaci
 > - L2 : 950 / 2800 = 0.339
 
 ### Merit order GLSK
-A merit order GLSK gives a priority to individual generators and loads. So **this type of GLSK is not linear** so it cannot be used to compute PTDF and as a consequence loop-flows. It can **only be used for net position variation**. Merit order GLSK is an ordered list of generators and loads. To reach the variation goal the first element of the list would be shifted until it reaches its minimum or maximum value – whether it is a load or a generator and whether it is a net position increase or decrease. Once this extremum is reached the seond element of the list can be shifted, and so on until the target variation is reached.
+A merit order GLSK gives a priority to individual generators and loads. So **this type of GLSK is not linear** so it cannot be used to compute PTDF and as a consequence loop-flows. It can **only be used for net position variation**. Merit order GLSK is an ordered list of generators and loads. To reach the variation goal the first element of the list would be shifted until it reaches its minimum or maximum value – whether it is a load or a generator and whether it is a net position increase or decrease. Once this extremum is reached the second element of the list can be shifted, and so on until the target variation is reached.
 
 
 > {:refdef: style="text-align: center;"}
