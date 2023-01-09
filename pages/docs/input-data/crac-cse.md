@@ -80,13 +80,13 @@ However, a branch has also a lot of optional tags that are described right below
 - **EIC** : Identification
 - **AlwaysSelected** : FARAO does not use this tag, it only reads the selected tag one
 - **selected** : If selected is false, FARAO will not consider the margin on this branch in its optimization. Default value is true
-- **Imax{...} and Ilimit{...}** : Please refer respectively to the CriticalBranches and Monitored Elements sections at the end of this page
+- **Imax{...} and Ilimit{...}** : Please refer respectively to the [CriticalBranches](#CriticalBranch) and [Monitored Elements](#MonitoredElements) sections at the end of this page
 - **Vn** : It is the nominal voltage, but FARAO reads is directly in the network therefore it is useless to fill it
 - **minmargin** : FARAO does not interact with this tag
 - **Direction** : Has to be DIRECT, OPPOSITE or BIDIR. **If the Branch is defined in a BaseCaseBranch, a CriticalBranch 
-or a MonitoredElement, this tag is mandatory.** Please refer to the CNECS/FlowCnecs section in the JSON CRAC Format page
-for more information on the behavior of FARAO according to the different direction values
-- **Status** : Must be OPEN or CLOSE for a branch involved in a topological action. Default value is OPEN. See an example in the topological actions section of this page.
+or a MonitoredElement, this tag is mandatory.** Please refer to this section [JSON CRAC Format](json#flow-cnecs)
+for more information on the behavior of FARAO according to the different direction values.
+- **Status** : Must be OPEN or CLOSE for a branch involved in a topological action. Default value is OPEN. See an example in the [topological actions](#NetworkActions) section of this page.
 - **Sensitivity** : FARAO does not interact with this tag
 - **PTDFListRef** : FARAO does not interact with this tag
 - **Remedial actions** : These remedial actions will be available with OnFlowConstraint usage rule for the branches they are associated to
@@ -157,7 +157,7 @@ If SharedWith is "CSE" : FreeToUse
 If SharedWith is a UCTE country code : OnFlowConstraintInCountry in the country filled in     
 If SharedWith is "None" : OnFlowConstraint only for its associated CNECs (c.f. the Branch section above)
 
-#### Range Actions {#Range Actions}
+#### Range Actions {#RangeActions}
 
 - **PST Range Actions**
 
@@ -222,12 +222,12 @@ FARAO maximum tap = min(Network maximum tap, Crac maximum tap)
 </CRACSeries>
 ```
 
-For now the only VariationType handled by FARAO is "ABSOLUTE" : the mix/max admissible set-points of the HVDC.   
+For now the only VariationType handled by FARAO is "ABSOLUTE" : the min/max admissible set-points of the HVDC.   
 **An HVDC Range Action is modelled by an Injection range Action** (the HVDC line is disconnected and replaced by two injections, one on each side of the line, with opposite keys of 1 and -1). 
 FARAO creates the opposite keys by itself, therefore there is no need to specify it.  
 ⚠️*There isn't any check performed to verify that an applied set-point is between the ranges' min and max.*
 
-#### Network Actions {#Network Actions}
+#### Network Actions {#NetworkActions}
 
 - **injection set-point**
 
@@ -255,7 +255,7 @@ FARAO creates the opposite keys by itself, therefore there is no need to specify
 
 For now the only VariationType handled by FARAO is "ABSOLUTE", on the node you filled in, the new set-point value will be the one you defined (in MW).
 
-- **topological** 
+- **topological**
 
 ```xml
 <CRACSeries>
@@ -323,7 +323,7 @@ BaseCaseBranches is made of:
 
 For each branch in the list, if Imax is provided, **a CNEC will be created on Preventive state.**
 
-#### CriticalBranch {#CricitalBranch}
+#### CriticalBranch {#CriticalBranch}
 
 ```xml
 <CRACSeries>
@@ -382,9 +382,10 @@ For each critical branch, given an attribute ImaxAfter{Instant}, **a CNEC on the
 </CRACSeries>
 ```
 
-A MonitoredElement always has a TimeInterval and a branch.
+A MonitoredElement always has a TimeInterval and a branch.  
+It will not be optimized by FARAO, however it will be monitored. In other words, **on this element, FARAO cannot reduce the margin compared to its initial value.**
 
-First, if IlimitMNE is filled in, **a CNEC on Preventive state will be created**. Then, given a number n of outages in the Outages tag and an attribute IlimitMNE_After{Instant}, **n CNECs on the given state will be created :**
+First, if IlimitMNE is filled in, a CNEC on Preventive state will be created. Then, **for each outage in the Outages tag and for each attribute IlimitMNE_After{Instant} that is present, a CNEC will be created on the given state**:
 - IlimitMNE_AfterOutage -> Instant Outage
 - IlimitMNE_AfterSPS -> Instant Auto
 - IlimitMNE_AfterCRA -> Instant Curative
