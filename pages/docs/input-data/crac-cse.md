@@ -151,7 +151,7 @@ A remedial action can be of different types, but they will always have :
 
 **The SharedWith tag**
 
-This tag defines the usage rule of the remedial action. You can refer to the section "Remedial actions and usages rules" in the JSON CRAC format page for further explanation on the usage rule behavior.
+This tag defines the usage rule of the remedial action. You can refer to this section [Remedial actions and usages rules](json#remedial-actions) for further explanation on the usage rule behavior.
 
 If SharedWith is "CSE" : FreeToUse  
 If SharedWith is a UCTE country code : OnFlowConstraintInCountry in the country filled in     
