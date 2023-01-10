@@ -26,7 +26,6 @@ tags: [Docs, Data]
   <CreationDateTime v="2019-08-15T14:07:28Z"/>
   <ConstraintTimeInterval v="2019-01-07T23:00Z/2019-01-08T23:00Z"/>
   <Domain codingScheme="A01" v="REGION_EIC"/>
- 
   ...
 </FlowBasedConstraintDocument>
 ```
@@ -68,7 +67,7 @@ As it is defined in the CRAC model a CNEC is associated to a state. If the &lt;o
 
 #### Branch definition {#branch-definition}
 
-n the definitions of critical branches or outages appear the &lt;branch&gt; tag, it can be quite singular. This type of CRAC has to be associated with a network in UCTE format therefore a branch is designated by two nodes – from and to – that are UCTE nodes and an order code which is defined in the UCTE format literature. The name represents only a more human-readable name but there is no guaranty on its unicity.
+In the definitions of critical branches or outages appear the &lt;branch&gt; tag, it can be quite singular. This type of CRAC has to be associated with a network in UCTE format therefore a branch is designated by two nodes – from and to – that are UCTE nodes and an order code which is defined in the UCTE format literature. The name represents only a more human-readable name but there is no guaranty on its unicity.
 
 A branch can also be defined this way :
 

@@ -147,7 +147,7 @@ The network elements currently handled by FARAO's contingencies are: internal li
 
 ### Instants and States {#instants-states}
 
-The instant is a hypothetical moment in the chronology of a contingency. Three instants currently exist in Farao:
+The instant is a hypothetical moment in the chronology of a contingency. Four instants currently exist in Farao:
 
 - the preventive instant, that occurs before any contingency, and describes the 'base case' situation.
 - the outage instant, that occurs just after a contingency, in a time too short which does not permit the activation of curative remedial actions
