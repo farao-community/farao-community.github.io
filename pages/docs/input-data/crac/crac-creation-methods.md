@@ -1,14 +1,13 @@
 ---
 layout: documentation
-title: The CRAC Creation Utility Methods
+title: CRAC creation utility methods
 permalink: /docs/input-data/crac/creation-methods
 hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
-order: 6
-feature-img: "assets/img/farao3.jpg"
-tags: [Docs, Data]
+order: 7
+tags: [Docs, Data, CRAC]
 ---
 
 The package [farao-crac-creation-util](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creation-util) offers some utility classes which looks in a PowSyBl Network for information which are required for the CRAC creation.  

@@ -6,9 +6,8 @@ hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
-order: 2
-feature-img: "assets/img/farao3.jpg"
-tags: [Docs, Data]
+order: 4
+tags: [Docs, Data, CRAC]
 ---
 
 ### Header overview {#header}

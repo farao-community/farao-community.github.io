@@ -6,12 +6,11 @@ hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
-order: 3
-feature-img: "assets/img/farao3.jpg"
-tags: [Docs, Data]
+order: 5
+tags: [Docs, Data, CRAC]
 ---
 
-### Header overview {#header}
+## Header overview {#header}
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -35,7 +34,7 @@ tags: [Docs, Data]
 A crac document has a time interval for its validity and a lot of its sub-objects have their own time interval of validity as well.  
 Therefore, **this document has to be imported for a specific datetime** – hourly-precise – to be able to select only the available elements for this datetime.
 
-### Branch {#Branch}
+## Branch {#Branch}
 
 In the PowSyBl vocabulary, **a 'Branch' is an element which is connected to two terminals** (lines, tie-lines, transformers, etc.)  
 As this object is used almost everywhere in the CRAC, it is introduced first.
@@ -91,7 +90,7 @@ for more information on the behavior of FARAO according to the different directi
 - **PTDFListRef** : FARAO does not interact with this tag
 - **Remedial actions** : These remedial actions will be available with OnFlowConstraint usage rule for the branches they are associated to
 
-### Outages {#Outages}
+## Outages {#Outages}
 ```xml
 <CRACSeries>
     <Outages>
@@ -124,7 +123,7 @@ for more information on the behavior of FARAO according to the different directi
 **Outages are also commonly called ‘Contingencies’.**  
 Each outage with multiple associated network elements must have them listed as showcased in the "outage_2" example above.
 
-### RemedialActions {#RemedialActions}
+## RemedialActions {#RemedialActions}
 
 ```xml
 <CRACSeries>
@@ -157,9 +156,9 @@ If SharedWith is "CSE" : FreeToUse
 If SharedWith is a UCTE country code : OnFlowConstraintInCountry in the country filled in     
 If SharedWith is "None" : OnFlowConstraint only for its associated CNECs (c.f. the Branch section above)
 
-#### Range Actions {#RangeActions}
+### Range Actions {#RangeActions}
 
-- **PST Range Actions**
+#### PST Range Actions {#pst}
 
 ```xml
 <CRACSeries>
@@ -195,7 +194,7 @@ A PST Range Action is defined by its PstRange attribute which contains:
 FARAO minimum tap = max(Network minimum tap, Crac minimum tap)  
 FARAO maximum tap = min(Network maximum tap, Crac maximum tap)
 
-- **HVDC Range Actions**
+#### HVDC Range Actions {#hvdc}
 
 ```xml
 <CRACSeries>
@@ -227,9 +226,9 @@ For now the only VariationType handled by FARAO is "ABSOLUTE" : the min/max admi
 FARAO creates the opposite keys by itself, therefore there is no need to specify it.  
 ⚠️*There isn't any check performed to verify that an applied set-point is between the ranges' min and max.*
 
-#### Network Actions {#NetworkActions}
+### Network Actions {#NetworkActions}
 
-- **injection set-point**
+#### injection set-point {#injection-set-point}
 
 ```xml
 <CRACSeries>
@@ -255,7 +254,7 @@ FARAO creates the opposite keys by itself, therefore there is no need to specify
 
 For now the only VariationType handled by FARAO is "ABSOLUTE", on the node you filled in, the new set-point value will be the one you defined (in MW).
 
-- **topological**
+#### topological actions {#topological}
 
 ```xml
 <CRACSeries>
@@ -282,11 +281,55 @@ For now the only VariationType handled by FARAO is "ABSOLUTE", on the node you f
 
 As mentioned earlier, the status must be OPEN or CLOSE and default value is OPEN.
 
-### CriticalBranches {#CriticalBranches}
+#### bus bar change {#BusBar}
+```xml
+<CRACSeries>
+    ...
+    <RemedialActions>
+        <RemedialAction>
+            <Name v="RA3"/>
+            <TimeInterval v="2020-03-12T23:00Z/2020-03-13T00:00Z"/>
+            <Operator v="BE"/>
+            <Application v="CURATIVE"/>
+            <SharedWith v="CSE"/>
+            <BusBar>
+                <InitialNode v="BBE1AA11"/>
+                <FinalNode v="BBE1AA12"/>
+                <Branch>
+                    <FromNode v="BBE1AA11"/>
+                    <ToNode v="BBE2AA1*"/>
+                    <Order v="1"/>
+                </Branch>
+                <Branch>
+                    <FromNode v="BBE1AA11"/>
+                    <ToNode v="BBE3AA1*"/>
+                    <Order v="1"/>
+                </Branch>
+            </BusBar>
+        </RemedialAction>
+        ...
+    </RemedialActions>
+</CRACSeries>
+```
+These remedial actions consist in the changing of one or multiple lines' end from one bus to another.  
+In the example above, the remedial action would move:
+- Line BBE1AA11 BBE2AA1* 1 (* is a wildcard) on the left side from bus BBE1AA11 (InitialNode) to bus BBE1AA12 (FinalNode)
+- Line BBE1AA11 BBE3AA1* 1 (* is a wildcard) on the left side from bus BBE1AA11 (InitialNode) to bus BBE1AA12 (FinalNode)
+
+These modifications are actually impossible to do easily in a PowSyBl network without modifying its whole structure.  
+For this reason, the user shall pre-process the network in order to create fictitious buses and switches that shall be opened 
+or closed by these remedial actions.  
+
+![busb-bar-equivalent-model](/assets/img/busbar.png)  
+
+Using [CseCracCreationParameters](crac-creation-parameters.md#cse), FARAO can then map these remedial actions to the switches 
+created by the user, and interpret BusBar remedial actions as [SwitchPairs](crac.md#switch-pair).
+
+## CriticalBranches {#CriticalBranches}
 
 It should contain a BaseCaseBranches tag and at least one CriticalBranch
 
-#### BaseCaseBranches {#BaseCaseBranches}
+### BaseCaseBranches {#BaseCaseBranches}
 
 ```xml
 <CRACSeries>
@@ -323,7 +366,7 @@ BaseCaseBranches is made of:
 
 For each branch in the list, if Imax is provided, **a CNEC will be created on Preventive state.**
 
-#### CriticalBranch {#CriticalBranch}
+### CriticalBranch {#CriticalBranch}
 
 ```xml
 <CRACSeries>
@@ -357,7 +400,7 @@ For each critical branch, given an attribute ImaxAfter{Instant}, **a CNEC on the
 - ImaxAfterSPS -> Instant Auto
 - ImaxAfterCRA -> Instant Curative
 
-### MonitoredElements {#MonitoredElements}
+## MonitoredElements {#MonitoredElements}
 
 ```xml
 <CRACSeries>
@@ -389,3 +432,8 @@ First, if IlimitMNE is filled in, a CNEC on Preventive state will be created. Th
 - IlimitMNE_AfterOutage -> Instant Outage
 - IlimitMNE_AfterSPS -> Instant Auto
 - IlimitMNE_AfterCRA -> Instant Curative
+  
+---
+See also: [CseCracCreationParameters](crac-creation-parameters#cse)
+
+---

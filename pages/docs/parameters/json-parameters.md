@@ -14,30 +14,13 @@ order: 2
 ## Overview {#overview}
 
 The JSON parameters file allows tuning the RAO:
-- to chose the **business objective function** of the RAO (maximize min margin, get a positive margin, ...)
+- to choose the **business objective function** of the RAO (maximize min margin, get a positive margin, ...)
 - to activate/deactivate optional business **features**
 - to fine-tune the search algorithm, improve **performance** and/or **quality** of results
 
-The Java object used is called [RaoParameters](). It can hold extensions. The following paragraphs explain in detail the used parameters in the RAO.  
+The Java object used is called [RaoParameters](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/rao-api/src/main/java/com/farao_community/farao/rao_api/parameters/RaoParameters.java). 
+It can hold extensions. The following paragraphs explain in detail the used parameters in the RAO.  
 Using the RaoParameters Java object or the JSON file is pretty straight forward, thus it will not be detailed here.
-
-**Jump to:**
-* [Linear problem & solver parameters](#mip-parameters)
-* [Search-tree parameters (extension)](#search-tree-parameters)
-  - [End of search conditions](#stop-criterion-parameters)
-  - [Number of RA limitation](#ra-usage-limits)
-    - [Geographical criterion](#ra-usage-geo)
-    - [Objective function impact](#ra-usage-impact)
-    - [Simultaneous usage of remedial action limitations](#ra-usage-number)
-  - [Computations parallelism](#parallelism)
-  - [Second preventive optimization parameters](#second-prao-parameters)
-  - [Other SearchTreeRao parameters](#other-search-tree-parameters)
-* [RangeAction usage limitation](#range-action-usage-limitation)
-* [Relative margin parameters](#relative-margin-parameters)
-* [Mnec-related parameters](#mnec-parameters)
-* [Loopflow-related parameters](#loopflow-parameters)
-* [Sensitivity and Load-flow parameters](#sensi-lf-parameters)
-* [Other RAO parameters](#other-rao-parameters)
 
 ## Linear problem & solver parameters {#mip-parameters}
 

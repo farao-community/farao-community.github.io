@@ -1,14 +1,13 @@
 ---
 layout: documentation
-title: CRAC Import & Creation
+title: CRAC import & creation
 permalink: /docs/input-data/crac/import
 hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
 order: 0
-feature-img: "assets/img/farao3.jpg"
-tags: [Docs, Data]
+tags: [Docs, Data, CRAC]
 ---
 
 ### CRAC import/export {#import-export}
@@ -63,7 +62,10 @@ The FARAO CRAC object model is not a bijection of all existing formats. To handl
 
 - The NativeCrac can be imported from a file with a **NativeCracImporter**.
 
-- The NativeCrac can be converted in a CRAC with a **CracCreator**, the CracCreator needs a network to interpret the data of the NativeCrac. Moreover, the creators of formats which contain more than one timestamp also need a timestamp in the form of a java OffsetDateTime as the created CRAC object only contains one timestamp. CracCreationParameters can also be provided to the CracCreator, with some configurations which set the behaviour of the Creator.
+- The NativeCrac can be converted in a CRAC with a **CracCreator**, the CracCreator needs a network to interpret the data 
+of the NativeCrac. Moreover, the creators of formats which contain more than one timestamp also need a timestamp in the 
+form of a java OffsetDateTime as the created CRAC object only contains one timestamp. [CracCreationParameters](crac-creation-parameters) 
+can also be provided to the CracCreator, with some configurations which set the behaviour of the Creator.
 
 - The CracCreator returns a **CracCreationContext**. It contains:  
 -- the created CRAC object  

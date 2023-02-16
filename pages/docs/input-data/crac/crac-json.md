@@ -1,16 +1,18 @@
 ---
 layout: documentation
-title: JSON CRAC format
+title: Internal json CRAC format
 permalink: /docs/input-data/crac/json
 hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
-order: 1
-feature-img: "assets/img/farao3.jpg"
-tags: [Docs, Data]
+order: 3
+tags: [Docs, Data, CRAC]
 ---
 
+**TODO : update cnec side, update ra speed**
+
+## Introduction {#introduction}
 The name CRAC is a standard denomination defined by the ENTSO-E which means: Contingency list, Remedial Actions, and Additional constraints.
 
 More concretely, it is an object which gathers data on:
@@ -30,7 +32,7 @@ It is typically used in European coordinated processes. It enables, for a given 
 Note that other pages of this documentation describe how the FARAO CRAC object model can be built with other standard CRAC formats, such as the CORE Merged-CB CRAC format, the security limit format, or the CRAC CSE Format.
 
 
-### Full CRAC examples
+## Full CRAC examples
 Example of complete CRACs are given below
 
 {% capture t1_java %}
@@ -57,7 +59,7 @@ The following paragraphs of this page explain, step by step, the content of thos
 > 🔵 marks a field that can be mandatory in some cases  
 > ⭐ marks a field that must be unique in the CRAC  
 
-### Network elements {#network-elements}
+## Network elements {#network-elements}
 FARAO relies on [PowSyBl framework](https://www.powsybl.org/), and FARAO's CRAC relies on some elements of the PowSyBl's iidm Network object: the so-called network elements.
 
 The network elements are for instance: the elements which are disconnected from the network during a contingency, the electrical lines tagged as critical network elements in the CRAC, the PSTs which are referenced by the CRAC as remedial actions, the switches which could be used as topological remedial actions...
@@ -90,7 +92,7 @@ Moreover, the internal Json CRAC format contains an index of network element nam
 {% endcapture %}
 {% include /tabs.html id="t2" tab1name="JAVA creation API" tab1content=t2_java tab2name="JSON file" tab2content=t2_json %}
 
-### Contingencies {#contingencies}
+## Contingencies {#contingencies}
 A CRAC contains contingencies. 'Contingency' is the denomination which has been chosen within the FARAO internal format, but contingencies are also commonly called 'outages', 'CO' for 'Critical Outages', or 'N-k'.
 
 A contingency is the representation of an incident on the network i.e. a cut line or a group/transformer failure, etc. In FARAO, it is modelled by the loss of one or several network elements. Usually we have either a one network element loss that is called "N-1" or a two network elements loss that is called "N-2". For instance
@@ -145,7 +147,7 @@ Names are optional, they can be used to make the CRAC more understandable from a
 The network elements currently handled by FARAO's contingencies are: internal lines, interconnections, transformers, PSTs, generators, HVDCs, BusBar sections and dangling lines.
 
 
-### Instants and States {#instants-states}
+## Instants and States {#instants-states}
 
 The instant is a hypothetical moment in the chronology of a contingency. Four instants currently exist in Farao:
 
@@ -170,7 +172,7 @@ The scheme below illustrates these notions of instant and state. It highlights t
 
 Instants and states are not directly added to a FARAO CRAC object model, but are indirectly part of several notions which are introduced in the following paragraphs of this page.
 
-### CNECs {#cnecs}
+## CNECs {#cnecs}
 
 A CRAC contains CNECs. A CNEC stands for 'Critical Network Element and Contingency', it is also known under the name 'CBCO' for 'Critical Branch and Critical Outage'.
 
@@ -195,7 +197,7 @@ CNECs can be monitored and/or optimised. This notion of monitored/optimised has 
 - ensures that the margin of a 'monitored' CNEC is positive.
 
 FARAO contains 3 types of CNECs : **FlowCnecs**, **AngleCnecs** and **VoltageCnecs**.
-#### FlowCnec {#flow-cnecs}
+### FlowCnec {#flow-cnecs}
 A FlowCnec has the two following specificities:
 
 - it contains one network element that is a **'Branch'**. In the PowSyBl vocabulary, a 'Branch' is an element which is connected to two terminals. For instance, lines, tie-lines, transformers and PSTs are 'Branches'.
@@ -205,7 +207,7 @@ A FlowCnec is one version (implementation) in FARAO of a generic object: a Branc
 
 A FlowCnec has **two sides**, which correspond to the two terminals of the PowSyBl network element of the FlowCnec, usually called terminal one and two, or terminal left and right. The notion of **direction** is also inherent to the FlowCnec: a flow in direction "direct" is a flow from terminal one/left to terminal two/right, while a flow in direction "opposite" is a flow from terminal two/right to terminal one/left. The convention of FARAO is that a positive flow is a flow in the "direct" direction, while a negative flow is a flow in the "opposite" direction.
 
-##### Flow limits on a FlowCnec
+#### Flow limits on a FlowCnec
 A FlowCnec contains thresholds. Those thresholds define the limits between which the power flow of the FlowCnec should ideally remain. Those limits can be defined in megawatt, ampere, or in percentage of the Imax of the branch (%Imax). A threshold has a minimum and/or a maximum value. The maximum value represents the maximum value of the flow in the "direct" direction and the minimum value represents the inverse of the maximum value of the flow in the "opposite" direction. Therefore, the flow of FlowCnecs which only have one minimum value, or one maximum value is implicitly monitored in only one direction (see example 1 of picture below).
 
 ![FlowCnec-Threshold](/assets/img/flowcnec.png)
@@ -233,7 +235,7 @@ In the examples of the picture above, all the thresholds are defined in megawatt
 
 A FlowCnec has a reliability margin, also known as FRM for Flow Reliability Margin. The reliability margin can only be defined in megawatt. It is subtracted from the min/max values of the FlowCnec thresholds when the limits of the FlowCnec are computed.
 
-##### Create a CNEC
+#### Create a CNEC
 In FARAO, FlowCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
 
 {% capture t4_java %}
@@ -341,7 +343,7 @@ crac.newFlowCnec()
 🔵 **iMax**:  mandatory if the FlowCnec has at least one threshold in %Imax  
 {% endcapture %}
 {% include /tabs.html id="t4" tab1name="JAVA creation API" tab1content=t4_java tab2name="JSON file" tab2content=t4_json tab3name="Object fields" tab3content=t4_objects %}
-#### AngleCnec {#angle-cnecs}
+### AngleCnec {#angle-cnecs}
 An AngleCnec is a branch which may see a phase angle shift between its two ends when it's disconnected. This may induce insecurities in the network when it's back up. That's why we monitor angle CNECs and associate with them remedial actions (generally re-dispatching) that can reduce the phase angle shift between the two ends.
 
 In terms of FARAO object model, an AngleCnec is a CNEC. Even though it is associated with a branch, it is not a BranchCnec, because we cannot define on which side it is monitored: it is monitored on both sides (more specifically, we monitor the phase shift between the two sides). 
@@ -355,7 +357,7 @@ An AngleCnec has the following specificities:
 > 💡  **NOTE**
 > AngleCnecs currently cannot be optimised by the RAO, but they are monitored by an independent [AngleMonitoring](/docs/engine/angle-monitoring) module.
 
-##### Create an AngleCnec
+#### Create an AngleCnec
 In FARAO, AngleCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
 
 {% capture t5_java %}
@@ -438,7 +440,7 @@ cnec2 = crac.newAngleCnec()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **maxValue**: at least one of these two values (min/max) is required   
 {% endcapture %}
 {% include /tabs.html id="t5" tab1name="JAVA creation API" tab1content=t5_java tab2name="JSON file" tab2content=t5_json tab3name="Object fields" tab3content=t5_objects %}
-#### VoltageCnec {#voltage-cnecs}
+### VoltageCnec {#voltage-cnecs}
 A VoltageCnec is a CNEC on which we monitor the voltage on substations. It has the following specificities:
 - it contains one network element
 - the physical parameter which is monitored by the CNEC is the **voltage**.
@@ -447,7 +449,7 @@ A VoltageCnec is a CNEC on which we monitor the voltage on substations. It has t
 > 💡  **NOTE**
 > VoltageCnecs currently cannot be optimised by the RAO, but they are monitored by an independent [VoltageMonitoring](/docs/engine/voltage-monitoring) module.
 
-##### Create a VoltageCnec
+#### Create a VoltageCnec
 In FARAO, VoltageCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
 
 {% capture t6_java %}
@@ -521,7 +523,7 @@ cnec1 = crac.newVoltageCnec()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **maxValue**: at least one of these two values (min/max) is required   
 {% endcapture %}
 {% include /tabs.html id="t6" tab1name="JAVA creation API" tab1content=t6_java tab2name="JSON file" tab2content=t6_json tab3name="Object fields" tab3content=t6_objects %}
-### Remedial actions and usages rules {#remedial-actions}
+## Remedial actions and usages rules {#remedial-actions}
 
 A remedial action is an action on the network that is considered as able to reduce constraints on the CNECs.
 
@@ -581,17 +583,17 @@ Complete examples of Network and Range Action in Json format are given in the fo
 ~~~
 {% endcapture %}
 {% capture t7_objects %}
-#### For FreeToUse usage rules
+### For FreeToUse usage rules
 🔴 **instant**  
 🔴 **usageMethod**  
-#### For OnState usage rules
+### For OnState usage rules
 🔴 **instant**  
 🔴 **usageMethod**  
 🔴 **contingency**: must be the id of a contingency that exists in the CRAC  
-#### For OnFlowConstraint usage rules
+### For OnFlowConstraint usage rules
 🔴 **instant**  
 🔴 **flowCnecId**: must be the id of a CNEC that exists in the CRAC  
-#### Usage methods
+### Usage methods
 FARAO handles three different types of usage methods:  
 1 - **AVAILABLE**: the remedial action is available in the given state, if the RAO decides it is optimal, with no extra condition  
 2 - **FORCED**: the RAO must activate the remedial action (under the condition described by the usage rule)  
@@ -600,7 +602,7 @@ FARAO handles three different types of usage methods:
 {% endcapture %}
 {% include /tabs.html id="t7" tab1name="JAVA creation API" tab1content=t5_java tab2name="JSON file" tab2content=t7_json tab3name="Object fields" tab3content=t7_objects %}
 
-### Network Actions {#network-actions}
+## Network Actions {#network-actions}
 
 A Network Action is a combination of at least one elementary actions. The elementary actions in FARAO are:
 
@@ -748,10 +750,10 @@ crac.newNetworkAction()
 {% endcapture %}
 {% include /tabs.html id="t8" tab1name="JAVA creation API" tab1content=t8_java tab2name="JSON file" tab2content=t8_json tab3name="Object fields" tab3content=t8_objects %}
 
-### Range Actions {#range-actions}
+## Range Actions {#range-actions}
 FARAO has three types of RangeActions : PstRangeAction, HvdcRangeAction, and InjectionRangeAction.
 
-#### PST Range Action {#pst-range-action}
+### PST Range Action {#pst-range-action}
 A PstRangeAction contains a network element which must point toward a PST of the iidm PowSyBl network model. The PstRangeAction will be able to modify the set-point of this PST.
 
 > 💡  **NOTE** 
@@ -844,7 +846,7 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
 {% endcapture %}
 {% include /tabs.html id="t9" tab1name="JAVA creation API" tab1content=t9_java tab2name="JSON file" tab2content=t9_json tab3name="Object fields" tab3content=t9_objects %}
 
-#### HVDC Range Action {#hvdc-range-action}
+### HVDC Range Action {#hvdc-range-action}
 An HvdcRangeAction contains a network element that must point towards an HvdcLine of the iidm PowSyBl network model. The HvdcRangeAction will be able to modify its set-point, in MW.  
 
 The domain in which the HvdcRangeAction can modify the HvdcSetpoint is delimited by 'HvdcRanges'. An HvdcRangeAction contains a list of HvdcRanges. A range must be defined with a min and a max.  
@@ -896,7 +898,7 @@ In that case, the validity domain of the HVDC is [-5; 10].
 {% endcapture %}
 {% include /tabs.html id="t10" tab1name="JAVA creation API" tab1content=t10_java tab2name="JSON file" tab2content=t10_json tab3name="Object fields" tab3content=t10_objects %}
 
-#### Injection Range Action {#injection-range-action}
+### Injection Range Action {#injection-range-action}
 
 An InjectionRangeAction modifies given generators' & loads' injection set-points in a given range of a reference set-point.
 

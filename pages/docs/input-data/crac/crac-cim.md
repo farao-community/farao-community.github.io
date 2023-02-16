@@ -6,9 +6,8 @@ hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
-order: 4
-feature-img: "assets/img/farao3.jpg"
-tags: [Docs, Data]
+order: 6
+tags: [Docs, Data, CRAC]
 ---
 
 
@@ -147,7 +146,9 @@ In the CIM CRAC, AngleCnecs are actually defined with their corresponding remedi
 
 #### VoltageCnecs {#voltageCnecs} 
 
-VoltageCnecs are defined in the [crac creation parameters file](/docs/input-data/crac-creation-parameters). Nevertheless, they are imported via the CimCracCreator because that's where the information on which contingencies are imported lies. Only voltage cnecs with contingencies correctly defined in B55 Series shall be imported.
+VoltageCnecs are defined in the [CimCracCreationParameters](crac-creation-parameters#voltage-cnecs-creation-parameters). 
+Nevertheless, they are imported via the CimCracCreator because that's where the information on which contingencies are imported lies. 
+Only voltage cnecs with contingencies correctly defined in B55 Series shall be imported.
 
 ### Remedial Actions {#remedialactions}
 
@@ -322,3 +323,8 @@ In the end, two HVDC range actions with an absolute range of -XXX MW to XXX MW e
 
 In order to ensure the imported CRAC is usable in the RAO, FARAO implements the following special rules:
 - Hybrid (range + binary) remedial actions are prohibited.
+
+---
+See also: [CimCracCreationParameters](crac-creation-parameters#cim)
+
+---
