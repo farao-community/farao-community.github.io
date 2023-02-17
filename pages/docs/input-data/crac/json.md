@@ -10,7 +10,7 @@ order: 3
 tags: [Docs, Data, CRAC]
 ---
 
-**TODO : update cnec side, update ra speed**
+**TODO : update OnFlowConstraintInCountry, check if all network actions are up-to-date**
 
 ## Introduction {#introduction}
 The name CRAC is a standard denomination defined by the ENTSO-E which means: Contingency list, Remedial Actions, and Additional constraints.
@@ -32,7 +32,7 @@ It is typically used in European coordinated processes. It enables, for a given 
 Note that other pages of this documentation describe how the FARAO CRAC object model can be built with other standard CRAC formats, such as the CORE Merged-CB CRAC format, the security limit format, or the CRAC CSE Format.
 
 
-## Full CRAC examples
+## Full CRAC examples {#full-crac-examples}
 Example of complete CRACs are given below
 
 {% capture t1_java %}
@@ -212,30 +212,26 @@ A FlowCnec contains thresholds. Those thresholds define the limits between which
 
 ![FlowCnec-Threshold](/assets/img/flowcnec.png)
 
-Thresholds are defined for a given side of the FlowCnec. Several "threshold rules" enable to define the side of the FlowCnec on which the threshold applies. The side can be defined directly with one of the two first rules, or with business consideration with one of the four last following rules:
-- on left side
-- on right side
-- on regulated side
-- on non-regulated side
-- on high voltage level side
-- on low voltage level side
+A threshold is defined either on the left or on the right side of the FlowCnec.
 
 > 💡  **NOTE**  
 > The side of the threshold is particularly crucial for thresholds:  
 > - in ampere or %Imax of **transformers**, as the current on both sides of a transformer are different
 > - in %Imax of **tie-lines**, as the current limits are usually different on both sides of a tie-line.
 > - used in applications which involve **AC load-flow** computation, as the flow in one side of a branch is not equal to the flow on its other side (due to losses)
+> 
+> The CracCreationParameters allows the user to [decide which side(s) should be monitored by default](creation-parameters#default-monitored-line-side).
 
 In the examples of the picture above, all the thresholds are defined in megawatt. If the thresholds are defined in ampere, or in %Imax, additional data is required in order to handle the following conversions:
 - if one threshold of the FlowCnec is in ampere or in percentage of Imax, the nominal voltage on both sides of the threshold must be defined
 - if one threshold of the FlowCnec is in percentage of Imax, the Imax of the FlowCnec on the side of the threshold must be defined
 
-[Utility methods](creation-methods) have been developed in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
+[Utility methods](import#new-formats) have been developed in FARAO to ease the management of the Imax and nominal voltage during the creation of FlowCnecs.
 
 
 A FlowCnec has a reliability margin, also known as FRM for Flow Reliability Margin. The reliability margin can only be defined in megawatt. It is subtracted from the min/max values of the FlowCnec thresholds when the limits of the FlowCnec are computed.
 
-#### Create a CNEC
+#### Create a FlowCnec
 In FARAO, FlowCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
 
 {% capture t4_java %}
@@ -247,7 +243,7 @@ crac.newFlowCnec()
     .withOperator("operator1")
     .newThreshold()
         .withUnit(Unit.MEGAWATT)
-        .withRule(BranchThresholdRule.ON_LEFT_SIDE)
+        .withSide(Side.LEFT)
         .withMin(-1500.)
         .withMax(1500.)
         .add()
@@ -264,12 +260,12 @@ crac.newFlowCnec()
 	.withOperator("operator1")
 	.newThreshold()
 		.withUnit(Unit.PERCENT_IMAX)
-		.withRule(BranchThresholdRule.ON_RIGHT_SIDE)
+		.withSide(Side.RIGHT)
 		.withMax(0.95)
 		.add()
 	.newThreshold()
 		.withUnit(Unit.AMPERE)
-		.withRule(BranchThresholdRule.ON_RIGHT_SIDE)
+        .withSide(Side.LEFT)
 		.withMin(-450.)
 		.add()
 	.withReliabilityMargin(50.)
@@ -296,7 +292,7 @@ crac.newFlowCnec()
       "unit" : "megawatt",
       "min" : -1500.0,
       "max" : 1500.0,
-      "rule" : "onLeftSide"
+      "side" : "left"
     } ]
   },  {
     "id" : "curative-cnec-with-two-thresholds-id",
@@ -313,11 +309,11 @@ crac.newFlowCnec()
     "thresholds" : [ {
       "unit" : "ampere",
       "min" : -450.0,
-      "rule" : "onRightSide"
+      "side" : "left"
     }, {
       "unit" : "percent_imax",
       "max" : 0.95,
-      "rule" : "onRightSide"
+      "side" : "right"
     } ]
   } ]
 ~~~
@@ -336,13 +332,14 @@ crac.newFlowCnec()
 ⚪ **monitored**: default value = false  
 🔴 **thresholds**: list of 1 to N thresholds, a FlowCnec must contain at least one threshold  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **unit**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **rule**  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **side**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **minValue**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **maxValue**: at least one of these two values (min/max) is required  
 🔵 **nominal voltages**: mandatory if the FlowCnec has at least one threshold in %Imax or A  
 🔵 **iMax**:  mandatory if the FlowCnec has at least one threshold in %Imax  
 {% endcapture %}
 {% include /tabs.html id="t4" tab1name="JAVA creation API" tab1content=t4_java tab2name="JSON file" tab2content=t4_json tab3name="Object fields" tab3content=t4_objects %}
+  
 ### AngleCnec {#angle-cnecs}
 An AngleCnec is a branch which may see a phase angle shift between its two ends when it's disconnected. This may induce insecurities in the network when it's back up. That's why we monitor angle CNECs and associate with them remedial actions (generally re-dispatching) that can reduce the phase angle shift between the two ends.
 
@@ -770,14 +767,21 @@ TapRanges can be of different types:
 
 The final validity range of the PstRangeAction is the intersection of its TapRanges, with the intersection of the min/max feasible taps of the PST.  
 The PstRangeAction also requires additional data, notably to be able to interpret the TapRanges. Those additional data are: the initial tap of the PST, and a conversion map which gives for each feasible tap of the PST its corresponding angle. Utility methods have been developed in FARAO to ease the management of these additional data during the creation of a PstRangeAction.
-
+  
+Two or more [aligned PST range actions](crac#range-action) must have the same (random) group ID defined. The RAO will 
+make sure their optimized set-points are always equal.  
+  
+If the PstRangeAction is an automaton, it has to have a speed assigned. This is an integer that defines the relative 
+speed of this range action compared to other range-action automatons. No two range-action automatons can have the same 
+speed value, unless they are aligned. A smaller "speed" value means a faster range action.
 {% capture t9_java %}
 ~~~java
 crac.newPstRangeAction()
-    .withId("pst-range-action-id")
-    .withName("pst-range-action-name")
+    .withId("pst-range-action-1-id")
+    .withName("pst-range-action-1-name")
     .withOperator("operator")
     .withNetworkElement("pst-network-element-id")
+    .withGroupId("pst-range-action-1 is aligned with pst-range-action-2")
     .withInitialTap(3)
     .withTapToAngleConversionMap(Map.of(-3, 0., -2, .5, -1, 1., 0, 1.5, 1, 2., 2, 2.5, 3, 3.))
     .newTapRange()
@@ -791,6 +795,7 @@ crac.newPstRangeAction()
         .withMaxTap(2)
         .add()
     .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .withSpeed(1)
     .add();
 ~~~
 In that case, the validity domain of the PST (intersection of its ranges and feasible taps) is [1; 3]
@@ -799,14 +804,15 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
 {% capture t9_json %}
 ~~~json
 "pstRangeActions" : [ {
-    "id" : "pst-range-action-id",
-    "name" : "pst-range-action-name",
+    "id" : "pst-range-action-1-id",
+    "name" : "pst-range-action-1-name",
     "operator" : "operator",
     "freeToUseUsageRules" : [ {
       "instant" : "preventive",
       "usageMethod" : "available"
     } ],
     "networkElementId" : "pst-network-element-id",
+    "groupId" : "pst-range-action-1 is aligned with pst-range-action-2",
     "initialTap" : 2,
     "tapToAngleConversionMap" : {
       "-3" : 0.0,
@@ -817,6 +823,7 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
       "2" : 2.5,
       "3" : 3.0
     },
+    "speed" : 1,
     "ranges" : [ {
       "min" : 0,
       "max" : 3,
@@ -833,8 +840,10 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
 🔴⭐ **identifier**  
 ⚪ **name**  
 ⚪ **operator**  
-🔴 **network element**: id is mandatory, name is optional
-🔴 **initial tap**
+🔴 **network element**: id is mandatory, name is optional  
+⚪ **groupId**: if you want to align this range action with others, set the same groupId for all  
+🔵 **speed**: mandatory if it is an automaton  
+🔴 **initial tap**  
 🔴 **tap to angle conversion map**  
 🔴 **tap ranges**: list of 0 to N TapRange  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **range type**  
@@ -851,7 +860,8 @@ An HvdcRangeAction contains a network element that must point towards an HvdcLin
 
 The domain in which the HvdcRangeAction can modify the HvdcSetpoint is delimited by 'HvdcRanges'. An HvdcRangeAction contains a list of HvdcRanges. A range must be defined with a min and a max.  
 
-HvdcRanges can only be absolute : the mix/max admissible set-point of the HVDC. ⚠️ *There isn't any check performed to verify that an applied set-point is between the ranges' min and max.*
+HvdcRanges can only be absolute : the mix/max admissible set-point of the HVDC.  
+⚠️ *There isn't any check performed to verify that an applied set-point is between the ranges' min and max.*
 
 {% capture t10_java %}
 ~~~java
@@ -889,6 +899,8 @@ In that case, the validity domain of the HVDC is [-5; 10].
 ⚪ **name**  
 ⚪ **operator**  
 🔴 **network element**: id is mandatory, name is optional  
+⚪ **groupId**: if you want to align this range action with others, set the same groupId for all  
+🔵 **speed**: mandatory if it is an automaton  
 ⚪ **hvdc ranges**: list of 0 to N HvdcRange  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **min**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **max**  
@@ -947,6 +959,8 @@ This means the set-point of "network-element-1" (key = 1) can be changed between
 ⚪ **name**  
 ⚪ **operator**  
 🔴 **network element and key** (list of 1 to N): id and key are mandatory, name is optional  
+⚪ **groupId**: if you want to align this range action with others, set the same groupId for all  
+🔵 **speed**: mandatory if it is an automaton  
 🔴 **ranges**: list of 1 to N Range  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **min**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **max**  
@@ -955,3 +969,8 @@ This means the set-point of "network-element-1" (key = 1) can be changed between
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on usage rules)  
 {% endcapture %}
 {% include /tabs.html id="t11" tab1name="JAVA creation API" tab1content=t11_java tab2name="JSON file" tab2content=t11_json tab3name="Object fields" tab3content=t11_objects %}
+
+---
+See also: [CRAC import](import)
+
+---

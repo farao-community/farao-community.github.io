@@ -32,11 +32,21 @@ tags: [Docs, Data, CRAC]
     <end>2021-04-02T22:00Z</end>
   </time_Period.timeInterval>
   <domain.mRID codingScheme="A01">10YCB-FR-ES-PT-S</domain.mRID>
+  <TimeSeries>
+    <mRID>TimeSeries_1</mRID>
+    ...
+  </TimeSeries>
+  <TimeSeries>
+    <mRID>TimeSeries_2</mRID>
+    ...
+  </TimeSeries>
 
   ...
 </CRAC_MarketDocument>
 ```
-A crac market document has a time interval for its validity. Therefore, **this document has to be imported for a specific datetime** – hourly-precise.
+A crac market document has a time interval for its validity. Therefore, **this document has to be imported for a specific datetime** – hourly-precise.  
+Moreover, only timeseries whose mRIDs are configured in the CimCracCreationParameters [timeseries-mrids](creation-parameters#timeseries-mrids) 
+parameter are imported. this allows the import of border-specific contraints and remedial actions.
 
 
 ### Contingencies {#contingencies} 
@@ -65,7 +75,7 @@ Contingencies are listed in Series of business type B55. They are defined in Con
 
 ### CNECs {#cnecs} 
 
-#### FlowCnecs {#flowCnecs} 
+#### FlowCnecs {#flow-cnecs} 
 
 ```xml
 <Series>
@@ -108,7 +118,7 @@ As it is defined in the CRAC model, a CNEC is associated to a state. If the Seri
 
 Finally, a CNEC can be named in the following way : _[network element name] - [side (placeholder if the branch is a TieLine)] - [direction in which the CNEC is monitored (placeholder)] - [monitored (placeholder for MNECs)] - [contingency (placeholder for when a contingency is defined.)] - [instant]_.
 
-#### AngleCnecs {#angleCnecs} 
+#### AngleCnecs {#angle-cnecs} 
 
 ```xml
 <Series>
@@ -144,13 +154,13 @@ Finally, a CNEC can be named in the following way : _[network element name] - [s
 AngleCnecs are easily distinguishable thanks to the AdditionalConstraint_Series tag.  They define an AngleCnec in curative with an importing element, an exporting element (cf. the two registered resources) and with a threshold with a max bound defined by quantity.  
 In the CIM CRAC, AngleCnecs are actually defined with their corresponding remedial actions in B56 Series (ie Remedial Action series). The Contingency_Series (unique) refers to the contingency after which the AngleCnec is monitored.  
 
-#### VoltageCnecs {#voltageCnecs} 
+#### VoltageCnecs {#voltage-cnecs} 
 
-VoltageCnecs are defined in the [CimCracCreationParameters](crac-creation-parameters#voltage-cnecs-creation-parameters). 
+[VoltageCnecs are defined in the CimCracCreationParameters](creation-parameters#voltage-cnecs-creation-parameters). 
 Nevertheless, they are imported via the CimCracCreator because that's where the information on which contingencies are imported lies. 
 Only voltage cnecs with contingencies correctly defined in B55 Series shall be imported.
 
-### Remedial Actions {#remedialactions}
+### Remedial Actions {#remedial-actions}
 
 Remedial actions are listed in Series of business type B56. 
 
@@ -167,8 +177,8 @@ Remedial actions are listed in Series of business type B56.
     ...
     </Monitored_Series>
     <RemedialAction_Series>
-      <mRID>PRA_1</mRID>
-      <name>PRA_1</name>
+      <mRID>RTE-PRA_1</mRID>
+      <name>RTE preventive remedial action number 1</name>
       <businessType>B59</businessType>
       <applicationMode_MarketObjectStatus.status>A18</applicationMode_MarketObjectStatus.status>
       <availability_MarketObjectStatus.status>A39</availability_MarketObjectStatus.status>
@@ -186,14 +196,18 @@ BusinessType in B56 series should always be B59. In RemedialAction_Series, the a
 - Preventive and curative : A27
 - Auto : A20.  
 
+By default, the operator is read from the RemedialAction_Series' mRID, as the string that precedes the first "-" character. In the example above, the operator would be "RTE".  
+
 RemedialAction_Series may also contain Contingency_Series, Monitored_Series and Shared_Domain tags. Remedial actions' [usage rules](json#remedial-actions) will be defined depending on these tags: 
 - RemedialAction_Series that don't have any Monitored_Series children tags nor any Shared_Domain tags define **FreeToUse** remedial actions.
-- When Monitored_Series tags exist, they define CNEC Ids for which the remedial action series is available. These CNECs must have been defined previously [in a B57 series](#flowCnecs). When the RemedialAction_Series also contains a Contingency_Series, the only CNECs from the Monitored_Series tags that will be considered are those that list CNECs defined with a contingency from the Contingency_Series. For each remaining CNEC, the remedial action is defined with a **OnFlowConstraint** on the remedial action's instant.
+- When Monitored_Series tags exist, they define CNEC Ids for which the remedial action series is available. These CNECs must have been defined previously [in a B57 series](#flow-cnecs). When the RemedialAction_Series also contains a Contingency_Series, the only CNECs from the Monitored_Series tags that will be considered are those that list CNECs defined with a contingency from the Contingency_Series. For each remaining CNEC, the remedial action is defined with a **OnFlowConstraint** on the remedial action's instant.
 - When the RemedialAction_Series has no Contingency_Series, no Monitored_Series, and a Shared_Domain tag, the Shared_Domain tag must be taken into account. It represents a country. Then, the remedial action is defined with a **OnFlowConstraintInCountry** on the remedial action's instant.  
 
-Some remedial actions are aligned. When it's the case, this information is retrieved [from the CracCreationParameters file]( /docs/input-data/crac-creation-parameters) and the remedial actions are defined with a common groupId.
+Some remedial actions may have to be aligned in order to keep the same set-point value. 
+When it's the case, this information is retrieved [from the CracCreationParameters file](creation-parameters#cim-range-action-groups) 
+and the remedial actions are defined with a common groupId.
 
-#### PST Range Actions {#pstRangeActions}
+#### PST Range Actions {#pst}
 
 ```xml
 <Series>
@@ -225,7 +239,7 @@ Some remedial actions are aligned. When it's the case, this information is retri
 
 PST Range Actions have a unique RegisteredResource with A06 psrType, that stands for phase shift transformer. They can be defined with a range, rangeType being specified by the marketObjectStatus and min and max range values being defined by resourceCapacity min and max capacities. 
 
-#### Network Actions {#networkactions}
+#### Network Actions {#network-actions}
 
 Network actions have one or more registered resources, that represent elementary actions. Each elementary action's type is defined by its psrType :  
 - **pst set-point** elementary actions have a A06 psrType, that stands for phase shift transformer. They differ from range actions as they have a specific set-point instead of an allowed range. That's why they have a default capacity tag instead of a minimumCapacity and/or a maximumCapacity tag.  
@@ -305,7 +319,7 @@ Network actions have one or more registered resources, that represent elementary
 ```
 A network action is imported if all of its elementary actions are imported.
 
-#### HVDC Range Actions {#hvdcRangeActions}
+#### HVDC Range Actions {#hvdc}
 
 In the CIM CRAC format as it is actually used, the HVDC remedial action is defined in two separate remedial actions, each representing one direction:
 - the first RemedialAction_Series is a range action in the A -> B direction, with 0 to XXX MW available.
@@ -319,12 +333,16 @@ Each of these RemedialAction_Series can contain 4 RegisteredResources, allowing 
 
 In the end, two HVDC range actions with an absolute range of -XXX MW to XXX MW each are defined, on both HVDC lines. These HVDC range actions are aligned, i.e. they share the same group ID. That means that they must have the same set-point. 
 
-### Special rules {#specialrules}
+### Extra rules {#extra-rules}
 
 In order to ensure the imported CRAC is usable in the RAO, FARAO implements the following special rules:
-- Hybrid (range + binary) remedial actions are prohibited.
+- Hybrid (range-actions + network-actions) remedial actions are prohibited.
+- If AUTO CNECs exist without any automaton that can eventually secure them, these CNECs are duplicated in the 
+  OUTAGE instant in order to be secured by the preventive RAO.
+- HVDC set-point remedial actions that require the deactivation of [angle-droop active power control](https://www.powsybl.org/pages/documentation/grid/model/extensions.html#hvdc-angle-droop-active-power-control)
+  (AC-emulation) are only supported at the AUTO instant.
 
 ---
-See also: [CimCracCreationParameters](crac-creation-parameters#cim)
+See also: [CimCracCreationParameters](creation-parameters#cim), [CimCracCreationContext](creation-parameters#cim)
 
 ---

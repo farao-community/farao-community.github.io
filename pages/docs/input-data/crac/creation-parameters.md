@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: CRAC creation parameters
-permalink: /docs/input-data/crac/crac-creation-context
+permalink: /docs/input-data/crac/creation-parameters
 hide: true
 root-page: Documentation
 docu-section: Input Data
@@ -17,7 +17,7 @@ the current on both sides of the line, on the left side only, or on the right si
 In DC convention, it doesn't matter: it is enough for the RAO to monitor the left side, allowing it to have a smaller optimisation problem.  
 In AC convention, it is generally preferred to monitor both sides, as flows on both sides can be different because of losses.  
   
-In FARAO's [internal CRAC format](crac-json.md), it is possible which side(s) to monitor, and this is needed in the RAO.  
+In FARAO's [internal CRAC format](json), it is possible which side(s) to monitor, and this is needed in the RAO.  
 However, no CRAC format actually defines this configuration, thus is necessary to add an extra configuration object when creating a CRAC 
 object to be used in the RAO.  
 This is the purpose of FARAO's "CRAC creation parameters".
@@ -54,15 +54,18 @@ Parameter "crac-factory" allows the user to define which Crac implementation to 
 ### default-monitored-line-side {#default-monitored-line-side}
 This parameter defines which side(s) of a line the RAO should monitor by default (side is defined as per [PowSyBl](https://www.powsybl.org/pages/documentation/) 
 convention), when optimizing line's flow margin.    
-This parameter is ignored when the line side to monitor is defined by the native CRAC itself (e.g. when a cross-border 
-tie-line is monitored by one TSO only, then the RAO will automatically detect on which side this TSO is).  
+Note that this parameter is ignored when the line side to monitor is defined by the native CRAC itself (e.g. when a 
+cross-border tie-line is monitored by one TSO only, then the RAO will automatically detect on which side this TSO is).  
 Possible values for this parameter are:  
-- "monitor-lines-on-left-side": to monitor lines on left side only (typically to be used in DC mode)
-- "monitor-lines-on-right-side": to monitor lines on right side only (alternatively in DC mode)
-- "monitor-lines-on-both-sides": to monitor lines on both sides; the flow limits defined in the native CRAC file will then 
-apply to both sides (typically to be used in AC mode)
+- **monitor-lines-on-left-side** to monitor lines on left side only (typically to be used in DC-loadflow mode)
+- **monitor-lines-on-right-side** to monitor lines on right side only (alternatively in DC-loadflow mode)
+- **monitor-lines-on-both-sides** to monitor lines on both sides; the flow limits defined in the native CRAC file will then 
+apply to both sides (typically to be used in AC-loadflow mode)
+  
+> 💡  **NOTE**  
+> If you don't know which option to choose, it is safest to go with **monitor-lines-on-both-sides**
 
-### Full example {#non-specific-parameters-example}
+### full example {#non-specific-parameters-example}
 {% capture t1_java %}
 ```java
 CracCreationParameters cracCreationParameters = new CracCreationParameters();
@@ -80,30 +83,28 @@ cracCreationParameters.setDefaultMonitoredLineSide(CracCreationParameters.Monito
 {% endcapture %}
 {% include /tabs.html id="t1" tab1name="JAVA API" tab1content=t1_java tab2name="JSON file" tab2content=t1_json %}
 
-  
-  
 ## CSE-specific parameters {#cse}
-The [CSE native crac format](crac-cse.md) lacks important information that other formats don't.  
+The [CSE native crac format](cse) lacks important information that other formats don't.  
 The user can define a [CseCracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/farao_community/farao/data/crac_creation/creator/cse/parameters/CseCracCreationParameters.java) 
 extension to the CracCreationParameters object in order to define them.  
 
 ### range-action-groups {#cse-range-action-groups}
-The CSE native CRAC format does not allow defining [aligned range actions](crac.md#range-action). This extra parameter 
+The CSE native CRAC format does not allow defining [aligned range actions](crac#range-action). This extra parameter 
 allows the user to do just that.  
 To use it, you have to define a list of strings containing the IDs of range actions that have to be aligned seperated by a 
 " + " sign; for example "range-action-1-id + range-action-17-id" and "range-action-8-id + range-action-9-id".  
 See [example below](#cse-example) for a better illustration.
 
 ### bus-bar-change-switches {#bus-bar-change-switches}
-As explained in the CSE native CRAC format section [here](crac-cse.md#BusBar), bus-bar-change remedial actions are defined in FARAO 
-as [switch pair network actions](crac.md#switch-pair).  
+As explained in the CSE native CRAC format section [here](cse#bus-bar), bus-bar-change remedial actions are defined in FARAO 
+as [switch pair network actions](crac#switch-pair).  
 These switches are not defined in the native CRAC not in the original network, they should be created artificially in the 
 network and their IDs should be sent to the RAO.  
 This parameter allows the definition of the switch(es) to open and the switch(es) to close for every bus-bar change remedial action.  
 To use it, defined for every bus-bar-change remedial action ID the IDs of the pairs od switches to open/close.  
 See [example below](#cse-example) for a better illustration.
 
-### Full CSE example {#cse-example}
+### full CSE example {#cse-example}
 {% capture t2_java %}
 ```java
 // Create CracCreationParameters and set global parameters
@@ -164,7 +165,7 @@ cracCreationParameters.addExtension(CseCracCreationParameters.class, cseParamete
 {% include /tabs.html id="t2" tab1name="JAVA API" tab1content=t2_java tab2name="JSON file" tab2content=t2_json %}
 
 ## CIM-specific parameters {#cim}
-The [CIM native CRAC format](crac-cim.md) lacks important information that other formats don't.  
+The [CIM native CRAC format](cim) lacks important information that other formats don't.  
 The user can define a [CimCracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/parameters/CimCracCreationParameters.java)
 extension to the CracCreationParameters object in order to define them.
 
@@ -178,7 +179,7 @@ to define the CNECs and remedial actions of the border-specific RAO. TimeSeries 
 See [example below](#cim-example) for a better illustration.
 
 ### range-action-groups {#cim-range-action-groups}
-Like the CSE native CRAC format, the CIM format does not allow defining [aligned range actions](crac.md#range-actions). 
+Like the CSE native CRAC format, the CIM format does not allow defining [aligned range actions](crac#range-action). 
 This extra parameter allows the user to do just that.  
 To use it, you have to define a list of strings containing the IDs of range actions that have to be aligned seperated by a
 " + " sign; for example "range-action-1-id + range-action-17-id" and "range-action-8-id + range-action-9-id".  
@@ -195,7 +196,7 @@ must have the same speed.
 See [example below](#cim-example) for a better illustration.
 
 ### voltage-cnecs-creation-parameters {#voltage-cnecs-creation-parameters}
-The CIM CRAC does not allow the definition of [VoltageCnecs](crac-json.md#voltage-cnecs). This parameter allows the user 
+The CIM CRAC does not allow the definition of [VoltageCnecs](json#voltage-cnecs). This parameter allows the user 
 to add VoltageCnecs during CRAC creation.  
 To define voltage CNECs, the user has to define:
 - A list of monitored network elements, identified by their unique ID in the network file. These network elements must be VoltageLevels.
@@ -206,7 +207,7 @@ at defined instants (the contingences shall be identified by their CIM CRAC mRID
 See [example below](#cim-example) for a better illustration.
 
 
-### Full CIM example {#cim-example}
+### full CIM example {#cim-example}
 {% capture t3_java %}
 ```java
 // Create CracCreationParameters and set global parameters
@@ -332,6 +333,6 @@ cracCreationParameters.addExtension(CimCracCreationParameters.class, cimParamete
 {% include /tabs.html id="t3" tab1name="JAVA API" tab1content=t3_java tab2name="JSON file" tab2content=t3_json %}
 
 ---
-See also: [CSE CRAC format](crac-cse.md), [CIM CRAC format](crac-cim.md)
+See also: [CSE CRAC format](cse), [CIM CRAC format](cim)
 
 ---

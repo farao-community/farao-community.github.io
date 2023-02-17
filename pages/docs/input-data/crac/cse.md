@@ -34,7 +34,7 @@ tags: [Docs, Data, CRAC]
 A crac document has a time interval for its validity and a lot of its sub-objects have their own time interval of validity as well.  
 Therefore, **this document has to be imported for a specific datetime** – hourly-precise – to be able to select only the available elements for this datetime.
 
-## Branch {#Branch}
+## Branch {#branch}
 
 In the PowSyBl vocabulary, **a 'Branch' is an element which is connected to two terminals** (lines, tie-lines, transformers, etc.)  
 As this object is used almost everywhere in the CRAC, it is introduced first.
@@ -79,18 +79,18 @@ However, a branch has also a lot of optional tags that are described right below
 - **EIC** : Identification
 - **AlwaysSelected** : FARAO does not use this tag, it only reads the selected tag one
 - **selected** : If selected is false, FARAO will not consider the margin on this branch in its optimization. Default value is true
-- **Imax{...} and Ilimit{...}** : Please refer respectively to the [CriticalBranches](#CriticalBranch) and [Monitored Elements](#MonitoredElements) sections at the end of this page
+- **Imax{...} and Ilimit{...}** : Please refer respectively to the [CriticalBranches](#critical-branch) and [Monitored Elements](#monitored-elements) sections at the end of this page
 - **Vn** : It is the nominal voltage, but FARAO reads is directly in the network therefore it is useless to fill it
 - **minmargin** : FARAO does not interact with this tag
 - **Direction** : Has to be DIRECT, OPPOSITE or BIDIR. **If the Branch is defined in a BaseCaseBranch, a CriticalBranch 
-or a MonitoredElement, this tag is mandatory.** Please refer to this section [JSON CRAC Format](json#flow-cnecs)
+or a MonitoredElement, this tag is mandatory.** Please refer to [this section](json#flow-cnecs) of JSON CRAC Format
 for more information on the behavior of FARAO according to the different direction values.
-- **Status** : Must be OPEN or CLOSE for a branch involved in a topological action. Default value is OPEN. See an example in the [topological actions](#NetworkActions) section of this page.
+- **Status** : Must be OPEN or CLOSE for a branch involved in a topological action. Default value is OPEN. See an example in the [topological actions](#network-actions) section of this page.
 - **Sensitivity** : FARAO does not interact with this tag
 - **PTDFListRef** : FARAO does not interact with this tag
 - **Remedial actions** : These remedial actions will be available with OnFlowConstraint usage rule for the branches they are associated to
 
-## Outages {#Outages}
+## Outages {#uutages}
 ```xml
 <CRACSeries>
     <Outages>
@@ -123,7 +123,7 @@ for more information on the behavior of FARAO according to the different directi
 **Outages are also commonly called ‘Contingencies’.**  
 Each outage with multiple associated network elements must have them listed as showcased in the "outage_2" example above.
 
-## RemedialActions {#RemedialActions}
+## RemedialActions {#remedial-actions}
 
 ```xml
 <CRACSeries>
@@ -150,13 +150,13 @@ A remedial action can be of different types, but they will always have :
 
 **The SharedWith tag**
 
-This tag defines the usage rule of the remedial action. You can refer to this section [Remedial actions and usages rules](json#remedial-actions) for further explanation on the usage rule behavior.
+This tag defines the usage rule of the remedial action. You can refer to [this section](json#remedial-actions) for further explanation on the usage rule behavior.
 
 If SharedWith is "CSE" : FreeToUse  
 If SharedWith is a UCTE country code : OnFlowConstraintInCountry in the country filled in     
 If SharedWith is "None" : OnFlowConstraint only for its associated CNECs (c.f. the Branch section above)
 
-### Range Actions {#RangeActions}
+### Range Actions {#range-actions}
 
 #### PST Range Actions {#pst}
 
@@ -226,7 +226,7 @@ For now the only VariationType handled by FARAO is "ABSOLUTE" : the min/max admi
 FARAO creates the opposite keys by itself, therefore there is no need to specify it.  
 ⚠️*There isn't any check performed to verify that an applied set-point is between the ranges' min and max.*
 
-### Network Actions {#NetworkActions}
+### Network Actions {#network-actions}
 
 #### injection set-point {#injection-set-point}
 
@@ -281,7 +281,7 @@ For now the only VariationType handled by FARAO is "ABSOLUTE", on the node you f
 
 As mentioned earlier, the status must be OPEN or CLOSE and default value is OPEN.
 
-#### bus bar change {#BusBar}
+#### bus bar change {#bus-bar}
 ```xml
 <CRACSeries>
     ...
@@ -322,14 +322,14 @@ or closed by these remedial actions.
 
 ![busb-bar-equivalent-model](/assets/img/busbar.png)  
 
-Using [CseCracCreationParameters](crac-creation-parameters.md#cse), FARAO can then map these remedial actions to the switches 
-created by the user, and interpret BusBar remedial actions as [SwitchPairs](crac.md#switch-pair).
+Using [CseCracCreationParameters](creation-parameters.md#cse), FARAO can then map these remedial actions to the switches 
+created by the user, and interpret BusBar remedial actions as [SwitchPairs](crac#switch-pair).
 
-## CriticalBranches {#CriticalBranches}
+## CriticalBranches {#critical-branches}
 
 It should contain a BaseCaseBranches tag and at least one CriticalBranch
 
-### BaseCaseBranches {#BaseCaseBranches}
+### BaseCaseBranches {#base-case-branches}
 
 ```xml
 <CRACSeries>
@@ -366,7 +366,7 @@ BaseCaseBranches is made of:
 
 For each branch in the list, if Imax is provided, **a CNEC will be created on Preventive state.**
 
-### CriticalBranch {#CriticalBranch}
+### CriticalBranch {#critical-branch}
 
 ```xml
 <CRACSeries>
@@ -400,7 +400,7 @@ For each critical branch, given an attribute ImaxAfter{Instant}, **a CNEC on the
 - ImaxAfterSPS -> Instant Auto
 - ImaxAfterCRA -> Instant Curative
 
-## MonitoredElements {#MonitoredElements}
+## MonitoredElements {#monitored-elements}
 
 ```xml
 <CRACSeries>
@@ -434,6 +434,6 @@ First, if IlimitMNE is filled in, a CNEC on Preventive state will be created. Th
 - IlimitMNE_AfterCRA -> Instant Curative
   
 ---
-See also: [CseCracCreationParameters](crac-creation-parameters#cse)
+See also: [CseCracCreationParameters](creation-parameters#cse), [CseCracCreationContext](creation-context#cse)
 
 ---

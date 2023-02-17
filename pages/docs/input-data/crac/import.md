@@ -10,7 +10,7 @@ order: 0
 tags: [Docs, Data, CRAC]
 ---
 
-### CRAC import/export {#import-export}
+## CRAC import/export {#import-export}
 
 
 The [FARAO CRAC object model](json) can be directly imported and exported using the farao-crac-io-api.  
@@ -34,7 +34,7 @@ CracExporters.exportCrac(crac, "Json", Paths.get("/tmp/crac.json"));
 CracExporters.exportCrac(crac, network, "SecurityLimit", outputStream);
 ~~~
 
-#### Versioning of internal JSON CRAC files {#versions}
+## Versioning of internal JSON CRAC files {#versions}
 Json files and json importer/exporter are versioned.  
 The version number does not correspond to the version number of farao-core. The version only increase when a modification is made within the JSON importer / exporter.  
 - The number version of the json files corresponds to the number of version of the exporter by which it has been exported.
@@ -52,7 +52,7 @@ The version number does not correspond to the version number of farao-core. The 
 [^1]: might work in some situations
 
 
-### NativeCrac, CracCreators and CracCreationContext {#crac-creator}
+## NativeCrac, CracCreators and CracCreationContext {#crac-creator}
 
 The FARAO CRAC object model is not a bijection of all existing formats. To handle more complex formats, which do not have a one-to-one mapping with the FARAO CRAC object model, an overlay has been designed.  
 
@@ -64,10 +64,10 @@ The FARAO CRAC object model is not a bijection of all existing formats. To handl
 
 - The NativeCrac can be converted in a CRAC with a **CracCreator**, the CracCreator needs a network to interpret the data 
 of the NativeCrac. Moreover, the creators of formats which contain more than one timestamp also need a timestamp in the 
-form of a java OffsetDateTime as the created CRAC object only contains one timestamp. [CracCreationParameters](crac-creation-parameters) 
+form of a java OffsetDateTime as the created CRAC object only contains one timestamp. [CracCreationParameters](creation-parameters) 
 can also be provided to the CracCreator, with some configurations which set the behaviour of the Creator.
 
-- The CracCreator returns a **CracCreationContext**. It contains:  
+- The CracCreator returns a [CracCreationContext](creation-context). It contains:  
 -- the created CRAC object  
 -- additional information which explains how the initial format has been mapped into the FARAO format. This mapping is often not straightforward (see below). The CracCreationContext enables to keep in memory a link between the NativeCrac and the CRAC objects.
 
@@ -87,7 +87,7 @@ can also be provided to the CracCreator, with some configurations which set the 
 > In the CORE CC process, this CracCreationContext is re-used when results are exported at the end of the RAO, in order to roll-back the modifications which has been made during the creation, and export at the end of the process a CNE file which is consistent with the initial CRAC file.
 
 The formats handled by the CracCreator are:	
-- [FbConstraint document](fbconstraint), also known as Merged-CB, CBCORA or F301 ([farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint))
+- [FlowBasedConstraint document](fbconstraint), also known as Merged-CB, CBCORA or F301 ([farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint))
 - [CSE CRAC](cse) ([farao-crac-creator-cse](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cse))
 - [CIM CRAC](cim) ([farao-crac-creator-cim](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cim))
 
@@ -118,6 +118,22 @@ Crac crac = cracCreationContext.getCrac();
 CracCreationParameters parameters = JsonCracCreationParameters.read(getClass().getResourceAsStream("/parameters/cse-crac-creation-parameters-nok.json"));
 ~~~
 
-### Example of application of CRAC creation / import / export {#example}
+## Implementing new CRAC formats {#new-formats}
+You are welcome to contribute to the project if you need to import a new native CRAC format to be used in FARAO.  
+You can find inspiration in existing CRAC creators' code:
+- [farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint)
+- [farao-crac-creator-cse](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cse)
+- [farao-crac-creator-cim](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cim)  
+  
+To help you with that, the package [farao-crac-creation-util](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creation-util)
+offers utility classes that can make mapping the CRAC elements to the PowSyBl network elements much easier.
+You should also get familiar with our java [CRAC creation API](json).  
+
+## Example of application of CRAC creation / import / export {#example}
 
 ![flow-diagram](/assets/img/flow-diagram-nativeCrac.png)
+
+---
+See also: [CRAC creation parameters](creation-parameters), [CRAC object](json), [CRAC creation context](creation-context)
+
+---

@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: CRAC
-permalink: /docs/input-data/crac
+permalink: /docs/input-data/crac/crac
 hide: true
 root-page: Documentation
 docu-section: Input Data
@@ -30,7 +30,7 @@ FARAO distinguishes two types of remedial actions, **range actions** and **netwo
 
 Range actions are actions on the network with a degree of freedom: the choice of a **set-point** within a given range. 
 These actions can be optimised linearly, with some approximations. For more information related to the linear optimisation 
-of range actions in FARAO, please refer to the [dedicated documentation page](/docs/castor/linear-problem/linear-rao).
+of range actions in FARAO, please refer to the [dedicated documentation page](/docs/engine/ra-optimisation/linear-rao).
 
 They can be defined on some categories of network elements:
 - Phase Shift Transformer (PST),
@@ -48,7 +48,7 @@ Any 2 or more range actions (of same type) can be aligned into range action "gro
 ### Network action {#network-action}
 
 Network actions are any other kind of action on the network, such as the opening/closing of a network element, setting the tap position of a PST to a given set-point, etc. They can only be activated, or remain inactive.
-They are used in the [search-tree RAO](/docs/castor/search-tree-rao) only.  
+They are used in the [search-tree RAO](/docs/engine/ra-optimisation/search-tree-rao) only.  
 One network action can combine one or multiple elementary actions. These are the types of elementary actions handled in FARAO:
 #### Topological actions {#topological}
 It consists in the opening or the closing of one branch or one switch of the network.
@@ -58,3 +58,8 @@ It consists in the modification of the tap of a PST to a pre-defined target tap.
 It consists in the modification of an injection (load, generator or dangling line) to a pre-defined set-point.
 #### Switch pair {#switch-pair}
 It consists in opening a switch and closing another.
+
+---
+See also: [CRAC import](import), [CRAC object](json)
+
+---
