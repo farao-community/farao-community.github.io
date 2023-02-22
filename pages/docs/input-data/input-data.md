@@ -11,65 +11,44 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
 
-# Independent from I/O format
-
-Based on our experience on different capacity calculation regions, the format for IGM/CGM (either UCTE/CGMES) 
-or CRAC/CBCORA (Critical Branch/Critical Outages/Remedial Actions) are not yet harmonized over Europe. 
-To limit dependencies with input/output format, FARAO uses its own CRAC format in order to be
-easily adaptable for any projects. 
-
-The internal CRAC format is in Json. It is generic and can handle specificities of different regions.
-Creating a Json CRAC is easy through the usage of our API, and multiple native CRAC files can already be converted into Json format (FbConstraint, CSE-CRAC, CIM-CRAC).
-
-The limitations on critical network elements supported by the internal CRAC format are the ones listed here below.
-
-| Physical parameter |    Unit(s)  |
-|--------------------|-------------|
-|   Angle (soon...)  |Degree or Rad|
-|        Flow        |  MW or A    |
-|  Voltage (soon...) |     kV      |
-
-By implementing these types of limitations, FARAO is able to manage most of the operational security limits 
-defined in the network codes (Article 2, Regulation 2015/1222 CACM).
-
-### Network
-
+## Network
 The network data model used by FARAO toolbox is the PowSyBl IIDM format.
 To get detailed information about the network model, please refer to [dedicated documentation](https://www.powsybl.org/pages/documentation/index.html#grid-model)
 on PowSyBl website.
 
-#### Network exchange formats supported (as part of PowSyBl project):
-
+Network exchange formats supported (as part of PowSyBl project):
 - CGMES
 - UCTE
 - XIIDM
 - ...
 
-### CRAC
+## CRAC
+CRAC (for "***C**ontingency list, **R**emedial **A**ctions and additional **C**onstraints*") are objects dedicated to
+define security domain of the network object. They define contingencies to take into account in business process,
+constraints to monitor and remedial actions available to get rid of potential active constraints.
 
-CRAC (for "***C**ontingency list, **R**emedial **A**ctions and additional **C**onstraints*") are objects dedicated to define security
-domain of the network object. They define contingencies to take into account in business
-process, constraint to monitor and remedial actions available to get rid of potential
-active constraints.
+Based on our experience on different capacity calculation regions, the format for IGM/CGM (either UCTE/CGMES) or
+CRAC/CBCORA (Critical Branch/Critical Outages/Remedial Actions) are not yet harmonized over Europe.  
+To limit dependencies with input/output formats, FARAO uses its own [CRAC format](crac/json) in order to be easily
+adaptable for any process.
 
-Please refer to the [dedicated documentation page](/docs/input-data/crac) to get more information about FARAO CRAC data model.
+Please refer to the [dedicated CRAC section](/docs/input-data/crac) for more information.
 
-#### CRAC exchange formats supported:
-
+CRAC exchange formats actually supported by FARAO:
 - [JSON CRAC](/docs/input-data/crac/json) (FARAO-specific)
 - [FlowBasedConstraint CRAC](/docs/input-data/crac/fbconstraint) (used in CORE region)
 - [CSE CRAC](/docs/input-data/crac/cse) (used in CSE region)
 - [CIM CRAC](/docs/input-data/crac/cim) (used in SWE region)
 
-### GLSK
+## GLSK
 
-GLSK (for "*Generation and Load Shift Keys*") are objects dedicated to define scaling strategies
-to simulate injections modification on network model.
+GLSK (for "*Generation and Load Shift Keys*") are objects dedicated to define scaling strategies to simulate injections
+modification on network model.
 
-Please refer to the [dedicated documentation page](/docs/input-data/glsk) to get more information about GLSK data model.
+Please refer to the [dedicated documentation page](/docs/input-data/glsk) to get more information about GLSK data model, 
+as well as to the dedicated [PowSyBl repository](https://github.com/powsybl/powsybl-entsoe).
 
-#### GLSK exchange formats supported:
-
+GLSK exchange formats supported (as part of PowSyBl project):
 - [CIM GLSK](/docs/input-data/glsk/cim)
 - [CSE GLSK](/docs/input-data/glsk/cse)
 - [UCTE GLSK](/docs/input-data/glsk/ucte)

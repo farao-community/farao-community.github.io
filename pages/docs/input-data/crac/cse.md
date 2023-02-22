@@ -8,6 +8,8 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 5
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CseCracCreationParameters](creation-parameters#cse), [CseCracCreationContext](creation-context#cse)
 ---
 
 ## Header overview {#header}
@@ -433,7 +435,3 @@ First, if IlimitMNE is filled in, a CNEC on Preventive state will be created. Th
 - IlimitMNE_AfterSPS -> Instant Auto
 - IlimitMNE_AfterCRA -> Instant Curative
   
----
-See also: [CseCracCreationParameters](creation-parameters#cse), [CseCracCreationContext](creation-context#cse)
-
----

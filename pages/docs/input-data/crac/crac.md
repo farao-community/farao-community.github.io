@@ -8,6 +8,8 @@ docu-section: Input Data
 docu-parent: Input Data
 order: 3
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CRAC import](import), [CRAC object](json)
 ---
 
 ## Introduction {#introduction}
@@ -58,8 +60,3 @@ It consists in the modification of the tap of a PST to a pre-defined target tap.
 It consists in the modification of an injection (load, generator or dangling line) to a pre-defined set-point.
 #### Switch pair {#switch-pair}
 It consists in opening a switch and closing another.
-
----
-See also: [CRAC import](import), [CRAC object](json)
-
----

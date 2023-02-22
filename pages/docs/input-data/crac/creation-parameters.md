@@ -8,6 +8,8 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 2
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CSE CRAC format](cse), [CIM CRAC format](cim)
 ---
 
 ## Introduction {#introduction}
@@ -331,8 +333,3 @@ cracCreationParameters.addExtension(CimCracCreationParameters.class, cimParamete
 ```
 {% endcapture %}
 {% include /tabs.html id="t3" tab1name="JAVA API" tab1content=t3_java tab2name="JSON file" tab2content=t3_json %}
-
----
-See also: [CSE CRAC format](cse), [CIM CRAC format](cim)
-
----

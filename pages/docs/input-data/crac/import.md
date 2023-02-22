@@ -8,6 +8,8 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 0
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CRAC creation parameters](creation-parameters), [CRAC object](json), [CRAC creation context](creation-context)
 ---
 
 ## CRAC import/export {#import-export}
@@ -132,8 +134,3 @@ You should also get familiar with our java [CRAC creation API](json).
 ## Example of application of CRAC creation / import / export {#example}
 
 ![flow-diagram](/assets/img/flow-diagram-nativeCrac.png)
-
----
-See also: [CRAC creation parameters](creation-parameters), [CRAC object](json), [CRAC creation context](creation-context)
-
----

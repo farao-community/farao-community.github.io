@@ -21,7 +21,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name                                                   | Details |
 |--------------------------------------------------------|---|
-| [pst-model](/docs/parameters/rao-parameters#pst-model) | This filler is used only if this parameters is set to *CONTINUOUS* |
+| [pst-model](/docs/parameters#pst-model) | This filler is used only if this parameters is set to *CONTINUOUS* |
 
 ## Defined optimization variables {#defined-variables}
 

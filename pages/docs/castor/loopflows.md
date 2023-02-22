@@ -9,6 +9,7 @@ docu-parent: CASTOR
 order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: [LoopFlow parameters](/docs/parameters#loop-flow-parameters)
 ---
 
 When the power flows from the production areas to the consumers, the current can sometimes cross borders even if the 
@@ -52,8 +53,3 @@ $$\begin{equation}
 
 where $$c^{LFviolation}$$ is a configurable input, and represents what gain on the minimal margin (in MW) we need per MW of
 violation on Loopflows.
-
----
-See also: [LoopFlow parameters](/docs/parameters/rao-parameters#loop-flow-parameters)
-
----

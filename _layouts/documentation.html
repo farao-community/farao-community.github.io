@@ -6,8 +6,10 @@ layout: default
     <section class="post-content">
         <div class="bootstrap-iso">
             <div>
+                <!-- Navigation bar -->
                 {% include sidebar.html %}
                 <div>
+                    <!-- Page header -->
                     <header id="main" style="text-align: left; padding: 0; margin: 0">
                         <h1>
                             {{ page.title }}
@@ -17,17 +19,29 @@ layout: default
                         {% endif %}
                     </header>
                     <hr style="margin-bottom: 1vh; margin-top: 1vh">
+
+                    <!-- "Contents" summary -->
+                    {%if page.summary-hmax != 0 %}
                     <p style="margin: 1px; font-weight: bold">
                         Contents
                     </p>
-                    {% if page.summary-hmax %}
-                        {% include toc.html html=content h_max=page.summary-hmax %}
-                    {% else %}
-                        {% include toc.html html=content %}
-                    {% endif %}
+                    {% include toc.html html=content h_max=page.summary-hmax %}
                     <hr>
+                    {% endif %}
+
+                    <!-- Actual content -->
                     {{ content }}
                 </div>
+
+                <!-- "See also" footer -->
+                {% if page.see-also %}
+                <hr style="margin-bottom: 1vh; margin-top: 5vh">
+                <p style="margin: 1px">
+                    See also:
+                    {{ page.see-also | markdownify }}
+                </p>
+                {% endif %}
+
             </div>
         </div>
     </section>

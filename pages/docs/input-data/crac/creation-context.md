@@ -8,11 +8,13 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 8
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CRAC import](import.md), [CRAC object](pages/docs/input-data/crac/json/json.md), [RAO result object](/docs/output-data/rao-result-json)
 ---
 
 ## Introduction {#introduction}
 When FARAO tries to import a native CRAC file ([FlowBasedConstraint](fbconstraint.md), [CSE](cse.md), [CIM](cim.md), ...) 
-into an [internal CRAC format](json.md), some data transformation can happen, and data present in the final CRAC object 
+into an [internal CRAC format](pages/docs/input-data/crac/json/json.md), some data transformation can happen, and data present in the final CRAC object 
 will not be a "one-to-one" exact representation of the data in the original file.  
 This can be an issue for the final user, as [querying the RAO result file or object](/docs/output-data/rao-result-json#contents) 
 needs knowledge of the artefacts FARAO created during CRAC creation.  
@@ -535,8 +537,3 @@ are not yet supported)
 optimized nor monitored)
 - **NOT_FOR_REQUESTED_TIMESTAMP**: the element is ignored because it does not apply to the given timestamp
 - **OTHER**: any error that does not fall into one of the categories above
-
----
-See also: [CRAC import](import.md), [CRAC object](json.md), [RAO result object](/docs/output-data/rao-result-json)
-
----

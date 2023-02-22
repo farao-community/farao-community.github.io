@@ -8,6 +8,8 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 4
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CracCreationParameters](creation-parameters#non-specific-parameters), [FbConstraintCreationContext](creation-context#fbconstraint)
 ---
 
 ### Header overview {#header}
@@ -190,7 +192,3 @@ In order to ensure the imported CRAC is usable in the RAO, FARAO implements thes
 - If multiple PST remedial actions are defined for the same network element and the same state, only one is imported (priority is given to PSTs that have a group ID defined)
 - FARAO adds LoopFlow constraints for all critical branches with names ending with "[XX]" (where "XX" is a country code), even if the critical branch is internal to a country
 
----
-See also: [CracCreationParameters](creation-parameters#non-specific-parameters), [FbConstraintCreationContext](creation-context#fbconstraint)
-
----

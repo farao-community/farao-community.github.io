@@ -8,6 +8,8 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 6
 tags: [Docs, Data, CRAC]
+see-also: |
+    [CimCracCreationParameters](creation-parameters#cim), [CimCracCreationContext](creation-parameters#cim)
 ---
 
 
@@ -341,8 +343,3 @@ In order to ensure the imported CRAC is usable in the RAO, FARAO implements the 
   OUTAGE instant in order to be secured by the preventive RAO.
 - HVDC set-point remedial actions that require the deactivation of [angle-droop active power control](https://www.powsybl.org/pages/documentation/grid/model/extensions.html#hvdc-angle-droop-active-power-control)
   (AC-emulation) are only supported at the AUTO instant.
-
----
-See also: [CimCracCreationParameters](creation-parameters#cim), [CimCracCreationContext](creation-parameters#cim)
-
----

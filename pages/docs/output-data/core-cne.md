@@ -1,12 +1,12 @@
 ---
 layout: documentation
-title: Voltage monitoring
-permalink: /docs/engine/voltage-monitoring
+title: CORE CNE File
+permalink: /docs/output-data/core-cne
 hide: true
 root-page: Documentation
-docu-section: CASTOR
-docu-parent: CASTOR
-order: 6
+docu-section: Output Data
+docu-parent: Output Data
+order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
