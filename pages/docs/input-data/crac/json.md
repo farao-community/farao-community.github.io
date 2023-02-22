@@ -8,7 +8,10 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 3
 tags: [Docs, Data, CRAC]
+summary-hmax: 3
 ---
+
+**TODO : add loopflow extension**
 
 ## Introduction {#introduction}
 The name CRAC is a standard denomination defined by the ENTSO-E which means: **C**ontingency list, **R**emedial 

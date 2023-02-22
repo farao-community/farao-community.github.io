@@ -19,9 +19,9 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 ## Used parameters {#parameters}
 
-| Name | Details |
-|---|---|
-| [pst-optimization-approximation](/docs/parameters/json-parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *CONTINUOUS* |
+| Name                                                   | Details |
+|--------------------------------------------------------|---|
+| [pst-model](/docs/parameters/rao-parameters#pst-model) | This filler is used only if this parameters is set to *CONTINUOUS* |
 
 ## Defined optimization variables {#defined-variables}
 

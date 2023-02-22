@@ -20,7 +20,11 @@ layout: default
                     <p style="margin: 1px; font-weight: bold">
                         Contents
                     </p>
-                    {% include toc.html html=content %}
+                    {% if page.summary-hmax %}
+                        {% include toc.html html=content h_max=page.summary-hmax %}
+                    {% else %}
+                        {% include toc.html html=content %}
+                    {% endif %}
                     <hr>
                     {{ content }}
                 </div>

@@ -76,3 +76,6 @@ As a result, the current limit considered in the preventive optimisation of this
 This ensures that the optimisation avoids finding a preventive solution where the flow of this CNEC would lie between the PATL and TATL value. If such preventive solution were selected, due to the unavailability of curative actions, the flow in curative would remain higher than the PATL value, which would correspond to an overload on the grid element (situation for Outage 2 in the figure below).
 
 ![Curative CNEC in preventive example](/assets/img/curative2.png)
+
+## Second preventive RAO {#second-preventive-rao}
+**TODO**

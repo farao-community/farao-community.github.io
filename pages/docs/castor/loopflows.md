@@ -54,6 +54,6 @@ where $$c^{LFviolation}$$ is a configurable input, and represents what gain on t
 violation on Loopflows.
 
 ---
-See also: [LoopFlow parameters](/docs/parameters/json-parameters#loopflow-parameters)
+See also: [LoopFlow parameters](/docs/parameters/rao-parameters#loop-flow-parameters)
 
 ---
