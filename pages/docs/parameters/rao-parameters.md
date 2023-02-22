@@ -699,7 +699,6 @@ Zones are seperated by + or -.
 ~~~
 {% endcapture %}
 {% capture t1_itools %}
-**TODO**  
 Based on PowSyBl's [configuration mechanism](https://www.powsybl.org/pages/documentation/user/configuration/).
 ~~~yml
 load-flow:
