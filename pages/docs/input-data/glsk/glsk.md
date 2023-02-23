@@ -10,7 +10,7 @@ order: 2
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 see-also: |
-[Entso-e implementation guide of GLSK](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/07_Generation_and_Load%20Shift_Key_Implementation_Guide_v2r1.pdf)
+    [Entso-e implementation guide of GLSK](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/07_Generation_and_Load%20Shift_Key_Implementation_Guide_v2r1.pdf)
 ---
 
 ## General definition {#definitio}

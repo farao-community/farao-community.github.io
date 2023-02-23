@@ -9,7 +9,8 @@ docu-parent: CASTOR
 order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
-see-also: [LoopFlow parameters](/docs/parameters#loop-flow-parameters)
+see-also: | 
+    [LoopFlow parameters](/docs/parameters#loop-flow-parameters)
 ---
 
 When the power flows from the production areas to the consumers, the current can sometimes cross borders even if the 
