@@ -14,10 +14,14 @@ see-also: |
     [Voltage CNECs](/docs/input-data/crac/json#voltage-cnecs), [RAO result](docs/output-data/rao-result-json)
 ---
 
+## Introduction {#introduction}
 {% include_relative introduction.md %}
 
+## The Java API {#java-api}
 {% include_relative java-api.md %}
 
+## The voltage monitoring result {#result}
 {% include_relative result.md %}
 
+## The voltage monitoring algorithm {#algorithm}
 {% include_relative algorithm.md %}

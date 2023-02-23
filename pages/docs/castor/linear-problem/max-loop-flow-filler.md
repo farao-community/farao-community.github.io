@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 4
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [MaxLoopFlowFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/MaxLoopFlowFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -26,10 +28,10 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details |
 |---|---|---|
-| [rao-with-loop-flow-limitation](/docs/parameters/json-parameters#rao-with-loop-flow-limitation) |  | This filler is only used if this parameter is activated |
-| [loop-flow-acceptable-augmentation](/docs/parameters/json-parameters#loop-flow-acceptable-augmentation) | $$c^{acc-augm}_{lf}$$ | The increase of the initial loop-flow that is allowed by the optimisation. |
-| [loop-flow-constraint-adjustment-coefficient](/docs/parameters/json-parameters#loop-flow-constraint-adjustment-coefficient) | $$c^{adj-coeff}_{lf}$$ | This parameter acts as a margin which tighten, in the linear optimisation problem of RAO, the bounds of the loop-flow constraints. It conceptually behaves as the coefficient c-adjustment from the constraint below: <br> abs(loop-flow[cnec]) <= loop-flow-threshold - c-adjustment <br> This parameter is a safety margin which can absorb some of the approximations which are made in the linear optimization problem of the RAO (non integer PSTs taps, flows approximated by sensi coefficient, etc.), and therefore increase the probability that the loop-flow constraints which are respected in the linear optimisation problem, remain respected once the loop-flows are re-computed without the linear approximations. |
-| [loop-flow-violation-cost](/docs/parameters/json-parameters#loop-flow-violation-cost) | $$c^{penalty}_{lf}$$ | penalisation, in the objective function, of the excess of 1 MW of loop-flow |
+| [rao-with-loop-flow-limitation](/docs/parameters#rao-with-loop-flow-limitation) |  | This filler is only used if this parameter is activated |
+| [loop-flow-acceptable-augmentation](/docs/parameters#loop-flow-acceptable-augmentation) | $$c^{acc-augm}_{lf}$$ | The increase of the initial loop-flow that is allowed by the optimisation. |
+| [loop-flow-constraint-adjustment-coefficient](/docs/parameters#loop-flow-constraint-adjustment-coefficient) | $$c^{adj-coeff}_{lf}$$ | This parameter acts as a margin which tighten, in the linear optimisation problem of RAO, the bounds of the loop-flow constraints. It conceptually behaves as the coefficient c-adjustment from the constraint below: <br> abs(loop-flow[cnec]) <= loop-flow-threshold - c-adjustment <br> This parameter is a safety margin which can absorb some of the approximations which are made in the linear optimization problem of the RAO (non integer PSTs taps, flows approximated by sensi coefficient, etc.), and therefore increase the probability that the loop-flow constraints which are respected in the linear optimisation problem, remain respected once the loop-flows are re-computed without the linear approximations. |
+| [loop-flow-violation-cost](/docs/parameters#loop-flow-violation-cost) | $$c^{penalty}_{lf}$$ | penalisation, in the objective function, of the excess of 1 MW of loop-flow |
 
 ## Defined optimization variables {#defined-variables}
 
@@ -88,10 +90,3 @@ $$
 \min (c^{penalty}_{lf} \sum_{c \in \mathcal{C} ^{lf}} S^{lf} (c))
 \end{equation}
 $$
-
-<br>
-
----
-Code reference: [MaxLoopFlowFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/MaxLoopFlowFiller.java)
-
----

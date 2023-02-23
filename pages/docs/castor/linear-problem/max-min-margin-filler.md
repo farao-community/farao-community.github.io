@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 2
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [MaxMinMarginFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/MaxMinMarginFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -24,13 +26,13 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Details |
 |---|---|
-| [objective-function](/docs/parameters/json-parameters#objective-function) | Used to set the unit (AMPERE/MW) of the objective function |
+| [objective-function](/docs/parameters#objective-function) | Used to set the unit (AMPERE/MW) of the objective function |
 
 ## Defined optimization variables {#defined-variables}
 
 | Name | Symbol | Details | Type | Index | Unit | Lower bound | Upper bound |
 |---|---|---|---|---|---|---|---|
-| Minimum margin | $$MM$$ | the minimum margin over all OptimizedFlowCnecs | Real value | one scalar variable for the whole problem | MW or AMPERE (depending on [objective-function](/docs/parameters/json-parameters#objective-function) unit) | $$-\infty$$ | $$+\infty$$ |
+| Minimum margin | $$MM$$ | the minimum margin over all OptimizedFlowCnecs | Real value | one scalar variable for the whole problem | MW or AMPERE (depending on [objective-function](/docs/parameters#objective-function) unit) | $$-\infty$$ | $$+\infty$$ |
 
 ## Used optimization variables {#used-variables}
 
@@ -42,7 +44,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 ### Define the minimum margin variable
 
-#### If [objective-function](/docs/parameters/json-parameters#objective-function) is in MW
+#### If [objective-function](/docs/parameters#objective-function) is in MW
 
 $$
 \begin{equation}
@@ -59,7 +61,7 @@ $$
 Note that OptimizedFlowCnec might have only one threshold (upper or lower), in that case, only one of the two above constraints is defined.
 <br>
 
-#### If [objective-function](/docs/parameters/json-parameters#objective-function) is in AMPERE
+#### If [objective-function](/docs/parameters#objective-function) is in AMPERE
 
 $$
 \begin{equation}
@@ -94,8 +96,3 @@ $$
 \min (-MM)
 \end{equation}
 $$
-
----
-Code reference: [MaxMinMarginFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/MaxMinMarginFiller.java)
-
----

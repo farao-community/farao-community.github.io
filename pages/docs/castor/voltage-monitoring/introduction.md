@@ -1,4 +1,3 @@
-## Introduction {#introduction}
 In the [FARAO CRAC](/docs/input-data/crac/json), the user can define voltage constraints on network elements.  
 These are constraints that monitor that the voltage values on given network elements do not exceed a given
 threshold.  

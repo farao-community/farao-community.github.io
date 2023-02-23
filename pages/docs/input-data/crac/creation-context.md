@@ -114,7 +114,7 @@ PowSyBl network's from/to. This means that FARAO had to invert the branch when i
 as well as its flow constraints, and that the flow results in the RaoResult will be inverted in regard to the original CRAC's convention. 
 The user should be careful to invert these results before exploiting them.   
 
-Here is a full example of BranchCnecCreationContext usage to export user-comprehensible RAO results:    
+Here is a complete example of BranchCnecCreationContext usage to export user-comprehensible RAO results:    
   
 ```java
 UcteCracCreationContext ucteCracCreationContext = ...
@@ -171,7 +171,7 @@ remedial-action element in the original CRAC, that can be uniquely identified. I
 - **CreatedRAId** holds the ID of the FARAO remedial action that was created from this native element. This is the 
 ID the user should use to query the internal CRAC & RaoResult objects.
 
-Here is a full example of RemedialActionCreationContext usage to export user-comprehensible RAO results:
+Here is a complete example of RemedialActionCreationContext usage to export user-comprehensible RAO results:
   
 ```java
 UcteCracCreationContext ucteCracCreationContext = ...
@@ -226,7 +226,7 @@ contains information about the creation of contingencies in FARAO. One CseOutage
 - **CreatedContingencyId** holds the ID of the FARAO contingency that was created from this native element. This is the
 ID the user should use to query the internal CRAC & RaoResult objects.
 
-Here is a full example of CseOutageCreationContext usage:
+Here is a complete example of CseOutageCreationContext usage:
   
 ```java
 CseCracCreationContext cseCracCreationContext = ...
@@ -274,7 +274,7 @@ It holds the following information:
 - **CreatedContingencyId** holds the ID of the FARAO contingency that was created from this native element. This is the
   ID the user should use to query the internal CRAC & RaoResult objects.
 
-Here is a full example of CimContingencyCreationContext usage:
+Here is a complete example of CimContingencyCreationContext usage:
 
 ```java
 CimCracCreationContext cimCracCreationContext = ...
@@ -339,7 +339,7 @@ contains information about the creation of CNECs in FARAO. One MonitoredSeriesCr
     - **CreatedCnecIds** holds the ID of the FARAO CNEC that was created (if applicable) from this "Measurements", for
       the given contingency & instant. This is the ID the user should use to query the internal CRAC & RaoResult objects.
 
-Here is a full example of MonitoredSeriesCreationContext usage to export user-comprehensible RAO results:
+Here is a complete example of MonitoredSeriesCreationContext usage to export user-comprehensible RAO results:
 
 ```java
 CimCracCreationContext cimCracCreationContext = ...
@@ -392,7 +392,7 @@ It holds the following information:
   This is the ID the user should use to query the internal CRAC & RaoResult objects.
 - **ContingencyId** holds the ID of the contingency for this angle CNEC. It can be used with internal objects.
 
-Here is a full example of AngleCnecCreationContext usage to export user-comprehensible RAO results:
+Here is a complete example of AngleCnecCreationContext usage to export user-comprehensible RAO results:
 
 ```java
 CimCracCreationContext cimCracCreationContext = ...
@@ -434,7 +434,7 @@ It holds the following information:
 - **CreatedCnecId** is the ID of the FARAO voltage CNEC that was created. 
   This is the ID the user should use to query the internal CRAC & RaoResult objects.
 
-Here is a full example of VoltageCnecCreationContext usage to export user-comprehensible RAO results:
+Here is a complete example of VoltageCnecCreationContext usage to export user-comprehensible RAO results:
 
 ```java
 CimCracCreationContext cimCracCreationContext = ...
@@ -478,7 +478,7 @@ It holds the following information:
   to one ID, except for HVDC range actions where it can hold multiple IDs). These are the IDs the user should use to query
   the internal CRAC & RaoResult objects.
 
-Here is a full example of RemedialActionSeriesCreationContext usage to export user-comprehensible RAO results:
+Here is a complete example of RemedialActionSeriesCreationContext usage to export user-comprehensible RAO results:
 
 ```java
 CimCracCreationContext cimCracCreationContext = ...

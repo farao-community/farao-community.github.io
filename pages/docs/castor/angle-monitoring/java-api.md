@@ -1,4 +1,3 @@
-## The Java API {#java-api}
 You can easily call the angle monitoring module using the [JAVA API](https://github.com/farao-community/farao-core/blob/master/monitoring/angle-monitoring/src/main/java/com/farao_community/farao/monitoring/angle_monitoring/AngleMonitoring.java):
 1. Build an AngleMonitoring object using:
 ~~~java
@@ -26,7 +25,7 @@ With:
 > 💡  **NOTE**  
 > For now, only CIM GLSK format is supported by the angle monitoring module
 
-Here is a full example:
+Here is a complete example:
 ~~~java
 Crac crac = ...
 Network network = ...

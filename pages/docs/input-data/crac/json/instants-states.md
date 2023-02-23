@@ -1,5 +1,3 @@
-## Instants and States {#instants-states}
-
 The instant is a moment in the chronology of a contingency event. Four instants currently exist in FARAO:
 - the **preventive** instant occurs before any contingency, and describes the "base-case" situation.
 - the **outage** instant occurs just after a contingency happens, in a time too short to allow the activation of any

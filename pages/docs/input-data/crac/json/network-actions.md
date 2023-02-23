@@ -1,5 +1,3 @@
-## Network Actions {#network-actions}
-
 A FARAO "Network Action" is a remedial action with a binary state: it is either active or inactive.  
 One network action is a combination of one or multiple "elementary actions", among the following:
 - Topological action: opening or closing a branch or a switch in the network.

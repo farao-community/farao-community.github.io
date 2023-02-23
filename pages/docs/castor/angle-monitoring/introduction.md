@@ -1,4 +1,3 @@
-## Introduction {#introduction}
 Some CRAC files can define angle constraints on network elements.  
 These are constraints that monitor that the current phase shift between two network elements does not exceed a given
 threshold.  

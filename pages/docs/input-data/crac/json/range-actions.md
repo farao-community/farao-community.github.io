@@ -1,4 +1,3 @@
-## Range Actions {#range-actions}
 A FARAO "Range Action" is a remedial action with a continuous or discrete set-point. If the range action is inactive, its
 set-point is equal to its value in the initial network. If it is activated, its set-point is optimized by the RAO to
 improve the objective function.  

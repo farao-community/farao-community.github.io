@@ -67,7 +67,7 @@ apply to both sides (typically to be used in AC-loadflow mode)
 > 💡  **NOTE**  
 > If you don't know which option to choose, it is safest to go with **monitor-lines-on-both-sides**
 
-### full example {#non-specific-parameters-example}
+### complete example {#non-specific-parameters-example}
 {% capture t1_java %}
 ```java
 CracCreationParameters cracCreationParameters = new CracCreationParameters();

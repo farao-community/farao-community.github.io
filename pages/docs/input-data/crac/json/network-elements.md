@@ -1,4 +1,3 @@
-## Network elements {#network-elements}
 FARAO relies on the [PowSyBl framework](https://www.powsybl.org/), and FARAO's CRAC relies on some elements of
 [PowSyBl's network model](https://www.powsybl.org/pages/documentation/grid/model/): the so-called network elements.
 

@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
 
-### Overview
+### Introduction
 
 The Linear RAO optimises the linear remedial actions (for now: PSTs, HVDCs, injection range actions) according to a configurable objective function (e.g. maximization of the minimum margin). The solving algorithm approximates the impact of the remedial actions on the network flows with linear sensitivity coefficients. It therefore solves [linear optimisation problems](/docs/castor/linear-optimisation-problem) to find the optimal setpoints for the remedial actions. Moreover, it can iterate over several reference points in order to mitigate the linear approximation inherent to its optimisation problem.
 
@@ -46,7 +46,7 @@ CASTOR can be configured to define groups of LRAs whose taps should be maintaine
 
 #### Minimum impact of a LRA in the linear optimisation
 
-In order to control the usage of LRAs in the optimisation, it is possible to set a constraint in the optimisation problem: the change in setpoint value of one particular LRA should not have an impact on the objective function smaller than a configurable value (see [pst-sensitivity-threshold](/docs/parameters/json-parameters#pst-sensitivity-threshold), [hvdc-sensitivity-threshold](/docs/parameters/json-parameters#hvdc-sensitivity-threshold), and [injection-ra-sensitivity-threshold](/docs/parameters/json-parameters#injection-ra-sensitivity-threshold)).
+In order to control the usage of LRAs in the optimisation, it is possible to set a constraint in the optimisation problem: the change in setpoint value of one particular LRA should not have an impact on the objective function smaller than a configurable value (see [pst-sensitivity-threshold](/docs/parameters#pst-sensitivity-threshold), [hvdc-sensitivity-threshold](/docs/parameters#hvdc-sensitivity-threshold), and [injection-ra-sensitivity-threshold](/docs/parameters#injection-ra-sensitivity-threshold)).
 
 When computing the LRA sensitivities, only the ones which are higher than these parameters are considered and the others are considered zero. This allows us to filter out the PSTs which don't have a big enough impact on the CNECs.
 
@@ -56,7 +56,7 @@ $$\begin{equation}
 \max MM - \sum_{lra \in \mathcal{LRA}} \Delta_{lra} c^{LRA}
 \end{equation}$$
 
-with $$MM$$ the minimum margin, $$\mathcal{LRA}$$ the set of LRAs, $$\Delta_{lra}$$ the variation of setpoint of the LRA $$lra$$, and $$c^{LRA}$$ the penalty cost (see [pst-penalty-cost](/docs/parameters/json-parameters#pst-penalty-cost), [hvdc-penalty-cost](/docs/parameters/json-parameters#hvdc-penalty-cost), and [injection-ra-penalty-cost](/docs/parameters/json-parameters#injection-ra-penalty-cost)).
+with $$MM$$ the minimum margin, $$\mathcal{LRA}$$ the set of LRAs, $$\Delta_{lra}$$ the variation of setpoint of the LRA $$lra$$, and $$c^{LRA}$$ the penalty cost (see [pst-penalty-cost](/docs/parameters#pst-penalty-cost), [hvdc-penalty-cost](/docs/parameters#hvdc-penalty-cost), and [injection-ra-penalty-cost](/docs/parameters#injection-ra-penalty-cost)).
 
 This way, if two solutions provide (almost) the same minimum margin, the problem will favor the one that changes the setpoints the 
 least.

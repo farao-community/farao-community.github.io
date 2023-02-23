@@ -1,7 +1,7 @@
 ---
 layout: documentation
-title: Modelling un-optimised CNECs
-permalink: /docs/castor/linear-optimisation-problem/unoptimized-cnec-filler
+title: Modelling un-optimised CNECs (CRAs)
+permalink: /docs/castor/linear-optimisation-problem/unoptimized-cnec-filler-cra
 hide: true
 root-page: Documentation
 docu-section: CASTOR
@@ -9,7 +9,13 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 9
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [UnoptimizedCnecFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/UnoptimizedCnecFiller.java)
 ---
+
+> ⚠️  **NOTE**  
+> These constraints are not compatible with [Modelling un-optimised CNECs (PSTs)](unoptimized-cnec-filler-pst).  
+> Only one of both features can be activated through [RAO parameters](/docs/parameters#not-optimized-cnecs).
 
 ## Used input data {#input-data}
 
@@ -26,13 +32,13 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Details |
 |---|---|---|
-| [curative-rao-optimize-operators-not-sharing-cras](/docs/parameters/json-parameters#curative-rao-optimize-operators-not-sharing-cras) | This filler is only used if this parameter is activated, and only for curative RAO. |
+| [do-not-optimize-curative-cnecs-for-tsos-without-cras](/docs/parameters#do-not-optimize-curative-cnecs-for-tsos-without-cras) | This filler is only used if this parameter is activated, and only for curative RAO. |
 
 ## Defined optimization variables {#defined-variables}
 
 | Name | Symbol | Details | Type | Index | Unit | Lower bound | Upper bound |
 |---|---|---|---|---|---|---|---|
-| MarginDecrease | $$MD(c)$$ | Margin has decreased on FlowCnec $$c$$. Equal to 1 if the margin is decreased compared to the pre-perimeter value (PrePerimeterMargin), 0 otherwise. | Binary | One variable for every element of (FlowCnecs) whose operator is in (operatorsNotToOptimize) <br> $$\forall c \in \mathcal{C} ^{uo}$$ | no unit | 0 | 1 |
+| DoOptimize | DoOptimize(c)$$ | FlowCnec $$c$$ should be optimized. Equal to 1 if the margin is decreased compared to the pre-perimeter value (PrePerimeterMargin), 0 otherwise. | Binary | One variable for every element of (FlowCnecs) whose operator is in (operatorsNotToOptimize) <br> $$\forall c \in \mathcal{C} ^{uo}$$ | no unit | 0 | 1 |
 
 ## Used optimization variables {#used-variables}
 
@@ -51,13 +57,13 @@ It should be equal to 1 if the optimizer wants to degrade the margin of a given 
 
 $$
 \begin{equation}
-F(c) - f^{-}_{threshold} (c) \geq RAM_{preperim}(c) - worstMarginDecrease \times MD(c), \forall c \in \mathcal{C} ^{uo}
+F(c) - f^{-}_{threshold} (c) \geq RAM_{preperim}(c) - worstMarginDecrease \times DoOptimize(c), \forall c \in \mathcal{C} ^{uo}
 \end{equation}
 $$  
 
 $$
 \begin{equation}
-f^{+}_{threshold} (c) - F(c) \geq RAM_{preperim}(c) - worstMarginDecrease \times MD(c), \forall c \in \mathcal{C} ^{uo}
+f^{+}_{threshold} (c) - F(c) \geq RAM_{preperim}(c) - worstMarginDecrease \times DoOptimize(c), \forall c \in \mathcal{C} ^{uo}
 \end{equation}
 $$  
 
@@ -85,7 +91,7 @@ So we can release the minimum margin constraints if MarginDecrease is equal to 0
 
 $$
 \begin{equation}
-(1 - MD(c)) \times 2 \times MaxRAM, \forall c \in \mathcal{C} ^{uo}
+(1 - DoOptimize(c)) \times 2 \times MaxRAM, \forall c \in \mathcal{C} ^{uo}
 \end{equation}
 $$  
 
@@ -97,10 +103,3 @@ $$
 ## Contribution to the objective function {#objective-function}
 
 Given the updated constraints above, the "un-optimised CNECs" will no longer count in the minimum margin (thus in the objective function) unless their margin is decreased.
-
-<br>
-
----
-Code reference: [UnoptimizedCnecFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/UnoptimizedCnecFiller.java)
-
----

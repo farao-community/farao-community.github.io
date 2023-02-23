@@ -1,5 +1,3 @@
-### Flow CNECs results {#flow-cnecs-results}
-
 These results contain important RAO information about flow CNECs.  
 Note that you have to use [FlowCnec](/docs/input-data/crac/json#flow-cnecs) objects from the CRAC in order to query the RaoResult Java API.
 Most results are power flow results (like flows & margins), and can be queried in two [units](https://github.com/farao-community/farao-core/blob/master/commons/src/main/java/com/farao_community/farao/commons/Unit.java)
@@ -335,7 +333,7 @@ Example:
 {% endcapture %}
 {% include /tabs.html id="t8" tab1name="JAVA API" tab1content=t8_java tab2name="JSON file" tab2content=t8_json %}
 
-#### Full JSON example {#flowcnec-json-example}
+#### Complete JSON example {#flowcnec-json-example}
 ~~~json
   "flowCnecResults" : [ {
     "flowCnecId" : "cnec1outageId",

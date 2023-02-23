@@ -1,5 +1,3 @@
-## The angle monitoring result {#result}
-
 ### JSON import & export {#import-export}
 The [AngleMonitoringResult](https://github.com/farao-community/farao-core/blob/master/monitoring/angle-monitoring/src/main/java/com/farao_community/farao/monitoring/angle_monitoring/AngleMonitoringResult.java) 
 can be written to and read from a JSON file.  
@@ -127,7 +125,7 @@ AngleMonitoringResult object:
 public List<String> printConstraints()
 ~~~
 
-### Full JSON example {#result-json-example}
+### Complete JSON example {#result-json-example}
 ~~~json
 {
   "type": "ANGLE_MONITORING_RESULT",

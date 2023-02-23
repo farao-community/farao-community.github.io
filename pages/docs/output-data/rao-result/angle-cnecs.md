@@ -1,4 +1,3 @@
-### Angle CNECs results {#angle-cnecs-results}
 These results contain important RAO information about angle CNECs.  
 Note that you have to use [AngleCnec](/docs/input-data/crac/json#angle-cnecs) objects from the CRAC in order to query the RaoResult Java API.
 
@@ -68,7 +67,7 @@ Example:
 {% endcapture %}
 {% include /tabs.html id="t14" tab1name="JAVA API" tab1content=t14_java tab2name="JSON file" tab2content=t14_json %}
 
-#### Full JSON example {#anglecnec-json-example}
+#### Complete JSON example {#anglecnec-json-example}
 ~~~json
   "angleCnecResults" : [ {
     "angleCnecId" : "angleCnecId",

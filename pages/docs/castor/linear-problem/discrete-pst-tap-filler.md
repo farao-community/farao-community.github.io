@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 7
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [DiscretePstTapFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/DiscretePstTapFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -28,7 +30,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Details |
 |---|---|
-| [pst-optimization-approximation](/docs/parameters/json-parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
+| [pst-optimization-approximation](/docs/parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
 
 ## Defined optimization variables {#defined-variables}
 
@@ -111,11 +113,4 @@ $$
 \begin{equation}
 \delta ^{+} (r) + \delta ^{-} (r)  \leq 1 , \forall r \in \mathcal{RA}^{PST}
 \end{equation}
-$$  
-
-<br>
-
----
-Code reference: [DiscretePstTapFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/DiscretePstTapFiller.java)
-
----
+$$

@@ -41,7 +41,7 @@ For Capacity calculation processes, CASTOR considers the following remedial acti
 
 The impact of some types of remedial actions on flows could be considered to be linear: optimisation of HVDC setpoints and optimisation of generation unit setpoints. In addition to these, CASTOR also considers phase shifter transformers as linear remedial actions.[^1]
 
-[^1]: CASTOR offers different approximation levels for modelling PSTs. See [the relevant RAO parameter](/docs/parameters/json-parameters#pst-optimization-approximation) for more information. 
+[^1]: CASTOR offers different approximation levels for modelling PSTs. See [the relevant RAO parameter](/docs/parameters#pst-optimization-approximation) for more information. 
 
 A phase shifter transformer (PST) is defined by its range of acceptable tap settings.
 This acceptable tap setting can be defined by three different ways:
@@ -129,9 +129,9 @@ As mentioned above, for NTC Capacity calculation/ CEP Validation, this stop crit
 
 These stop criteria only make sense for a minimum margin objective function (may it be absolute or relative).  
 
-On both stop criteria, [additional constraints](/docs/parameters/json-parameters#search-tree-parameters) can be added, for example:
-- the [maximal number of consecutive chosen network actions](/docs/parameters/json-parameters#maximum-search-depth), also called search tree depth,
-- the [minimal relative gain](/docs/parameters/json-parameters#relative-network-action-minimum-impact-threshold) of objective function between two consecutive network actions (i.e. between two search tree depths).
+On both stop criteria, [additional constraints](/docs/parameters#search-tree-parameters) can be added, for example:
+- the [maximal number of consecutive chosen network actions](/docs/parameters#maximum-search-depth), also called search tree depth,
+- the [minimal relative gain](/docs/parameters#relative-network-action-minimum-impact-threshold) of objective function between two consecutive network actions (i.e. between two search tree depths).
 
 ### Algorithm
 

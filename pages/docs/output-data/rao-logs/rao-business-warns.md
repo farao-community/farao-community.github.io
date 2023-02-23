@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
 
-## Overview
+## Introduction
 
 These logs contain warnings that may occur during the search-tree algorithm. Activate them if you want to know when unordinary situations are met.  
 Possible warnings are listed below.  

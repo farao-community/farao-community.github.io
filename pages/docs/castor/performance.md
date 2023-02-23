@@ -79,6 +79,6 @@ This parameter can be defined also through absolute increase :
 - minimum impact (in MW/degree or A/degree) for the use of PST/HVDC
 
 ---
-See also: [Network actions impact parameters](/docs/parameters/json-parameters#ra-usage-impact), [Range actions impact parameters](/docs/parameters/json-parameters#range-action-usage-limitation)
+See also: [Network actions impact parameters](/docs/parameters#ra-usage-impact), [Range actions impact parameters](/docs/parameters#range-action-usage-limitation)
 
 ---

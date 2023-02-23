@@ -272,7 +272,7 @@ when searching for the best network actions.
   though they share the Alegro line)*
 
 ## Second preventive RAO parameters {#second-preventive-rao}
-These parameters (second-preventive-rao) tune the behaviour of the [second preventive RAO](/docs/engine/ra-optimisation/curative#second-preventive-rao).
+These parameters (second-preventive-rao) tune the behaviour of the [second preventive RAO](/docs/engine/ra-optimisation/rao-steps#second-preventive-rao).
 
 ### execution-condition {#second-preventive-execution-condition}
 - **Expected value**: one of the following:
@@ -355,7 +355,7 @@ These parameters (ra-usage-limits-per-contingency) limit the usage of remedial a
   of its allowed CRAs is supposed infinite.  
   This parameter is only used during the curative RAO.
 
-## CNECs that shall not be optimised {#not-optimized-cnecs}
+## CNECs that should not be optimised {#not-optimized-cnecs}
 These parameters (not-optimized-cnecs) allow the activation of region-specific features, that de-activate the
 optimisation of specific CNECs in specific conditions.
 
@@ -546,7 +546,7 @@ See also: [Modelling MNECs and their virtual cost](/docs/castor/linear-optimisat
   approximations are removed (i.e. taps have been rounded and real flow calculated)
 
 ## Relative margins extension {#relative-margins-parameters}
-Adding a RelativeMarginsParameters extension is mandatory when [objective function is relative](#type).  
+Adding a RelativeMarginsParameters extension is mandatory when [objective function is relative](#objective-function-type).  
 See also: [Modelling the maximum minimum relative margin objective function](/docs/castor/linear-optimisation-problem/max-min-relative-margin-filler)
 
 ### ptdf-boundaries {#relative-margins-ptdf-boundaries}

@@ -1,5 +1,3 @@
-## The voltage monitoring result {#result}
-
 ### JSON import & export {#import-export}
 The [VoltageMonitoringResult](https://github.com/farao-community/farao-core/blob/master/monitoring/voltage-monitoring/src/main/java/com/farao_community/farao/monitoring/voltage_monitoring/VoltageMonitoringResult.java) 
 can be written to and read from a JSON file.  
@@ -81,7 +79,7 @@ VoltageMonitoringResult object:
 public List<String> printConstraints()
 ~~~
 
-### Full JSON example {#result-json-example}
+### Complete JSON example {#result-json-example}
 ~~~json
 {
   "type" : "VOLTAGE_MONITORING_RESULT",

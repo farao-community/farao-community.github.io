@@ -61,16 +61,23 @@ The following paragraphs of this page explain, step by step, the content of thes
 > 🔵 marks a field that can be **mandatory in some cases**  
 > ⭐ marks a field that must be **unique** in the CRAC  
 
+## Network elements {#network-elements}
 {% include_relative network-elements.md %}  
 
+## Contingencies {#contingencies}
 {% include_relative contingencies.md %}  
 
+## Instants and States {#instants-states}
 {% include_relative instants-states.md %}  
 
+## CNECs {#cnecs}
 {% include_relative cnecs.md %}  
 
+## Remedial actions and usages rules {#remedial-actions}
 {% include_relative remedial-actions.md %}  
 
+## Network Actions {#network-actions}
 {% include_relative network-actions.md %}  
 
+## Range Actions {#range-actions}
 {% include_relative range-actions.md %}  

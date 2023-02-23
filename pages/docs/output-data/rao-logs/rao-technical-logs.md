@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
 
-## Overview
+## Introduction
 
 These logs detail the steps of the search-tree algorithm. Activate them if you know the tool pretty well, and in case you want to follow the algorithm in detail.  
 Most logs contain normal information, but some may contain errors or warnings (possible cases are listed below).  

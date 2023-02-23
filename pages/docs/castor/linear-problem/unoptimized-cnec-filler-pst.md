@@ -1,0 +1,115 @@
+---
+layout: documentation
+title: Modelling un-optimised CNECs (PSTs)
+permalink: /docs/castor/linear-optimisation-problem/unoptimized-cnec-filler-pst
+hide: true
+root-page: Documentation
+docu-section: CASTOR
+docu-parent: Linear Remedial Actions Optimisation
+order: 10
+feature-img: "assets/img/farao3.jpg"
+tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [UnoptimizedCnecFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/UnoptimizedCnecFiller.java)
+---
+
+> ⚠️  **NOTE**  
+> These constraints are not compatible with [Modelling un-optimised CNECs (CRAs)](unoptimized-cnec-filler-cra).  
+> Only one of both features can be activated through [RAO parameters](/docs/parameters#not-optimized-cnecs).
+
+## Used input data {#input-data}
+
+| Name            | Symbol                     | Details                                                                    |
+|-----------------|----------------------------|----------------------------------------------------------------------------|
+| FlowCnecs       | $$c \in \mathcal{C}$$      | Set of optimised FlowCnecs                                                 |
+| Upper threshold | $$f^{+}_{threshold} (c)$$  | Upper threshold of FlowCnec $$c$$, in MW, defined in the CRAC              |
+| Lower threshold | $$f^{-}_{threshold} (c)$$  | Lower threshold of FlowCnec $$c$$, in MW, defined in the CRAC              |
+| RA upper bound  | $$A^{+}(r,s)$$             | Upper bound of allowed range for range action $$r$$ at state $$s$$[^1]     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| RA lower bound  | $$A^{-}(r,s)$$             | Lower bound of allowed range for range action $$r$$ at state $$s$$[^1]     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Sensitivities   | $$\sigma _{n}(r,c,s)$$     | sensitivity of RangeAction $$r$$ on FlowCnec $$c$$ for state $$s$$         |
+| cnecPstPairs    | $$(c, r)\in \mathcal{CP}$$ | These are CNEC-PST combinations defined by the user in the [do-not-optimize-cnec-secured-by-its-pst](/docs/parameters#do-not-optimize-cnec-secured-by-its-pst) parameter. |
+
+[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+
+## Used parameters {#parameters}
+
+| Name | Details |
+|---|---|---|
+| [do-not-optimize-cnec-secured-by-its-pst](/docs/parameters#do-not-optimize-cnec-secured-by-its-pst) | This filler is only used if this parameter contains CNEC-PST combinations. |
+
+## Defined optimization variables {#defined-variables}
+
+| Name         | Symbol              | Details                                                                                                              | Type | Index                                                                                                                                                              | Unit | Lower bound | Upper bound |
+|--------------|---------------------|----------------------------------------------------------------------------------------------------------------------|---|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|---|---|
+| DoOptimize | $$DoOptimize(c)$$ | FlowCnec $$c$$ should be optimized. Equal to 0 if its associated PST has enough taps left to secure it, 1 otherwise. | Binary | One variable for every CNEC element $$c$$ in $$\mathcal{CP}$$ | no unit | 0 | 1 |
+
+## Used optimization variables {#used-variables}
+
+| Name | Symbol | Defined in |
+|---|---|---|
+| Flow | $$F(c)$$ | [CoreProblemFiller](core-problem-filler#defined-variables) |
+| RA setpoint | $$A(r)$$ | [CoreProblemFiller](core-problem-filler#defined-variables) |
+
+
+## Defined constraints {#defined-constraints}
+
+### Defining the "don't optimize CNEC" binary variable
+
+It should be equal to 1 if the PST has enough taps left to secure the associated CNEC.  
+This is estimated using sensitivity values.  
+
+$$\forall (c, r)\in \mathcal{CP}$$  
+let $$s$$ be the state on $$c$$ which is evaluated  
+and $$bigM(r, s) = A^{+}(r, s) - A^{-}(r, s)$$  
+
+- **if $$\sigma _{n}(r,c,s) \gt 0$$**  
+  $$
+  \begin{equation}
+  A(r, s) \geq A^{-}(r, s) - \frac{f^{+}_{threshold} (c) - F(c)}{\sigma _{n}(r,c,s)} - bigM(r, s) \times DoOptimize(c)
+  \end{equation}
+  $$
+  $$
+  \begin{equation}
+  A(r, s) \leq A^{+}(r, s) + \frac{F(c) - f^{-}_{threshold} (c)}{\sigma _{n}(r,c,s)} + bigM(r, s) \times DoOptimize(c)
+  \end{equation}
+  $$  
+
+- **if $$\sigma _{n}(r,c,s) \lt 0$$**  
+  $$
+  \begin{equation}
+  A(r, s) \geq A^{-}(r, s) - \frac{F(c) - f^{-}_{threshold} (c)}{\sigma _{n}(r,c,s)} - bigM(r, s) \times DoOptimize(c)
+  \end{equation}
+  $$
+  $$
+  \begin{equation}
+  A(r, s) \leq A^{+}(r, s) + \frac{f^{+}_{threshold} (c) - F(c)}{\sigma _{n}(r,c,s)} + bigM(r, s) \times DoOptimize(c)
+  \end{equation}
+  $$  
+
+
+*Note that a FlowCnec might have only one threshold (upper or lower), in that case, only one of the two above constraints is defined.*  
+
+<br>
+
+### Updating the minimum margin constraints
+
+(These are originally defined in [MaxMinMarginFiller](max-min-margin-filler#defined-constraints) and [MaxMinRelativeMarginFiller](max-min-relative-margin-filler#defined-constraints))  
+
+For CNECs which should not be optimized, their RAM should not be taken into account in the minimum margin variable unless their margin is decreased.  
+
+So we can release the minimum margin constraints if DoOptimize is equal to 0. In order to do this, we just need to add the following term to these constraints' right side:  
+
+$$
+\begin{equation}
+(1 - DoOptimize(c)) \times 2 \times MaxRAM, \forall  (c, r) \in \mathcal{CP}
+\end{equation}
+$$  
+
+*Note that this term should be divided by the absolute PTDF sum for relative margins, but it is not done explicitly in the code because this coefficient is brought to the left-side of the constraint.*
+
+<br>
+
+
+## Contribution to the objective function {#objective-function}
+
+Given the updated constraints above, the "un-optimised CNECs" will no longer count in the minimum margin (thus in the objective function) unless their margin is decreased.

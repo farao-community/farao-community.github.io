@@ -69,12 +69,17 @@ This is why **most of the information in the RAO results can have up to 4 values
 
 {% include_relative meta-info.md %}  
 
+### Flow CNECs results {#flow-cnecs-results}
 {% include_relative flow-cnecs.md %}  
 
+### Angle CNECs results {#angle-cnecs-results}
 {% include_relative angle-cnecs.md %}  
 
+### Voltage CNECs results {#voltage-cnecs-results}
 {% include_relative voltage-cnecs.md %}  
 
+### Network actions results {#network-actions-results}
 {% include_relative network-actions.md %}  
 
+### Standard range actions results {#standard-range-action-results}
 {% include_relative range-actions.md %}  

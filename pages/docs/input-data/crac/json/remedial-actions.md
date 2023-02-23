@@ -1,5 +1,3 @@
-## Remedial actions and usages rules {#remedial-actions}
-
 A remedial action is an action on the network that is considered capable of reducing constraints on the CNECs.
 
 Two types of remedial action exists in FARAO:

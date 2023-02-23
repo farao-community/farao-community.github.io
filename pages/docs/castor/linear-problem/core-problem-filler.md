@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 1
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [CoreProblemFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/CoreProblemFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -83,8 +85,3 @@ $$
 \min \sum_{r,s \in \mathcal{RA}} (c^{penalty}_{ra}(r) \Delta A(r,s))
 \end{equation}
 $$
-
----
-Code reference: [CoreProblemFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/CoreProblemFiller.java)
-
----

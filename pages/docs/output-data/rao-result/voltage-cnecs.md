@@ -1,4 +1,3 @@
-### Voltage CNECs results {#voltage-cnecs-results}
 These results contain important RAO information about voltage CNECs.  
 Note that you have to use [VoltageCnec](/docs/input-data/crac/json#voltage-cnecs) objects from the CRAC in order to query the RaoResult Java API.
 
@@ -66,7 +65,7 @@ Example:
 {% endcapture %}
 {% include /tabs.html id="t16" tab1name="JAVA API" tab1content=t16_java tab2name="JSON file" tab2content=t16_json %}
 
-#### Full JSON example {#voltagecnec-json-example}
+#### Complete JSON example {#voltagecnec-json-example}
 ~~~json
   "voltageCnecResults" : [ {
     "voltageCnecId" : "voltageCnecId",

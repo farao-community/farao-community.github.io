@@ -1,4 +1,3 @@
-## The Java API {#java-api}
 You can easily call the voltage monitoring module using the [JAVA API](https://github.com/farao-community/farao-core/blob/master/monitoring/voltage-monitoring/src/main/java/com/farao_community/farao/monitoring/voltage_monitoring/VoltageMonitoring.java):
 1. Build a VoltageMonitoring object using:
 ~~~java
@@ -19,7 +18,7 @@ With:
 - numberOfLoadFlowsInParallel: the number of contingencies to monitor in parallel, allowing a maximum utilization of
   your computing resources (set it to your number of available CPUs).
 
-Here is a full example:
+Here is a complete example:
 ~~~java
 Crac crac = ...
 Network network = ...

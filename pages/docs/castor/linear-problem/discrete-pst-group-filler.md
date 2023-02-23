@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 8
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [DiscretePstGroupFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/DiscretePstGroupFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -22,7 +24,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Details |
 |---|---|
-| [pst-optimization-approximation](/docs/parameters/json-parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
+| [pst-optimization-approximation](/docs/parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
 
 ## Defined optimization variables {#defined-variables}
 
@@ -45,11 +47,4 @@ $$
 \begin{equation}
 T^{group}(g) = t_{n}(r) + \Delta t^{+} (r) - \Delta t^{-} (r), \forall r \in \mathcal{RA}(g), \forall g \in \mathcal{G}^{pst}_{RA}
 \end{equation}
-$$  
-
-<br>
-
----
-Code reference: [DiscretePstGroupFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/DiscretePstGroupFiller.java)
-
----
+$$

@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 ---
 
-## Overview
+## Introduction
 
 These logs contain high-level business information about the search-tree algorithm. Activate them if you want an overview of the RAO steps, like the impact of topological actions and the optimization result of every perimeter.
 Most logs contain normal information, but some may contain errors (possible cases are listed below).  

@@ -1,4 +1,3 @@
-## The angle monitoring algorithm {#algorithm}
 Here is a detailed description of how the angle monitoring algorithm operates:
 - Apply optimal preventive remedial actions from RaoResult on the network
 - From the CRAC, get the set of states on which AngleCnecs exist

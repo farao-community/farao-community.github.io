@@ -1,4 +1,3 @@
-### Standard range actions results {#standard-range-action-results}
 These results contain information about the selection of standard range actions by the RAO.  
 Standard range actions are range actions that have a continuous set-point that can be optimised in a given range.  
 Actually, standard range actions handled by FARAO are: **HVDC range actions** and **Injection range actions**.  

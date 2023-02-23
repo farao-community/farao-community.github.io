@@ -1,5 +1,3 @@
-## CNECs {#cnecs}
-
 A CRAC should define CNECs. A CNEC is a "**C**ritical **N**etwork **E**lement and **C**ontingency" (also known as "CBCO"
 or "Critical Branch and Critical Outage").
 

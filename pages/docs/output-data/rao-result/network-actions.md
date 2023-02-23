@@ -1,4 +1,3 @@
-### Network actions results {#network-actions-results}
 These results contain information about the selection of network actions by the RAO.
 *Note that you will need to use [NetworkAction](/docs/input-data/crac/json#network-actions) objects from the CRAC for querying the Java API.*
 

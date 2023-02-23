@@ -1,4 +1,3 @@
-## Contingencies {#contingencies}
 A CRAC object must define "critical contingencies" (or "critical outages", or "CO", or "N-k"...).  
 The denomination chosen within the FARAO internal format is **"Contingency"**.
 
