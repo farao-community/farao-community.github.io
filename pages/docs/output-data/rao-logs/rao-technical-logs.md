@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: RAO Technical Logs
-permalink: /docs/output-data/rao-technical-logs
+permalink: /docs/output-data/rao-logs/technical-logs
 hide: true
 root-page: Documentation
 docu-section: Output Data

@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: RAO Business Warnings
-permalink: /docs/output-data/rao-business-warns
+permalink: /docs/output-data/rao-logs/business-warns
 hide: true
 root-page: Documentation
 docu-section: Output Data

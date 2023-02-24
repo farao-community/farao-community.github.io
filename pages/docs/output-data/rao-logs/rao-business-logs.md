@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: RAO Business Logs
-permalink: /docs/output-data/rao-business-logs
+permalink: /docs/output-data/rao-logs/business-logs
 hide: true
 root-page: Documentation
 docu-section: Output Data

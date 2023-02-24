@@ -47,7 +47,7 @@ Three possible values for CNEC results:
   > exported in **B57** series, as explained further in this article)
 
 ### Party_MarketParticipant
-mRID: ENTSOE EICode of the CNEC's operator (in mRID tag).
+mRID: [ENTSO-E EICode](https://www.entsoe.eu/data/energy-identification-codes-eic/) of the CNEC's operator (in mRID tag).
 
 ### optimization_MarketObjectStatus.status
 Two possible values:

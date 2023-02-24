@@ -13,9 +13,11 @@ summary-hmax: 0
 ---
 
 CASTOR's logs are divided into three categories:
-- [RAO Business Logs](pages/docs/output-data/rao-logs/rao-business-logs.md): log entries that contain business information about the remedial action optimisation steps 
-- [RAO Business Warnings](pages/docs/output-data/rao-logs/rao-business-warns.md): log entries that contain business warnings about the RAO steps
-- [RAO Technical Logs](pages/docs/output-data/rao-logs/rao-technical-logs.md): log entries that contain technical logs that can be activated to debug detailed steps of the RAO
+- [RAO Business Logs](pages/docs/output-data/rao-logs/business-logs.md): log entries that contain business information about the remedial action optimisation steps 
+- [RAO Business Warnings](pages/docs/output-data/rao-logs/business-warns.md): log entries that contain business warnings about the RAO steps
+- [RAO Technical Logs](pages/docs/output-data/rao-logs/technical-logs.md): log entries that contain technical logs that can be activated to debug detailed steps of the RAO
 
 You can collect these logs and use them in your application to provide monitoring for the RAO process.
 For examples on how to do this, check out the [GridCapa applications](https://github.com/farao-community?q=gridcapa&type=all&language=&sort=).
+
+You can check out our small but complete [RAO logs example](example.md).

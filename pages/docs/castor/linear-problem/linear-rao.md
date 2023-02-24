@@ -40,7 +40,7 @@ Hereunder, the specific workflow related to linear optimisation.
 
 ![Linear RAO algorithm](/assets/img/linear-rao-algo.png)
 
-#### Forcing setpoints of a defined set of linear remedial actions to be equal
+#### Forcing set-points of a defined set of linear remedial actions to be equal
 
 CASTOR can be configured to define groups of LRAs whose taps should be maintained equal during optimisation. To see how this is done, you can check the details of the [linear optimisation problem](/docs/castor/linear-optimisation-problem).
 

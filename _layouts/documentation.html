@@ -36,10 +36,13 @@ layout: default
                 <!-- "See also" footer -->
                 {% if page.see-also %}
                 <hr style="margin-bottom: 1vh; margin-top: 5vh">
+                <p style="margin: 1px; font-weight: bold">
+                    See also
+                </p>
                 <p style="margin: 1px">
-                    See also:
                     {{ page.see-also | markdownify }}
                 </p>
+                <hr>
                 {% endif %}
 
             </div>

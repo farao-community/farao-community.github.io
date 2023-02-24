@@ -67,7 +67,7 @@ If it doesn't exist, it means that the following describes the remedial action *
 to know the initial set-points of range actions).
 
 #### Party_MarketParticipant
-ENTSOE EICode of the remedial action's operator (in mRID tag).
+[ENTSO-E EICode](https://www.entsoe.eu/data/energy-identification-codes-eic/) of the remedial action's operator (in mRID tag).
 
 #### RegisteredResource (optional)
 This tag is only exported for **range actions**, to hold their set-point values.

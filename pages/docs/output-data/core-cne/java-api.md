@@ -18,20 +18,20 @@ With:
   in the header of the CNE file:
   - **documentId**: document ID to be written in "mRID" field
   - **revisionNumber**: integer to be written in "revisionNumber" field
-  - **domainId**: domain ID to be written in "domain.mRID" field (usually an ENTSOE EICode)
-  - **processType**: the ENTSOE code of the process type, to be written in "process.processType" field:
+  - **domainId**: domain ID to be written in "domain.mRID" field (usually an [ENTSO-E EICode](https://www.entsoe.eu/data/energy-identification-codes-eic/))
+  - **processType**: the ENTSO-E code of the process type, to be written in "process.processType" field:
     - **A48**: Day-ahead capacity determination, used for CORE region
     - ~~**Z01**~~: Day-ahead capacity determination, used for SWE  region (so don't use it here)
   - **senderId**: ID of the sender of the CNE document, to be written in "sender_MarketParticipant.mRID" field 
-    (usually an ENTSOE EICode)
-  - **senderRole**: ENTSOE code defining the role of the sender of the CNE document, to be written in 
+    (usually an [ENTSO-E EICode](https://www.entsoe.eu/data/energy-identification-codes-eic/))
+  - **senderRole**: ENTSO-E code defining the role of the sender of the CNE document, to be written in 
     "sender_MarketParticipant.marketRole.type" field:
     - **A04**: system operator
     - **A36**: capacity coordinator
     - **A44**: regional security coordinator
   - **receiverId**: ID of the receiver of the CNE document, to be written in "receiver_MarketParticipant.mRID" field 
-    (usually an ENTSOE EICode)
-  - **receiverRole**: ENTSOE code defining the role of the receiver of the CNE document, to be written in
+    (usually an [ENTSO-E EICode](https://www.entsoe.eu/data/energy-identification-codes-eic/))
+  - **receiverRole**: ENTSO-E code defining the role of the receiver of the CNE document, to be written in
     "receiver_MarketParticipant.marketRole.type" field. Same value options as senderRole.
   - **timeInterval**: time interval of document applicability, to be written in "time_Period.timeInterval" field. It should 
     be formatted as follows: "YYYY-MM-DDTHH:MMZ/YYYY-MM-DDTHH:MMZ" (start date / end date).

@@ -10,7 +10,8 @@ order: 2
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 see-also: |
-    [Entso-e implementation guide of GLSK](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/07_Generation_and_Load%20Shift_Key_Implementation_Guide_v2r1.pdf)
+    [ENTSO-E implementation guide of GLSK](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/07_Generation_and_Load%20Shift_Key_Implementation_Guide_v2r1.pdf), 
+    [PowSyBl ENTSO-E repository](https://github.com/powsybl/powsybl-entsoe)
 ---
 
 ## General definition {#definitio}
@@ -75,7 +76,7 @@ Given a zone, each element the GLSK is **rated by its participation to the net p
 > - L1 : 100 / 1400 = 0.07
 > - L2 : 50 / 1400 = 0.035
 
-#### Proportional to remaining capacity
+#### Proportional to remaining capacity {#remaining-capacity}
 Given a zone, each element the GLSK is **rated by its remaining available capacity in the direction of the variation**. So there is no need to specify the coefficients, we only need to know the set of generators/loads, their associated target active power and their maximum and minimum capacity.
 
 > {:refdef: style="text-align: center;"}
@@ -107,7 +108,7 @@ Given a zone, each element the GLSK is **rated by its remaining available capaci
 > - L1 : 900 / 2800 = 0.321
 > - L2 : 950 / 2800 = 0.339
 
-### Merit order GLSK
+### Merit order GLSK {#merit-order}
 A merit order GLSK gives a priority to individual generators and loads. So **this type of GLSK is not linear** so it cannot be used to compute PTDF and as a consequence loop-flows. It can **only be used for net position variation**. Merit order GLSK is an ordered list of generators and loads. To reach the variation goal the first element of the list would be shifted until it reaches its minimum or maximum value – whether it is a load or a generator and whether it is a net position increase or decrease. Once this extremum is reached the second element of the list can be shifted, and so on until the target variation is reached.
 
 
