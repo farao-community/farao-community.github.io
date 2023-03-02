@@ -6,7 +6,7 @@ given FARAO ["state"](#instants-states)).
 The contingency is omitted if the CNEC is defined at the preventive instant.
 
 > 💡  **NOTE**  
-> A FARAO CNEC is associated one instant and one contingency only. This is not the case for all native CRAC formats:
+> A FARAO CNEC is associated to one instant and one contingency only. This is not the case for all native CRAC formats:
 > for instance, in the [CORE merged-CB CRAC format](fbconstraint), the post-outage CNECs are implicitly defined for the
 > two instants outage and curative.
 >
@@ -54,14 +54,14 @@ flow of the FlowCnec should ideally remain.
   > 💡  **NOTE**
   > The side of the branch on which the threshold is set is particularly crucial in the following cases:
   > - when the threshold is defined in ampere or %Imax on a [**transformer**](https://www.powsybl.org/pages/documentation/grid/model/#transformers),
-      > as the current values on the two sides of a transformer are different,
+  >   as the current values on the two sides of a transformer are different,
   > - when the threshold is defined in %Imax on a [**tie-line**](https://www.powsybl.org/pages/documentation/grid/model/#tie-line),
-      > as the current limits are usually different on both sides of a tie-line,
+  >   as the current limits are usually different on both sides of a tie-line,
   > - when the application uses **AC load-flow** computation, as the flow values on the two sides of a branch are
-      > different (due to losses). The CracCreationParameters allows the user to [decide which side(s) should be monitored by default](creation-parameters#default-monitored-line-side).
+  >   different (due to losses). The CracCreationParameters allows the user to [decide which side(s) should be monitored by default](creation-parameters#default-monitored-line-side).
 - A threshold has a minimum and/or a maximum value. The maximum value represents the maximum value of the flow in the "direct" direction
-  and the minimum value represents the inverse of the maximum value of the flow in the "opposite" direction.
-  Therefore, the flow of FlowCnecs which only have one minimum value, or one maximum value is implicitly monitored in
+  and the minimum value represents the maximum value of the flow in the "opposite" direction.
+  Therefore, for FlowCnecs that only have one minimum or one maximum value, the flow is implicitly monitored in
   only one direction (see example 1 of picture below).
 
 ![FlowCnec-Threshold](/assets/img/flowcnec.png)
@@ -272,7 +272,7 @@ In FARAO, AngleCnecs can be created by the java API, or written in the json CRAC
   .newThreshold()
     .withUnit(Unit.DEGREE)
     .withMax(1000.0)
-        .withMin(-1000.0)
+    .withMin(-1000.0)
     .add()
   .withMonitored()
   .add();

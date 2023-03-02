@@ -45,7 +45,7 @@ The determination of the optimal set-point improving a network situation require
 - the maximal reachable value according to the specified network – or the maximal authorized variation for an increasing variation,
 - the sensitivity of a set-point variation on every CNEC for the specified network.
   
-Any 2 or more range actions (of same type) can be aligned into range action "groups" in FARAO, which constraints the RAO to set them to the same set-point at all times.
+Any 2 or more range actions (of same type) can be aligned into range action "groups" in FARAO, which constrains the RAO to set them to the same set-point at all times.
 
 ### Network action {#network-action}
 

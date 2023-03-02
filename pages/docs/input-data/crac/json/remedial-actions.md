@@ -2,9 +2,9 @@ A remedial action is an action on the network that is considered capable of redu
 
 Two types of remedial action exists in FARAO:
 - **Network Actions**: they have the specificity of being binary. A Network Action is either applied on the network, or
-  not applied. Topological actions are a classic example of Network Actions.
+  not applied. Topological actions are a typical example of Network Actions.
 - **Range Actions**: they have the specificity of having a degree of freedom, a set-point. When a Range Action is
-  activated, it is activated at a given value of its set-point. PSTs are a classic example of Range Actions.
+  activated, it is activated at a given value of its set-point. PSTs are a typical example of Range Actions.
 
 Both Network Actions and Range Actions have usage rules which define the conditions under which they can be activated.
 The usage rules which exist in FARAO are:

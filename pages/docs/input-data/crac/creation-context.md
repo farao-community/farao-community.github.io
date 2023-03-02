@@ -22,8 +22,8 @@ The [CracCreationContext](https://github.com/farao-community/farao-core/blob/mas
 classes produced by the different CRAC creators allow the user to access meta-information 
 about the CRAC creation process, and to map the original file to the created artifacts in the FARAO object, or to 
 error messages if some objects could not be imported.  
-This is particularly useful is the user needs to export the RAO result in a format different from [FARAO's internal format](/docs/output-data/rao-result-json), 
-referencing CNECs and remedial actions as they were defined in the original (native) CRAC file.  
+This is particularly useful if the user needs to export the RAO result in a format different from [FARAO's internal format](/docs/output-data/rao-result-json), 
+and to reference CNECs and remedial actions as they were defined in the original (native) CRAC file.  
 Many implementations of CracCreationContext exist, depending on the original format. Every implementation has its own 
 specific API. CracCreationContexts are the main output of CracCreators.  
 ```java
@@ -69,7 +69,7 @@ original CRAC.
 The report's lines all begin with one of these tags:
 - **[ERROR]**: happens when a CRAC could not be created (e.g. if the user tried to import a [FlowBasedConstraint](fbconstraint.md) 
 file without defining a timestamp, or a [CSE](cse.md) file with a non-UCTE network file, etc.)
-- **[REMOVED]**: happens when RAO ignores elements of the CRAC because they cannot be imported, or because they are not relevant 
+- **[REMOVED]**: happens when FARAO ignores elements of the CRAC because they cannot be imported, or because they are not relevant 
 for the RAO (e.g. if a contingency is defined on an element that doesn't exist in the network, or if a CNEC is neither 
 optimized nor monitored, etc.)
 - **[ADDED]**: happens if FARAO decides to add elements that were not explicitly defined in the original file (e.g. if the 
@@ -78,7 +78,7 @@ instant in order to secure them during the preventive RAO)
 - **[ALTERED]**: happens if FARAO imports an element after altering it or ignoring some of its components (e.g. if a monitored 
 element shall be so after multiple contingencies, among which some were not imported for any reason, then only valid 
 contingencies will be used for the created CNECs)
-- **[WARN]**: non-critical warnings (e.g. if the user defined a timestamp for a CRAC format tht doesn't require one, the 
+- **[WARN]**: non-critical warnings (e.g. if the user defined a timestamp for a CRAC format that doesn't require one, the 
 timestamp is ignored and a warning is logged)
 - **[INFO]**: non-critical information
 
@@ -90,8 +90,8 @@ cracCreationContext.getCreationReport().printCreationReport();
 ## UCTE implementation {#ucte}
 A common UCTE interface [UcteCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/std_creation_context/UcteCracCreationContext.java) 
 has been defined in order to collect the common fields a CracCreationContext implementation should hold when created using a **UCTE** network.  
-Of course, as all CRAC formats use UCTE convention, so not all CRAC formats can implement this UCTE interface.  
-Actually, this interface is implemented by [FlowBasedConstraint](fbconstraint.md) and [CSE](cse.md) crac creators.  
+Of course, not all CRAC formats use UCTE convention, so not all CRAC formats can implement this UCTE interface.  
+Currently, this interface is implemented by [FlowBasedConstraint](fbconstraint.md) and [CSE](cse.md) crac creators.  
 It has all the [non-specific](#non-specific) features, plus the following.
 
 ### Branch CNEC creation contexts {#ucte-branch-cnec-context}
@@ -110,7 +110,7 @@ FARAO can construct this by concatenating multiple elements in order to ensure t
 - **CreatedCnecIds** holds the ID(s) of the FARAO CNEC(s) that were created for this native critical branch. These are the 
 IDs the user should use to query the internal CRAC & RaoResult objects.
 - **isDirectionInvertedInNetwork** is a boolean equal to true if the from/to in the original CRAC are the inverse of the 
-PowSyBl network's from/to. This means that FARAO had to invert the branch when importing it (in order to be coherent with th network) 
+PowSyBl network's from/to. This means that FARAO had to invert the branch when importing it (in order to be coherent with the network) 
 as well as its flow constraints, and that the flow results in the RaoResult will be inverted in regard to the original CRAC's convention. 
 The user should be careful to invert these results before exploiting them.   
 
@@ -471,7 +471,7 @@ It holds the following information:
 - **isAltered** is a boolean equal to true if FARAO had to alter some elements of this remedial action when importing it.
 - **ImportStatus** contains further information about the import status of the element (see [appendix](#import-status))
 - **ImportStatusDetail** is a user-friendly message explaining why the element has not been imported (if applicable)
-- **isInverted** is a boolean equal to true if the imported remedial action had to imported with regard to the original
+- **isInverted** is a boolean equal to true if the imported remedial action had to be inverted with regard to the original
   CRAC convention, in order to comply with the PowSyBl network convention (this is especially useful for HVDC range actions).
   If this field is set to true, the user should be careful to invert results accordingly (see example below).
 - **CreatedIds** holds the IDs of the FARAO remedial actions that were created from this native element (generally holds up
@@ -526,8 +526,8 @@ the RAO ("NOT_FOR_RAO"), but ignore the other ones.
 Here are the possible values of this enum:
 - **IMPORTED**: the element was successfully imported
 - **ELEMENT_NOT_FOUND_IN_NETWORK**: the element references a network element that was not found in the network (e.g. a 
-critical branch defined a line that does not exist in the PowSyBl network)
-- **INCOMPLETE_DATA**: the element is missing crucial information needed to define a wholesome FARA object (e.g. a flow 
+critical branch defined on a line that does not exist in the PowSyBl network)
+- **INCOMPLETE_DATA**: the element is missing crucial information needed to define a complete FARAO object (e.g. a flow 
 CNEC defined without a flow limit)
 - **INCONSISTENCY_IN_DATA**: the element definition is inconsistent (e.g. a PST range action that is defined on a non-PST 
 network element)

@@ -19,9 +19,9 @@ the current on both sides of the line, on the left side only, or on the right si
 In DC convention, it doesn't matter: it is enough for the RAO to monitor the left side, allowing it to have a smaller optimisation problem.  
 In AC convention, it is generally preferred to monitor both sides, as flows on both sides can be different because of losses.  
   
-In FARAO's [internal CRAC format](json), it is possible which side(s) to monitor, and this is needed in the RAO.  
-However, no CRAC format actually defines this configuration, thus is necessary to add an extra configuration object when creating a CRAC 
-object to be used in the RAO.  
+In FARAO's [internal CRAC format](json), it is possible to define which side(s) to monitor, and this is needed in the RAO.  
+However, no CRAC format actually defines this configuration, thus it is necessary to add an extra configuration object 
+when creating a CRAC object to be used in the RAO.  
 This is the purpose of FARAO's "CRAC creation parameters".
 
 ## Creating a CracCreationParameters object {#create}
@@ -48,10 +48,10 @@ defines a few parameters needed for all native CRAC formats.
 ### crac-factory {#crac-factory}
 FARAO's [Crac](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/farao_community/farao/data/crac_api/Crac.java) 
 object is actually just an interface, with a default implementation in [CracImpl](https://github.com/farao-community/farao-core/tree/master/data/crac/crac-impl/src/main/java/com/farao_community/farao/data/crac_impl).  
-As a FARAO toolbox user, you are allowed to define your own custom Crac implementation. This implementation shall be created using a [CracFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/farao_community/farao/data/crac_api/CracFactory.java).  
+As a FARAO toolbox user, you are allowed to define your own custom Crac implementation. This implementation shall be instanced using a [CracFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/farao_community/farao/data/crac_api/CracFactory.java).  
 FARAO's default implementation is [CracImplFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/main/java/com/farao_community/farao/data/crac_impl/CracImplFactory.java).  
-Parameter "crac-factory" allows the user to define which Crac implementation to use. If you do not have a custom implementation
-(which should be the case of almost all users), set it to "CracImplFactory".  
+Parameter "crac-factory" allows the user to define which CracFactory implementation (thus which Crac implementation) to 
+use. If you do not have a custom implementation (which should be the case of most users), set it to "CracImplFactory".  
 
 ### default-monitored-line-side {#default-monitored-line-side}
 This parameter defines which side(s) of a line the RAO should monitor by default (side is defined as per [PowSyBl](https://www.powsybl.org/pages/documentation/) 
@@ -100,10 +100,10 @@ See [example below](#cse-example) for a better illustration.
 ### bus-bar-change-switches {#bus-bar-change-switches}
 As explained in the CSE native CRAC format section [here](cse#bus-bar), bus-bar-change remedial actions are defined in FARAO 
 as [switch pair network actions](crac#switch-pair).  
-These switches are not defined in the native CRAC not in the original network, they should be created artificially in the 
+These switches are not defined in the native CRAC nor in the original network, they should be created artificially in the 
 network and their IDs should be sent to the RAO.  
 This parameter allows the definition of the switch(es) to open and the switch(es) to close for every bus-bar change remedial action.  
-To use it, defined for every bus-bar-change remedial action ID the IDs of the pairs od switches to open/close.  
+To use it, for every bus-bar-change remedial action ID, define the IDs of the pairs of switches to open/close.  
 See [example below](#cse-example) for a better illustration.
 
 ### full CSE example {#cse-example}
@@ -174,8 +174,8 @@ extension to the CracCreationParameters object in order to define them.
 ### timeseries-mrids {#timeseries-mrids}
 Some processes require the RAO to split the CIM CRAC into multiple smaller CRACs, in particular in order to optimize different 
 borders separately. For example, the SWE CC process requires the RAO to be split into one France-Spain RAO and one 
-Spain-Portugal RAO. This is possible thanks to the CIM CRAC's TimeSeries tags, that can are each allocated to one of the 
-two borders.  
+Spain-Portugal RAO. This is possible thanks to the CIM CRAC's TimeSeries tags, that can allocate crac objects to one of 
+the two borders.  
 The "timeseries-mrids" parameters allows the user to set which timeseries should be read from the CIM CRAC file, in order 
 to define the CNECs and remedial actions of the border-specific RAO. TimeSeries are identified by their "mRID" value.  
 See [example below](#cim-example) for a better illustration.
@@ -205,7 +205,7 @@ To define voltage CNECs, the user has to define:
 - Instants for which these elements should be monitored (among PREVENTIVE, OUTAGE, AUTO, and CURATIVE)
 - For instants other than PREVENTIVE that are selected, a list of contingencies after which these elements are monitored 
 at defined instants (the contingences shall be identified by their CIM CRAC mRIDs as they figure in the B55 Series/Contingency_Series)
-- For every instant, the minimum and maximum voltage thresholds to be applied for every nominal voltage level.  
+- For every instant, the minimum and maximum voltage thresholds to be respected for every nominal voltage level.  
 See [example below](#cim-example) for a better illustration.
 
 

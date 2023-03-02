@@ -9,10 +9,10 @@ Examples:
 - N-1: The loss of one generator
 - N-2: The loss of two parallel power lines
 
-A contingency is a probable event, for which the consequences can put the grid at risk. Therefore, contingencies must
+A contingency is a probable event that can put the grid at risk. Therefore, contingencies must
 be considered when operating the electrical transmission / distribution system.
 
-In FARAO, contingencies are defined the following way:
+In FARAO, contingencies are defined in the following way:
 
 {% capture t3_java %}
 ~~~java

@@ -105,7 +105,7 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
 ### max-mip-iterations {#max-mip-iterations}
 - **Expected value**: integer
 - **Default value**: 10
-- **Usage**: defines the maximum number of iterations to be executed the iterating linear optimiser of the RAO.  
+- **Usage**: defines the maximum number of iterations to be executed by the iterating linear optimiser of the RAO.  
   One iteration of the iterating linear optimiser includes: the resolution of one linear problem (MIP), an update of the
   network with the optimal PST taps found in the linear problem, a security analysis of the updated network and an
   assessment of the objective function based on the results of the security analysis.  
@@ -128,7 +128,7 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
   - **APPROXIMATED_INTEGERS**: a PST is represented by its tap positions, and these tap positions are considered
     proportional to the PST's angle set-point (hence the "approximated" adjective). Thus, these tap positions can be
     used as a multiplier of the sensitivity values when representing the impact of the PST on CNECs. This approach is
-    more precise and thus has the advantage of better respecting LoopFlow and MNEC constraints. But it introduces
+    more precise and thus has the advantage of better respecting Loop-Flow and MNEC constraints. But it introduces
     integer variables (tap positions) and can be harder to solve.  
     See [Using integer variables for PST taps](/docs/castor/linear-optimisation-problem/discrete-pst-tap-filler).
 
@@ -137,8 +137,8 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
 - **Default value**: 0.01
 - **Usage**: the pst-penalty-cost represents the cost of changing the PST set-points, it is used within the linear
   optimisation problem of the RAO, where, for each PST, the following term is added to the objective function: 
-  *pst-penalty-cost x |alpha - alpha0|*, where *alpha* is the optimized angle of the PST, and *alpha0* the angle in its
-  initial position.  
+  *pst-penalty-cost $$\times |\alpha - \alpha_{0}|$$*, where *$$\alpha$$* is the optimized angle of the PST, and 
+  *$$\alpha_{0}$$* the angle in its initial position.  
   If several solutions are equivalent (e.g. with the same min margin), a strictly positive pst penalty cost will favour
   the ones with the PST taps the closest to the initial situation.  
 
@@ -319,14 +319,14 @@ These parameters (ra-usage-limits-per-contingency) limit the usage of remedial a
 - **Default value**: 2^32 -1 (max integer value)
 - **Usage**: this parameter defines the maximum number of curative remedial actions allowed in the RAO. The RAO will 
   prioritize remedial actions that have the best impact on the minimum margin.  
-  This parameter is only used during the curative RAO.
+  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
 
 ### max-curative-tso {#max-curative-tso}
 - **Expected value**: integer
 - **Default value**: 2^32 -1 (max integer value)
 - **Usage**: this parameter defines the maximum number of TSOs that can apply remedial actions after a contingency. The 
   RAO will choose the best TSOs combination to maximize the minimum margin.  
-  This parameter is only used during the curative RAO.
+  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
 
 ### max-curative-ra-per-tso {#max-curative-ra-per-tso}
 - **Expected value**: a map with string keys and integer values. The keys should be the same as the RAs' operators as
@@ -335,7 +335,7 @@ These parameters (ra-usage-limits-per-contingency) limit the usage of remedial a
 - **Usage**: this parameter defines the maximum number of curative remedial actions allowed for each TSO, per contingency.  
   The TSOs should be identified using the same IDs as in the CRAC. If a TSO is not listed in this map, then the number
   of its allowed CRAs is supposed infinite.  
-  This parameter is only used during the curative RAO.
+  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
 
 ### max-curative-topo-per-tso {#max-curative-topo-per-tso}
 - **Expected value**: a map with string keys and integer values. The keys should be the same as the RAs' operators as
@@ -352,8 +352,8 @@ These parameters (ra-usage-limits-per-contingency) limit the usage of remedial a
 - **Default value**: empty map
 - **Usage**: this parameter defines the maximum number of curative PST remedial actions allowed for each TSO, per contingency.  
   The TSOs should be identified using the same IDs as in the CRAC. If a TSO is not listed in this map, then the number
-  of its allowed CRAs is supposed infinite.  
-  This parameter is only used during the curative RAO.
+  of its allowed curative PSTs is supposed infinite.  
+  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
 
 ## CNECs that should not be optimised {#not-optimized-cnecs}
 These parameters (not-optimized-cnecs) allow the activation of region-specific features, that de-activate the
@@ -369,7 +369,8 @@ optimisation of specific CNECs in specific conditions.
   If it is set to false, all CNECs are treated equally in the curative RAO.  
   This parameter has no effect on the preventive RAO.  
   This parameter should be set to true for CORE CC.
-  This parameter is not compatible with [do-not-optimize-cnec-secured-by-its-pst](#do-not-optimize-cnec-secured-by-its-pst).
+  This parameter is not compatible with [do-not-optimize-cnec-secured-by-its-pst](#do-not-optimize-cnec-secured-by-its-pst) 
+  for technical reasons.
 
 ### do-not-optimize-cnec-secured-by-its-pst {#do-not-optimize-cnec-secured-by-its-pst}
 - **Expected value**: a map with string keys and values. The keys should represent critical network element IDs, and the
@@ -381,7 +382,8 @@ optimisation of specific CNECs in specific conditions.
   taken into account if the PST has too few tap positions left to reduce the flow constraints on these CNECs.  
   This parameter affects both preventive and curative RAOs.  
   It is actually used for the SWE CC process.
-  This parameter is not compatible with [do-not-optimize-curative-cnecs-for-tsos-without-cras](#do-not-optimize-curative-cnecs-for-tsos-without-cras).
+  This parameter is not compatible with [do-not-optimize-curative-cnecs-for-tsos-without-cras](#do-not-optimize-curative-cnecs-for-tsos-without-cras)
+  for technical reasons.
 
 ## Load-flow and sensitivity computation parameters {#load-flow-and-sensitivity-computation}
 These parameters (load-flow-and-sensitivity-computation) configure the load-flow and sensitivity computations providers 
@@ -406,7 +408,7 @@ will be (e.g.) : minMargin - sensitivity-failure-over-cost.
 If this parameter is strictly positive, the RAO will discriminate the combinations of RA for which the systematic 
 analysis didn't converge. The RAO might therefore put aside the solution with the best objective-function if it has 
 lead to a sensitivity failure, and instead propose a solution whose objective-function is worse, but whose associated 
-network is converging.
+network is converging for all contingency scenarios.
 
 ### sensitivity-parameters {#sensitivity-parameters}
 - **Expected value**: SensitivityComputationParameters ([PowSyBl](https://www.powsybl.org/pages/documentation/simulation/sensitivity/) configuration)
@@ -415,7 +417,7 @@ network is converging.
 The underlying "load-flow-parameters" is also used whenever an explicit pure load-flow computation is needed. 
 
 ## Multi-threading parameters {#multi-threading}
-These parameters (multi-threading) allow you to run a RAO making most out of your computation resources.
+These parameters (multi-threading) allow you to run a RAO making the most out of your computation resources.
 
 ### contingency-scenarios-in-parallel {#contingency-scenarios-in-parallel}
 - **Expected value**: integer
@@ -461,7 +463,7 @@ See also: [Modelling loop-flows and their virtual cost](/docs/castor/linear-opti
   With *LFcnec* the loop-flow on the CNEC after optimisation, *MaxLFcnec* is the CNEC loop-flow threshold, *InitLFcnec*
   the initial loop-flow on the cnec, and *acceptableAugmentation* the so-called "loop-flow-acceptable-augmentation"
   coefficient.  
-  If this constraint cannot be respected and the loop-flow excess the aforementioned threshold, the objective function
+  If this constraint cannot be respected and the loop-flow exceeds the aforementioned threshold, the objective function
   associated to this situation will be penalized (see also [violation-cost](#loop-flow-violation-cost))
 
 ### approximation {#loop-flow-approximation}
@@ -484,8 +486,8 @@ See also: [Modelling loop-flows and their virtual cost](/docs/castor/linear-opti
 - **Expected value**: numeric values, in MEGAWATT unit
 - **Default value**: 0.0 MW
 - **Usage**: this parameter acts as a margin which tightens, in the linear optimisation problem of RAO, the bounds of the
-  loop-flow constraints. It conceptually behaves as the coefficient *c-adjustment* from the constraint below:  
-  *abs(loop-flow(cnec)) <= loop-flow-threshold - c-adjustment*  
+  loop-flow constraints. It conceptually behaves as the coefficient *cAdjustment* from the constraint below:  
+  *abs(LoopFlow(cnec)) <= LoopFlowThreshold - cAdjustment*  
   This parameter is a safety margin that can absorb some approximations made in the linear
   optimisation problem of the RAO (non-integer PSTs taps, flows approximated by sensitivity coefficients, etc.), and
   therefore increase the probability that the loop-flow constraints which are respected in the linear optimisation
@@ -528,7 +530,7 @@ See also: [Modelling MNECs and their virtual cost](/docs/castor/linear-optimisat
 ### violation-cost {#mnec-violation-cost}
 - **Expected value**: numeric values, no unit (it applies as a multiplier for the constraint violation inside the
   objective function)
-- **Default value**: 10 (same as [loopflow violation cost](#loop-flow-violation-cost))
+- **Default value**: 10.0 (same as [loop-flow violation cost](#loop-flow-violation-cost))
 - **Usage**: the penalty cost associated to the violation of a MNEC constraint.
   In order to avoid optimisation infeasibility, the MNEC constraints are soft: they can be violated. These violations
   are penalized by a significant cost, in order to guide the optimiser towards a solution where - if possible - all

@@ -96,7 +96,8 @@ Note that the [PstHelper utility class](creation-methods) can ease the creation 
 ⚪ **name**  
 ⚪ **operator**  
 🔴 **network element**: id is mandatory, name is optional  
-⚪ **groupId**: if you want to align this range action with others, set the same groupId for all  
+⚪ **groupId**: if you want to align this range action with others, set the same groupId for all. You can use any 
+group ID you like, as long as you use the same for all the range actions you want to align.  
 🔵 **speed**: mandatory if it is an automaton  
 🔴 **initial tap**  
 🔴 **tap to angle conversion map**  

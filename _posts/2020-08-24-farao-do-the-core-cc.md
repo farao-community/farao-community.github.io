@@ -14,7 +14,7 @@ FARAO v2.1.1 has been recently released. FARAO v2.1.1 notably includes all the f
 - Branch monitored in one or both directions, with thresholds defined in MW, A or %Imax
 - Branch monitored in N and N-1 states
 - AC and DC computations (for load flow and sensitivity analyses)
-- Limitation of loopflows in the RAO
+- Limitation of loop-flows in the RAO
 
 With in addition another key feature: the consideration of MNEC (Monitored Network Element) in the optimisation. The CRAC importers have also been improved, with some new development enabling to efficiently read real data in the standard file formats used for the capacity calculation of CORE, with hundreds of contingencies and thousands of Cnec.
 

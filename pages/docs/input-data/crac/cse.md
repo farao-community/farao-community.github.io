@@ -92,7 +92,7 @@ for more information on the behavior of FARAO according to the different directi
 - **PTDFListRef** : FARAO does not interact with this tag
 - **Remedial actions** : These remedial actions will be available with OnFlowConstraint usage rule for the branches they are associated to
 
-## Outages {#uutages}
+## Outages {#outages}
 ```xml
 <CRACSeries>
     <Outages>
@@ -322,7 +322,7 @@ These modifications are actually impossible to do easily in a PowSyBl network wi
 For this reason, the user shall pre-process the network in order to create fictitious buses and switches that shall be opened 
 or closed by these remedial actions.  
 
-![busb-bar-equivalent-model](/assets/img/busbar.png)  
+![bus-bar-equivalent-model](/assets/img/busbar.png)  
 
 Using [CseCracCreationParameters](creation-parameters.md#cse), FARAO can then map these remedial actions to the switches 
 created by the user, and interpret BusBar remedial actions as [SwitchPairs](crac#switch-pair).
