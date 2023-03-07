@@ -1,6 +1,6 @@
 Here is a detailed description of how the voltage monitoring algorithm operates:
 - Apply optimal preventive remedial actions from RaoResult on the network
-- From the CRAC, get the set of states on which VoltageeCnecs exist
+- From the CRAC, get the set of states on which VoltageCnecs exist
 - For each of these states, monitor voltages:
   - Use a new copy of the network
   - If the state is not preventive,

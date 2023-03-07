@@ -40,7 +40,8 @@ see-also: |
 | RA setpoint | $$A(r,s)$$ | setpoint of RangeAction $$r$$ on state $$s$$| Real value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | Range lower bound[^1] | Range upper bound[^1] |
 | RA setpoint absolute variation | $$\Delta A(r,s)$$ | The absolute setpoint variation of RangeAction $$r$$ on state $$s$$, from setpoint on previous state to "RA setpoint" | Real positive value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | 0 | $$+\infty$$ |
 
-[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the 
+types of their ranges: ABSOLUTE, RELATIVE_TO_INITIAL_NETWORK, RELATIVE_TO_PREVIOUS_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
 ## Defined constraints {#defined-constraints}
 

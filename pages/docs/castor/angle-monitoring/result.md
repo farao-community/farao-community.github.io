@@ -17,7 +17,7 @@ AngleMonitoringResult angleMonitoringResult2 =new AngleMonitoringResultImporter(
 The AngleMonitoringResult object contains the results of the angle monitoring algorithm.
 
 #### Status {#result-status}
-The AngleMonitoringResult has methods describing the security status of the network in regard to the angle constraints 
+The AngleMonitoringResult describes the security status of the network in regard to the angle constraints 
 defined in the CRAC:
 - **SECURE**: the network is secure; no angle thresholds are violated
 - **UNSECURE**: the network is not secure; at least one angle CNEC has an angle constraint

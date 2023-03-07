@@ -94,7 +94,7 @@ INFO  c.f.f.commons.logs.RaoBusinessLogs - Limiting element #01: margin = -179.1
 INFO  c.f.f.commons.logs.RaoBusinessLogs - Limiting element #02: margin = -173.31 MW, element FFR2AA1  FFR3AA1  1 at state preventive, CNEC ID = "FR2-FR3-O - preventive"
 ~~~
 The RAO successfully decreased the objection function value to 179.1 by setting the tap position of PST "PRA_CRA_PST_BE" to 1.
-(Note that the objective function see by the RAO is the opposite of the minimum margin).  
+(Note that the objective function seen by the RAO is the opposite of the minimum margin).  
 So it increased the margin on the most limiting element from -182MW to -179MW.  
 This is not a lot (but it's a good start); you can limit using range actions for small margin improvements using 
 [the dedicated parameters](/docs/parameters#range-actions-optimization).
@@ -217,14 +217,14 @@ This concludes the preventive RAO.
 The RAO applies the optimal preventive remedial actions on the network then re-assesses it against all CNEC constraints 
 in the CRAC.  
 In this case the most limiting element is still the preventive CNEC detected by the RAO (so we don't have any hope of 
-improving its margin anymore), but the second most limiting element is a auto CNEC that was not in the preventive 
+improving its margin anymore), but the second most limiting element is an auto CNEC that was not in the preventive 
 perimeter: "NL2-BE3-O - auto".  
 Most importantly, a virtual cost is created: the preventive remedial actions must have violated a soft constraint (e.g. 
-MNEC or loop-flow constraint) without realising, because the constraint was on CNEC of the AUTO instant.  
-The following will have to take care of this.
+MNEC or loop-flow constraint) without noticing so, because the constraint was on a CNEC of the AUTO instant.  
+The following steps will have to take care of this.
 
 ## Contingency scenarios
-Every contingency is treated seperately:
+Every contingency is treated separately:
 - The AUTO instant is simulated to select triggered automatons (if AUTO CNECs and remedial actions exist)
 - The CURATIVE instant is optimised in a search-tree to select best curative actions
 
@@ -259,7 +259,6 @@ has a negative margin of -32MW initially.
 The FARAO automaton simulator shifts the PST's tap (using sensitivity values) until the CNEC is secured or the PST 
 reaches its limit tap. In this case, shifting the PST's set-point from 0.0 to 1.56 (in radians) is enough to increase 
 the margin on the CNEC from -32 to +7 MW.  
-However, the virtual cost problem is still not solved, as can be seen in the final overall cost.  
 
 ### Curative remedial actions optimisation
 The curative search-tree starts by assessing the most limiting element of the curative perimeter.  

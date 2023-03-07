@@ -14,7 +14,7 @@ With:
   results.
 - **angleMonitoringResult**: the [angle monitoring result object](/docs/engine/angle-monitoring#result).
 - **raoParameters**: the [RaoParameters](/docs/parameters) used in the RAO.
-- **exporterParameters**: a specific object that te user should define, containing meta-information that will be written
+- **exporterParameters**: a specific object that the user should define, containing meta-information that will be written
   in the header of the CNE file:
   - **documentId**: document ID to be written in "mRID" field
   - **revisionNumber**: integer to be written in "revisionNumber" field

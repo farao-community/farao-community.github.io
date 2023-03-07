@@ -5,7 +5,8 @@ It can have one of the following values:
 - **DEFAULT**: the sensitivity / load-flow computations converged normally
 - **FAILURE**: the sensitivity / load-flow computations failed
 
-The user should be sufficiently warned when any state's sensitivity / load-flow computation fails.
+When the results are returned to the user of your application, they should be sufficiently warned if any state's 
+sensitivity / load-flow computation has failed.
 
 {% capture t1_java %}
 ~~~java
@@ -71,7 +72,7 @@ Example:
 ### Objective function cost results {#cost-results}
 Contains information about the reached objective function value, seperated into functional and virtual costs:
 - the **functional** cost reflects the business value of the objective (e.g. the cost associated to the minimum margin and the business penalties on usage of remedial actions)
-- the **virtual** cost reflects the violation of certain constraints (e.g. MNEC & loop-flow constraints)
+- the **virtual** cost reflects the violation of some constraints (e.g. MNEC & loop-flow constraints)
 
 {% capture t2_java %}
 ~~~java

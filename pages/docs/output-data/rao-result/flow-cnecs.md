@@ -241,7 +241,7 @@ The commercial flow on a CNEC.
 {% capture t7_java %}
 ~~~java
 // get the commercial flow on a given flow cnec, at a given side, in a given unit, at a given state
-double getLoopFlow(OptimizationState optimizationState, FlowCnec flowCnec, Side side, Unit unit);
+double getCommercialFlow(OptimizationState optimizationState, FlowCnec flowCnec, Side side, Unit unit);
 ~~~
 {% endcapture %}
 {% capture t7_json %}

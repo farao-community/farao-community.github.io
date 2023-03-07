@@ -13,8 +13,8 @@ see-also: |
   [GLSK](/docs/input-data/glsk)
 ---
 
-GLSK in CSE format are defined within XML files. This format is used for the SWE region.  
-The main tag of the document is **GLSK_MarketDocument**.
+GLSK in CSE format are defined within XML files. This format is used for the CSE region.  
+The main tag of the document is **GSKDocument**.
 
 ## Header {#header}
 

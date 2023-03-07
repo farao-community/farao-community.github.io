@@ -401,7 +401,7 @@ from inside the RAO.
 
 ### sensitivity-failure-over-cost {#sensitivity-failure-over-cost}
 - **Expected value**: numeric value, where the unit is that of the objective function
-- **Default value**: 0.0
+- **Default value**: 10000.0
 - **Usage**: if the systematic sensitivity analysis fails (= diverged) due to a combination of remedial actions, its 
 objective function assessment will be penalized by this value. In other words, the criterion for this combination of RA 
 will be (e.g.) : minMargin - sensitivity-failure-over-cost.  

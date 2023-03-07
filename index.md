@@ -43,7 +43,7 @@ local validation of the 70% margin required by the Clean Energy Package) or stud
 Transparency is in the DNA of this project. Functional and technical specifications, project's roadmap, code and its 
 level of quality are vailable on the website and updated frequently.
 
-As ENTSO-E stated in 2020 [Annual Work Programme](https://consultations.entsoe.eu/entso-e-general/have-your-say-on-entso-es-annual-work-programme-20/supporting_documents/191017_Entso-e%20AWP%202020_Stakeholder%20consultation.pdf):
+As Entso-e stated in 2020 [Annual Work Programme](https://eepublicdownloads.entsoe.eu/clean-documents/Publications/ENTSO-E%20general%20publications/200217_ENTSO-E_Annual%20Work%20Programme%202020%20(final).pdf):
 > The future of regional TSO coordination and focus of the RCCs in the next years will be strongly driven by
 > the integration of costly remedial actions in complex capacity calculation methodologies [...].
 >

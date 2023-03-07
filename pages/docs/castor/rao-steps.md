@@ -26,8 +26,9 @@ of post-fault actions (if applicable).
 
 This leads to the consideration of different optimisation perimeters. Each perimeter calls for the application of one 
 set of remedial actions. The preventive perimeter is the first computed. Optimisation will try to maximise the objective 
-function value on this first perimeter. Then, each contingency in curative defines one perimeter of curative optimisation. 
-Optimisation will try to maximise the objective function value of each of these perimeters.
+function value on this first perimeter (or just secure it, depending on the stop criterion). Then, each contingency in 
+curative defines one perimeter of curative optimisation. Optimisation will try to maximise the objective function value 
+of each of these perimeters (or just secure it, depending on the stop criterion).
 
 ## Preventive perimeter {#preventive-rao}
 
@@ -39,7 +40,7 @@ Overloads potentially reached on this perimeter are to be solved with preventive
 
 ## Automaton perimeters {#auto-rao}
 
-An automaton perimeter is defined for each defined contingency. Each automaton perimeter is formed by:
+An automaton perimeter can be defined for each defined contingency. Each automaton perimeter is formed by:
 - CNECs of the “after automatons” defined with a limit of type TATL. All CNECs are defined upon the same contingency.
 
 Overloads potentially reached on this perimeter can possibly be solved with automatons (ARA). 
@@ -47,7 +48,7 @@ Optimal preventive actions selected by the preventive RAO are applied in this pe
 
 ## Curative perimeters {#curative-rao}
 
-Finally, a curative perimeter is defined for each defined contingency. Each curative perimeter is formed by:
+Finally, a curative perimeter can be defined for each defined contingency. Each curative perimeter is formed by:
 - CNECs of the “after curative situation” defined with a limit of type PATL. All CNECs defined upon the same contingency.
 
 Overloads potentially reached on this perimeter are to be solved with curative actions. 

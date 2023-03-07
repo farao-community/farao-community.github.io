@@ -24,7 +24,8 @@ see-also: |
 | PstRangeAction tap bounds | $$\underline{t(r)} \: , \: \overline{t(r)}$$ | min and max tap[^1] of PstRangeAction $$r$$ |
 | tap-to-angle conversion function | $$f_r(t) = \alpha$$ | Discrete function $$f$$, which gives, for a given tap of the PstRangeAction $$r$$, its associated angle value |
 
-[^1]: PST range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+[^1]: PST range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the 
+types of their ranges: ABSOLUTE, RELATIVE_TO_INITIAL_NETWORK, RELATIVE_TO_PREVIOUS_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
 ## Used parameters {#parameters}
 

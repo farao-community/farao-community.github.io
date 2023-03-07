@@ -29,7 +29,8 @@ see-also: |
 | Sensitivities   | $$\sigma _{n}(r,c,s)$$     | sensitivity of RangeAction $$r$$ on FlowCnec $$c$$ for state $$s$$         |
 | cnecPstPairs    | $$(c, r)\in \mathcal{CP}$$ | These are CNEC-PST combinations defined by the user in the [do-not-optimize-cnec-secured-by-its-pst](/docs/parameters#do-not-optimize-cnec-secured-by-its-pst) parameter. |
 
-[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the 
+types of their ranges: ABSOLUTE, RELATIVE_TO_INITIAL_NETWORK, RELATIVE_TO_PREVIOUS_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
 ## Used parameters {#parameters}
 
@@ -59,7 +60,7 @@ It should be equal to 1 if the PST has enough taps left to secure the associated
 This is estimated using sensitivity values.  
 
 $$\forall (c, r)\in \mathcal{CP}$$  
-let $$s$$ be the state on $$c$$ which is evaluated  
+let $$s$$ be the state on which $$c$$ is evaluated  
 and $$bigM(r, s) = A^{+}(r, s) - A^{-}(r, s)$$  
 
 - **if $$\sigma _{n}(r,c,s) \gt 0$$**  
