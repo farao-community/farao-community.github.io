@@ -319,7 +319,7 @@ perimeter, increased from +7 to +224 MW.
 ## Second preventive RAO
 After optimising preventive remedial actions, simulating automatons, and optimising curative remedial actions, the 
 network situation is re-assessed after applying these actions on it.  
-Because the preventive remedial actions created a big virtual cost, a second preventive RAO is executed.  
+Then a second preventive RAO is executed.  
 First, the RAO applies only automatons and curative actions on the network and assesses the constraints.
 ~~~
 DEBUG c.f.farao.commons.logs.TechnicalLogs - Systematic sensitivity analysis with applied RA [start]
