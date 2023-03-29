@@ -571,6 +571,8 @@ Zones are seperated by + or -.
   getting close to zero. This parameter acts as a lower bound to the denominator.
 
 # Examples {#examples}
+> ⚠️  **NOTE**  
+> The following examples in json and yaml are not equivalent
 
 {% capture t1_json %}
 ~~~json
@@ -701,57 +703,56 @@ Zones are seperated by + or -.
 ~~~
 {% endcapture %}
 {% capture t1_itools %}
-**TODO**  
 Based on PowSyBl's [configuration mechanism](https://www.powsybl.org/pages/documentation/user/configuration/).
 ~~~yml
-load-flow:
-  default-impl-name: OpenLoadFlow
+rao-objective-function:
+  type: MAX_MIN_MARGIN_IN_AMPERE
+  preventive-stop-criterion: SECURE
+  curative-stop-criterion: SECURE
 
-sensitivity-analysis:
-  default-impl-name: OpenLoadFlow
+rao-range-actions-optimization:
+  max-mip-iterations: 5
+  pst-penalty-cost: 0.01
+  pst-sensitivity-threshold: 0.01
+  pst-model: APPROXIMATED_INTEGERS
+
+rao-linear-optimization-solver:
+  solver: CBC
+
+rao-topological-actions-optimization:
+  max-search-tree-depth: 3
+  predefined-combinations: [ "{na1}+{na2}", "{na3}+{na4}+{na5}" ]
+  relative-minimum-impact-threshold: 0.0
+  absolute-minimum-impact-threshold: 2.0
+
+rao-multi-threading:
+  contingency-scenarios-in-parallel: 4
+  preventive-leaves-in-parallel: 4
+  curative-leaves-in-parallel: 1
+
+rao-second-preventive-rao:
+  execution-condition: POSSIBLE_CURATIVE_IMPROVEMENT
+  re-optimize-curative-range-actions: true
+  hint-from-first-preventive-rao: true
+
+rao-not-optimized-cnecs:
+  do-not-optimize-curative-cnecs-for-tsos-without-cras: false
+
+rao-load-flow-and-sensitivity-computation:
+  load-flow-provider: OpenLoadFlow
+  sensitivity-provider: OpenLoadFlow
 
 load-flow-default-parameters:
   voltageInitMode: DC_VALUES
   balanceType: PROPORTIONAL_TO_GENERATION_P
   countriesToBalance: AL,AT,BA,BE,BG,CH,CZ,DE,ES,FR,GR,HR,HU,IT,ME,MK,NL,PL,PT,RO,RS,SI,SK,UA
-  phaseShifterRegulationOn: true
+  update parameters to version 2.0 phaseShifterRegulationOn: true
 
 open-loadflow-default-parameters:
   minPlausibleTargetVoltage: 0.5
   maxPlausibleTargetVoltage: 1.5
   plausibleActivePowerLimit: 10000
   newtonRaphsonConvEpsPerEq : 1.0E-2
-  minRealisticVoltage: 0.4
-  maxRealisticVoltage: 1.6
-
-rao-parameters:
-  objective-function: MAX_MIN_MARGIN_IN_AMPERE
-  max-number-of-iterations: 5
-  optimization-solver: XPRESS
-  relative-mip-gap : 0.001
-  solver-specific-parameters : THREADS 1 MAXNODE 100000 MAXTIME 300
-  pst-optimization-approximation: APPROXIMATED_INTEGERS
-  pst-penalty-cost: 0.01
-  pst-sensitivity-threshold : 0.01
-  sensitivity-fallback-overcost: 0.0
-  rao-with-loop-flow-limitation: false
-  rao-with-mnec-limitation: false
-  perimeters-in-parallel: 14
-  load-flow-provider: OpenLoadFlow
-  sensitivity-provider: OpenLoadFlow
-  
-search-tree-rao-parameters:
-  maximum-search-depth: 3
-  preventive-rao-stop-criterion: SECURE
-  curative-rao-stop-criterion: SECURE
-  absolute-network-action-minimum-impact-threshold: 2.0
-  relative-network-action-minimum-impact-threshold: 0.0
-  preventive-leaves-in-parallel: 14
-  curative-leaves-in-parallel: 1
-  second-preventive-optimization-condition: POSSIBLE_CURATIVE_IMPROVEMENT
-  global-opt-in-second-preventive: true
-  second-preventive-hint-from-first-preventive: true
-  curative-rao-optimize-operators-not-sharing-cras : true
 ~~~
 {% endcapture %}
 {% include /tabs.html id="t1" tab1name="Json" tab1content=t1_json tab2name="iTools" tab2content=t1_itools %}
