@@ -68,7 +68,14 @@ This is why **most of the information in the RAO results can have up to 4 values
 - **AFTER_CRA**: values after applying optimal **C**urative **R**emedial **A**ctions
 _See also: [RAO steps](/docs/engine/ra-optimisation/rao-steps)_
 
-{% include_relative meta-info.md %}  
+### Computation status {#computation-status}
+{% include_relative computation-status.md %}  
+
+### Executed optimisation steps {#executed-optimisation-steps}
+{% include_relative steps.md %}
+
+### Objective function cost results {#cost-results}
+{% include_relative obj-function.md %}
 
 ### Flow CNECs results {#flow-cnecs-results}
 {% include_relative flow-cnecs.md %}  
