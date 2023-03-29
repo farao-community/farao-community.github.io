@@ -9,6 +9,7 @@ docu-parent: none
 feature-img: "assets/img/farao3.jpg"
 tags: [Applications]
 order: 1
+summary-hmax: 0
 ---
 
 Many operational applications involve optimising remedial actions for critical network elements; and these applications often need to achieve different goals.

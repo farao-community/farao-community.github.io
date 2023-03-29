@@ -9,6 +9,7 @@ docu-parent: none
 feature-img: "assets/img/farao3.jpg"
 tags: [Applications]
 order: 2
+summary-hmax: 0
 ---
 
 ## CASTOR - maximization of the minimum margin

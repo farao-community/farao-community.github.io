@@ -9,6 +9,7 @@ docu-parent: none
 feature-img: "assets/img/farao3.jpg"
 tags: [Applications]
 order: 4
+summary-hmax: 0
 ---
 
 ## FARAO closed optimisation
