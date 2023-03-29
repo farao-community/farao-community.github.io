@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 7
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [DiscretePstTapFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/DiscretePstTapFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -22,13 +24,14 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | PstRangeAction tap bounds | $$\underline{t(r)} \: , \: \overline{t(r)}$$ | min and max tap[^1] of PstRangeAction $$r$$ |
 | tap-to-angle conversion function | $$f_r(t) = \alpha$$ | Discrete function $$f$$, which gives, for a given tap of the PstRangeAction $$r$$, its associated angle value |
 
-[^1]: PST range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+[^1]: PST range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the 
+types of their ranges: ABSOLUTE, RELATIVE_TO_INITIAL_NETWORK, RELATIVE_TO_PREVIOUS_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
 ## Used parameters {#parameters}
 
 | Name | Details |
 |---|---|
-| [pst-optimization-approximation](/docs/parameters/json-parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
+| [pst-optimization-approximation](/docs/parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
 
 ## Defined optimization variables {#defined-variables}
 
@@ -111,11 +114,4 @@ $$
 \begin{equation}
 \delta ^{+} (r) + \delta ^{-} (r)  \leq 1 , \forall r \in \mathcal{RA}^{PST}
 \end{equation}
-$$  
-
-<br>
-
----
-Code reference: [DiscretePstTapFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/DiscretePstTapFiller.java)
-
----
+$$

@@ -9,6 +9,7 @@ docu-parent: none
 feature-img: "assets/img/farao3.jpg"
 tags: [Applications]
 order: 3
+summary-hmax: 0
 ---
 
 ## CASTOR - positive margin stop criterion

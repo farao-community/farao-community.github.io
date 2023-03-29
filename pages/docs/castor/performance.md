@@ -34,7 +34,7 @@ When performing optimisation on multiple timestamps, it is also possible to sepa
 the different studied situations on different threads.
 
 ---
-See also: [Computations parallelism parameters](/docs/parameters/json-parameters#parallelism), [Parallelizing perimeters parameter](/docs/parameters/json-parameters#perimeters-in-parallel)
+See also: [Computations parallelism parameters](/docs/parameters#multi-threading)
 
 ---
 
@@ -59,7 +59,7 @@ by national operators due to the timing constraint for real-time operations. For
 consideration.
 
 ---
-See also: [Search stop criterion parameters](/docs/parameters/json-parameters#stop-criterion-parameters)
+See also: [Search stop criterion parameters](/docs/parameters#max-search-tree-depth)
 
 ---
 
@@ -79,6 +79,6 @@ This parameter can be defined also through absolute increase :
 - minimum impact (in MW/degree or A/degree) for the use of PST/HVDC
 
 ---
-See also: [Network actions impact parameters](/docs/parameters/json-parameters#ra-usage-impact), [Range actions impact parameters](/docs/parameters/json-parameters#range-action-usage-limitation)
+See also: [Network actions impact parameters](/docs/parameters#ra-usage-impact), [Range actions impact parameters](/docs/parameters#range-action-usage-limitation)
 
 ---

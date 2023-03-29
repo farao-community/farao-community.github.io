@@ -52,7 +52,7 @@ change due to unforeseen complexity in implementing features or priority changes
 - Branch monitored in one or both directions, with **thresholds defined in MW, I or %Imax**
 - Branch monitored in **N and N-1 states**
 - **AC and DC computations** (for load flow and sensitivity analyses)
-- Limitation of **loopflows** in the RAO, as described in the ACER methodology
+- Limitation of **loop-flows** in the RAO, as described in the ACER methodology
 
 ### Partial release of CASTOR: v*2.0.0* (March 2020)
 

@@ -6,9 +6,11 @@ hide: true
 root-page: Documentation
 docu-section: CASTOR
 docu-parent: Linear Remedial Actions Optimisation
-order: 10
+order: 11
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [RaUsageLimitsFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/RaUsageLimitsFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -27,7 +29,7 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | Maximum number of RAs per TSO | $$nRA^{max}(tso,s)$$ | Maximum number of range actions to use by a given TSO on state $$s$$|
 | TSOs | $$tso \in \mathcal{TSO}$$ | Set of all TSOs operating a range action in RangeActions |
 
-*Note that this filler is currently only used for curative RAO, and uses parameters defined [here](/docs/parameters/json-parameters#ra-usage-number). Nonetheless, they are modified to take into account applied topological actions first.*
+*Note that this filler is currently only used for curative RAO, and uses parameters defined [here](/docs/parameters#ra-usage-number). Nonetheless, they are modified to take into account applied topological actions first.*
 
 ## Defined optimization variables {#defined-variables}
 
@@ -60,7 +62,7 @@ $$
 
 *⚠️ In order to mitigate rounding issues, and ensure that the max and min setpoints are feasible, a small "epsilon" (1e-5) is added to max / subtracted to min setpoint.*  
 
-*⚠️ In order to mitigate PST tap ↔ angle approximation in "[APPROXIMATED_INTEGERS](/docs/parameters/json-parameters#pst-optimization-approximation)" mode, and ensure that the initial setpoint is feasible, a correction factor is added or subtracted from the initial setpoint in the constraints above. This coefficient is computed as 30% of the average tap to angle conversion factor:*  
+*⚠️ In order to mitigate PST tap ↔ angle approximation in "[APPROXIMATED_INTEGERS](/docs/parameters#pst-optimization-approximation)" mode, and ensure that the initial setpoint is feasible, a correction factor is added or subtracted from the initial setpoint in the constraints above. This coefficient is computed as 30% of the average tap to angle conversion factor:*  
 *correction = 0.3 x abs((max angle - min angle) / (max tap - min tap))*
 
 ### Maximum number of remedial actions
@@ -107,12 +109,4 @@ $$
 \begin{equation}
 \sum_{r,s \in \mathcal{RA}(tso)} \delta (r,s) \leq nRA^{max}(tso,s), \forall tso \in \mathcal{TSO}, \forall s \in \mathcal{S}
 \end{equation}
-$$   
-
-<br>
-
-
----
-Code reference: [RaUsageLimitsFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/RaUsageLimitsFiller.java)
-
----
+$$

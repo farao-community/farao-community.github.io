@@ -1,9 +1,56 @@
 ---
-layout: page
-bootstrap: true
+layout: default
 ---
 
-<div class="container-fluid">
-    {% include sidebar.html %}
-    {{ content }}
-</div>
+<article>
+    <section class="post-content">
+        <div class="bootstrap-iso">
+            <div>
+                <!-- Navigation bar -->
+                {% include sidebar.html %}
+                <div>
+                    <!-- Page header -->
+                    <header id="main" style="text-align: left; padding: 0; margin: 0">
+                        <h1>
+                            {{ page.title }}
+                        </h1>
+                        {% if page.subtitle %}
+                        <h2 class="subtitle">{{ page.subtitle }}</h2>
+                        {% endif %}
+                    </header>
+                    <hr style="margin-bottom: 1vh; margin-top: 1vh">
+
+                    <!-- "Contents" summary -->
+                    {%if page.summary-hmax != 0 %}
+                    <p style="margin: 1px; font-weight: bold">
+                        Contents
+                    </p>
+                    {% include toc.html html=content h_max=page.summary-hmax %}
+                    <hr>
+                    {% endif %}
+
+                    <!-- Actual content -->
+                    {{ content }}
+                </div>
+
+                <!-- "See also" footer -->
+                {% if page.see-also %}
+                <hr style="margin-bottom: 1vh; margin-top: 5vh">
+                <p style="margin: 1px; font-weight: bold">
+                    See also
+                </p>
+                <p style="margin: 1px">
+                    {{ page.see-also | markdownify }}
+                </p>
+                <hr>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tag list for portfolio -->
+    {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+    {% include tags_list.html tags=tag_list %}
+</article>
+

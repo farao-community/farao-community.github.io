@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 6
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [ContinuousRangeActionGroupFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/ContinuousRangeActionGroupFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -19,9 +21,9 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 ## Used parameters {#parameters}
 
-| Name | Details |
-|---|---|
-| [pst-optimization-approximation](/docs/parameters/json-parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *CONTINUOUS* |
+| Name                                                   | Details |
+|--------------------------------------------------------|---|
+| [pst-model](/docs/parameters#pst-model) | This filler is used only if this parameters is set to *CONTINUOUS* |
 
 ## Defined optimization variables {#defined-variables}
 
@@ -43,11 +45,4 @@ $$
 \begin{equation}
 A^{group}(g) = A(r), \forall r \in \mathcal{RA}(g), \forall g \in \mathcal{G}^{c}_{RA}
 \end{equation}
-$$  
-
-<br>
-
----
-Code reference: [ContinuousRangeActionGroupFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/ContinuousRangeActionGroupFiller.java)
-
----
+$$

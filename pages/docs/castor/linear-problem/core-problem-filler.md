@@ -9,6 +9,8 @@ docu-parent: Linear Remedial Actions Optimisation
 order: 1
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
+see-also: |
+    [CoreProblemFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/CoreProblemFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -27,8 +29,8 @@ tags: [Docs, Search Tree RAO, CASTOR]
 
 | Name | Symbol | Details | Source |
 |---|---|---|---|
-| sensitivityThreshold |  | Set to zero the sensitivities of RangeActions below this threshold; thus avoiding the activation of RangeActions which have too small an impact on the flows (can also be achieved with penaltyCost). This simplifies & speeds up the resolution of the optimization problem (can be necessary when the problem contains integer variables). However, it also adds an approximation in the computation of the flows within the MILP, which can be tricky to handle when the MILP contains hard constraints on loop-flows or monitored FlowCnecs. | Equal to [pst-sensitivity-threshold](/docs/parameters/json-parameters#pst-sensitivity-threshold) for PSTs, [hvdc-sensitivity-threshold](/docs/parameters/json-parameters#hvdc-sensitivity-threshold) for HVDCs, and [injection-ra-sensitivity-threshold](/docs/parameters/json-parameters#injection-ra-sensitivity-threshold) for injection range actions |
-| penaltyCost | $$c^{penalty}_{ra}$$ | Supposedly a small penalization, in the use of the RangeActions. When several solutions are equivalent, this favours the one with the least change in the RangeActions' setpoints (compared to the initial situation). It also avoids the activation of RangeActions which have to small an impact on the objective function. | Equal to [pst-penalty-cost](/docs/parameters/json-parameters#pst-penalty-cost) for PSTs, [hvdc-penalty-cost](/docs/parameters/json-parameters#hvdc-penalty-cost) for HVDCs, and [injection-ra-penalty-cost](/docs/parameters/json-parameters#injection-ra-penalty-cost) for injection range actions |
+| sensitivityThreshold |  | Set to zero the sensitivities of RangeActions below this threshold; thus avoiding the activation of RangeActions which have too small an impact on the flows (can also be achieved with penaltyCost). This simplifies & speeds up the resolution of the optimization problem (can be necessary when the problem contains integer variables). However, it also adds an approximation in the computation of the flows within the MILP, which can be tricky to handle when the MILP contains hard constraints on loop-flows or monitored FlowCnecs. | Equal to [pst-sensitivity-threshold](/docs/parameters#pst-sensitivity-threshold) for PSTs, [hvdc-sensitivity-threshold](/docs/parameters#hvdc-sensitivity-threshold) for HVDCs, and [injection-ra-sensitivity-threshold](/docs/parameters#injection-ra-sensitivity-threshold) for injection range actions |
+| penaltyCost | $$c^{penalty}_{ra}$$ | Supposedly a small penalization, in the use of the RangeActions. When several solutions are equivalent, this favours the one with the least change in the RangeActions' setpoints (compared to the initial situation). It also avoids the activation of RangeActions which have to small an impact on the objective function. | Equal to [pst-penalty-cost](/docs/parameters#pst-penalty-cost) for PSTs, [hvdc-penalty-cost](/docs/parameters#hvdc-penalty-cost) for HVDCs, and [injection-ra-penalty-cost](/docs/parameters#injection-ra-penalty-cost) for injection range actions |
 
 ## Defined optimization variables {#defined-variables}
 
@@ -38,7 +40,8 @@ tags: [Docs, Search Tree RAO, CASTOR]
 | RA setpoint | $$A(r,s)$$ | setpoint of RangeAction $$r$$ on state $$s$$| Real value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | Range lower bound[^1] | Range upper bound[^1] |
 | RA setpoint absolute variation | $$\Delta A(r,s)$$ | The absolute setpoint variation of RangeAction $$r$$ on state $$s$$, from setpoint on previous state to "RA setpoint" | Real positive value | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | 0 | $$+\infty$$ |
 
-[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the types of their ranges: ABSOLUTE, PREVIOUS_TO_INITIAL_NETWORK, PREVIOUS_TO_INITIAL_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
+[^1]: Range actions' lower & upper bounds are computed using CRAC + network + previous RAO results, depending on the 
+types of their ranges: ABSOLUTE, RELATIVE_TO_INITIAL_NETWORK, RELATIVE_TO_PREVIOUS_INSTANT (more information [here](/docs/input-data/crac/json#range-actions))
 
 ## Defined constraints {#defined-constraints}
 
@@ -83,8 +86,3 @@ $$
 \min \sum_{r,s \in \mathcal{RA}} (c^{penalty}_{ra}(r) \Delta A(r,s))
 \end{equation}
 $$
-
----
-Code reference: [CoreProblemFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/CoreProblemFiller.java)
-
----

@@ -27,7 +27,7 @@ It is published on [GitHub](https://github.com/farao-community) under the [Mozil
 for power systems coordinated capacity calculation and security analysis projects.
 - Computation engines - providing open interface and efficient implementation of standard
 tools for supporting capacity calculation projects.
-- Exchange standards interface - providing importers and exporters to support ENTSOE exchange
+- Exchange standards interface - providing importers and exporters to support ENTSO-E exchange
 data interface in projects implementation.    
 
 By extending the [PowSyBl](http://www.powsybl.org) framework, FARAO aims at providing an open, transparent,
