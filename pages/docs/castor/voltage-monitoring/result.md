@@ -1,3 +1,6 @@
+The [VoltageMonitoringResult](https://github.com/farao-community/farao-core/blob/master/monitoring/voltage-monitoring/src/main/java/com/farao_community/farao/monitoring/voltage_monitoring/VoltageMonitoringResult.java)
+object contains all the relevant results of the voltage monitoring algorithm.
+
 ### JSON import & export {#import-export}
 The [VoltageMonitoringResult](https://github.com/farao-community/farao-core/blob/master/monitoring/voltage-monitoring/src/main/java/com/farao_community/farao/monitoring/voltage_monitoring/VoltageMonitoringResult.java) 
 can be written to and read from a JSON file.  
