@@ -6,7 +6,7 @@ hide: true
 root-page: Documentation
 docu-section: Input Data
 docu-parent: Input Data
-order: 4
+order: 5
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 summary-hmax: 0
@@ -38,7 +38,7 @@ A virtual hub therefore has :
 - an EIC code (e.g. 17Y000000930814J) 
 - and an associated UCTE node (e.g. XFR_ES11).
 
-The EIC code can be also found in the RefProg file. The virtual hub is indeed referenced in the refProg file with a given associated net position.
+The EIC code can also be found in the [RefProg file](/docs/input-data/reference-program). The virtual hub is indeed referenced in the RefProg file with a given associated net position.
 The EIC code can however not be found in the GLSK file, the GLSK of the virtual hub is implicitly a factor of 100% on the unique UCTE node of the hub.
 
 
