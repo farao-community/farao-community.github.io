@@ -21,8 +21,8 @@ The RAO parameters allow tuning the RAO:
 
 RAO parameters can be constructed using:
 - The Java API (see [source code](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/rao-api/src/main/java/com/farao_community/farao/rao_api/parameters/RaoParameters.java))
-- A JSON file (see [example](#json-example))
-- A PowSyBl configuration file (see [example](#itools-example))
+- A JSON file (see [example](#examples))
+- A PowSyBl configuration file (see [example](#examples))
 
 # Global parameters {#global-parameters}
 These parameters should be always set in the RAO parameters file or object.
@@ -173,7 +173,7 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
 ### injection-ra-penalty-cost {#injection-ra-penalty-cost}
 - **Expected value**: numeric value, unit: unit of the objective function / MW
 - **Default value**: 0.001
-- **Usage**: the injection-ra-penalty-cost the cost of changing the injection set-points, it is used within the linear
+- **Usage**: the injection-ra-penalty-cost represents the cost of changing the injection set-points, it is used within the linear
   optimisation problem of the RAO, in the same way as the two types of RangeAction above.
 
 ### injection-ra-sensitivity-threshold {#injection-ra-sensitivity-threshold}
