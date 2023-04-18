@@ -23,7 +23,7 @@ In this page, we present:
 - where to find the RaoResult instance,
 - how to save a RaoResult java object to a JSON file,
 - how to import a RaoResult java object from a JSON file,
-- how to access information in the RaoResult, using either the RaoResult java object or the JSON file
+- how to access information in the RaoResult, using either the RaoResult java object or the JSON file.
 
 ## Accessing the RAO result {#rao-result}
 The [RaoResult](https://github.com/farao-community/farao-core/blob/master/data/rao-result/rao-result-api/src/main/java/com/farao_community/farao/data/rao_result_api/RaoResult.java) java object is actually an interface that is implemented by many FARAO classes. However, one only needs to use the interface's functions.
@@ -41,12 +41,13 @@ A RaoResult JSON file can be imported into a [RaoResultImpl](https://github.com/
 ### Export {#export}
 Example:
 ~~~java
-new RaoResultExporter().export(raoResult, crac, outputStream);
+new RaoResultExporter().export(raoResult, crac, flowUnits, outputStream);
 ~~~
 Where:
-- raoResult is the RaoResult object you obtained from the RaoProvider
-- crac is the CRAC object you used in the RAO
-- outputStream is the java.io.OutputStream you want to write the JSON file into
+- `raoResult` is the RaoResult object you obtained from the RaoProvider;
+- `crac` is the CRAC object you used in the RAO;
+- `flowUnits` is the set of units in which the flow measurements should be exported (either `AMPERE` or `MEGAWATT`, or both);
+- `outputStream` is the `java.io.OutputStream` you want to write the JSON file into.
 
 ### Import {#import}
 Example:
@@ -54,8 +55,8 @@ Example:
 RaoResult importedRaoResult = new RaoResultImporter().importRaoResult(inputStream, crac);
 ~~~
 Where:
-- crac is the CRAC object you used in the RAO
-- inputStream is the java.io.InputStream you read the JSON file into
+- `crac` is the CRAC object you used in the RAO
+- `inputStream` is the `java.io.InputStream` you read the JSON file into
 
 ## Contents of the RAO result {#contents}
 The RAO result object generally contains information about post-optimisation results.  
