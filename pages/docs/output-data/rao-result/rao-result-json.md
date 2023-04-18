@@ -41,22 +41,22 @@ A RaoResult JSON file can be imported into a [RaoResultImpl](https://github.com/
 ### Export {#export}
 Example:
 ~~~java
-new RaoResultExporter().export(raoResult, crac, flowUnits, outputStream);
+new RaoResultExporter().export(RaoResult raoResult, Crac crac, Set<Unit> flowUnits, OutputStream outputStream);
 ~~~
 Where:
-- `raoResult` is the RaoResult object you obtained from the RaoProvider;
-- `crac` is the CRAC object you used in the RAO;
-- `flowUnits` is the set of units in which the flow measurements should be exported (either `AMPERE` or `MEGAWATT`, or both);
-- `outputStream` is the `java.io.OutputStream` you want to write the JSON file into.
+- **`raoResult`** is the RaoResult object you obtained from the RaoProvider;
+- **`crac`** is the CRAC object you used in the RAO;
+- **`flowUnits`** is the set of units in which the flow measurements should be exported (either `AMPERE` or `MEGAWATT`, or both);
+- **`outputStream`** is the `java.io.OutputStream` you want to write the JSON file into.
 
 ### Import {#import}
 Example:
 ~~~java
-RaoResult importedRaoResult = new RaoResultImporter().importRaoResult(inputStream, crac);
+RaoResult importedRaoResult = new RaoResultImporter().importRaoResult(InputStream inputStream, Crac crac);
 ~~~
 Where:
-- `crac` is the CRAC object you used in the RAO
-- `inputStream` is the `java.io.InputStream` you read the JSON file into
+- **`crac`** is the CRAC object you used in the RAO
+- **`inputStream`** is the `java.io.InputStream` you read the JSON file into
 
 ## Contents of the RAO result {#contents}
 The RAO result object generally contains information about post-optimisation results.  
