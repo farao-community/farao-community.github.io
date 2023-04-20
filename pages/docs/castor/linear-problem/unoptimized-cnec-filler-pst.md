@@ -113,4 +113,5 @@ $$
 
 ## Contribution to the objective function {#objective-function}
 
-Given the updated constraints above, the "un-optimised CNECs" will no longer count in the minimum margin (thus in the objective function) unless their margin is decreased.
+Given the updated constraints above, the "un-optimised CNECs" will no longer count in the minimum margin (thus in the 
+objective function) unless they are overloaded and their associated PST cannot relieve the overload.
