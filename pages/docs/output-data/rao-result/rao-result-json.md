@@ -41,7 +41,7 @@ A RaoResult JSON file can be imported into a [RaoResultImpl](https://github.com/
 ### Export {#export}
 Example:
 ~~~java
-new RaoResultExporter().export(RaoResult raoResult, Crac crac, Set<Unit> flowUnits, OutputStream outputStream);
+new RaoResultExporter().export(raoResult, crac, flowUnits, outputStream);
 ~~~
 Where:
 - **`raoResult`** is the RaoResult object you obtained from the RaoProvider;
@@ -52,7 +52,7 @@ Where:
 ### Import {#import}
 Example:
 ~~~java
-RaoResult importedRaoResult = new RaoResultImporter().importRaoResult(InputStream inputStream, Crac crac);
+RaoResult importedRaoResult = new RaoResultImporter().importRaoResult(inputStream, crac);
 ~~~
 Where:
 - **`crac`** is the CRAC object you used in the RAO
