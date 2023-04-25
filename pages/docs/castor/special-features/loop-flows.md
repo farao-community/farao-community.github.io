@@ -31,7 +31,8 @@ lines when no commercial exchanges are present. Loop-flows limit the capacity av
 
 ### Computation {#loop-flow-computation}
 
-During the RAO, the loop-flow $$F_{loop-flow}$$ on each cross zonal CNEC should not exceed the maximum between:
+It is possible to configure the RAO in order to make sure that, during RA optimisation, the loop-flow $$F_{loop-flow}$$ 
+on each cross zonal CNEC does not exceed the maximum between:
 
 - the initial loop-flow $$F_0$$
 - the loop-flow threshold $$ F_{max_{loop-flow}} $$, provided by TSOs for each of their cross zonal CNECs
