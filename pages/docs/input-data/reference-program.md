@@ -22,12 +22,12 @@ The main tag for the document is **PublicationDocument**.
 ~~~xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <PublicationDocument DtdRelease="1" DtdVersion="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="publication-document-v2r0.xsd">
-    <DocumentIdentification v="RP-CORESO-20200106-05"/>
+    <DocumentIdentification v="DOCUMENT_ID"/>
     <DocumentVersion v="5"/>
     <DocumentType v="A45"/>
-    <SenderIdentification codingScheme="A01" v="22XCORESO------S"/>
+    <SenderIdentification codingScheme="A01" v="SENDER_EIC"/>
     <SenderRole v="A44"/>
-    <ReceiverIdentification codingScheme="A01" v="17XTSO-CS------W"/>
+    <ReceiverIdentification codingScheme="A01" v="RECEIVER_EIC"/>
     <ReceiverRole v="A36"/>
     <CreationDateTime v="2020-02-26T11:12:12.304+01:00"/>
     <PublicationTimeInterval v="2019-01-07T23:00Z/2019-01-08T23:00Z"/>
@@ -86,5 +86,5 @@ _You can find a complete list of codes [in the XSDs](https://www.entsoe.eu/Docum
 - **MeasureUnitQuantity**: Unit of the value. In the example above, "MAW".
 - **TimeInterval**: time interval covered by the period.
 - **Resolution**: the resolution of the data. In the example above, "PT60M" means we have one value every 60 minutes.
-- **Interval**: contains the **Pos** (position, in the example above, "1" means the first interval, ie from the start 
-of **TimeInterval** to **TimeInterval** + **Resolution**) and **Qty** (the value of the exchange).
+- **Interval**: contains the **Pos** (position, in the example above, "1" means the first interval, ie from the start  
+  of **TimeInterval** to **TimeInterval** + **Resolution**) and **Qty** (the value of the exchange).

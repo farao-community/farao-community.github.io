@@ -14,7 +14,7 @@ see-also: |
 ---
 
 ### Definition
-MNECs (Monitored Network Elements) are monitored rather than optimized, see [Optimised and monitored CNECs](/docs/input-data/crac/json#optimised-vs-monitored)
+MNECs (Monitored Network Elements) are monitored rather than optimised, see [Optimised and monitored CNECs](/docs/input-data/crac/json#optimised-vs-monitored)
 Their margin must be kept positive or above its initial value.
 
 ### Implementation

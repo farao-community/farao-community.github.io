@@ -35,9 +35,9 @@ It is possible to configure the RAO in order to make sure that, during RA optimi
 on each cross zonal CNEC does not exceed the maximum between:
 
 - the initial loop-flow $$F_0$$
-- the loop-flow threshold $$ F_{max_{loop-flow}} $$, provided by TSOs for each of their cross zonal CNECs
+- the loop-flow threshold $$ F_{max_{loop-flow}} $$, provided by TSOs for each of their cross-zonal CNECs
 
-It can be computed via the commercial flow:
+It can be computed using the actual flow and the commercial flow:
 
 $$\begin{equation}
 F_{loop-flow}(c) = F(c) - F_{commercial}(c)
@@ -48,7 +48,7 @@ F_{commercial} (c) = \sum_{z \in LFC} PTDF(c,z) * NP(z)
 \end{equation}$$
 
 With: <br> - LFC, the set of bidding zones for which we compute the commercial flows, set under [loop-flow-countries](/docs/parameters#loop-flow-countries)
-<br> - NP, the net position of the bidding zone z, read from the [ReferenceProgram](/docs/input-data/reference-program) given as input of the RAO 
+<br> - NP, the net position of the bidding zone z, read from the [ReferenceProgram](/docs/input-data/reference-program)
 <br> - PTDF, the power transfer distribution factor of the bidding zone z on the FlowCnec c, eventually recomputed within the RAO depending on the value of the configuration parameter [loop-flow-approximation](/docs/parameters#loop-flow-approximation).
 The PTDF represents FlowCnec c's sensitivity to a variation of the net position on the bidding zone Z mapped on the network according to [GLSK](/docs/input-data/glsk)).
 
