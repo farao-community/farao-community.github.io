@@ -1,12 +1,12 @@
 ---
 layout: documentation
 title: Voltage monitoring
-permalink: /docs/engine/voltage-monitoring
+permalink: /docs/engine/monitoring/voltage-monitoring
 hide: true
 root-page: Documentation
 docu-section: CASTOR
-docu-parent: CASTOR
-order: 6
+docu-parent: Monitoring modules
+order: 2
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 summary-hmax: 3

@@ -6,7 +6,7 @@ hide: true
 root-page: Documentation
 docu-section: CASTOR
 docu-parent: CASTOR
-order: 2
+order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 ---
