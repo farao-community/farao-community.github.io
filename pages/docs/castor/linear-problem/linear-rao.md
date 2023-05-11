@@ -32,7 +32,7 @@ The main inputs of the algorithm are:
 
 The linear RAO result is provided, containing the optimal setpoints of the range actions.
 
-### Algorithm
+### Algorithm {#Algorithm}
 
 Let’s take the example of a PST to clarify how linear remedial actions are optimised.
 PST optimisation relies on 3 types of computations:

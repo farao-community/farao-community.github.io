@@ -141,7 +141,7 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
 - **Usage**: This parameter aims to resolve one issue. CASTOR makes the approximation that PSTs sensitivities on CNECs are linear.
   However, in AC-computation, it is not always the case. Therefore, the linear problem can sometimes find a worse solution than its previous iteration.
   Before this parameter existed, if this situation occurred, the linear problem stopped and returned the previous solution,
-  see this schema : [Linear Remedial Actions Optimisation](/docs/engine/ra-optimisation/linear-rao).
+  see this schema : [Linear Remedial Actions Optimisation](/docs/engine/ra-optimisation/linear-rao#Algorithm).
   - **DISABLED**: Keeps the same behavior as described above.
   - **ENABLED**: This introduces two changes:
     1. If the linear problem finds a solution worse than previous iteration, it continues.
