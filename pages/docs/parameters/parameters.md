@@ -132,35 +132,6 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
     integer variables (tap positions) and can be harder to solve.  
     See [Using integer variables for PST taps](/docs/castor/linear-optimisation-problem/discrete-pst-tap-filler).
 
-### pst-range-decrease {#pst-range-decrease}
-- **Expected value**: one of the following:
-  - "DISABLED"
-  - "ENABLED"
-  - "ENABLED_FOR_FIRST_PREVENTIVE_AND_CURATIVE_ONLY"
-- **Default value**: "DISABLED"
-- **Usage**: This parameter aims to resolve one issue. CASTOR makes the approximation that PSTs sensitivities on CNECs are linear.
-  However, in AC-computation, it is not always the case. Therefore, the linear problem can sometimes find a worse solution than its previous iteration.
-  Before this parameter existed, if this situation occurred, the linear problem stopped and returned the previous solution,
-  see this schema : [Linear Remedial Actions Optimisation](/docs/engine/ra-optimisation/linear-rao#Algorithm).
-  - **DISABLED**: Keeps the same behavior as described above.
-  - **ENABLED**: This introduces two changes:
-    1. If the linear problem finds a solution worse than previous iteration, it continues.
-      When stopping condition is met (max_iteration reached or two successive iterations have the same PST set-points),
-      the problem returns the best solution it has ever found.
-    2. Moreover, the PST relative variation decreases at each iteration:   
-
-$$\begin{equation} x_{n} - (\frac{2}{3})^{n}*t \leq x_{n+1} \leq x_{n} +  (\frac{2}{3})^{n}*t\end{equation}$$
-
-- where t is the total amount of taps of a PST, n the current iteration and 
-  $$x_{n}$$ the PST tap position at iteration n.  
-The value $$\frac{2}{3}$$ has been chosen to force the linear problem convergence
-while allowing it to go back to its initial solution eventually if needed.
-
-  - **ENABLED_FOR_FIRST_PREVENTIVE_AND_CURATIVE_ONLY**:
-    Same as **ENABLED** but only for first preventive and curative optimization, the second preventive will keep the usual behavior. 
-    This value has been introduced because sensitivity calculations in the second preventive are very long 
-    (due to the largest optimization perimeter) and computation time loss may outweight the gains obtained by enabling pst-range-decrease. 
-
 ### pst-penalty-cost {#pst-penalty-cost}
 - **Expected value**: numeric value, unit: unit of the objective function / ° (per degree)
 - **Default value**: 0.01
@@ -211,6 +182,29 @@ while allowing it to go back to its initial solution eventually if needed.
 - **Usage**: the injection sensitivity coefficients which are below the injection-ra-sensitivity-threshold will be
   considered equal to zero by the linear optimisation problem.  
   The perks are the same as the two parameters above.
+
+### ra-range-shrinking {#ra-range-shrinking}
+- **Expected value**: one of the following:
+  - "DISABLED"
+  - "ENABLED"
+  - "ENABLED_IN_FIRST_PRAO_AND_CRAO"
+- **Default value**: "DISABLED"
+- **Usage**: CASTOR makes the approximation that range action sensitivities on CNECs are linear. However, in 
+  active+reactive computations, this approximation may be incorrect. The linear problem can thus find a worse solution 
+  than in its previous iteration.
+  - **DISABLED**: if this situation occurs, the linear problem stops and returns the previous solution,
+    see this schema : [Linear Remedial Actions Optimisation](/docs/engine/ra-optimisation/linear-rao#algorithm).
+  - **ENABLED**: this introduces two new behaviors to the iterating linear optimiser:
+    1. If the linear problem finds a solution worse than in its previous iteration, it continues iterating.  
+       When stop condition is met ([max-mip-iterations](#max-mip-iterations) reached, or two successive iterations have 
+       the same optimal RA set-points), then the problem returns the best solution it has found.
+    2. At each new iteration, the range action's allowed range shrinks according to equations [described here](/docs/castor/linear-optimisation-problem/core-problem-filler#ra-range-shrinking).
+       These equations have been chosen to force the linear problem convergence while allowing the RA to go 
+       back to its initial solution if needed.  
+  - **ENABLED_IN_FIRST_PRAO_AND_CRAO**:
+    same as **ENABLED** but only for first preventive and curative RAO. This parameter value has been introduced because 
+    sensitivity computations in the second preventive RAO can be slow (due to the larger optimization perimeter), thus 
+    computation time loss may outweigh the gains of RA range shrinking.
 
 ### linear-optimization-solver {#linear-optimization-solver}
 These are parameters that tune the solver used to solve the MIP problem.
