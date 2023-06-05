@@ -183,6 +183,29 @@ These parameters (range-actions-optimization) tune the [linear optimiser](/docs/
   considered equal to zero by the linear optimisation problem.  
   The perks are the same as the two parameters above.
 
+### ra-range-shrinking {#ra-range-shrinking}
+- **Expected value**: one of the following:
+  - "DISABLED"
+  - "ENABLED"
+  - "ENABLED_IN_FIRST_PRAO_AND_CRAO"
+- **Default value**: "DISABLED"
+- **Usage**: CASTOR makes the approximation that range action sensitivities on CNECs are linear. However, in 
+  active+reactive computations, this approximation may be incorrect. The linear problem can thus find a worse solution 
+  than in its previous iteration.
+  - **DISABLED**: if this situation occurs, the linear problem stops and returns the previous solution,
+    see this schema : [Linear Remedial Actions Optimisation](/docs/engine/ra-optimisation/linear-rao#algorithm).
+  - **ENABLED**: this introduces two new behaviors to the iterating linear optimiser:
+    1. If the linear problem finds a solution worse than in its previous iteration, it continues iterating.  
+       When stop condition is met ([max-mip-iterations](#max-mip-iterations) reached, or two successive iterations have 
+       the same optimal RA set-points), then the problem returns the best solution it has found.
+    2. At each new iteration, the range action's allowed range shrinks according to equations [described here](/docs/castor/linear-optimisation-problem/core-problem-filler#ra-range-shrinking).
+       These equations have been chosen to force the linear problem convergence while allowing the RA to go 
+       back to its initial solution if needed.  
+  - **ENABLED_IN_FIRST_PRAO_AND_CRAO**:
+    same as **ENABLED** but only for first preventive and curative RAO. This parameter value has been introduced because 
+    sensitivity computations in the second preventive RAO can be slow (due to the larger optimization perimeter), thus 
+    computation time loss may outweigh the gains of RA range shrinking.
+
 ### linear-optimization-solver {#linear-optimization-solver}
 These are parameters that tune the solver used to solve the MIP problem.
 
