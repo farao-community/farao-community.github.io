@@ -340,6 +340,8 @@ cnec2 = crac.newAngleCnec()
 🔵 **contingency**: mandatory, except if the instant is preventive. Must be the id of a contingency which exists in the CRAC  
 ⚪ **operator**  
 ⚪ **reliability margin**: default value = 0 °  
+⚪ **optimized**: default value = false  
+⚪ **monitored**: default value = false  
 🔴 **thresholds**: list of 1 to N thresholds, an AngleCnec must contain at least one threshold  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **unit**  : must be in degrees  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **minValue**  
@@ -432,6 +434,8 @@ crac.newVoltageCnec()
 🔵 **contingency**: mandatory, except if the instant is preventive. Must be the id of a contingency which exists in the CRAC  
 ⚪ **operator**  
 ⚪ **reliability margin**: default value = 0 kV  
+⚪ **optimized**: default value = false  
+⚪ **monitored**: default value = false  
 🔴 **thresholds**: list of 1 to N thresholds, a VoltageCnec must contain at least one threshold  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **unit**  : must be in kilovolts  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **minValue**  
