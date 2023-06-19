@@ -46,6 +46,14 @@ An automaton perimeter can be defined for each defined contingency. Each automat
 Overloads potentially reached on this perimeter can possibly be solved with automatons (ARA). 
 Optimal preventive actions selected by the preventive RAO are applied in this perimeter.  
 
+The automaton perimeter is not designed to optimise automatic remedial actions, but to simulate their use. This simulation is carried out in two stages:
+
+1. First, all automatic network remedial actions (topological actions, injection set-points, PST set-points, switch paurs) are applied directly on the newtork without any need for optimisation (since there is no set-point to compute)
+
+2. Then, automatic range actions (PST and HVDC) are applied one by one until all CNECs are secure. During the iteravtive application process, if a CNEC is overloaded, a sensitivity computation is performed to determine which set-point to apply.
+
+The speed of the remedial actions determines the order in which they are applied. When applying the automatic range actions, these range actions are sorted from the fastest to the slowest. In the case of aligned range actions, they are simulated simultaneously.
+
 ## Curative perimeters {#curative-rao}
 
 Finally, a curative perimeter can be defined for each defined contingency. Each curative perimeter is formed by:
