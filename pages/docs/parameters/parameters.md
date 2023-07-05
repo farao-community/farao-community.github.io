@@ -662,7 +662,7 @@ Zones are seperated by + or -.
     "sensitivity-parameters" : {
       "version" : "1.0",
       "load-flow-parameters" : {
-        "version" : "1.7",
+        "version" : "1.9",
         "voltageInitMode" : "DC_VALUES",
         "transformerVoltageControlOn" : false,
         "phaseShifterRegulationOn" : true,
@@ -678,12 +678,13 @@ Zones are seperated by + or -.
         "countriesToBalance" : [ "TR", "BE", "SI", "CH", "AL", "ES", "SK", "BA", "RO", "PT", "DE", "AT", "FR", "CZ", "ME", "NL", "PL", "GR", "IT", "UA", "HU", "BG", "MK", "HR", "RS" ],
         "connectedComponentMode" : "MAIN",
         "hvdcAcEmulation" : true,
+        "dcPowerFactor" : 1.0,
         "extensions" : {
           "open-load-flow-parameters" : {
             "plausibleActivePowerLimit" : 10000.0,
             "minPlausibleTargetVoltage" : 0.5,
             "maxPlausibleTargetVoltage" : 1.5, 
-            "maxIteration" : 100,
+            "maxNewtonRaphsonIterations" : 100,
             "newtonRaphsonConvEpsPerEq" : 1.0E-3,
             "slackBusSelectionMode" : "MOST_MESHED",
             "slackBusesIds" : [ ],
@@ -695,7 +696,6 @@ Zones are seperated by + or -.
             "voltagePerReactivePowerControl" : false,
             "voltageInitModeOverride" : "NONE",
             "transformerVoltageControlMode" : "WITH_GENERATOR_VOLTAGE_CONTROL",
-            "dcPowerFactor" : 1.0,
             "minRealisticVoltage" : 0.5,
             "maxRealisticVoltage" : 1.5,
             "reactiveRangeCheckMode" : "MAX"
