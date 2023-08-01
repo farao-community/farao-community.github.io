@@ -40,27 +40,34 @@ Overloads potentially reached on this perimeter are to be solved with preventive
 
 ## Automaton perimeters {#auto-rao}
 
-An automaton perimeter can be defined for each defined contingency. Each automaton perimeter is formed by:
-- CNECs of the “after automatons” defined with a limit of type TATL. All CNECs are defined upon the same contingency.
+An automaton perimeter can be defined for each defined contingency. Each automaton perimeter is formed by CNECs of the “after automatons” defined with a limit of type TATL. All CNECs are defined upon the same contingency.
 
-Overloads potentially reached on this perimeter can possibly be solved with automatons (ARA). 
-Optimal preventive actions selected by the preventive RAO are applied in this perimeter.  
+Optimal preventive actions selected by the preventive RAO are applied in this perimeter.   
 
-The automaton perimeter is not designed to optimise automatic remedial actions, but to simulate their use. Indeed, in real life, automatons are build to detect specific outages and to react automatically to them by applying a remedial action defined by pre-configured settings. In FARAO, this simulation is carried out in two stages:
+Preventive and curative perimeters optimized overloads on their respective perimeters by applying available remedial actions, whereas the automaton perimeter performs a **simulation**
+of the application of available auto remedial actions. Indeed, in real life an "automated protection" is triggered when an outage takes place, even if its triggering causes another constraint somewhere else in the network.
+That's why regardless of the impacts on CNECs, automatic remedial actions are activated if their specific activation conditions are met (eg. after a given contingency).
+In CASTOR, this simulation is carried out in two stages:
 
-1. First, all automatic network remedial actions (topological actions, injection set-points, PST set-points, switch pairs) are applied directly on the network;
+Here is a detailed step-by-step of automatic remedial actions’ application in CASTOR:
+1. First, all automatic remedial actions for which there is not set-point to compute are applied on the network. These remedial actions are called [network actions](/docs/input-data/crac/json#network-actions). They include topological actions, injection set-points, PST set-points, switch pairs.
 
-2. Then, automatic range actions (PST and HVDC) are applied one by one until all CNECs are secure. During the iterative application process, if a CNEC is overloaded, a sensitivity computation is performed to determine which set-point to apply.
+2. Then, automatic range actions are applied one by one, as long as some of the perimeter's CNECs are overloaded. The speed of the remedial actions determines the order in which they are applied : the fastest range actions are simulated first. Aligned range actions are simulated simultaneously.
 
-All range ARAs cannot be applied directly because their respective set-points have to be calculated in the first place (unlike network ARAs for which the set-points are imposed).
+Automatic range actions' setpoint is computed using the results of a sensitivity analysis computation, during which the sensivity $$\sigma$$ of a range action on a cnec is computed. By focusing on the worse overloaded CNEC, we can compute the automatic range action's optimal setpoint to relieve that CNEC with the following formula:
+\begin{equation}
+A_{optimal} = A_{current} + {sign}{(F(c)}) * \frac{\min(0, margin(c))}{\sigma}
+\end{equation}
 
-The speed of the remedial actions determines the order in which they are applied. When applying the automatic range actions, these range actions are sorted from the fastest to the slowest. In the case of aligned range actions, they are simulated simultaneously.
+| Name                           | Symbol            | Details                                                                                                               | Type                | Index                                            | Unit                                                      | Lower bound           | Upper bound           |
+|--------------------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------|---------------------|--------------------------------------------------|-----------------------------------------------------------|-----------------------|-----------------------|
+| Flow                           | $$F(c)$$          | flow of FlowCnec $$c$$                                                                                                | Real value          | One variable for every element of (FlowCnecs)    | MW                                                        | $$-\infty$$           | $$+\infty$$           |
+| RA setpoint                    | $$A$$             | setpoint of RangeAction                                                                          | Real value          | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | Range lower bound[^1] | Range upper bound[^1] |
 
-As soon as all CNECs are secure, the iterative application of range ARAs is stopped which means that all defined range ARAs may not be applied at the end of the process
 
-The optimal set-point value is computed using the sensitivity computations result $$\sigma$$ with the formula:
+Range actions include PSTs and HVDCs. As soon as all CNECs are secure, we stop applying range actions. 
 
-$$\hbox{currentSetpoint } + \hbox{sign}(\hbox{cnecFlow}) \times \frac{\min(0, \hbox{cnecMargin})}{\sigma}$$
+Unlike automatic network actions, automatic range actions are only applied as long as CNECs are overloaded because we need to determine the set-point on which they are applied.
 
 ## Curative perimeters {#curative-rao}
 
