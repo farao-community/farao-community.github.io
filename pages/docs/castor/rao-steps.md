@@ -44,17 +44,16 @@ An automaton perimeter can be defined for each defined contingency. Each automat
 
 Optimal preventive actions selected by the preventive RAO are applied in this perimeter.   
 
-Preventive and curative perimeters optimized overloads on their respective perimeters by applying available remedial actions, whereas the automaton perimeter performs a **simulation**
-of the application of available auto remedial actions. Indeed, in real life an "automated protection" is triggered when an outage takes place, even if its triggering causes another constraint somewhere else in the network.
-That's why regardless of the impacts on CNECs, automatic remedial actions are activated if their specific activation conditions are met (eg. after a given contingency).
+While preventive and curative remedial actions are optimized to prevent overloads in their respective perimeters, auto remedial actions are actually simulated in the automaton perimeter. Indeed, in real life an "automated protection" is triggered when an outage takes place, even if its triggering causes another constraint somewhere else in the network.
+That's why, regardless of the impacts on CNECs, automatic remedial actions are activated if their specific activation conditions are met (eg. after a given contingency).
 In CASTOR, this simulation is carried out in two stages:
 
-Here is a detailed step-by-step of automatic remedial actions’ application in CASTOR:
-1. First, all automatic remedial actions for which there is not set-point to compute are applied on the network. These remedial actions are called [network actions](/docs/input-data/crac/json#network-actions). They include topological actions, injection set-points, PST set-points, switch pairs.
+#### Automatic network actions simulation {#auto-na}
+First, all automatic remedial actions for which there is not set-point to compute are applied on the network. These remedial actions are called [network actions](/docs/input-data/crac/json#network-actions). They include topological actions, injection set-points, PST set-points, switch pairs.
+#### Automatic range actions simulation {#auto-ra}
+Then, automatic range actions are applied one by one, as long as some of the perimeter's CNECs are overloaded. Range actions include PSTs and HVDCs. The remedial actions' speed determines the order in which they are applied: the fastest range actions are simulated first. Aligned range actions are simulated simultaneously.
 
-2. Then, automatic range actions are applied one by one, as long as some of the perimeter's CNECs are overloaded. The speed of the remedial actions determines the order in which they are applied : the fastest range actions are simulated first. Aligned range actions are simulated simultaneously.
-
-Automatic range actions' setpoint is computed using the results of a sensitivity analysis computation, during which the sensivity $$\sigma$$ of a range action on a cnec is computed. By focusing on the worse overloaded CNEC, we can compute the automatic range action's optimal setpoint to relieve that CNEC with the following formula:
+Automatic range actions' setpoint is computed using the results of a sensitivity analysis computation, during which the sensitivity $$\sigma$$ of a range action on a CNEC is computed. By focusing on the worse overloaded CNEC, we can compute the automatic range action's optimal setpoint to relieve that CNEC with the following formula:
 \begin{equation}
 A_{optimal} = A_{current} + {sign}{(F(c)}) * \frac{\min(0, margin(c))}{\sigma}
 \end{equation}
@@ -64,10 +63,25 @@ A_{optimal} = A_{current} + {sign}{(F(c)}) * \frac{\min(0, margin(c))}{\sigma}
 | Flow                           | $$F(c)$$          | flow of FlowCnec $$c$$                                                                                                | Real value          | One variable for every element of (FlowCnecs)    | MW                                                        | $$-\infty$$           | $$+\infty$$           |
 | RA setpoint                    | $$A$$             | setpoint of RangeAction                                                                          | Real value          | One variable for every element of (RangeActions) | Degrees for PST range actions; MW for other range actions | Range lower bound[^1] | Range upper bound[^1] |
 
+This formula is capped by the range actions' min and max setpoints: if the range action we're simulating doesn't achieve relieving the worse CNEC, we'll push it to its min or max tap and then continue the simulation with the next fastest ARA. 
 
-Range actions include PSTs and HVDCs. As soon as all CNECs are secure, we stop applying range actions. 
+Once the worse overloaded CNEC is relieved, we carry on the simulation focusing on the next worse overloaded CNEC. As soon as all CNECs are secure, we stop applying range actions. 
 
-Unlike automatic network actions, automatic range actions are only applied as long as CNECs are overloaded because we need to determine the set-point on which they are applied.
+N.B: a range action can only be shifted in one direction. If the previous formula implies moving a range action in the opposite direction (compared to the one it's already been shifted in), we'll carry on the simulation with the next fastest ARA.
+
+The simulation can therefore stop for the following reasons:
+- there are no more overloaded CNECs in the perimeter
+- all ARAs have been made the most of
+  - either because they have reached their min/max set-points 
+  - either because they have already been shifted in one direction and relieving remaining overloaded CNECs would require shifting these ARAs in the opposite direction
+- a sensitivity analysis computation failed
+- too many iterations have been performed (security stop criterion)
+
+Unlike automatic network actions, automatic range actions can only be applied as long as CNECs are overloaded because we need to determine the set-point on which they are applied.
+
+Here is an example of the simulation of automatic range actions:
+
+![Simulation_Of_Auto_Range_Actions](/assets/img/simulation_ara.png)
 
 ## Curative perimeters {#curative-rao}
 
