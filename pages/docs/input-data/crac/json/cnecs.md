@@ -74,7 +74,7 @@ additional data is required in order to handle the following conversions:
 
 > 💡  **NOTE**
 > A FlowCnec's reliability margin is also known as FRM for Flow Reliability Margin.
-> It can only be defined in megawatt, it is subtracted from the thresholds of the FlowCnec, adding extra an constraint.
+> It can only be defined in megawatt, it is subtracted from the thresholds of the FlowCnec, adding an extra constraint.
 
 #### Creating a FlowCnec
 In FARAO, FlowCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
