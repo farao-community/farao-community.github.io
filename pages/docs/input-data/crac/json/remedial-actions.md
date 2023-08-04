@@ -118,9 +118,11 @@ Complete examples of Network and Range Action in Json format are given in the fo
 🔴 **voltageCnecId**: must be the id of an [VoltageCnec](#voltage-cnecs) that exists in the CRAC  
 <ins>**Usage methods**</ins>  
 FARAO handles three different types of usage methods:  
-1 - **AVAILABLE**: the remedial action is available in the given state, if the RAO decides it is optimal, with no extra condition  
-2 - **FORCED**: the RAO must activate the remedial action (under the condition described by the usage rule)  
-3 - **TO_BE_EVALUATED**: the RAO must evaluate the applicability of the remedial action before trying to apply it (only for OnFlowConstraint and OnFlowConstraintInCountry usage rules)  
+1 - **FORCED**: the RAO must activate the remedial action (under the condition described by the usage rule)  
+2 - **AVAILABLE**: There are 2 cases:
+- If the usageRule is onFlowConstraint: the RAO must evaluate the applicability of the remedial action before trying to apply it
+- Else : the remedial action is available in the given state, if the RAO decides it is optimal, with no extra condition
+
 *NB*: even though OnState usage rules on the preventive state is theoretically possible, it is forbidden by FARAO as the same purpose can be achieved with a FreeToUse usage rule on the preventive instant.  
 {% endcapture %}
 {% include /tabs.html id="t7" tab1name="JAVA creation API" tab1content=t7_java tab2name="JSON file" tab2content=t7_json tab3name="Object fields" tab3content=t7_objects %}
