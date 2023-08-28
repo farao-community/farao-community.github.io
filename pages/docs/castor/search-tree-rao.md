@@ -82,7 +82,7 @@ And:
 Optimisation will try to maximize the objective function value, formulated as such:
 
 $$\begin{equation}
-OF = min_i(\rho_i * F_{max_i}-F_i)
+OF = min_i(\rho_i * (F_{max_i}-F_i))
 \end{equation}$$
 
 With :
