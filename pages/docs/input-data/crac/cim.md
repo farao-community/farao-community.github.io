@@ -73,7 +73,7 @@ parameter are imported. this allows the import of border-specific contraints and
   ...
 </Series>
 ```
-Contingencies are listed in Series of business type B55. They are defined in Contingency_Series elements. The associated network elements are defined in the registered resources.
+Contingencies are listed in Series of business type B55, B56 or B57. They are defined in Contingency_Series elements. The associated network elements are defined in the registered resources.
 
 ### CNECs {#cnecs} 
 
@@ -114,9 +114,9 @@ Contingencies are listed in Series of business type B55. They are defined in Con
   ...
 </Series>
 ```
-CNECs are defined in Monitored_Series elements. A CNEC has one registered resource that defines its network element via its mrID. The optimization_MarketObjectStatus indicates if the CNEC is monitored or optimized.   
+CNECs are defined in Monitored_Series elements, in B56 or B57 Series. A CNEC has one registered resource that defines its network element via its mrID. The optimization_MarketObjectStatus indicates if the CNEC is monitored or optimized.   
 
-As it is defined in the CRAC model, a CNEC is associated to a state. If the Series containing the Monitored_Series has one or many Contingency_Series that have previously been correctly defined [in B55 Series](#contingencies), CNECs shall be created after these referenced contingencies. When no Contingency_Series are present in this Series, CNECs shall be created after all the contingencies defined in B55 series. The Measurements tags define the instants on which CNECs are defined via the measurementType tag, and the CNEC's threshold values.  
+As it is defined in the CRAC model, a CNEC is associated to a state. If the Series containing the Monitored_Series has one or many Contingency_Series that have previously been [correctly defined](#contingencies), CNECs shall be created after these referenced contingencies. When no Contingency_Series are present in this Series, CNECs shall be created after all the contingencies present in the CRAC. The Measurements tags define the instants on which CNECs are defined via the measurementType tag, and the CNEC's threshold values.  
 
 Finally, a CNEC can be named in the following way : _[network element name] - [side (placeholder if the branch is a TieLine)] - [direction in which the CNEC is monitored (placeholder)] - [monitored (placeholder for MNECs)] - [contingency (placeholder for when a contingency is defined.)] - [instant]_.
 
@@ -160,7 +160,7 @@ In the CIM CRAC, AngleCnecs are actually defined with their corresponding remedi
 
 [VoltageCnecs are defined in the CimCracCreationParameters](creation-parameters#voltage-cnecs-creation-parameters). 
 Nevertheless, they are imported via the CimCracCreator because that's where the information on which contingencies are imported lies. 
-Only voltage cnecs with contingencies correctly defined in B55 Series shall be imported.
+Only voltage CNECs with contingencies that were previously correctly defined shall be imported.
 
 ### Remedial Actions {#remedial-actions}
 
@@ -202,7 +202,7 @@ By default, the operator is read from the RemedialAction_Series' mRID, as the st
 
 RemedialAction_Series may also contain Contingency_Series, Monitored_Series and Shared_Domain tags. Remedial actions' [usage rules](json#remedial-actions) will be defined depending on these tags: 
 - RemedialAction_Series that don't have any Monitored_Series children tags nor any Shared_Domain tags define **FreeToUse** remedial actions.
-- When Monitored_Series tags exist, they define CNEC Ids for which the remedial action series is available. These CNECs must have been defined previously [in a B57 series](#flow-cnecs). When the RemedialAction_Series also contains a Contingency_Series, the only CNECs from the Monitored_Series tags that will be considered are those that list CNECs defined with a contingency from the Contingency_Series. For each remaining CNEC, the remedial action is defined with a **OnFlowConstraint** on the remedial action's instant.
+- When Monitored_Series tags exist, they define CNECs for which the remedial action series is available. These CNECs could have been defined previously in B57 series, or they are only defined in this B56 series following the [same logic described previously](#flow-cnecs). When the RemedialAction_Series also contains a Contingency_Series, the only CNECs from the Monitored_Series tags that will be considered are those that list CNECs defined with a contingency from the Contingency_Series. For each remaining CNEC, the remedial action is defined with a **OnFlowConstraint** on the remedial action's instant.
 - When the RemedialAction_Series has no Contingency_Series, no Monitored_Series, and a Shared_Domain tag, the Shared_Domain tag must be taken into account. It represents a country. Then, the remedial action is defined with a **OnFlowConstraintInCountry** on the remedial action's instant.  
 
 Some remedial actions may have to be aligned in order to keep the same set-point value. 
