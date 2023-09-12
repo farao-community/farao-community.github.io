@@ -27,10 +27,11 @@ defined in the CRAC:
 - **LOW_VOLTAGE_CONSTRAINT**: the network is not secure; at least one voltage CNEC has a voltage value lower than its threshold
 - **HIGH_AND_LOW_VOLTAGE_CONSTRAINTS**: the network is not secure; at least one voltage CNEC has a voltage value higher than its threshold, 
   and at least one voltage CNEC has a voltage value lower than its threshold
+- **UNKNOWN**: the network status is unknown; no load flow could converge on the network
 
 {% capture t1_java %}
 ~~~java
-// get the overall status (one of 4 values above)
+// get the overall status (one of 5 values above)
 public Status getStatus()
 ~~~
 {% endcapture %}
@@ -39,6 +40,42 @@ This information is not directly accessible in the JSON file.
 {% endcapture %}
 {% include /tabs.html id="t1" tab1name="JAVA API" tab1content=t1_java tab2name="JSON file" tab2content=t1_json %}
 
+#### Applied remedial actions {#applied-ra}
+The following methods return information about the applied remedial actions for voltage CNECs.
+{% capture t2_java %}
+(see [states](/docs/input-data/crac/json#instants-states), [network actions](/docs/input-data/crac/json#network-actions), [re-dispatch network actions](#redispatch))
+~~~java
+// get activated network actions for each state
+public Map<State, Set<NetworkAction>> getAppliedRas()
+
+// get activated network actions for a given state
+public Set<NetworkAction> getAppliedRas(State state)
+
+// get activated network action IDs for a given state ID
+public Set<String> getAppliedRas(String stateId)
+~~~
+{% endcapture %}
+{% capture t2_json %}
+Example:
+~~~json
+"applied-cras": [
+    {
+      "instant": "curative",
+      "contingency": "co1",
+      "remedial-actions": [
+        "na2"
+      ]
+    },
+    {
+      "instant": "preventive",
+      "remedial-actions": [
+        "na1"
+      ]
+    }
+  ]
+~~~
+{% endcapture %}
+{% include /tabs.html id="t2" tab1name="JAVA API" tab1content=t2_java tab2name="JSON file" tab2content=t2_json %}
 #### Voltage values {#result-voltage-values}
 The following methods return information about the voltage values for voltage CNECs.
 
