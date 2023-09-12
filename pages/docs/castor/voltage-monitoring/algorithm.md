@@ -34,4 +34,4 @@ Here is a detailed description of how the voltage monitoring algorithm operates:
   - Move on to next state (Go to (A)).
 - Assemble all the state-specific VoltageMonitoringResult in one overall [VoltageMonitoringResult](#result)
   
-![Voltage monitoring algorithm](/assets/img/new_voltage_monitoring_algorithm.png)
+![Voltage monitoring algorithm](/assets/img/voltage_monitoring_algorithm.png)
