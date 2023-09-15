@@ -7,7 +7,7 @@ root-page: Documentation
 docu-section: Input Data
 docu-parent: CRAC
 order: 6
-tags: [ Docs, Data, CRAC ]
+tags: [ Docs, Data, CRAC, CSA ]
 ---
 
 ## Presentation {#presentation}
@@ -156,7 +156,15 @@ name, instant(s) and operator information.
 </rdf:RDF>
 ```
 
-A CNEC can also be made curative by linking it to a contingency through an `AssessedElementWithContingency`.
+The CNEC is imported only if the `isCritical` and `normalEnabled` fields are both set to `true`. If the `inBaseCase`
+field is set to `true` a **preventive** CNEC is created from this assessed element (but this does not mean that a
+curative CNEC cannot be created as well). The `AssessedSystemOperator` and the `name` are concatenated together with the
+CNEC's instant (with the pattern *TSO_name - instant*) to create the CNEC's name. Finally, the `OperationalLimit` points
+to an eponymous object in either the ER or EQ profile depending on the type of CNEC (see below). This `OperationalLimit`
+bears the value of the threshold and the reference to the network element(s).
+
+A CNEC can also be made curative by linking it to a contingency through an `AssessedElementWithContingency`. In this
+case, the contingency's name is added to the CNEC's name.
 
 ```xml
 <!-- AE Profile -->
@@ -181,8 +189,7 @@ of the Assessed Element.
 ### FlowCNEC {#flow-cnec}
 
 The CNEC is a [FlowCNEC](json#flow-cnecs) if its associated `OperationalLimit` is a `CurrentLimit` which can be found in
-the **EQ**
-profile (CGMES file).
+the **EQ** profile (CGMES file).
 
 ```xml
 <!-- EQ (CGMES) Profile -->
@@ -212,11 +219,12 @@ profile (CGMES file).
 </rdf:RDF>
 ```
 
+The CNEC's threshold value (in AMPERES) is determined by the `value` field of the `CurrentLimit` and must be positive.
+
 ### AngleCNEC {#angle-cnec}
 
 The CNEC is an [AngleCNEC](json#angle-cnecs) if its associated `OperationalLimit` is a `VoltageAngleLimit` which can be
-found in the **ER**
-profile.
+found in the **ER** profile.
 
 ```xml
 <!-- ER Profile -->
@@ -248,11 +256,30 @@ profile.
 </rdf:RDF>
 ```
 
+The CNEC's threshold value (in DEGREES) is determined by the `normalValue` field of the `VoltageAngleLimit` and must be
+positive. Whether this is the maximum or minimum threshold of the CNEC depends on the `OperationalLimitType`'
+s `direction`:
+
+- if the `direction` is `high`, the maximum value of the threshold is `+ normalValue`
+- if the `direction` is `low`, the minimum value of the threshold is `- normalValue`
+- if the `direction` is `absoluteValue`, the maximum value of the threshold is + `normalValue` and the minimum value of
+  the threshold is `- normalValue`
+
+An AngleCNEC also has two terminals, one being the importing element and the other being the exporting element, which
+imposes the flow direction. Two terminals are referenced by the AngleCNEC in the CSA profiles. The first one (called
+*terminal_1*) is referenced by the `VoltageAngleLimit`'s `AngleReferenceTerminal` field. The second one (called
+*terminal_2*) is referenced by the `OperationalLimitSet`'s `Terminal` field. The flow direction is determined depending
+on the `VoltageAngleLimit`'s `isFlowToRefTerminal` field value:
+
+- if it is missing of `false`, the importing element is *terminal_1* and the exporting element is *terminal_2*
+- if it is present of `true`, the exporting element is *terminal_1* and the importing element is *terminal_2*
+
+> ⚠️ Note that if the `OperationalLimitType`'s `direction` is **not** `absoluteValue`, the `isFlowToRefTerminal` must be present otherwise the AngleCNEC will be ignored. 
+
 ### VoltageCNEC {#voltage-cnec}
 
 The CNEC is a [VoltageCNEC](json#voltage-cnecs) if its associated `OperationalLimit` is a `VoltageLimit` which can be
-found in the **EQ**
-profile (CGMES file).
+found in the **EQ** profile (CGMES file).
 
 ```xml
 <!-- EQ (CGMES) Profile -->
@@ -587,7 +614,8 @@ value of the set-point.
 For the `StaticPropertyRange`, the `PropertyReference` must also be `ShuntCompensator.sections`. The value of the
 set-point (in SECTION_COUNT) is determined by the `normalValue` given that the `valueKind` is `absolute` and that
 the `direction`is none to indicate that the number of section is an imposed value without any degree of freedom for the
-RAO.
+RAO. Note that `normalValue` must be integer-*castable* (i.e. a float number with null decimal part) to model a number
+of sections.
 
 {% endcapture %}
 
