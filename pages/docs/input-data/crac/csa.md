@@ -10,7 +10,7 @@ order: 6
 tags: [ Docs, Data, CRAC ]
 ---
 
-### Presentation {#presentation}
+## Presentation {#presentation}
 
 For the CSA process, the CRAC data is split over multiple XML files called **CSA profiles**, each one with its own
 specific purpose, and which were inspired by the CGM format. This format
@@ -18,7 +18,7 @@ was [introduced by ENTSO-E](https://www.entsoe.eu/data/cim/cim-for-grid-models-e
 CSA profiles reference one another using **mRID** links (UUID format) which makes it possible to separate the
 information among several distinct files.
 
-### Header overview {#header}
+## Header overview {#header}
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -59,13 +59,13 @@ Besides, each CSA profile has a period of validity delimited by the `startDate` 
 header's `FullModel` object. If the time at which the import occurs is outside of this time interval, the profile is
 ignored.
 
-### Contingencies {#contingencies}
+## Contingencies {#contingencies}
 
 The [contingencies](json#contingencies) are described in the **CO** profile. They can be represented by two types of
 objects: `ExceptionalContingency` and  `OutOfRangeContingency`. The contingency is linked to the network element on
 which it can occur through a `ContingencyEquipment`.
 
-**ExceptionalContingency**
+{% capture case_ExceptionalContingency %}
 
 ```xml
 <!-- CO Profile -->
@@ -91,7 +91,8 @@ which it can occur through a `ContingencyEquipment`.
 </rdf:RDF>
 ```
 
-**OutOfRangeContingency**
+{% endcapture %}
+{% capture case_OutOfRangeContingency %}
 
 ```xml
 <!-- CO Profile -->
@@ -117,7 +118,12 @@ which it can occur through a `ContingencyEquipment`.
 </rdf:RDF>
 ```
 
-### CNECs {#cnecs}
+{% endcapture %}
+{% include /tabs.html id="CSA_CO_tabs" tab1name="ExceptionalContingency" tab1content=case_ExceptionalContingency
+tab2name="
+OutOfRangeContingency" tab2content=case_OutOfRangeContingency %}
+
+## CNECs {#cnecs}
 
 The [CNECs](json#cnec) are described in the **AE** profile with an `AssessedElement` object which bears the identifier,
 name, instant(s) and operator information.
@@ -164,9 +170,10 @@ A CNEC can also be made curative by linking it to a contingency through an `Asse
 The distinction between the types of CNEC (FlowCNEC, AngleCNEC or VoltageCNEC) comes from the type of `OperationalLimit`
 of the Assessed Element.
 
-#### FlowCNEC {#flow-cnec}
+### FlowCNEC {#flow-cnec}
 
-The CNEC is a FlowCNEC if its associated `OperationalLimit` is a `CurrentLimit` which can be found in the **EQ**
+The CNEC is a [FlowCNEC](json#flow-cnecs) if its associated `OperationalLimit` is a `CurrentLimit` which can be found in
+the **EQ**
 profile (CGMES file).
 
 ```xml
@@ -197,9 +204,10 @@ profile (CGMES file).
 </rdf:RDF>
 ```
 
-#### AngleCNEC {#angle-cnec}
+### AngleCNEC {#angle-cnec}
 
-The CNEC is an AngleCNEC if its associated `OperationalLimit` is a `VoltageAngleLimit` which can be found in the **ER**
+The CNEC is an [AngleCNEC](json#angle-cnecs) if its associated `OperationalLimit` is a `VoltageAngleLimit` which can be
+found in the **ER**
 profile.
 
 ```xml
@@ -232,9 +240,10 @@ profile.
 </rdf:RDF>
 ```
 
-#### VoltageCNEC {#voltage-cnec}
+### VoltageCNEC {#voltage-cnec}
 
-The CNEC is a VolatgeCNEC if its associated `OperationalLimit` is a `VoltageLimit` which can be found in the **EQ**
+The CNEC is a [VoltageCNEC](json#voltage-cnecs) if its associated `OperationalLimit` is a `VoltageLimit` which can be
+found in the **EQ**
 profile (CGMES file).
 
 ```xml
@@ -265,7 +274,7 @@ profile (CGMES file).
 </rdf:RDF>
 ```
 
-### Remedial Actions {#remedial-actions}
+## Remedial Actions {#remedial-actions}
 
 The [remedial actions](json#remedial-actions) are described in the **RA** profile. The most general way to describe a
 remedial action is with a `GridStateAlterationRemedialAction` object that bears the identifier, name, operator, speed
@@ -287,7 +296,7 @@ and instant of the remedial action.
 </rdf:RDF>
 ```
 
-#### PST Range Action {#pst-range-action}
+### PST Range Action {#pst-range-action}
 
 A [PST range action](json#pst-range-action) is described by a `TapPositionAction` object which references its parent
 remedial action (`GridStateAlterationRemedialAction`) and the PST affected by the action. This `TapPositionAction` is
@@ -332,14 +341,14 @@ maximum reachable taps.
 </rdf:RDF>
 ```
 
-#### Network Actions {#network-actions}
+### Network Actions {#network-actions}
 
-##### Topological Action {#topological-action}
+#### Topological Action {#topological-action}
 
 A [topological action](json#network-actions) is described by a `TopologyAction` object which references its parent
 remedial action (`GridStateAlterationRemedialAction`) and the switch affected by the action.
 
-> Currently, topological actions are implemented such that they can only invert the state of the switch.
+> ℹ️ Currently, topological actions are implemented such that they can only invert the state of the switch.
 
 ```xml
 <!-- RA Profile -->
@@ -359,7 +368,7 @@ remedial action (`GridStateAlterationRemedialAction`) and the switch affected by
 </rdf:RDF>
 ```
 
-##### Injection Set-point Action {#injection-set-point-action}
+#### Injection Set-point Action {#injection-set-point-action}
 
 An [injection set-point action](json#network-actions) is described by a `SetPointAction` object which references its
 parent remedial action (`GridStateAlterationRemedialAction`) and the network element affected by the action, and which
@@ -368,7 +377,7 @@ handles three types of CSA set-point actions: the **rotating machine actions**, 
 actions** and the **shunt compensator modifications**. All three are handled similarly by FARAO but their respective
 descriptions in the CSA profiles differ from one another.
 
-**Rotating machine action**
+{% capture case_RotatingMachineAction %}
 
 A rotating machine action is described with a `RotatingMachineAction` object in the RA profile.
 
@@ -400,7 +409,9 @@ A rotating machine action is described with a `RotatingMachineAction` object in 
 </rdf:RDF>
 ```
 
-**Power electronics connection action**
+{% endcapture %}
+
+{% capture case_PowerElectronicsConnectionAction %}
 
 A power electronics connection action is described with a `PowerElectronicsConnectionAction` object in the RA profile.
 
@@ -434,7 +445,9 @@ A power electronics connection action is described with a `PowerElectronicsConne
 </rdf:RDF>
 ```
 
-**Shunt compensator modification**
+{% endcapture %}
+
+{% capture case_ShuntCompensatorModification %}
 
 A shunt compensator modification is described with a `ShuntCompensatorModification` object in the RA profile.
 
@@ -466,14 +479,21 @@ A shunt compensator modification is described with a `ShuntCompensatorModificati
 </rdf:RDF>
 ```
 
-#### Usage Rules {#usage-rules}
+{% endcapture %}
 
-##### OnInstant {#on-instant-usage-rule}
+{% include /tabs.html id="CSA_Set-point_RA_tabs" tab1name="Rotating Machine Action"
+tab1content=case_RotatingMachineAction tab2name="
+Power Electronics Connection Action" tab2content=case_PowerElectronicsConnectionAction tab3name="
+Shunt Compensator Modification" tab3content=case_ShuntCompensatorModification %}
+
+### Usage Rules {#usage-rules}
+
+#### OnInstant {#on-instant-usage-rule}
 
 By default, if no additional information is included, the remedial action is imported with an **onInstant usage rule**
 and an **AVAILABLE usage method**.
 
-##### OnContingencyState {#on-contingency-state-usage-rule}
+#### OnContingencyState {#on-contingency-state-usage-rule}
 
 If the remedial action is linked to a contingency, its usage method is no longer onInstant and is now
 **onContingencyState**. This link is created with a `ContingencyWithRemedialAction` object that bound together the
@@ -502,10 +522,30 @@ The usage method depends on the value of the `combinationConstraintKind` field:
 - if it is `excluded`, the usage method is **UNAVAILABLE** and an onInstant usage rule with an AVAILABLE usage method
   will be created for the remedial action
 
-> **Cases with multiple ContingencyWithRemedialActions defined for the same remedial action**
-> TODO
+> ⚠️ **Cases with multiple `ContingencyWithRemedialActions` defined for the same remedial action**
+>
+> This case happens when several `ContingencyWithRemedialAction` objects link the same remedial action with different
+> contingencies (with possibly different values of `combinationConstraintKind`).
+>
+> If there is at least one `excluded` contingency, then:
+> - An **onInstant** usage rule is created for the remedial action at the curative instant with an **AVAILABLE** usage
+    method
+> - An **onContingencyState** usage rule is created for the remedial action with an **UNAVAILABLE** usage method for
+    each `excluded` contingency
+> - An **onContingencyState** usage rule is created for the remedial action with a **FORCED** usage method for
+    each `included` contingency
+>
+> If there is no `excluded` contingency, then:
+> - An **onContingencyState** usage rule is created for the remedial action with a **FORCED** usage method each
+    the `included` contingency
+> - An **onContingencyState** usage rule is created for the remedial action with an **AVAILABLE** usage method each
+    the `considered` contingency
 
-##### OnConstraint {#on-constraint-usage-rule}
+> ⛔ **Cases with different `combinationConstraintKind` values for the same remedial action-contingency couple**
+>
+> This case is illegal and will be discarded at the import.
+
+#### OnConstraint {#on-constraint-usage-rule}
 
 If the remedial action is linked to an assessed element (a CNEC), its usage method is no longer onInstant and is now
 **onConstraint**. This link is created with a `AssessedElementWithRemedialAction` object that bound together the
