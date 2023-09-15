@@ -205,7 +205,10 @@ the **EQ** profile (CGMES file).
         <cim:IdentifiedObject.mRID>operational-limit-type</cim:IdentifiedObject.mRID>
         <cim:IdentifiedObject.name>Operational limit type</cim:IdentifiedObject.name>
         <cim:IdentifiedObject.description>Example of operational limit type</cim:IdentifiedObject.description>
-        <cim:OperationalLimitType.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.upAndDown"/>
+        <cim:OperationalLimitType.direction
+                rdf:resource="http://iec.ch/TC57/CIM100#OperationalLimitDirectionKind.absoluteValue"/>
+        <eu:OperationalLimitType.kind rdf:resource="http://iec.ch/TC57/CIM100-European#LimitKind.tatl"/>
+        <cim:OperationalLimitType.acceptableDuration>30</cim:OperationalLimitType.acceptableDuration>
     </cim:OperationalLimitType>
     <nc:CurrentLimit rdf:ID="_current-limit">
         <cim:IdentifiedObject.mRID>current-limit</cim:IdentifiedObject.mRID>
@@ -220,6 +223,27 @@ the **EQ** profile (CGMES file).
 ```
 
 The CNEC's threshold value (in AMPERES) is determined by the `value` field of the `CurrentLimit` and must be positive.
+Whether this is the maximum or minimum threshold of the CNEC depends on the `OperationalLimitType`'s `direction`:
+
+- if the `direction` is `high`, the maximum value of the threshold is `+ normalValue`
+- if the `direction` is `absoluteValue`, the maximum value of the threshold is + `normalValue` and the minimum value of
+  the threshold is `- normalValue`
+
+The CNEC's threshold side depends on the nature of the `OperationalLimitSet`'s `Terminal` which must reference an
+existing line in the network and which also defines the CNEC's network element:
+
+- if the line is a `CGMES.Terminal1` or a `CGMES.Terminal_Boundary_1` in PowSyBl, the threshold of the CNEC is on the
+  **left** side
+- if the line is a `CGMES.Terminal2` or a `CGMES.Terminal_Boundary_2` in PowSyBl, the threshold of the CNEC is on the
+  **right** side
+
+If the `OperationalLimitType`'s `kind` is `tatl`, the `OperationalLimitType`'s `acceptableDuration` field must be
+present and sets the FlowCNEC's instant:
+
+- if `acceptableDuration` = 0, the FlowCNEC is **preventive** or **curative** (if linked to a contingency)
+- if 0 < `acceptableDuration` ≤ 60, the FlowCNEC is monitored at the **outage** instant
+- if 60 < `acceptableDuration` ≤ 900, the FlowCNEC is monitored at the **auto** instant
+- if `acceptableDuration` > 9000, the FlowCNEC is **curative**
 
 ### AngleCNEC {#angle-cnec}
 
@@ -240,7 +264,8 @@ found in the **ER** profile.
         <cim:IdentifiedObject.mRID>operational-limit-type</cim:IdentifiedObject.mRID>
         <cim:IdentifiedObject.name>Operational limit type</cim:IdentifiedObject.name>
         <cim:IdentifiedObject.description>Example of operational limit type</cim:IdentifiedObject.description>
-        <cim:OperationalLimitType.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.upAndDown"/>
+        <cim:OperationalLimitType.direction
+                rdf:resource="http://iec.ch/TC57/CIM100#OperationalLimitDirectionKind.absoluteValue"/>
     </cim:OperationalLimitType>
     <nc:VoltageAngleLimit rdf:ID="_voltage-angle-limit">
         <cim:IdentifiedObject.mRID>voltage-angle-limit</cim:IdentifiedObject.mRID>
@@ -274,7 +299,8 @@ on the `VoltageAngleLimit`'s `isFlowToRefTerminal` field value:
 - if it is missing of `false`, the importing element is *terminal_1* and the exporting element is *terminal_2*
 - if it is present of `true`, the exporting element is *terminal_1* and the importing element is *terminal_2*
 
-> ⚠️ Note that if the `OperationalLimitType`'s `direction` is **not** `absoluteValue`, the `isFlowToRefTerminal` must be present otherwise the AngleCNEC will be ignored. 
+> ⚠️ Note that if the `OperationalLimitType`'s `direction` is **not** `absoluteValue`, the `isFlowToRefTerminal` must be
+> present otherwise the AngleCNEC will be ignored.
 
 ### VoltageCNEC {#voltage-cnec}
 
@@ -295,7 +321,9 @@ found in the **EQ** profile (CGMES file).
         <cim:IdentifiedObject.mRID>operational-limit-type</cim:IdentifiedObject.mRID>
         <cim:IdentifiedObject.name>Operational limit type</cim:IdentifiedObject.name>
         <cim:IdentifiedObject.description>Example of operational limit type</cim:IdentifiedObject.description>
-        <cim:OperationalLimitType.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.upAndDown"/>
+        <cim:OperationalLimitType.isInfiniteDuration>true</cim:OperationalLimitType.isInfiniteDuration>
+        <cim:OperationalLimitType.direction
+                rdf:resource="http://iec.ch/TC57/CIM100#OperationalLimitDirectionKind.high"/>
     </cim:OperationalLimitType>
     <nc:VoltageLimit rdf:ID="voltage-limit">
         <cim:IdentifiedObject.mRID>voltage-limit</cim:IdentifiedObject.mRID>
@@ -308,6 +336,18 @@ found in the **EQ** profile (CGMES file).
     ...
 </rdf:RDF>
 ```
+
+To be valid, the VoltageCNEC's `isInfiniteDuration` field must be set to `true`. It is missing or set to `false` it will
+be ignored.
+
+The CNEC's threshold value (in KILOVOLTS) is determined by the `value` field of the `VoltageLimit` and must be positive.
+Whether this is the maximum or minimum threshold of the CNEC depends on the `OperationalLimitType`'s `direction`:
+
+- if the `direction` is `high`, the maximum value of the threshold is `+ normalValue`
+- if the `direction` is `low`, the minimum value of the threshold is `- normalValue`
+
+The VoltageCNEC's network element is determined by the `OperationalLimitSet`'s `Terminal`. The latter must reference an
+existing BusBarSection in the network.
 
 ## Remedial Actions {#remedial-actions}
 
