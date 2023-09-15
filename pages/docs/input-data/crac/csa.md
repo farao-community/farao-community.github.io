@@ -120,8 +120,16 @@ which it can occur through a `ContingencyEquipment`.
 
 {% endcapture %}
 {% include /tabs.html id="CSA_CO_tabs" tab1name="ExceptionalContingency" tab1content=case_ExceptionalContingency
-tab2name="
-OutOfRangeContingency" tab2content=case_OutOfRangeContingency %}
+tab2name="OutOfRangeContingency" tab2content=case_OutOfRangeContingency %}
+
+A contingency is imported only if the `normalMustStudy` field is set to `true` and if it is referenced by a
+valid `ContingencyEquipment`, i.e. having `Equipment` pointing to an existing network element and a `contingentStatus`
+being `outOfService`.
+
+From the `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the contingency's identifier.
+Besides, and the `EquipmentOperator` is converted to a friendly name and concatenated with the `name` to create the
+contingency's name (if the TSO is missing, only the name is used; if the name is missing, the `mRID` will be used
+instead). Finally, the `ContingencyEquipment`'s `Equipment` is used as the contingency's network element.
 
 ## CNECs {#cnecs}
 
@@ -291,17 +299,35 @@ and instant of the remedial action.
         <nc:RemedialAction.normalAvailable>true</nc:RemedialAction.normalAvailable>
         <nc:RemedialAction.kind rdf:resource="http://entsoe.eu/ns/nc#RemedialActionKind.preventive"/>
         <nc:RemedialAction.timeToImplement>PT50S</nc:RemedialAction.timeToImplement>
+        <nc:RemedialAction.RemedialActionSystemOperator
+                rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
     </nc:GridStateAlterationRemedialAction>
     ...
 </rdf:RDF>
 ```
 
+The remedial action is imported only if the `normalAvailable` field is set to `true`. As for
+the [contingencies](#contingencies), the `mRID` is used as the remedial action's identifier and
+the `RemedialActionSystemOperator` and `name` are concatenated together to create the remedial action's name. The
+instant of the remedial action is determined by the `kind` which can be either `preventive` or `curative`. Finally,
+the `timeToImplement` is converted to a number of seconds and used as the remedial action's speed.
+
+In the following, we describe the different types of remedial actions that can be imported in FARAO from the CSA
+profiles. The general pattern is to link a `GridStateAlteration` object which references the parent remedial
+action (`GridStateAlterationRemedialAction`) and a `StaticPropertyRange` which contains the physical and numerical
+definition of the remedial action. The field of the `StaticPropertyRange` are:
+
+- `normalValue` which contains the numerical data of the remedial action (such as the set-point, the PST tap, ...)
+- `PropertyReference` which indicated the network element's property that will be affected by the remedial action
+- `valueKind` which indicates whether the `normalValue` is defined independently of the previous state (`absolute`) of
+  the network element or relatively (`incremental`)
+- `direction` which bears the logic of whether the `normalValue` is an extreme value, an increase / decrease or just a
+  standalone value
+
 ### PST Range Action {#pst-range-action}
 
 A [PST range action](json#pst-range-action) is described by a `TapPositionAction` object which references its parent
-remedial action (`GridStateAlterationRemedialAction`) and the PST affected by the action. This `TapPositionAction` is
-itself referenced by one or two `StaticPropertyRange` objects which provide the numerical values for the minimum and/or
-maximum reachable taps.
+remedial action (`GridStateAlterationRemedialAction`) and the PST affected by the action.
 
 ```xml
 <!-- RA Profile -->
@@ -317,6 +343,21 @@ maximum reachable taps.
                 rdf:resource="http://energy.referencedata.eu/PropertyReference/TapChanger.step"/>
         <nc:TapPositionAction.TapChanger rdf:resource="#_tap-changer"/>
     </nc:TapPositionAction>
+    ...
+</rdf:RDF>
+```
+
+The PST range action is considered only if the `normalEnabled` field is set to `true`. Besides, the `TapChanger` must
+reference an existing PST in the network and the `PropertyReference` must necessarily be `TapChanger.step` since it is
+the PST's tap position which shifts.
+
+To be valid, the `TapPositionAction` must itself be referenced by one or two `StaticPropertyRange` objects which provide
+the numerical values for the minimum and/or maximum reachable taps.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
     <nc:StaticPropertyRange rdf:ID="_static-property-range-for-tap-position-action-max">
         <cim:IdentifiedObject.mRID>static-property-range-for-tap-position-action-max</cim:IdentifiedObject.mRID>
         <cim:IdentifiedObject.name>Upper bound for tap position action</cim:IdentifiedObject.name>
@@ -340,6 +381,12 @@ maximum reachable taps.
     ...
 </rdf:RDF>
 ```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `TapChanger.step`. The value of the tap is
+determined by the `normalValue`: if the `direction` is `up` this is the maximum reachable tap and if it is `down` it is
+the minimum. Note that the `valueKind` must be `absolute` to indicate that the limit does not depend on the previous
+PST's state. Up to two `StaticPropertyRange` objects can be linked to the same PST range action to set the minimum
+and/or maximum tap.
 
 ### Network Actions {#network-actions}
 
@@ -368,6 +415,10 @@ remedial action (`GridStateAlterationRemedialAction`) and the switch affected by
 </rdf:RDF>
 ```
 
+The topological action is considered only if the `normalEnabled` field is set to `true`. Besides, the `Switch` must
+reference an existing switch in the network and the `PropertyReference` must necessarily be `Switch.open` since a
+topology action is about opening or closing such a switch.
+
 #### Injection Set-point Action {#injection-set-point-action}
 
 An [injection set-point action](json#network-actions) is described by a `SetPointAction` object which references its
@@ -395,6 +446,21 @@ A rotating machine action is described with a `RotatingMachineAction` object in 
                 rdf:resource="http://energy.referencedata.eu/PropertyReference/RotatingMachine.p"/>
         <nc:RotatingMachineAction.RotatingMachine rdf:resource="#_rotating-machine"/>
     </nc:RotatingMachineAction>
+    ...
+</rdf:RDF>
+```
+
+The rotating machine action is considered only if the `normalEnabled` field is set to `true`. Besides,
+the `RotatingMachine` must reference an existing generator in the network and the `PropertyReference` must necessarily
+be `RotatingMachine.p` since the remedial action acts on the generator's power.
+
+To be valid, the `RotatingMachineAction` must itself be referenced by a `StaticPropertyRange` which provides the value
+of the set-point.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
     <nc:StaticPropertyRange rdf:ID="_static-property-range-for-rotating-machine-action">
         <cim:IdentifiedObject.mRID>static-property-range-for-rotating-machine-action</cim:IdentifiedObject.mRID>
         <cim:IdentifiedObject.name>Set-point in MW</cim:IdentifiedObject.name>
@@ -408,6 +474,10 @@ A rotating machine action is described with a `RotatingMachineAction` object in 
     ...
 </rdf:RDF>
 ```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `RotatingMachine.p`. The value of the set-point (in
+MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction` is none to
+indicate that the set-point is an imposed value without any degree of freedom for the RAO.
 
 {% endcapture %}
 
@@ -430,6 +500,22 @@ A power electronics connection action is described with a `PowerElectronicsConne
                 rdf:resource="http://energy.referencedata.eu/PropertyReference/PowerElectronicsConnection.p"/>
         <nc:PowerElectronicsConnectionAction.PowerElectronicsConnection rdf:resource="#_power-electronics-connection"/>
     </nc:PowerElectronicsConnectionAction>
+    ...
+</rdf:RDF>
+```
+
+The power electronics connection action is considered only if the `normalEnabled` field is set to `true`. Besides,
+the `PowerElectronicsConnection` must reference an existing power electronics connection in the network and
+the `PropertyReference` must necessarily be `PowerElectronicsConnection.p` since the remedial action acts on the power
+electronics connection's power.
+
+To be valid, the `PowerElectronicsConnectionAction` must itself be referenced by a `StaticPropertyRange` which provides
+the value of the set-point.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
     <nc:StaticPropertyRange rdf:ID="_static-property-range-for-power-electronics-connection-action">
         <cim:IdentifiedObject.mRID>static-property-range-for-power-electronics-connection-action
         </cim:IdentifiedObject.mRID>
@@ -444,6 +530,10 @@ A power electronics connection action is described with a `PowerElectronicsConne
     ...
 </rdf:RDF>
 ```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `PowerElectronicsConnection.p`. The value of the
+set-point (in MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction`
+is none to indicate that the set-point is an imposed value without any degree of freedom for the RAO.
 
 {% endcapture %}
 
@@ -465,9 +555,24 @@ A shunt compensator modification is described with a `ShuntCompensatorModificati
                 rdf:resource="http://energy.referencedata.eu/PropertyReference/ShuntCompensator.sections"/>
         <nc:ShuntCompensatorModification.ShuntCompensator rdf:resource="#_shunt-compensator"/>
     </nc:ShuntCompensatorModification>
+    ...
+</rdf:RDF>
+```
+
+The shunt compensator modification is considered only if the `normalEnabled` field is set to `true`. Besides,
+the `ShuntCompensator` must reference a shunt compensator in the network and the `PropertyReference` must necessarily
+be `ShuntCompensator.sections` since the remedial action acts on the number of sections of the shunt compensator.
+
+To be valid, the `ShuntCompensatorModification` must itself be referenced by a `StaticPropertyRange` which provides the
+value of the set-point.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
     <nc:StaticPropertyRange rdf:ID="_static-property-range-for-shunt-compensator-modification">
         <cim:IdentifiedObject.mRID>static-property-range-for-shunt-compensator-modification</cim:IdentifiedObject.mRID>
-        <cim:IdentifiedObject.name>Set-point in SECTION_UNITS</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.name>Set-point in SECTION_COUNT</cim:IdentifiedObject.name>
         <nc:RangeConstraint.GridStateAlteration rdf:resource="#_shunt-compensator-modification"/>
         <nc:RangeConstraint.normalValue>5.0</nc:RangeConstraint.normalValue>
         <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.none"/>
@@ -478,6 +583,11 @@ A shunt compensator modification is described with a `ShuntCompensatorModificati
     ...
 </rdf:RDF>
 ```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `ShuntCompensator.sections`. The value of the
+set-point (in SECTION_COUNT) is determined by the `normalValue` given that the `valueKind` is `absolute` and that
+the `direction`is none to indicate that the number of section is an imposed value without any degree of freedom for the
+RAO.
 
 {% endcapture %}
 
@@ -490,13 +600,13 @@ Shunt Compensator Modification" tab3content=case_ShuntCompensatorModification %}
 
 #### OnInstant {#on-instant-usage-rule}
 
-By default, if no additional information is included, the remedial action is imported with an **onInstant usage rule**
+By default, if no additional information is given, the remedial action is imported with an **onInstant usage rule**
 and an **AVAILABLE usage method**.
 
 #### OnContingencyState {#on-contingency-state-usage-rule}
 
 If the remedial action is linked to a contingency, its usage method is no longer onInstant and is now
-**onContingencyState**. This link is created with a `ContingencyWithRemedialAction` object that bound together the
+**onContingencyState**. This link is created with a `ContingencyWithRemedialAction` object that bounds together the
 remedial action and the contingency.
 
 ```xml
@@ -548,7 +658,7 @@ The usage method depends on the value of the `combinationConstraintKind` field:
 #### OnConstraint {#on-constraint-usage-rule}
 
 If the remedial action is linked to an assessed element (a CNEC), its usage method is no longer onInstant and is now
-**onConstraint**. This link is created with a `AssessedElementWithRemedialAction` object that bound together the
+**onConstraint**. This link is created with a `AssessedElementWithRemedialAction` object that bounds together the
 assessed element and the contingency.
 
 The type of onConstraint usage rule depends on the type of the CNEC the remedial action is bounded to:
