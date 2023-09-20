@@ -1,7 +1,7 @@
 Here is a detailed description of how the voltage monitoring algorithm operates:
-- From the CRAC, get the set of states on which VoltageCnecs exist
 - Apply optimal preventive remedial actions from RaoResult on the network
 - For each of these states, monitor voltages:
+- From the CRAC, get the set of states on which VoltageCnecs exist
 - (A) For each of these states, generate a state-specific VoltageMonitoringResult:
   - If one of these states is the preventive state, deal with it before handling any of the contingency states. Directly work on the input
     network. That way, applied voltage preventive remedial actions will be taken into account in the contingency states. Go to (B)
@@ -21,8 +21,8 @@ Here is a detailed description of how the voltage monitoring algorithm operates:
     - If the VoltageCnec has no associated RA, log a warning that the voltage constraint cannot be remedied, and move on to the
       next VoltageCnec.
     - For every RA:
-      - If the remedial action is not a topological action, do not apply it and log a warning. Then move on to the next RA.
-      - If the RA is a topological action, apply it on the network
+      - If the remedial action is not a network action, do not apply it and log a warning. Then move on to the next RA.
+      - If the RA is a network action, apply it on the network
   - If you applied any RA, recompute the LoadFlow
     - If it diverges, return a VoltageMonitoringResult with the following content for this state, then move on to the next state:
       - the voltages of the VoltageCnecs equal to what was computed before RA application

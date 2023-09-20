@@ -58,7 +58,7 @@ public Set<String> getAppliedRas(String stateId)
 {% capture t2_json %}
 Example:
 ~~~json
-"applied-cras": [
+"applied-ras": [
     {
       "instant": "curative",
       "contingency": "co1",
