@@ -127,7 +127,7 @@ valid `ContingencyEquipment`, i.e. having `Equipment` pointing to an existing ne
 being `outOfService`.
 
 From the `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the contingency's identifier.
-Besides, and the `EquipmentOperator` is converted to a friendly name and concatenated with the `name` to create the
+Besides, the `EquipmentOperator` is converted to a friendly name and concatenated with the `name` to create the
 contingency's name (if the TSO is missing, only the name is used; if the name is missing, the `mRID` will be used
 instead). Finally, the `ContingencyEquipment`'s `Equipment` is used as the contingency's network element.
 
