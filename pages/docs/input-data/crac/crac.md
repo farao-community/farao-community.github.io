@@ -57,6 +57,6 @@ It consists in the opening or the closing of one branch or one switch of the net
 #### PST set-point {#pst-set-point}
 It consists in the modification of the tap of a PST to a pre-defined target tap.
 #### Injection set-point {#injection-set-point}
-It consists in the modification of an injection (load, generator or dangling line) to a pre-defined set-point.
+It consists in the modification of an injection (load, generator, dangling line or shunt compensator) to a pre-defined set-point.
 #### Switch pair {#switch-pair}
 It consists in opening a switch and closing another.
