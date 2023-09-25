@@ -2,7 +2,7 @@ A FARAO "Network Action" is a remedial action with a binary state: it is either 
 One network action is a combination of one or multiple "elementary actions", among the following:
 - Topological action: opening or closing a branch or a switch in the network.
 - PST set-point: setting the tap of a PST in the network to a specific position.
-- Injection set-point: setting the active power set-point of an element in the network (load, generator or [dangling line](https://www.powsybl.org/pages/documentation/grid/model/#dangling-line))
+- Injection set-point: setting the active power set-point of an element in the network (load, generator, shunt compensator or [dangling line](https://www.powsybl.org/pages/documentation/grid/model/#dangling-line))
   to a specific value.
 - Switch pairs: opening a switch in the network and closing another (actually used to model [CSE bus-bar change remedial actions](cse#bus-bar)).
 
