@@ -18,6 +18,8 @@ The usage rules which exist in FARAO are:
   the remedial action is available if the given FlowCnec is constrained at the given instant.
 - the **OnAngleConstraint** usage rule (defined for a specific [instant](#instants-states) and a specific [AngleCnec](#angle-cnecs)):
   the remedial action is available if the given AngleCnec is constrained at the given instant.
+- the **OnVoltageConstraint** usage rule (defined for a specific [instant](#instants-states) and a specific [VoltageCnec](#voltage-cnecs)):
+  the remedial action is available if the given VoltageCnec is constrained at the given instant.
 
 
 A remedial action has an operator, which is the name of the TSO which operates the remedial action.
@@ -56,6 +58,12 @@ crac.newNetworkAction()
         .withInstant(Instant.CURATIVE)
         .withAngleCnec("angle-cnec-id")
         .add();
+
+crac.newNetworkAction()
+    .newOnVoltageConstraintUsageRule()
+        .withInstant(Instant.CURATIVE)
+        .withVoltageCnec("voltage-cnec-id")
+        .add();
 ~~~
 {% endcapture %}
 {% capture t7_json %}
@@ -81,6 +89,10 @@ Complete examples of Network and Range Action in Json format are given in the fo
 "onAngleConstraintUsageRules" : [ {
     "instant" : "curative",
     "angleCnecId" : "angle-cnec-id"
+} ],
+"onVoltageConstraintUsageRules" : [ {
+    "instant" : "curative",
+    "voltageCnecId" : "voltage-cnec-id"
 } ]
 ~~~
 {% endcapture %}
@@ -101,6 +113,9 @@ Complete examples of Network and Range Action in Json format are given in the fo
 <ins>**For OnAngleConstraint usage rules**</ins>  
 🔴 **instant**  
 🔴 **angleCnecId**: must be the id of an [AngleCnec](#angle-cnecs) that exists in the CRAC  
+<ins>**For OnVoltageConstraint usage rules**</ins>  
+🔴 **instant**  
+🔴 **voltageCnecId**: must be the id of an [VoltageCnec](#voltage-cnecs) that exists in the CRAC  
 <ins>**Usage methods**</ins>  
 FARAO handles three different types of usage methods:  
 1 - **AVAILABLE**: the remedial action is available in the given state, if the RAO decides it is optimal, with no extra condition  
