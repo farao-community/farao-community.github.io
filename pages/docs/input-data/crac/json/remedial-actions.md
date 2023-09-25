@@ -91,8 +91,8 @@ Complete examples of Network and Range Action in Json format are given in the fo
     "angleCnecId" : "angle-cnec-id"
 } ],
 "onVoltageConstraintUsageRules" : [ {
-"instant" : "curative",
-"voltageCnecId" : "voltage-cnec-id"
+    "instant" : "curative",
+    "voltageCnecId" : "voltage-cnec-id"
 } ]
 ~~~
 {% endcapture %}
