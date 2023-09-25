@@ -61,9 +61,37 @@ ignored.
 
 ## Contingencies {#contingencies}
 
-The [contingencies](json#contingencies) are described in the **CO** profile. They can be represented by two types of
-objects: `ExceptionalContingency` and  `OutOfRangeContingency`. The contingency is linked to the network element on
-which it can occur through a `ContingencyEquipment`.
+The [contingencies](json#contingencies) are described in the **CO** profile. They can be represented by three types of
+objects: `OrdinaryContingency`, `ExceptionalContingency` and  `OutOfRangeContingency`. The contingency is linked to the
+network element on which it can occur through a `ContingencyEquipment`.
+
+{% capture case_OrdinaryContingency %}
+
+```xml
+<!-- CO Profile -->
+<rdf:RDF>
+    ...
+    <nc:OrdinaryContingency rdf:ID="_ordinary-contingency">
+        <cim:IdentifiedObject.mRID>ordinary-contingency</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Ordinary contingency</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of ordinary contingency.</cim:IdentifiedObject.description>
+        <nc:Contingency.normalMustStudy>true</nc:Contingency.normalMustStudy>
+        <nc:Contingency.EquipmentOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+    </nc:OrdinaryContingency>
+    <cim:ContingencyEquipment rdf:ID="_contingency-equipment">
+        <cim:IdentifiedObject.mRID>contingency-equipment</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Contingency equipment</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of contingency equipment.</cim:IdentifiedObject.description>
+        <cim:ContingencyElement.Contingency rdf:resource="#_ordinary-contingency"/>
+        <cim:ContingencyEquipment.contingentStatus
+                rdf:resource="http://iec.ch/TC57/CIM100#ContingencyEquipmentStatusKind.outOfService"/>
+        <cim:ContingencyEquipment.Equipment rdf:resource="#_equipment"/>
+    </cim:ContingencyEquipment>
+    ...
+</rdf:RDF>
+```
+
+{% endcapture %}
 
 {% capture case_ExceptionalContingency %}
 
@@ -119,17 +147,19 @@ which it can occur through a `ContingencyEquipment`.
 ```
 
 {% endcapture %}
-{% include /tabs.html id="CSA_CO_tabs" tab1name="ExceptionalContingency" tab1content=case_ExceptionalContingency
-tab2name="OutOfRangeContingency" tab2content=case_OutOfRangeContingency %}
+{% include /tabs.html id="CSA_CO_tabs" tab1name="OrdinaryContingency" tab1content=case_OrdinaryContingency
+tab2name="ExceptionalContingency" tab2content=case_ExceptionalContingency
+tab3name="OutOfRangeContingency" tab3content=case_OutOfRangeContingency %}
 
 A contingency is imported only if the `normalMustStudy` field is set to `true` and if it is referenced by a
 valid `ContingencyEquipment`, i.e. having `Equipment` pointing to an existing network element and a `contingentStatus`
 being `outOfService`.
 
-From the `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the contingency's identifier.
-Besides, the `EquipmentOperator` is converted to a friendly name and concatenated with the `name` to create the
-contingency's name (if the TSO is missing, only the name is used; if the name is missing, the `mRID` will be used
-instead). Finally, the `ContingencyEquipment`'s `Equipment` is used as the contingency's network element.
+From the `OrdinaryContingency` / `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the
+contingency's identifier. Besides, the `EquipmentOperator` is converted to a friendly name and concatenated with the
+`name` to create the contingency's name (if the TSO is missing, only the name is used; if the name is missing, the
+`mRID` will be used instead). Finally, the `ContingencyEquipment`'s `Equipment` is used as the contingency's network
+element.
 
 ## CNECs {#cnecs}
 
@@ -156,7 +186,8 @@ name, instant(s) and operator information.
 </rdf:RDF>
 ```
 
-The CNEC is imported only if the `isCritical` and `normalEnabled` fields are both set to `true`. If the `inBaseCase`
+The CNEC is imported only if the `isCritical` and `normalEnabled` fields are both set to `true` or missing. If
+the `inBaseCase`
 field is set to `true` a **preventive** CNEC is created from this assessed element (but this does not mean that a
 curative CNEC cannot be created as well). The `AssessedSystemOperator` and the `name` are concatenated together with the
 CNEC's instant (with the pattern *TSO_name - instant*) to create the CNEC's name. Finally, the `OperationalLimit` points
