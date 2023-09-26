@@ -1,0 +1,789 @@
+---
+layout: documentation
+title: CSA CRAC format
+permalink: /docs/input-data/crac/csa
+hide: true
+root-page: Documentation
+docu-section: Input Data
+docu-parent: CRAC
+order: 6
+tags: [ Docs, Data, CRAC, CSA ]
+---
+
+## Presentation {#presentation}
+
+For the CSA process, the CRAC data is split over multiple XML files called **CSA profiles**, each one with its own
+specific purpose, and which were inspired by the CGM format. This format
+was [introduced by ENTSO-E](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/). The objects in the different
+CSA profiles reference one another using **mRID** links (UUID format) which makes it possible to separate the
+information among several distinct files.
+
+## Header overview {#header}
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:eumd="http://entsoe.eu/ns/Metadata-European#"
+        xmlns:eu="http://iec.ch/TC57/CIM100-European#"
+        xmlns:nc="http://entsoe.eu/ns/nc#"
+        xmlns:prov="http://www.w3.org/ns/prov#"
+        xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#"
+        xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+        xmlns:cim="http://iec.ch/TC57/CIM100#"
+        xmlns:dcterms="http://purl.org/dc/terms/#">
+    <md:FullModel rdf:about="urn:uuid:e6b94ef6-e043-4d29-a258-1718d6d2f507">
+        <dcat:Model.keyword>...</dcat:Model.keyword>
+        <dcat:Model.startDate>2023-01-01T00:00:00Z</dcat:Model.startDate>
+        <dcat:Model.endDate>2100-01-01T00:00:00Z</dcat:Model.endDate>
+        ...
+    </md:FullModel>
+    ...
+</rdf:RDF>
+```
+
+Each CSA profile is identified by a `keyword` that states which category of features it bears. Currently, FARAO handles
+6 different CSA profiles, the keyword and purpose of which are gathered in the following table:
+
+| Keyword | Full Name                | Purpose                                  |
+|---------|--------------------------|------------------------------------------|
+| AE      | Assessed Element         | Definition of CNECs.                     |
+| CO      | Contingency              | Definition of contingencies.             |
+| ER      | Equipment Reliability    | Definition of CNECs' thresholds.         |
+| RA      | Remedial Action          | Definition of remedial actions.          |
+| RAS     | Remedial Action Schedule | Definition of automatic remedial action. |
+| SSI     | Steady State Instruction | Overriding data for specific instants.   |
+
+Besides, each CSA profile has a period of validity delimited by the `startDate` and `endDate` fields in the
+header's `FullModel` object. If the time at which the import occurs is outside of this time interval, the profile is
+ignored.
+
+## Contingencies {#contingencies}
+
+The [contingencies](json#contingencies) are described in the **CO** profile. They can be represented by three types of
+objects: `OrdinaryContingency`, `ExceptionalContingency` and  `OutOfRangeContingency`. The contingency is linked to the
+network element on which it can occur through a `ContingencyEquipment`.
+
+{% capture case_OrdinaryContingency %}
+
+```xml
+<!-- CO Profile -->
+<rdf:RDF>
+    ...
+    <nc:OrdinaryContingency rdf:ID="_ordinary-contingency">
+        <cim:IdentifiedObject.mRID>ordinary-contingency</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Ordinary contingency</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of ordinary contingency.</cim:IdentifiedObject.description>
+        <nc:Contingency.normalMustStudy>true</nc:Contingency.normalMustStudy>
+        <nc:Contingency.EquipmentOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+    </nc:OrdinaryContingency>
+    <cim:ContingencyEquipment rdf:ID="_contingency-equipment">
+        <cim:IdentifiedObject.mRID>contingency-equipment</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Contingency equipment</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of contingency equipment.</cim:IdentifiedObject.description>
+        <cim:ContingencyElement.Contingency rdf:resource="#_ordinary-contingency"/>
+        <cim:ContingencyEquipment.contingentStatus
+                rdf:resource="http://iec.ch/TC57/CIM100#ContingencyEquipmentStatusKind.outOfService"/>
+        <cim:ContingencyEquipment.Equipment rdf:resource="#_equipment"/>
+    </cim:ContingencyEquipment>
+    ...
+</rdf:RDF>
+```
+
+{% endcapture %}
+
+{% capture case_ExceptionalContingency %}
+
+```xml
+<!-- CO Profile -->
+<rdf:RDF>
+    ...
+    <nc:ExceptionalContingency rdf:ID="_exceptional-contingency">
+        <cim:IdentifiedObject.mRID>exceptional-contingency</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Exceptional contingency</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of exceptional contingency.</cim:IdentifiedObject.description>
+        <nc:Contingency.normalMustStudy>true</nc:Contingency.normalMustStudy>
+        <nc:Contingency.EquipmentOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+    </nc:ExceptionalContingency>
+    <cim:ContingencyEquipment rdf:ID="_contingency-equipment">
+        <cim:IdentifiedObject.mRID>contingency-equipment</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Contingency equipment</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of contingency equipment.</cim:IdentifiedObject.description>
+        <cim:ContingencyElement.Contingency rdf:resource="#_exceptional-contingency"/>
+        <cim:ContingencyEquipment.contingentStatus
+                rdf:resource="http://iec.ch/TC57/CIM100#ContingencyEquipmentStatusKind.outOfService"/>
+        <cim:ContingencyEquipment.Equipment rdf:resource="#_equipment"/>
+    </cim:ContingencyEquipment>
+    ...
+</rdf:RDF>
+```
+
+{% endcapture %}
+{% capture case_OutOfRangeContingency %}
+
+```xml
+<!-- CO Profile -->
+<rdf:RDF>
+    ...
+    <nc:OutOfRangeContingency rdf:ID="_out-of-range-contingency">
+        <cim:IdentifiedObject.mRID>out-of-range-contingency</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Out-of-range contingency</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of out-of-range contingency.</cim:IdentifiedObject.description>
+        <nc:Contingency.normalMustStudy>true</nc:Contingency.normalMustStudy>
+        <nc:Contingency.EquipmentOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+    </nc:OutOfRangeContingency>
+    <cim:ContingencyEquipment rdf:ID="_contingency-equipment">
+        <cim:IdentifiedObject.mRID>contingency-equipment</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Contingency equipment</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of contingency equipment.</cim:IdentifiedObject.description>
+        <cim:ContingencyElement.Contingency rdf:resource="#_out-of-range-contingency"/>
+        <cim:ContingencyEquipment.contingentStatus
+                rdf:resource="http://iec.ch/TC57/CIM100#ContingencyEquipmentStatusKind.outOfService"/>
+        <cim:ContingencyEquipment.Equipment rdf:resource="#_equipment"/>
+    </cim:ContingencyEquipment>
+    ...
+</rdf:RDF>
+```
+
+{% endcapture %}
+{% include /tabs.html id="CSA_CO_tabs" tab1name="OrdinaryContingency" tab1content=case_OrdinaryContingency
+tab2name="ExceptionalContingency" tab2content=case_ExceptionalContingency
+tab3name="OutOfRangeContingency" tab3content=case_OutOfRangeContingency %}
+
+A contingency is imported only if the `normalMustStudy` field is set to `true` and if it is referenced by a
+valid `ContingencyEquipment`, i.e. having `Equipment` pointing to an existing network element and a `contingentStatus`
+being `outOfService`.
+
+From the `OrdinaryContingency` / `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the
+contingency's identifier. Besides, the `EquipmentOperator` is converted to a friendly name and concatenated with the
+`name` to create the contingency's name (if the TSO is missing, only the name is used; if the name is missing, the
+`mRID` will be used instead). Finally, the `ContingencyEquipment`'s `Equipment` is used as the contingency's network
+element.
+
+## CNECs {#cnecs}
+
+The [CNECs](json#cnec) are described in the **AE** profile with an `AssessedElement` object which bears the identifier,
+name, instant(s) and operator information.
+
+```xml
+<!-- AE Profile -->
+<rdf:RDF>
+    ...
+    <nc:AssessedElement rdf:ID="_assessed-element">
+        <cim:IdentifiedObject.mRID>assessed-element</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Assessed element</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of assessed element.</cim:IdentifiedObject.description>
+        <nc:AssessedElement.inBaseCase>true</nc:AssessedElement.inBaseCase>
+        <nc:AssessedElement.isCritical>true</nc:AssessedElement.isCritical>
+        <nc:AssessedElement.normalEnabled>true</nc:AssessedElement.normalEnabled>
+        <nc:AssessedElement.isCombinableWithRemedialAction>false</nc:AssessedElement.isCombinableWithRemedialAction>
+        <nc:AssessedElement.isCombinableWithContingency>false</nc:AssessedElement.isCombinableWithContingency>
+        <nc:AssessedElement.AssessedSystemOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+        <nc:AssessedElement.OperationalLimit rdf:resource="#_operational-limit"/>
+    </nc:AssessedElement>
+    ...
+</rdf:RDF>
+```
+
+The CNEC is imported only if the `isCritical` and `normalEnabled` fields are both set to `true` or missing. If
+the `inBaseCase`
+field is set to `true` a **preventive** CNEC is created from this assessed element (but this does not mean that a
+curative CNEC cannot be created as well). The `AssessedSystemOperator` and the `name` are concatenated together with the
+CNEC's instant (with the pattern *TSO_name - instant*) to create the CNEC's name. Finally, the `OperationalLimit` points
+to an eponymous object in either the ER or EQ profile depending on the type of CNEC (see below). This `OperationalLimit`
+bears the value of the threshold and the reference to the network element(s).
+
+A CNEC can also be made curative by linking it to a contingency through an `AssessedElementWithContingency`. In this
+case, the contingency's name is added to the CNEC's name.
+
+```xml
+<!-- AE Profile -->
+<rdf:RDF>
+    ...
+    <nc:AssessedElementWithContingency rdf:ID="_assessed-element-with-contingency">
+        <nc:AssessedElementWithContingency.mRID>assessed-element-with-contingency
+        </nc:AssessedElementWithContingency.mRID>
+        <nc:AssessedElementWithContingency.Contingency rdf:resource="#_contingency"/>
+        <nc:AssessedElementWithContingency.AssessedElement rdf:resource="#_assessed-element"/>
+        <nc:AssessedElementWithContingency.combinationConstraintKind
+                rdf:resource="http://entsoe.eu/ns/nc#ElementCombinationConstraintKind.included"/>
+        <nc:AssessedElementWithContingency.normalEnabled>true</nc:AssessedElementWithContingency.normalEnabled>
+    </nc:AssessedElementWithContingency>
+    ...
+</rdf:RDF>
+```
+
+The distinction between the types of CNEC (FlowCNEC, AngleCNEC or VoltageCNEC) comes from the type of `OperationalLimit`
+of the Assessed Element.
+
+### FlowCNEC {#flow-cnec}
+
+The CNEC is a [FlowCNEC](json#flow-cnecs) if its associated `OperationalLimit` is a `CurrentLimit` which can be found in
+the **EQ** profile (CGMES file).
+
+```xml
+<!-- EQ (CGMES) Profile -->
+<rdf:RDF>
+    ...
+    <cim:OperationalLimitSet rdf:ID="_operational-limit-set">
+        <cim:IdentifiedObject.mRID>operational-limit-set</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Operational limit set</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of operational limit set</cim:IdentifiedObject.description>
+        <cim:OperationalLimitSet.Terminal rdf:resource="#_terminal"/>
+    </cim:OperationalLimitSet>
+    <cim:OperationalLimitType rdf:ID="_operational-limit-type">
+        <cim:IdentifiedObject.mRID>operational-limit-type</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Operational limit type</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of operational limit type</cim:IdentifiedObject.description>
+        <cim:OperationalLimitType.direction
+                rdf:resource="http://iec.ch/TC57/CIM100#OperationalLimitDirectionKind.absoluteValue"/>
+        <eu:OperationalLimitType.kind rdf:resource="http://iec.ch/TC57/CIM100-European#LimitKind.tatl"/>
+        <cim:OperationalLimitType.acceptableDuration>30</cim:OperationalLimitType.acceptableDuration>
+    </cim:OperationalLimitType>
+    <nc:CurrentLimit rdf:ID="_current-limit">
+        <cim:IdentifiedObject.mRID>current-limit</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Current limit</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of current limit</cim:IdentifiedObject.description>
+        <cim:OperationalLimit.OperationalLimitType rdf:resource="#_operational-limit-type"/>
+        <cim:OperationalLimit.OperationalLimitSet rdf:resource="#_operational-limit-set"/>
+        <nc:CurrentLimit.value>100.0</nc:CurrentLimit.value>
+    </nc:CurrentLimit>
+    ...
+</rdf:RDF>
+```
+
+The CNEC's threshold value (in AMPERES) is determined by the `value` field of the `CurrentLimit` and must be positive.
+Whether this is the maximum or minimum threshold of the CNEC depends on the `OperationalLimitType`'s `direction`:
+
+- if the `direction` is `high`, the maximum value of the threshold is `+ normalValue`
+- if the `direction` is `absoluteValue`, the maximum value of the threshold is + `normalValue` and the minimum value of
+  the threshold is `- normalValue`
+
+The CNEC's threshold side depends on the nature of the `OperationalLimitSet`'s `Terminal` which must reference an
+existing line in the network and which also defines the CNEC's network element:
+
+- if the line is a `CGMES.Terminal1` or a `CGMES.Terminal_Boundary_1` in PowSyBl, the threshold of the CNEC is on the
+  **left** side
+- if the line is a `CGMES.Terminal2` or a `CGMES.Terminal_Boundary_2` in PowSyBl, the threshold of the CNEC is on the
+  **right** side
+
+If the `OperationalLimitType`'s `kind` is `tatl`, the `OperationalLimitType`'s `acceptableDuration` field must be
+present and sets the FlowCNEC's instant:
+
+- if `acceptableDuration` = 0, the FlowCNEC is **preventive** or **curative** (if linked to a contingency)
+- if 0 < `acceptableDuration` ≤ 60, the FlowCNEC is monitored at the **outage** instant
+- if 60 < `acceptableDuration` ≤ 900, the FlowCNEC is monitored at the **auto** instant
+- if `acceptableDuration` > 9000, the FlowCNEC is **curative**
+
+### AngleCNEC {#angle-cnec}
+
+The CNEC is an [AngleCNEC](json#angle-cnecs) if its associated `OperationalLimit` is a `VoltageAngleLimit` which can be
+found in the **ER** profile.
+
+```xml
+<!-- ER Profile -->
+<rdf:RDF>
+    ...
+    <cim:OperationalLimitSet rdf:ID="_operational-limit-set">
+        <cim:IdentifiedObject.mRID>operational-limit-set</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Operational limit set</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of operational limit set</cim:IdentifiedObject.description>
+        <cim:OperationalLimitSet.Terminal rdf:resource="#_terminal-2"/>
+    </cim:OperationalLimitSet>
+    <cim:OperationalLimitType rdf:ID="_operational-limit-type">
+        <cim:IdentifiedObject.mRID>operational-limit-type</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Operational limit type</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of operational limit type</cim:IdentifiedObject.description>
+        <cim:OperationalLimitType.direction
+                rdf:resource="http://iec.ch/TC57/CIM100#OperationalLimitDirectionKind.absoluteValue"/>
+    </cim:OperationalLimitType>
+    <nc:VoltageAngleLimit rdf:ID="_voltage-angle-limit">
+        <cim:IdentifiedObject.mRID>voltage-angle-limit</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Voltage angle limit</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of voltage angle limit</cim:IdentifiedObject.description>
+        <cim:OperationalLimit.OperationalLimitType rdf:resource="#_operational-limit-type"/>
+        <cim:OperationalLimit.OperationalLimitSet rdf:resource="#_operational-limit-set"/>
+        <nc:VoltageAngleLimit.normalValue>100.0</nc:VoltageAngleLimit.normalValue>
+        <nc:VoltageAngleLimit.isFlowToRefTerminal>true</nc:VoltageAngleLimit.isFlowToRefTerminal>
+        <nc:VoltageAngleLimit.AngleReferenceTerminal rdf:resource="#_terminal-1"/>
+    </nc:VoltageAngleLimit>
+    ...
+</rdf:RDF>
+```
+
+The CNEC's threshold value (in DEGREES) is determined by the `normalValue` field of the `VoltageAngleLimit` and must be
+positive. Whether this is the maximum or minimum threshold of the CNEC depends on the `OperationalLimitType`'
+s `direction`:
+
+- if the `direction` is `high`, the maximum value of the threshold is `+ normalValue`
+- if the `direction` is `low`, the minimum value of the threshold is `- normalValue`
+- if the `direction` is `absoluteValue`, the maximum value of the threshold is + `normalValue` and the minimum value of
+  the threshold is `- normalValue`
+
+An AngleCNEC also has two terminals, one being the importing element and the other being the exporting element, which
+imposes the flow direction. Two terminals are referenced by the AngleCNEC in the CSA profiles. The first one (called
+*terminal_1*) is referenced by the `VoltageAngleLimit`'s `AngleReferenceTerminal` field. The second one (called
+*terminal_2*) is referenced by the `OperationalLimitSet`'s `Terminal` field. The flow direction is determined depending
+on the `VoltageAngleLimit`'s `isFlowToRefTerminal` field value:
+
+- if it is missing of `false`, the importing element is *terminal_1* and the exporting element is *terminal_2*
+- if it is present of `true`, the exporting element is *terminal_1* and the importing element is *terminal_2*
+
+> ⚠️ Note that if the `OperationalLimitType`'s `direction` is **not** `absoluteValue`, the `isFlowToRefTerminal` must be
+> present otherwise the AngleCNEC will be ignored.
+
+### VoltageCNEC {#voltage-cnec}
+
+The CNEC is a [VoltageCNEC](json#voltage-cnecs) if its associated `OperationalLimit` is a `VoltageLimit` which can be
+found in the **EQ** profile (CGMES file).
+
+```xml
+<!-- EQ (CGMES) Profile -->
+<rdf:RDF>
+    ...
+    <cim:OperationalLimitSet rdf:ID="_operational-limit-set">
+        <cim:IdentifiedObject.mRID>operational-limit-set</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Operational limit set</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of operational limit set</cim:IdentifiedObject.description>
+        <cim:OperationalLimitSet.Terminal rdf:resource="#_terminal"/>
+    </cim:OperationalLimitSet>
+    <cim:OperationalLimitType rdf:ID="_operational-limit-type">
+        <cim:IdentifiedObject.mRID>operational-limit-type</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Operational limit type</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of operational limit type</cim:IdentifiedObject.description>
+        <cim:OperationalLimitType.isInfiniteDuration>true</cim:OperationalLimitType.isInfiniteDuration>
+        <cim:OperationalLimitType.direction
+                rdf:resource="http://iec.ch/TC57/CIM100#OperationalLimitDirectionKind.high"/>
+    </cim:OperationalLimitType>
+    <nc:VoltageLimit rdf:ID="voltage-limit">
+        <cim:IdentifiedObject.mRID>voltage-limit</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Voltage limit</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of voltage limit</cim:IdentifiedObject.description>
+        <cim:OperationalLimit.OperationalLimitType rdf:resource="#_operational-limit-type"/>
+        <cim:OperationalLimit.OperationalLimitSet rdf:resource="#_operational-limit-set"/>
+        <nc:VoltageLimit.value>100.0</nc:VoltageLimit.value>
+    </nc:VoltageLimit>
+    ...
+</rdf:RDF>
+```
+
+To be valid, the VoltageCNEC's `isInfiniteDuration` field must be set to `true`. It is missing or set to `false` it will
+be ignored.
+
+The CNEC's threshold value (in KILOVOLTS) is determined by the `value` field of the `VoltageLimit` and must be positive.
+Whether this is the maximum or minimum threshold of the CNEC depends on the `OperationalLimitType`'s `direction`:
+
+- if the `direction` is `high`, the maximum value of the threshold is `+ normalValue`
+- if the `direction` is `low`, the minimum value of the threshold is `- normalValue`
+
+The VoltageCNEC's network element is determined by the `OperationalLimitSet`'s `Terminal`. The latter must reference an
+existing BusBarSection in the network.
+
+## Remedial Actions {#remedial-actions}
+
+The [remedial actions](json#remedial-actions) are described in the **RA** profile. The most general way to describe a
+remedial action is with a `GridStateAlterationRemedialAction` object that bears the identifier, name, operator, speed
+and instant of the remedial action.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:GridStateAlterationRemedialAction rdf:ID="_remedial-action">
+        <cim:IdentifiedObject.mRID>remedial-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>RA</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of RA</cim:IdentifiedObject.description>
+        <nc:RemedialAction.normalAvailable>true</nc:RemedialAction.normalAvailable>
+        <nc:RemedialAction.kind rdf:resource="http://entsoe.eu/ns/nc#RemedialActionKind.preventive"/>
+        <nc:RemedialAction.timeToImplement>PT50S</nc:RemedialAction.timeToImplement>
+        <nc:RemedialAction.RemedialActionSystemOperator
+                rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+    </nc:GridStateAlterationRemedialAction>
+    ...
+</rdf:RDF>
+```
+
+The remedial action is imported only if the `normalAvailable` field is set to `true`. As for
+the [contingencies](#contingencies), the `mRID` is used as the remedial action's identifier and
+the `RemedialActionSystemOperator` and `name` are concatenated together to create the remedial action's name. The
+instant of the remedial action is determined by the `kind` which can be either `preventive` or `curative`. Finally,
+the `timeToImplement` is converted to a number of seconds and used as the remedial action's speed.
+
+In the following, we describe the different types of remedial actions that can be imported in FARAO from the CSA
+profiles. The general pattern is to link a `GridStateAlteration` object which references the parent remedial
+action (`GridStateAlterationRemedialAction`) and a `StaticPropertyRange` which contains the physical and numerical
+definition of the remedial action. The field of the `StaticPropertyRange` are:
+
+- `normalValue` which contains the numerical data of the remedial action (such as the set-point, the PST tap, ...)
+- `PropertyReference` which indicated the network element's property that will be affected by the remedial action
+- `valueKind` which indicates whether the `normalValue` is defined independently of the previous state (`absolute`) of
+  the network element or relatively (`incremental`)
+- `direction` which bears the logic of whether the `normalValue` is an extreme value, an increase / decrease or just a
+  standalone value
+
+### PST Range Action {#pst-range-action}
+
+A [PST range action](json#pst-range-action) is described by a `TapPositionAction` object which references its parent
+remedial action (`GridStateAlterationRemedialAction`) and the PST affected by the action.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:TapPositionAction rdf:ID="_tap-position-action">
+        <cim:IdentifiedObject.mRID>tap-position-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Tap position action</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of tap position action</cim:IdentifiedObject.description>
+        <nc:GridStateAlteration.normalEnabled>true</nc:GridStateAlteration.normalEnabled>
+        <nc:GridStateAlteration.GridStateAlterationRemedialAction rdf:resource="#_remedial-action"/>
+        <nc:GridStateAlteration.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/TapChanger.step"/>
+        <nc:TapPositionAction.TapChanger rdf:resource="#_tap-changer"/>
+    </nc:TapPositionAction>
+    ...
+</rdf:RDF>
+```
+
+The PST range action is considered only if the `normalEnabled` field is set to `true`. Besides, the `TapChanger` must
+reference an existing PST in the network and the `PropertyReference` must necessarily be `TapChanger.step` since it is
+the PST's tap position which shifts.
+
+To be valid, the `TapPositionAction` must itself be referenced by one or two `StaticPropertyRange` objects which provide
+the numerical values for the minimum and/or maximum reachable taps.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:StaticPropertyRange rdf:ID="_static-property-range-for-tap-position-action-max">
+        <cim:IdentifiedObject.mRID>static-property-range-for-tap-position-action-max</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Upper bound for tap position action</cim:IdentifiedObject.name>
+        <nc:RangeConstraint.GridStateAlteration rdf:resource="#_tap-position-action"/>
+        <nc:RangeConstraint.normalValue>7.0</nc:RangeConstraint.normalValue>
+        <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.up"/>
+        <nc:RangeConstraint.valueKind rdf:resource="http://entsoe.eu/ns/nc#ValueOffsetKind.absolute"/>
+        <nc:StaticPropertyRange.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/TapChanger.step"/>
+    </nc:StaticPropertyRange>
+    <nc:StaticPropertyRange rdf:ID="_static-property-range-for-tap-position-action-min">
+        <cim:IdentifiedObject.mRID>static-property-range-for-tap-position-action-min</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Lower bound for tap position action</cim:IdentifiedObject.name>
+        <nc:RangeConstraint.GridStateAlteration rdf:resource="#_tap-position-action"/>
+        <nc:RangeConstraint.normalValue>-7.0</nc:RangeConstraint.normalValue>
+        <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.down"/>
+        <nc:RangeConstraint.valueKind rdf:resource="http://entsoe.eu/ns/nc#ValueOffsetKind.absolute"/>
+        <nc:StaticPropertyRange.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/TapChanger.step"/>
+    </nc:StaticPropertyRange>
+    ...
+</rdf:RDF>
+```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `TapChanger.step`. The value of the tap is
+determined by the `normalValue`: if the `direction` is `up` this is the maximum reachable tap and if it is `down` it is
+the minimum. Note that the `valueKind` must be `absolute` to indicate that the limit does not depend on the previous
+PST's state. Up to two `StaticPropertyRange` objects can be linked to the same PST range action to set the minimum
+and/or maximum tap.
+
+### Network Actions {#network-actions}
+
+#### Topological Action {#topological-action}
+
+A [topological action](json#network-actions) is described by a `TopologyAction` object which references its parent
+remedial action (`GridStateAlterationRemedialAction`) and the switch affected by the action.
+
+> ℹ️ Currently, topological actions are implemented such that they can only invert the state of the switch.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:TopologyAction rdf:ID="_topology-action">
+        <cim:IdentifiedObject.mRID>topology-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Topology action</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of topology action</cim:IdentifiedObject.description>
+        <nc:GridStateAlteration.normalEnabled>true</nc:GridStateAlteration.normalEnabled>
+        <nc:GridStateAlteration.GridStateAlterationRemedialAction rdf:resource="#_remedial-action"/>
+        <nc:GridStateAlteration.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/Switch.open"/>
+        <nc:TopologyAction.Switch rdf:resource="#_switch"/>
+    </nc:TopologyAction>
+    ...
+</rdf:RDF>
+```
+
+The topological action is considered only if the `normalEnabled` field is set to `true`. Besides, the `Switch` must
+reference an existing switch in the network and the `PropertyReference` must necessarily be `Switch.open` since a
+topology action is about opening or closing such a switch.
+
+#### Injection Set-point Action {#injection-set-point-action}
+
+An [injection set-point action](json#network-actions) is described by a `SetPointAction` object which references its
+parent remedial action (`GridStateAlterationRemedialAction`) and the network element affected by the action, and which
+is itself referenced by a `StaticPropertyRange` object to provide the numerical value of the set-point. Currently, FARAO
+handles three types of CSA set-point actions: the **rotating machine actions**, the **power electronics connection
+actions** and the **shunt compensator modifications**. All three are handled similarly by FARAO but their respective
+descriptions in the CSA profiles differ from one another.
+
+{% capture case_RotatingMachineAction %}
+
+A rotating machine action is described with a `RotatingMachineAction` object in the RA profile.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:RotatingMachineAction rdf:ID="_rotating-machine-action">
+        <cim:IdentifiedObject.mRID>rotating-machine-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Rotating machine action</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of rotating machine action</cim:IdentifiedObject.description>
+        <nc:GridStateAlteration.normalEnabled>true</nc:GridStateAlteration.normalEnabled>
+        <nc:GridStateAlteration.GridStateAlterationRemedialAction rdf:resource="#_remedial-action"/>
+        <nc:GridStateAlteration.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/RotatingMachine.p"/>
+        <nc:RotatingMachineAction.RotatingMachine rdf:resource="#_rotating-machine"/>
+    </nc:RotatingMachineAction>
+    ...
+</rdf:RDF>
+```
+
+The rotating machine action is considered only if the `normalEnabled` field is set to `true`. Besides,
+the `RotatingMachine` must reference an existing generator in the network and the `PropertyReference` must necessarily
+be `RotatingMachine.p` since the remedial action acts on the generator's power.
+
+To be valid, the `RotatingMachineAction` must itself be referenced by a `StaticPropertyRange` which provides the value
+of the set-point.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:StaticPropertyRange rdf:ID="_static-property-range-for-rotating-machine-action">
+        <cim:IdentifiedObject.mRID>static-property-range-for-rotating-machine-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Set-point in MW</cim:IdentifiedObject.name>
+        <nc:RangeConstraint.GridStateAlteration rdf:resource="#_rotating-machine-action"/>
+        <nc:RangeConstraint.normalValue>100.0</nc:RangeConstraint.normalValue>
+        <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.none"/>
+        <nc:RangeConstraint.valueKind rdf:resource="http://entsoe.eu/ns/nc#ValueOffsetKind.absolute"/>
+        <nc:StaticPropertyRange.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/RotatingMachine.p"/>
+    </nc:StaticPropertyRange>
+    ...
+</rdf:RDF>
+```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `RotatingMachine.p`. The value of the set-point (in
+MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction` is none to
+indicate that the set-point is an imposed value without any degree of freedom for the RAO.
+
+{% endcapture %}
+
+{% capture case_PowerElectronicsConnectionAction %}
+
+A power electronics connection action is described with a `PowerElectronicsConnectionAction` object in the RA profile.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:PowerElectronicsConnectionAction rdf:ID="_power-electronics-connection-action">
+        <cim:IdentifiedObject.mRID>power-electronics-connection-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Power electronics connection action</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of power electronics connection action
+        </cim:IdentifiedObject.description>
+        <nc:GridStateAlteration.normalEnabled>true</nc:GridStateAlteration.normalEnabled>
+        <nc:GridStateAlteration.GridStateAlterationRemedialAction rdf:resource="#_remedial-action"/>
+        <nc:GridStateAlteration.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/PowerElectronicsConnection.p"/>
+        <nc:PowerElectronicsConnectionAction.PowerElectronicsConnection rdf:resource="#_power-electronics-connection"/>
+    </nc:PowerElectronicsConnectionAction>
+    ...
+</rdf:RDF>
+```
+
+The power electronics connection action is considered only if the `normalEnabled` field is set to `true`. Besides,
+the `PowerElectronicsConnection` must reference an existing power electronics connection in the network and
+the `PropertyReference` must necessarily be `PowerElectronicsConnection.p` since the remedial action acts on the power
+electronics connection's power.
+
+To be valid, the `PowerElectronicsConnectionAction` must itself be referenced by a `StaticPropertyRange` which provides
+the value of the set-point.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:StaticPropertyRange rdf:ID="_static-property-range-for-power-electronics-connection-action">
+        <cim:IdentifiedObject.mRID>static-property-range-for-power-electronics-connection-action
+        </cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Set-point in MW</cim:IdentifiedObject.name>
+        <nc:RangeConstraint.GridStateAlteration rdf:resource="#_power-electronics-connection-action"/>
+        <nc:RangeConstraint.normalValue>75.0</nc:RangeConstraint.normalValue>
+        <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.none"/>
+        <nc:RangeConstraint.valueKind rdf:resource="http://entsoe.eu/ns/nc#ValueOffsetKind.absolute"/>
+        <nc:StaticPropertyRange.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/PowerElectronicsConnection.p"/>
+    </nc:StaticPropertyRange>
+    ...
+</rdf:RDF>
+```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `PowerElectronicsConnection.p`. The value of the
+set-point (in MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction`
+is none to indicate that the set-point is an imposed value without any degree of freedom for the RAO.
+
+{% endcapture %}
+
+{% capture case_ShuntCompensatorModification %}
+
+A shunt compensator modification is described with a `ShuntCompensatorModification` object in the RA profile.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:ShuntCompensatorModification rdf:ID="_shunt-compensator-modification">
+        <cim:IdentifiedObject.mRID>shunt-compensator-modification</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Shunt compensator modification</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of shunt compensator modification</cim:IdentifiedObject.description>
+        <nc:GridStateAlteration.normalEnabled>true</nc:GridStateAlteration.normalEnabled>
+        <nc:GridStateAlteration.GridStateAlterationRemedialAction rdf:resource="#_remedial-action"/>
+        <nc:GridStateAlteration.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/ShuntCompensator.sections"/>
+        <nc:ShuntCompensatorModification.ShuntCompensator rdf:resource="#_shunt-compensator"/>
+    </nc:ShuntCompensatorModification>
+    ...
+</rdf:RDF>
+```
+
+The shunt compensator modification is considered only if the `normalEnabled` field is set to `true`. Besides,
+the `ShuntCompensator` must reference a shunt compensator in the network and the `PropertyReference` must necessarily
+be `ShuntCompensator.sections` since the remedial action acts on the number of sections of the shunt compensator.
+
+To be valid, the `ShuntCompensatorModification` must itself be referenced by a `StaticPropertyRange` which provides the
+value of the set-point.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:StaticPropertyRange rdf:ID="_static-property-range-for-shunt-compensator-modification">
+        <cim:IdentifiedObject.mRID>static-property-range-for-shunt-compensator-modification</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Set-point in SECTION_COUNT</cim:IdentifiedObject.name>
+        <nc:RangeConstraint.GridStateAlteration rdf:resource="#_shunt-compensator-modification"/>
+        <nc:RangeConstraint.normalValue>5.0</nc:RangeConstraint.normalValue>
+        <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.none"/>
+        <nc:RangeConstraint.valueKind rdf:resource="http://entsoe.eu/ns/nc#ValueOffsetKind.absolute"/>
+        <nc:StaticPropertyRange.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/ShuntCompensator.sections"/>
+    </nc:StaticPropertyRange>
+    ...
+</rdf:RDF>
+```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `ShuntCompensator.sections`. The value of the
+set-point (in SECTION_COUNT) is determined by the `normalValue` given that the `valueKind` is `absolute` and that
+the `direction`is none to indicate that the number of section is an imposed value without any degree of freedom for the
+RAO. Note that `normalValue` must be integer-*castable* (i.e. a float number with null decimal part) to model a number
+of sections.
+
+{% endcapture %}
+
+{% include /tabs.html id="CSA_Set-point_RA_tabs" tab1name="Rotating Machine Action"
+tab1content=case_RotatingMachineAction tab2name="
+Power Electronics Connection Action" tab2content=case_PowerElectronicsConnectionAction tab3name="
+Shunt Compensator Modification" tab3content=case_ShuntCompensatorModification %}
+
+### Usage Rules {#usage-rules}
+
+#### OnInstant {#on-instant-usage-rule}
+
+By default, if no additional information is given, the remedial action is imported with an **onInstant usage rule**
+and an **AVAILABLE usage method**.
+
+#### OnContingencyState {#on-contingency-state-usage-rule}
+
+If the remedial action is linked to a contingency, its usage method is no longer onInstant and is now
+**onContingencyState**. This link is created with a `ContingencyWithRemedialAction` object that bounds together the
+remedial action and the contingency.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:ContingencyWithRemedialAction rdf:ID="_contingency-with-remedial-action">
+        <nc:ContingencyWithRemedialAction.mRID>contingency-with-remedial-action</nc:ContingencyWithRemedialAction.mRID>
+        <nc:ContingencyWithRemedialAction.combinationConstraintKind
+                rdf:resource="http://entsoe.eu/ns/nc#ElementCombinationConstraintKind.considered"/>
+        <nc:ContingencyWithRemedialAction.RemedialAction rdf:resource="#_remedial-action"/>
+        <nc:ContingencyWithRemedialAction.Contingency rdf:resource="#_contingency"/>
+        <nc:ContingencyWithRemedialAction.normalEnabled>true</nc:ContingencyWithRemedialAction.normalEnabled>
+    </nc:ContingencyWithRemedialAction>
+    ...
+</rdf:RDF>
+```
+
+The usage method depends on the value of the `combinationConstraintKind` field:
+
+- if it is `considered`, the usage method is **AVAILABLE**;
+- if it is `included`, the usage method is **FORCED**;
+- if it is `excluded`, the usage method is **UNAVAILABLE** and an onInstant usage rule with an AVAILABLE usage method
+  will be created for the remedial action
+
+> ⚠️ **Cases with multiple `ContingencyWithRemedialActions` defined for the same remedial action**
+>
+> This case happens when several `ContingencyWithRemedialAction` objects link the same remedial action with different
+> contingencies (with possibly different values of `combinationConstraintKind`).
+>
+> If there is at least one `excluded` contingency, then:
+> - An **onInstant** usage rule is created for the remedial action at the curative instant with an **AVAILABLE** usage
+    method
+> - An **onContingencyState** usage rule is created for the remedial action with an **UNAVAILABLE** usage method for
+    each `excluded` contingency
+> - An **onContingencyState** usage rule is created for the remedial action with a **FORCED** usage method for
+    each `included` contingency
+>
+> If there is no `excluded` contingency, then:
+> - An **onContingencyState** usage rule is created for the remedial action with a **FORCED** usage method each
+    the `included` contingency
+> - An **onContingencyState** usage rule is created for the remedial action with an **AVAILABLE** usage method each
+    the `considered` contingency
+
+> ⛔ **Cases with different `combinationConstraintKind` values for the same remedial action-contingency couple**
+>
+> This case is illegal and will be discarded at the import.
+
+#### OnConstraint {#on-constraint-usage-rule}
+
+If the remedial action is linked to an assessed element (a CNEC), its usage method is no longer onInstant and is now
+**onConstraint**. This link is created with a `AssessedElementWithRemedialAction` object that bounds together the
+assessed element and the contingency.
+
+The type of onConstraint usage rule depends on the type of the CNEC the remedial action is bounded to:
+
+- if it is a FlowCNEC, the usage rule is **onFlowConstraint**
+- if it is an AngleCNEC, the usage rule is **onAngleConstraint**
+- if it is a VoltageCNEC, the usage rule is **onVoltageConstraint**
+
+```xml
+<!-- AE Profile -->
+<rdf:RDF>
+    ...
+    <nc:AssessedElementWithRemedialAction rdf:ID="_assessed-element-with-remedial-action">
+        <nc:AssessedElementWithRemedialAction.mRID>assessed-element-with-remedial-action
+        </nc:AssessedElementWithRemedialAction.mRID>
+        <nc:AssessedElementWithRemedialAction.combinationConstraintKind
+                rdf:resource="http://entsoe.eu/ns/nc#ElementCombinationConstraintKind.included"/>
+        <nc:AssessedElementWithRemedialAction.AssessedElement rdf:resource="#_assessed-element"/>
+        <nc:AssessedElementWithRemedialAction.RemedialAction rdf:resource="#_remedial-action"/>
+        <nc:AssessedElementWithRemedialAction.normalEnabled>true</nc:AssessedElementWithRemedialAction.normalEnabled>
+    </nc:AssessedElementWithRemedialAction>
+    ...
+</rdf:RDF>
+```
+
+The usage method depends on the value of the `combinationConstraintKind` field. If it is `considered`, the usage method
+is **AVAILABLE** whereas the usage method is **FORCED** if the fields is `included`. Note that if
+the `combinationConstraintKind` is `excluded` the remedial action cannot have an onConstraint usage rule for this very
+CNEC.
