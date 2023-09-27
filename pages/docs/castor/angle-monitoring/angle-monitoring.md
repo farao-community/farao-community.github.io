@@ -25,3 +25,6 @@ see-also: |
 
 ## The angle monitoring algorithm {#algorithm}
 {% include_relative algorithm.md %}
+
+## The output logs {#logs}
+{% include_relative logs.md %}
