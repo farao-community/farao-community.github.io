@@ -92,6 +92,7 @@ The formats handled by the CracCreator are:
 - [FlowBasedConstraint document](fbconstraint), also known as Merged-CB, CBCORA or F301 ([farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint))
 - [CSE CRAC](cse) ([farao-crac-creator-cse](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cse))
 - [CIM CRAC](cim) ([farao-crac-creator-cim](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cim))
+- [CSA PROFILES CRAC](csa profiles) ([farao-crac-creator-csa-profiles](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-csa-profiles))
 
 When creating a CRAC from one of these formats, the chain presented above can be coded step by step, or utility methods can be used to make all the import in one line of code. Some examples are given below:
 
@@ -120,92 +121,12 @@ Crac crac = cracCreationContext.getCrac();
 CracCreationParameters parameters = JsonCracCreationParameters.read(getClass().getResourceAsStream("/parameters/cse-crac-creation-parameters-nok.json"));
 ~~~
 
-## NativeCrac for RDF input data
-In case of input data in RDF format, the code structure stay the same, with **NativeCrac**, **CracCreator** and **CracCreationContext**, but NativeCrac is quite different from the one for JSON data format.
-RDF files can't be directly exported into java object, like JSON files can.
-To export RDF data into java object and use it to construct the CRAC, we need the NativeCrac includes two **PowSybl** objects :
-- a **TripleStore**, in which the RDF files data will be inserted
-- a **QueryCatalog**, which defines every SPARQL request useful to access to the TripleStore data 
-
-The TripleStore interface is based on the triple RDF structure (subject, predicate, object) and RDF files can be directly converted into TripleStore objects.
-If you insert several RDF files into the same TripleStore, requests used on this TripleStore will aggregate results from every input files.
-If you need request a specific file or files group, or ensure the fields from one request result come from the same file or files group, you can add files data into the TripleStore with different contexts names.
-
-Requests are made with **SPARQL**, which is a SQL-like request language for RDF triples. You can request on the whole TripleStore, or on a specific context.
-Context could be a file or a files group from input data, following your needs.
-Result from a TripleStore request is a **PropertyBags**.
-A PropertyBags is a list of **PropertyBag**, and each result entry is a PropertyBag.
-A PropertyBag is an HashMap, in which keys are fields names, as defined into SPARQL request, and values are requested datas.
-
-Example of a SPARQL request on the whole TripleStore, without specific context :
-~~~
-# query: contingencyEquipment
-PREFIX cim: <http://iec.ch/TC57/CIM100#>
-SELECT *
-WHERE {
-    ?contingencyEquipment
-        rdf:type cim:ContingencyEquipment ;
-        cim:ContingencyEquipment.Equipment ?contingencyEquipmentId ;
-}
-~~~
-
-Example of a SPARQL request on a specific context (the %s pattern will be replaced by context name to query TripleStore) :
-~~~
-# query: ordinaryContingency
-PREFIX cim: <http://iec.ch/TC57/CIM100#>
-PREFIX nc: <http://entsoe.eu/ns/nc#>
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-SELECT *
-{
-GRAPH <%s> {
-    ?fullModel
-        dcat:Model.startDate ?startDate ;
-        dcat:Model.endDate ?endDate ;
-        dcat:Model.keyword ?keyword .
-    ?contingency
-        rdf:type nc:OrdinaryContingency ;
-        cim:IdentifiedObject.name ?name ;
-}
-}
-~~~
-
-
-To use these requests, you could do :
-~~~java
-//to store RDF files data
-private final TripleStore tripleStoreCrac;
-
-//to add input data without specific context
-tripleStore.read(fileInputStream, "http://entsoe.eu", "");
-
-//to add input data in a specific context
-tripleStore.read(fileInputStream, "http://entsoe.eu", "contextName");
-
-//to request data from TripleStore
-private final QueryCatalog queryCatalogCrac;
-
-//to get a request from the queries catalog
-String queryKey;
-String query = queryCatalogCrac.get(queryKey);
-
-//query on the whole TripleStore
-PropertyBags result = tripleStoreCrac.query(query);
-
-//query on a specific context
-String context;
-String contextQuery = String.format(query, context);
-PropertyBags result = tripleStoreCrac.query(query);
-~~~
-
-
 ## Implementing new CRAC formats {#new-formats}
 You are welcome to contribute to the project if you need to import a new native CRAC format to be used in FARAO.  
-You can find inspiration in existing CRAC creators' code, with JSON format:
+You can find inspiration in existing CRAC creators' code:
 - [farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint)
 - [farao-crac-creator-cse](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cse)
 - [farao-crac-creator-cim](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cim)
-
-with RDF format:
 - [farao-crac-creator-csa-profiles](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-csa-profiles)
 
 To help you with that, the package [farao-crac-creation-util](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creation-util)
