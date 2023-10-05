@@ -4,6 +4,7 @@
 * install ruby: see https://jekyllrb.com/docs/installation/other-linux/
 * install bundle: run 'gem install bundler -v "=1.17.1" '
 * run 'bundle install'
+* if necessary, force bundle version for installation : 'gem install bundler:1.17.3' and then 'bundle _1.17.3_ update'
 
 # Type on Strap 
 
