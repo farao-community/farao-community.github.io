@@ -43,6 +43,7 @@ crac.newNetworkAction()
 	.newInjectionSetPoint()
 		.withSetpoint(260)
 		.withNetworkElement("generator-network-element-id")
+		.withUnit(Unit.MEGAWATT)
 		.add()
     .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .newOnStateUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withContingency("contingency-id").withInstant(Instant.CURATIVE).add()
@@ -104,7 +105,8 @@ crac.newNetworkAction()
     } ],
     "injectionSetpoints" : [ {
       "networkElementId" : "generator-network-element-id",
-      "setpoint" : 260.0
+      "setpoint" : 260.0,
+      "unit" : "megawatt"
     } ]
   }, {
     "id" : "switch-pair-na-id",
@@ -138,7 +140,8 @@ crac.newNetworkAction()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **setpoint**: integer, new tap of the PST  
 🔵 **injection set points**: list of 0 to N InjectionSetPoint  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **network element**: id is mandatory, name is optional  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **setpoint**: double, new value of the injection in MW  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **setpoint**: double, new value of the injection  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **unit**: Unit, unit of the InjectionSetPoint (MEGAWATT for generators, loads and dangling lines, or SECTION_COUNT for linear shunt compensators)  
 🔵 **switch pairs**: list of 0 to N SwitchPair  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **switch to open (network element)**: id is mandatory, name is optional  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **switch to close (network element)**: id is mandatory, name is optional, must be different from switch to open  
