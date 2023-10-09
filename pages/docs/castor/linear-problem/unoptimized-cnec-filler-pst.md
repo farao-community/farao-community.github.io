@@ -78,12 +78,12 @@ and $$bigM(r, s) = A^{+}(r, s) - A^{-}(r, s)$$
 - **if $$\sigma _{n}(r,c,s) \lt 0$$**  
   $$
   \begin{equation}
-  A(r, s) \geq A^{-}(r, s) - \frac{F(c) - f^{-}_{threshold} (c)}{\sigma _{n}(r,c,s)} - bigM(r, s) \times DoOptimize(c)
+  A(r, s) \geq A^{-}(r, s) - \frac{f^{-}_{threshold} (c) - F(c)}{\sigma _{n}(r,c,s)} - bigM(r, s) \times DoOptimize(c)
   \end{equation}
   $$
   $$
   \begin{equation}
-  A(r, s) \leq A^{+}(r, s) + \frac{f^{+}_{threshold} (c) - F(c)}{\sigma _{n}(r,c,s)} + bigM(r, s) \times DoOptimize(c)
+  A(r, s) \leq A^{+}(r, s) + \frac{F(c) - f^{+}_{threshold} (c)}{\sigma _{n}(r,c,s)} + bigM(r, s) \times DoOptimize(c)
   \end{equation}
   $$  
 
