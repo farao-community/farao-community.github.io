@@ -493,7 +493,7 @@ and/or maximum tap.
 A [topological action](json#network-actions) is described by a `TopologyAction` object which references its parent
 remedial action (`GridStateAlterationRemedialAction`) and the switch affected by the action.
 
-> ℹ️ Currently, topological actions are implemented such that they can only invert the state of the switch.
+> ℹ️ Currently, topological actions are implemented such that they can only open a switch.
 
 ```xml
 <!-- RA Profile -->
@@ -728,27 +728,6 @@ The usage method depends on the value of the `combinationConstraintKind` field:
 
 - if it is `considered`, the usage method is **AVAILABLE**;
 - if it is `included`, the usage method is **FORCED**;
-- if it is `excluded`, the usage method is **UNAVAILABLE** and an onInstant usage rule with an AVAILABLE usage method
-  will be created for the remedial action
-
-> ⚠️ **Cases with multiple `ContingencyWithRemedialActions` defined for the same remedial action**
->
-> This case happens when several `ContingencyWithRemedialAction` objects link the same remedial action with different
-> contingencies (with possibly different values of `combinationConstraintKind`).
->
-> If there is at least one `excluded` contingency, then:
-> - An **onInstant** usage rule is created for the remedial action at the curative instant with an **AVAILABLE** usage
-    method
-> - An **onContingencyState** usage rule is created for the remedial action with an **UNAVAILABLE** usage method for
-    each `excluded` contingency
-> - An **onContingencyState** usage rule is created for the remedial action with a **FORCED** usage method for
-    each `included` contingency
->
-> If there is no `excluded` contingency, then:
-> - An **onContingencyState** usage rule is created for the remedial action with a **FORCED** usage method each
-    the `included` contingency
-> - An **onContingencyState** usage rule is created for the remedial action with an **AVAILABLE** usage method each
-    the `considered` contingency
 
 > ⛔ **Cases with different `combinationConstraintKind` values for the same remedial action-contingency couple**
 >
@@ -784,6 +763,4 @@ The type of onConstraint usage rule depends on the type of the CNEC the remedial
 ```
 
 The usage method depends on the value of the `combinationConstraintKind` field. If it is `considered`, the usage method
-is **AVAILABLE** whereas the usage method is **FORCED** if the fields is `included`. Note that if
-the `combinationConstraintKind` is `excluded` the remedial action cannot have an onConstraint usage rule for this very
-CNEC.
+is **AVAILABLE** whereas the usage method is **FORCED** if the fields is `included`.
