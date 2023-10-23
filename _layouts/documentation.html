@@ -30,7 +30,7 @@ layout: default
                     {% endif %}
 
                     <!-- Actual content -->
-                    {{ content }}
+                    {% include anchor_headings.html html=content anchorBody="#" anchorAttrs="style=\"color: gray\"" %}
                 </div>
 
                 <!-- "See also" footer -->
