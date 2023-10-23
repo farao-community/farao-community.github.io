@@ -62,11 +62,12 @@ Where:
 The RAO result object generally contains information about post-optimisation results.  
 However, in some cases, it may be interesting to get some information about the initial state (e.g. power flows before 
 optimisation), or about the situation after preventive optimisation (e.g. optimal PST tap positions in preventive). 
-This is why **most of the information in the RAO results can have up to 4 values**, for these values of [OptimizationState](https://github.com/farao-community/farao-core/blob/master/data/rao-result/rao-result-api/src/main/java/com/farao_community/farao/data/rao_result_api/OptimizationState.java):
-- **INITIAL**: values before remedial action optimisation (initial state)
-- **AFTER_PRA**: values after applying optimal **P**reventive **R**emedial **A**ctions
-- **AFTER_ARA**: values after applying **A**utomatic **R**emedial **A**ctions
-- **AFTER_CRA**: values after applying optimal **C**urative **R**emedial **A**ctions
+This is why **most of the information in the RAO results are stored by optimized instant**, for example for these instants:  
+- **INITIAL** (json) or **null** (Java API): values before remedial action optimisation (initial state)
+- **PREVENTIVE** or **OUTAGE**: values after optimizing preventive instant, i.e. after applying optimal preventive remedial actions
+- **AUTO**: values after simulating auto instant, i.e. after applying automatic remedial actions
+- **CURATIVE**: values after optimizing curative instant, i.e. after applying optimal curative remedial actions
+  
 _See also: [RAO steps](/docs/engine/ra-optimisation/rao-steps)_
 
 ### Computation status {#computation-status}

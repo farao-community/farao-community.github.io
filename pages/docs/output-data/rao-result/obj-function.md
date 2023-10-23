@@ -4,20 +4,20 @@ Contains information about the reached objective function value, seperated into 
 
 {% capture t2_java %}
 ~~~java
-// get the functional cost at a given state
-double getFunctionalCost(OptimizationState optimizationState);
+// get the functional cost after optimisation of a given instant
+double getFunctionalCost(Instant optimizedInstant);
 
-// get the total virtual cost at a given state
-double getVirtualCost(OptimizationState optimizationState);
+// get the total virtual cost after optimisation of a given instant
+double getVirtualCost(Instant optimizedInstant);
 
-// get a specific virtual cost at a given state
-double getVirtualCost(OptimizationState optimizationState, String virtualCostName);
+// get a specific virtual cost after optimisation of a given instant
+double getVirtualCost(Instant optimizedInstant, String virtualCostName);
 
 // get all the virtual cost names in the RAO
 Set<String> getVirtualCostNames();
 
-// get the overall cost (functional + total virtual) at a given state
-double getCost(OptimizationState optimizationState);
+// get the overall cost (functional + total virtual) after optimisation of a given instant
+double getCost(Instant optimizedInstant);
 ~~~
 {% endcapture %}
 {% capture t2_json %}
@@ -31,21 +31,21 @@ Example:
         "MNEC" : 0.0
       }
     },
-    "afterPRA" : {
+    "preventive" : {
       "functionalCost" : 80.0,
       "virtualCost" : {
         "loopFlow" : 0.0,
         "MNEC" : 0.0
       }
     },
-    "afterARA" : {
+    "auto" : {
       "functionalCost" : -20.0,
       "virtualCost" : {
         "loopFlow" : 15.0,
         "MNEC" : 20.0
       }
     },
-    "afterCRA" : {
+    "curative" : {
       "functionalCost" : -50.0,
       "virtualCost" : {
         "loopFlow" : 10.0,

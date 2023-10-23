@@ -8,8 +8,8 @@ The actual power flow on the branch.
 
 {% capture t3_java %}
 ~~~java
-// get the flow on a given flow cnec, at a given side, in a given unit, at a given state
-double getFlow(OptimizationState optimizationState, FlowCnec flowCnec, Side side, Unit unit);
+// get the flow on a given flow cnec, at a given side, in a given unit, after optimisation of a given instant
+double getFlow(Instant optimizedInstant, FlowCnec flowCnec, Side side, Unit unit);
 ~~~
 {% endcapture %}
 {% capture t3_json %}
@@ -42,7 +42,7 @@ Example:
       },
       ...
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         ...
         "leftSide" : {
@@ -73,8 +73,8 @@ it has multiple thresholds, the smallest margin is returned.
 
 {% capture t4_java %}
 ~~~java
-// get the margin of a given flow cnec, in a given unit, at a given state
-double getMargin(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
+// get the margin of a given flow cnec, in a given unit, after optimisation of a given instant
+double getMargin(Instant optimizedInstant, FlowCnec flowCnec, Unit unit);
 ~~~
 {% endcapture %}
 {% capture t4_json %}
@@ -95,7 +95,7 @@ Example:
       },
       ...
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         ...
         "margin" : 1211.0,
@@ -126,8 +126,8 @@ The relative margin is the smallest flow margin of the CNEC.
 
 {% capture t5_java %}
 ~~~java
-// get the relative margin of a given flow cnec, in a given unit, at a given state
-double getRelativeMargin(OptimizationState optimizationState, FlowCnec flowCnec, Unit unit);
+// get the relative margin of a given flow cnec, in a given unit, after optimisation of a given instant
+double getRelativeMargin(Instant optimizedInstant, FlowCnec flowCnec, Unit unit);
 ~~~
 {% endcapture %}
 {% capture t5_json %}
@@ -148,7 +148,7 @@ Example:
       },
       ...
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         ...
         "relativeMargin" : 1212.0,
@@ -175,8 +175,8 @@ The loop-flow value on a CNEC.
 
 {% capture t6_java %}
 ~~~java
-// get the loop-flow on a given flow cnec, at a given side, in a given unit, at a given state
-double getLoopFlow(OptimizationState optimizationState, FlowCnec flowCnec, Side side, Unit unit);
+// get the loop-flow on a given flow cnec, at a given side, in a given unit, after optimisation of a given instant
+double getLoopFlow(Instant optimizedInstant, FlowCnec flowCnec, Side side, Unit unit);
 ~~~
 {% endcapture %}
 {% capture t6_json %}
@@ -205,7 +205,7 @@ Example:
       },
       ...
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         ...
         "rightSide" : {
@@ -240,8 +240,8 @@ The commercial flow on a CNEC.
 
 {% capture t7_java %}
 ~~~java
-// get the commercial flow on a given flow cnec, at a given side, in a given unit, at a given state
-double getCommercialFlow(OptimizationState optimizationState, FlowCnec flowCnec, Side side, Unit unit);
+// get the commercial flow on a given flow cnec, at a given side, in a given unit, after optimisation of a given instant
+double getCommercialFlow(Instant optimizedInstant, FlowCnec flowCnec, Side side, Unit unit);
 ~~~
 {% endcapture %}
 {% capture t7_json %}
@@ -270,7 +270,7 @@ Example:
       },
       ...
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         ...
         "rightSide" : {
@@ -305,8 +305,8 @@ The absolute sum of zonal PTDFs (influence factors) on a given CNEC. Reflects th
 
 {% capture t8_java %}
 ~~~java
-// get the absolute sum of zonal PTDFs for a given flow cnec, at a given side, at a given state
-double getPtdfZonalSum(OptimizationState optimizationState, FlowCnec flowCnec, Side side);
+// get the absolute sum of zonal PTDFs for a given flow cnec, at a given side, after optimisation of a given instant
+double getPtdfZonalSum(Instant optimizedInstant, FlowCnec flowCnec, Side side);
 ~~~
 {% endcapture %}
 {% capture t8_json %}
@@ -327,7 +327,7 @@ Example:
         },
         ...
     },
-    "afterPRA" : {
+    "preventive" : {
       ...
 ~~~
 {% endcapture %}
@@ -358,7 +358,7 @@ Example:
         }
       }
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         "margin" : 1211.0,
         "relativeMargin" : 1212.0,
@@ -402,7 +402,7 @@ Example:
         }
       }
     },
-    "afterPRA" : {
+    "preventive" : {
       "megawatt" : {
         "margin" : 1211.0,
         "relativeMargin" : 1212.0,
