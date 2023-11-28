@@ -117,9 +117,10 @@ Complete examples of Network and Range Action in Json format are given in the fo
 🔴 **instant**  
 🔴 **voltageCnecId**: must be the id of an [VoltageCnec](#voltage-cnecs) that exists in the CRAC  
 <ins>**Usage methods**</ins>  
-FARAO handles three different types of usage methods:  
-1 - **AVAILABLE**: the remedial action is available in the given state, if the RAO decides it is optimal, with no extra condition  
-2 - **FORCED**: the RAO must activate the remedial action under the condition described by the usage rule.
+FARAO handles three different types of usage methods sorted by priority:
+1- **UNAVAILABLE**: the remedial action can not be considered by the RAO.
+2 - **FORCED**: For automaton instant, the RAO must activate the remedial action under the condition described by the usage rule. For other instants, it will be ignored.
+3 - **AVAILABLE**: For automaton instant, the remedial action is ignored. Otherwise, it can be chosen by the RAO under the condition described by the usage rule.
 
 *NB*: even though OnState usage rules on the preventive state is theoretically possible, it is forbidden by FARAO as the same purpose can be achieved with a FreeToUse usage rule on the preventive instant.  
 {% endcapture %}
