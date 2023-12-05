@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 summary-hmax: 3
 see-also: |
-    [Voltage CNECs](/docs/input-data/crac/json#voltage-cnecs), [RAO result](docs/output-data/rao-result-json)
+    [Voltage CNECs](/docs/input-data/crac/json#voltage-cnecs), [RAO result](/docs/output-data/rao-result-json)
 ---
 
 ## Introduction {#introduction}

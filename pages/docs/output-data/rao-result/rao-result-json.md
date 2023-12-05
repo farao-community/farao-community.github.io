@@ -16,7 +16,7 @@ see-also: |
 
 ## Introduction {#introduction}
 
-A **R**emedial **A**ction **O**ptimisation process provides an optimal list of remedial actions to be applied in basecase and after contingencies listed in the [CRAC](/docs/iput-data/crac). The decisions are based upon the impact of these remedial actions on the CRAC's [CNECs](/docs/iput-data/crac#cnec).
+A **R**emedial **A**ction **O**ptimisation process provides an optimal list of remedial actions to be applied in basecase and after contingencies listed in the [CRAC](/docs/input-data/crac/crac). The decisions are based upon the impact of these remedial actions on the CRAC's [CNECs](/docs/input-data/crac/crac#cnec).
 
 A **RaoResult object model** has been designed in FARAO in order to hold all the important results of optimisation.
 In this page, we present:

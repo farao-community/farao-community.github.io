@@ -1,5 +1,5 @@
 Remedial actions have their own Constraint_Series to report the ones selected by the RAO **or by the 
-[angle monitoring module](/docs/engine/angle-monitoring)**.     
+[angle monitoring module](/docs/engine/monitoring/angle-monitoring)**.     
 The remedial actions' Constraint_Series all have a **B56 businessType**.
 
 Example:

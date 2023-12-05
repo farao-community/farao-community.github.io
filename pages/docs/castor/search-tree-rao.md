@@ -27,7 +27,7 @@ Some remedial actions such as PSTs & HVDCs are treated via a linear optimisation
 
 A search-tree algorithm will optimise all couples of critical branches and critical outages to define a set of remedial actions covering all these network states. This limits the impact of net position forecasts, which are highly uncertain because of the uncertainty in the power generation forecasts (renewables, unforeseeable events...).
 
-For example, let’s assume there that is no available preventive remedial action (for simplicity) and focus on the [CNEC](/docs/input-data/crac#cnec) with the minimum relative margin (let's call it CNE1C1).  
+For example, let’s assume there that is no available preventive remedial action (for simplicity) and focus on the [CNEC](/docs/input-data/crac/crac#cnec) with the minimum relative margin (let's call it CNE1C1).  
 The optimiser will search for a curative remedial action increasing margin of CNE1C1. However, considering only CNE1C1 could be relevant if, and only if, the net position forecast is highly reliable and accurate. As stated before, this could not be acceptable for the security of the system. That is why the search tree will also identify optimised remedial actions for CNE1C2, CNE1C3…
 
 ### Remedial actions considered
@@ -62,7 +62,7 @@ As a matter of clarification, connecting/disconnecting a generation unit can als
 
 #### For Flow-based Capacity calculation – minimum margin
 
-The objective function is used to determine at each step of the search tree which remedial action is the best. A variant of it is also used when solving the [linear optimisation problem](/docs/castor/linear-optimisation-problem).
+The objective function is used to determine at each step of the search tree which remedial action is the best. A variant of it is also used when solving the [linear optimisation problem](/docs/castor/linear-rao).
 
 The active flow $$F_i$$ on a CNEC $$i$$ is:
 
@@ -95,7 +95,7 @@ of CNEC $$i$$ relatively to a commercial border (zone-to-zone) of the capacity c
 
 The objective function of CASTOR is also configurable. The constraints taken into account within the 
 optimisation are also configurable in order to comply with process specificities (i.e limitation of 
-[loop flows](/docs/engine/ra-optimisation/loopflows) required for Flow based CORE Capacity Calculation).
+[loop flows](/docs/engine/ra-optimisation/loop-flows) required for Flow based CORE Capacity Calculation).
 
 
 #### For NTC Capacity calculation/CEP Validation
@@ -116,7 +116,7 @@ This algorithm acts on sets of states that share common remedial actions, also c
 
 The main inputs of the algorithm are:
 - the [network](/docs/input-data/network) at the root of the perimeter,
-- an extract of the original [CRAC](/docs/input-data/crac), containing only the remedial actions that are available in the given perimeter (filtered on usage rules). 
+- an extract of the original [CRAC](/docs/input-data/crac/crac), containing only the remedial actions that are available in the given perimeter (filtered on usage rules). 
 
 ### Stop criterion
 

@@ -32,7 +32,7 @@ CRAC/CBCORA (Critical Branch/Critical Outages/Remedial Actions) are not yet harm
 To limit dependencies with input/output formats, FARAO uses its own [CRAC format](crac/json) in order to be easily
 adaptable for any process.
 
-Please refer to the [dedicated CRAC section](/docs/input-data/crac) for more information.
+Please refer to the [dedicated CRAC section](/docs/input-data/crac/crac) for more information.
 
 CRAC exchange formats actually supported by FARAO:
 - [JSON CRAC](/docs/input-data/crac/json) (FARAO-specific)

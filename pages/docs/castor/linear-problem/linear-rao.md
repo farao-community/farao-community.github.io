@@ -26,7 +26,7 @@ In particular, the Linear RAO module is used in [CASTOR](/docs/engine/ra-optimis
 
 The main inputs of the algorithm are:
 - the network of the "initial situation", where the remedial actions are supposed to be at their "initial position",
-- an extract of the original [CRAC](/docs/input-data/crac), containing only the range actions to be optimised.
+- an extract of the original [CRAC](/docs/input-data/crac/crac), containing only the range actions to be optimised.
 
 ### Outputs
 

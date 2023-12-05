@@ -6,7 +6,7 @@ Access the angle value of an AngleCnec.
 
 {% capture t13_java %}
 *Note that this feature is not implemented in the default RAO result implementation, as angle CNECs are not optimised
-by the RAO, but monitored by an [angle monitoring module](/docs/engine/angle-monitoring).*
+by the RAO, but monitored by an [angle monitoring module](/docs/engine/monitoring/angle-monitoring).*
 ~~~java
 // get the angle value for a given angle cnec, at a given state, in a given angle unit
 double getAngle(OptimizationState optimizationState, AngleCnec angleCnec, Unit unit);
@@ -39,7 +39,7 @@ Access the angle margin value of an AngleCnec.
 
 {% capture t14_java %}
 *Note that this feature is not implemented in the default RAO result implementation, as angle CNECs are not optimised
-by the RAO, but monitored by an [angle monitoring module](/docs/engine/angle-monitoring).*
+by the RAO, but monitored by an [angle monitoring module](/docs/engine/monitoring/angle-monitoring).*
 ~~~java
 // get the margin value for a given angle cnec, at a given state, in a given angle unit
 double getMargin(OptimizationState optimizationState, AngleCnec angleCnec, Unit unit);
