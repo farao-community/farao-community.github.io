@@ -6,7 +6,7 @@ Access the voltage value of an VoltageCnec.
 
 {% capture t15_java %}
 *Note that this feature is not implemented in the default RAO result implementation, as voltage CNECs are not optimised
-by the RAO, but monitored by a [voltage monitoring module](/docs/engine/voltage-monitoring).*
+by the RAO, but monitored by a [voltage monitoring module](/docs/engine/monitoring/voltage-monitoring).*
 ~~~java
 // get the voltage value for a given voltage cnec, after optimisation of a given instant, in a given voltage unit
 double getVoltage(Instant optimizedInstant, VoltageCnec voltageCnec, Unit unit);
@@ -38,7 +38,7 @@ Access the voltage margin value of a VoltageCnec.
 
 {% capture t16_java %}
 *Note that this feature is not implemented in the default RAO result implementation, as voltage CNECs are not optimised
-by the RAO, but monitored by a [voltage monitoring module](/docs/engine/voltage-monitoring).*
+by the RAO, but monitored by a [voltage monitoring module](/docs/engine/monitoring/voltage-monitoring).*
 ~~~java
 // get the margin value for a given voltage cnec, after optimisation of a given instant, in a given voltage unit
 double getMargin(Instant optimizedInstant, VoltageCnec voltageCnec, Unit unit);

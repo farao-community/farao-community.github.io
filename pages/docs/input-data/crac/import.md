@@ -92,7 +92,7 @@ The formats handled by the CracCreator are:
 - [FlowBasedConstraint document](fbconstraint), also known as Merged-CB, CBCORA or F301 ([farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint))
 - [CSE CRAC](cse) ([farao-crac-creator-cse](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cse))
 - [CIM CRAC](cim) ([farao-crac-creator-cim](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-cim))
-- [CSA PROFILES CRAC](csa profiles) ([farao-crac-creator-csa-profiles](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-csa-profiles))
+- [CSA PROFILES CRAC](csa) ([farao-crac-creator-csa-profiles](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-csa-profiles))
 
 When creating a CRAC from one of these formats, the chain presented above can be coded step by step, or utility methods can be used to make all the import in one line of code. Some examples are given below:
 

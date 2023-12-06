@@ -472,7 +472,7 @@ These parameters (multi-threading) allow you to run a RAO making the most out of
 The following extensions can be added to RaoParameters when needed, in order to activate specific RAO features.
 
 ## Loop-flow extension {#loop-flow-parameters}
-Adding a LoopFlowParameters extension to RaoParameters will activate [loop-flow constraints](/docs/engine/ra-optimisation/loopflows).  
+Adding a LoopFlowParameters extension to RaoParameters will activate [loop-flow constraints](/docs/engine/ra-optimisation/loop-flows).  
 (The RAO will monitor the loop-flows on CNECs that have a LoopFlowThreshold extension.)  
 The following parameters tune these constraints.  
 See also: [Modelling loop-flows and their virtual cost](/docs/castor/linear-optimisation-problem/max-loop-flow-filler)  

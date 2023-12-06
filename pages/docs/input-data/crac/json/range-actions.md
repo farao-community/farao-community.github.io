@@ -54,7 +54,7 @@ crac.newPstRangeAction()
     .add();
 ~~~
 In that case, the validity domain of the PST (intersection of its ranges and feasible taps) is [1; 3]
-Note that the [PstHelper utility class](creation-methods) can ease the creation of the TapToAngleConversionMap.
+Note that the [PstHelper utility class](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creation-util/src/main/java/com/farao_community/farao/data/crac_creation/util/PstHelper.java) can ease the creation of the TapToAngleConversionMap.
 {% endcapture %}
 {% capture t9_json %}
 ~~~json

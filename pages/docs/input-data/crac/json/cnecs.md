@@ -187,7 +187,7 @@ crac.newFlowCnec()
 
 #### Loop-flow extension {#loop-flow-extension}
 When a FlowCnec carries a LoopFlowThreshold extension (and if [loop-flow constraints are enabled in the RAO](/docs/parameters#loop-flow-parameters)),
-its loop-flow is monitored by the RAO, that will keep it [under its threshold](/docs/engine/ra-optimisation/loopflows)
+its loop-flow is monitored by the RAO, that will keep it [under its threshold](/docs/engine/ra-optimisation/loop-flows)
 when optimising remedial actions.  
 The loop-flow extension defines the loop-flow threshold to be respected by the RAO (even though the initial loop-flow
 value on this CNEC may override this user-defined thrshold, as explained [here](/docs/castor/linear-optimisation-problem/max-loop-flow-filler)).
@@ -254,7 +254,7 @@ An AngleCnec has the following specificities:
 
 > 💡  **NOTE**
 > AngleCnecs currently cannot be optimised by the RAO, but they are monitored by an independent
-> [AngleMonitoring](/docs/engine/angle-monitoring) module.
+> [AngleMonitoring](/docs/engine/monitoring/angle-monitoring) module.
 
 #### Creating an AngleCnec
 In FARAO, AngleCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
@@ -357,7 +357,7 @@ A "VoltageCnec" is a CNEC on which we monitor the voltage on substations. It has
 
 > 💡  **NOTE**
 > VoltageCnecs currently cannot be optimised by the RAO, but they are monitored by an independent
-> [VoltageMonitoring](/docs/engine/voltage-monitoring) module.
+> [VoltageMonitoring](/docs/engine/monitoring/voltage-monitoring) module.
 
 #### Creating a VoltageCnec
 In FARAO, VoltageCnecs can be created by the java API, or written in the json CRAC internal format, as shown below:
