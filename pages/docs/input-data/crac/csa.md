@@ -20,8 +20,8 @@ information among several distinct files.
 
 ## Header overview {#header}
 
-The FARAO importer only supports version `2.3` headers for CSA profiles (
-see [ENTSO-E website](CGMES metadata and document header data exchange specification v2.3)).
+The FARAO importer only supports version `2.3` headers for CSA profiles (see
+[ENTSO-E website](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/MetadataAndHeaderDataExchangeSpecification_v2.3.0.pdf)).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47,9 +47,8 @@ see [ENTSO-E website](CGMES metadata and document header data exchange specifica
 ```
 
 Each CSA profile is identified by a `dcat:keyword` that states which category of features it bears. To be valid for
-FARAO, a
-profile must have exactly one keyword defined in its header. Besides, FARAO currently handles 5 different CSA profiles,
-the keyword and purpose of which are gathered in the following table:
+FARAO, a profile must have exactly one keyword defined in its header. Besides, FARAO currently handles 5 different CSA
+profiles, the keyword and purpose of which are gathered in the following table:
 
 | Keyword | Full Name                | Purpose                                |
 |---------|--------------------------|----------------------------------------|
@@ -161,7 +160,9 @@ A contingency is imported only if the `normalMustStudy` field is set to `true` a
 valid `ContingencyEquipment`, i.e. having `Equipment` pointing to an existing network element and a `contingentStatus`
 being `outOfService`. A contingency with no associated `ContingencyEquipment` will be ignored.
 
-> The network elements must be defined in the CGMES.
+> - The contingency can still be imported if `normalMustStudy` is set to `false` if the contingency is also defined in
+    the SSI profile with its field `mustStudy` set to `true`.
+> - The network elements must be defined in the CGMES.
 
 From the `OrdinaryContingency` / `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the
 contingency's identifier. Besides, the `EquipmentOperator` is converted to a friendly name and concatenated with the
@@ -196,6 +197,9 @@ The CNEC is imported only if the `normalEnabled` fields is set to `true` or miss
 to `true` a **preventive** CNEC is created from this assessed element (but this does not mean that a curative CNEC
 cannot be created as well). The `AssessedSystemOperator` and the `name` are concatenated together with the CNEC's
 instant (with the pattern *TSO_name - instant*) to create the CNEC's name.
+
+> The CNEC can still be imported if `normalEnabled` is set to `false` if the AssessedElement is also defined in the SSI
+> profile with its field `enabled` set to `true`.
 
 Finally, in order to specify the type, value(s) of the threshold(s) and associated network elements of the CNEC, two
 options are possible:
@@ -482,8 +486,12 @@ and instant of the remedial action.
 </rdf:RDF>
 ```
 
-The remedial action is imported only if the `normalAvailable` field is set to `true`. As for
-the [contingencies](#contingencies), the `mRID` is used as the remedial action's identifier and
+The remedial action is imported only if the `normalAvailable` field is set to `true`.
+
+> The remedial action can still be imported if `normalAvailable` is set to `false` if the remedial action is also
+> defined in the SSI profile with its field `avilable` set to `true`.
+
+As for the [contingencies](#contingencies), the `mRID` is used as the remedial action's identifier and
 the `RemedialActionSystemOperator` and `name` are concatenated together to create the remedial action's name. The
 instant of the remedial action is determined by the `kind` which can be either `preventive` or `curative`. Finally,
 the `timeToImplement` is converted to a number of seconds and used as the remedial action's speed.
@@ -527,6 +535,9 @@ The PST range action is considered only if the `normalEnabled` field is set to `
 reference an existing PST in the network and the `PropertyReference` must necessarily be `TapChanger.step` since it is
 the PST's tap position which shifts.
 
+> The PST range action can still be imported if `normalEnabled` is set to `false` if the TapPositionAction is also
+> defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `TapPositionAction` must itself be referenced by at most two `StaticPropertyRange` objects which
 provide the numerical values for the minimum and/or maximum reachable taps. If no `StaticPropertyRange` is present, the
 range of the remedial action will be set from the PST range read in the network.
@@ -565,6 +576,10 @@ the minimum. Note that the `valueKind` must be `absolute` to indicate that the l
 PST's state. Up to two `StaticPropertyRange` objects can be linked to the same PST range action to set the minimum
 and/or maximum tap.
 
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
+
 ### Network Actions {#network-actions}
 
 #### Topological Action {#topological-action}
@@ -594,6 +609,9 @@ The topological action is considered only if the `normalEnabled` field is set to
 reference an existing switch in the network and the `PropertyReference` must necessarily be `Switch.open` since a
 topology action is about opening or closing such a switch.
 
+> The topological action can still be imported if `normalEnabled` is set to `false` if the TopologyAction is also
+> defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `TopologyAction` must itself be referenced by one `StaticPropertyRange` object which indicates whether
 to open or to close the switch.
 
@@ -621,6 +639,10 @@ state. Finally, the `normalValue` (can be overriden by 'value' in SSI) field set
 
 - if it is 0 the switch will be closed
 - if it is 1 the switch will be opened
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 #### Injection Set-point Action {#injection-set-point-action}
 
@@ -657,6 +679,9 @@ The rotating machine action is considered only if the `normalEnabled` field is s
 the `RotatingMachine` must reference an existing generator in the network and the `PropertyReference` must necessarily
 be `RotatingMachine.p` since the remedial action acts on the generator's power.
 
+> The rotating machine action can still be imported if `normalEnabled` is set to `false` if the RotatingMachineAction is
+> also defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `RotatingMachineAction` must itself be referenced by a `StaticPropertyRange` which provides the value
 of the set-point.
 
@@ -681,6 +706,10 @@ of the set-point.
 For the `StaticPropertyRange`, the `PropertyReference` must also be `RotatingMachine.p`. The value of the set-point (in
 MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction` is none to
 indicate that the set-point is an imposed value without any degree of freedom for the RAO.
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 {% endcapture %}
 
@@ -712,6 +741,9 @@ the `PowerElectronicsConnection` must reference an existing power electronics co
 the `PropertyReference` must necessarily be `PowerElectronicsConnection.p` since the remedial action acts on the power
 electronics connection's power.
 
+> The power electronics connection action can still be imported if `normalEnabled` is set to `false` if the
+> PowerElectronicsConnectionAction is also defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `PowerElectronicsConnectionAction` must itself be referenced by a `StaticPropertyRange` which provides
 the value of the set-point.
 
@@ -737,6 +769,10 @@ the value of the set-point.
 For the `StaticPropertyRange`, the `PropertyReference` must also be `PowerElectronicsConnection.p`. The value of the
 set-point (in MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction`
 is none to indicate that the set-point is an imposed value without any degree of freedom for the RAO.
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 {% endcapture %}
 
@@ -766,6 +802,9 @@ The shunt compensator modification is considered only if the `normalEnabled` fie
 the `ShuntCompensator` must reference a shunt compensator in the network and the `PropertyReference` must necessarily
 be `ShuntCompensator.sections` since the remedial action acts on the number of sections of the shunt compensator.
 
+> The shunt compensator modification can still be imported if `normalEnabled` is set to `false` if the
+> ShuntCompensatorModification is also defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `ShuntCompensatorModification` must itself be referenced by a `StaticPropertyRange` which provides the
 value of the set-point.
 
@@ -792,6 +831,10 @@ set-point (in SECTION_COUNT) is determined by the `normalValue` given that the `
 the `direction`is none to indicate that the number of section is an imposed value without any degree of freedom for the
 RAO. Note that `normalValue` must be integer-*castable* (i.e. a float number with null decimal part) to model a number
 of sections.
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 {% endcapture %}
 
