@@ -64,6 +64,15 @@ ignored.
 
 > Several other fields can be added to the header but these will be ignored by FARAO.
 
+## Profiles overview {#csa-overview}
+
+The CRAC data is spread over different profiles that reference one another. The relation between the objects and the
+fields read by FARAO are displayed in the following chart.
+
+> Fields preceded by a "~" are optional.
+
+![CSA profiles usage overview](/assets/img/CSA-profiles.png)
+
 ## Contingencies {#contingencies}
 
 The [contingencies](json#contingencies) are described in the **CO** profile. They can be represented by three types of
