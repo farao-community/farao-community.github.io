@@ -29,9 +29,9 @@ Here is a detailed description of how the voltage monitoring algorithm operates:
       - no applied remedial actions
       - security UNSECURE (variant of HIGH/LOW_VOLTAGE_CONSTRAINT)
   - Re-compute all voltage values
-  - Create a state-specific [VoltageMonitoringResult](#result) with voltages, list of applied remedial actions , and secure flag set to SECURE if there is
+  - Create a state-specific voltage monitoring result with voltages, list of applied remedial actions , and secure flag set to SECURE if there is
     no more overshoot (after re-verifying thresholds)
   - Move on to next state (Go to (A)).
-- Assemble all the state-specific VoltageMonitoringResult in one overall [VoltageMonitoringResult](#result)
+- Assemble all the state-specific results in one overall result, and [update the RAO result object](#result)
   
 ![Voltage monitoring algorithm](/assets/img/voltage_monitoring_algorithm.png)

@@ -12,7 +12,7 @@ With:
   remedial actions.
 2. Run the monitoring algorithm using the constructed object's following method:
 ~~~java
-public AngleMonitoringResult run(String loadFlowProvider, LoadFlowParameters loadFlowParameters, int numberOfLoadFlowsInParallel, OffsetDateTime glskOffsetDateTime)
+public RaoResult runAndUpdateRaoResult(String loadFlowProvider, LoadFlowParameters loadFlowParameters, int numberOfLoadFlowsInParallel, OffsetDateTime glskOffsetDateTime)
 ~~~
 With:
 - loadFlowProvider: the name of the load-flow computer to use. This should refer to a [PowSyBl load flow provider implementation](https://www.powsybl.org/pages/documentation/simulation/powerflow/)
@@ -33,5 +33,5 @@ RaoResult raoResult = Rao.find(...).run(...)
 CimGlskDocument glsk = ...
 LoadFlowParameters loadFlowParameters = ...
 OffsetDateTime glskOffsetDateTime = ...
-AngleMonitoringResult angleMonitoringResult = new AngleMonitoring(crac, network, raoResult, glsk).run("OpenLoadFlow", loadFlowParameters, 2, glskOffsetDateTime);
+RaoResult raoResultWithAngleMonitoring = new AngleMonitoring(crac, network, raoResult, glsk).runAndUpdateRaoResult("OpenLoadFlow", loadFlowParameters, 2, glskOffsetDateTime);
 ~~~
