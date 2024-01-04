@@ -1,9 +1,9 @@
 After completing the RAO, the user can export the SWE CNE file using this method of [SweCneExporter](https://github.com/farao-community/farao-core/blob/master/data/result-exporter/swe-cne-exporter/src/main/java/com/farao_community/farao/data/swe_cne_exporter/SweCneExporter.java):
 ~~~java
-public void exportCne(Crac crac,Network network,
-        CimCracCreationContext cracCreationContext,
-        RaoResult raoResult, AngleMonitoringResult angleMonitoringResult,
-        RaoParameters raoParameters,CneExporterParameters exporterParameters,OutputStream outputStream)
+public void exportCne(Crac crac, Network network, 
+        CimCracCreationContext cracCreationContext, 
+        RaoResult raoResult, RaoParameters raoParameters, 
+        CneExporterParameters exporterParameters, OutputStream outputStream)
 ~~~
 With:
 - **crac**: the [CRAC object](/docs/input-data/crac/json) used for the RAO.
@@ -11,8 +11,10 @@ With:
 - **cracCreationContext**: the [CimCracCreationContext object](/docs/input-data/crac/creation-context#cim) generated during
   [CRAC creation](/docs/input-data/crac/import) from a native [CIM CRAC file](/docs/input-data/crac/cim).
 - **raoResult**: the [RaoResult](/docs/output-data/rao-result-json) object containing selected remedial actions and flow
-  results.
-- **angleMonitoringResult**: the [angle monitoring result object](/docs/engine/monitoring/angle-monitoring#result).
+  results, as well as [angle results](/docs/engine/monitoring/angle-monitoring) if the CRAC contains [angle CNECs](/docs/input-data/crac/json#angle-cnecs)
+  > ⚠️  **NOTE**  
+  > The exporter will fail if angle CNECs are present in the CRAC, but the RAO result does not contain angle results.  
+  > See how to compute angle results [here](/docs/engine/monitoring/angle-monitoring).
 - **raoParameters**: the [RaoParameters](/docs/parameters) used in the RAO.
 - **exporterParameters**: a specific object that the user should define, containing meta-information that will be written
   in the header of the CNE file:
@@ -49,8 +51,8 @@ CimCracCreationContext cracCreationContext = new CimCracCreator().createCrac(...
 Crac crac = cracCreationContext.getCrac();
 // Run RAO
 RaoResult raoResult = Rao.find(...).run(...)
-// Run angle monitoring
-AngleMonitoringResult angleMonitoringResult = new AngleMonitoring(crac, network, raoResult, glsk).run("OpenLoadFlow", loadFlowParameters, 2, glskOffsetDateTime);
+// Run angle monitoring and update RAO result
+RaoResult RaoResultWithAngleMonitoring = new AngleMonitoring(crac, network, raoResult, glsk).runAndUpdateRaoResult("OpenLoadFlow", loadFlowParameters, 2, glskOffsetDateTime);
 // Set CNE header parameters
 CneExporterParameters exporterParameters = new CneExporterParameters("DOCUMENT_ID", 1, "DOMAIN_ID",
                                             CneExporterParameters.ProcessType.DAY_AHEAD_CC, "SENDER_ID",
@@ -59,5 +61,5 @@ CneExporterParameters exporterParameters = new CneExporterParameters("DOCUMENT_I
                                             "2021-10-30T22:00Z/2021-10-31T23:00Z");
 // Export CNE to output stream
 OutputStream os = ...
-new SweCneExporter().exportCne(crac, network, cracCreationContext, raoResult, angleMonitoringResult, raoParameters, exporterParameters, os); 
+new SweCneExporter().exportCne(crac, network, cracCreationContext, raoResult, raoParameters, exporterParameters, os); 
 ~~~

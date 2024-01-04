@@ -10,7 +10,7 @@ With:
   be applied on the network before monitoring voltage values)
 2. Run the monitoring algorithm using the constructed object's following method:
 ~~~java
-public VoltageMonitoringResult run(String loadFlowProvider, LoadFlowParameters loadFlowParameters, int numberOfLoadFlowsInParallel)
+public RaoResult runAndUpdateRaoResult(String loadFlowProvider, LoadFlowParameters loadFlowParameters, int numberOfLoadFlowsInParallel)
 ~~~
 With:
 - loadFlowProvider: the name of the load-flow computer to use. This should refer to a [PowSyBl load flow provider implementation](https://www.powsybl.org/pages/documentation/simulation/powerflow/)
@@ -24,5 +24,5 @@ Crac crac = ...
 Network network = ...
 RaoResult raoResult = Rao.find(...).run(...)
 LoadFlowParameters loadFlowParameters = ...
-VoltageMonitoringResult voltageMonitoringResult = new VoltageMonitoring(crac, network, raoResult).run("OpenLoadFlow", loadFlowParameters, 2);
+RaoResult raoResultWithVoltageMonitoring = new VoltageMonitoring(crac, network, raoResult).runAndUpdateRaoResult("OpenLoadFlow", loadFlowParameters, 2);
 ~~~
