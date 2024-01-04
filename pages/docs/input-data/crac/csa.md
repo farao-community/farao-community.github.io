@@ -20,6 +20,9 @@ information among several distinct files.
 
 ## Header overview {#header}
 
+The FARAO importer only supports version `2.3` headers for CSA profiles (see
+[ENTSO-E website](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/MetadataAndHeaderDataExchangeSpecification_v2.3.0.pdf)).
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF
@@ -34,36 +37,47 @@ information among several distinct files.
         xmlns:cim="http://iec.ch/TC57/CIM100#"
         xmlns:dcterms="http://purl.org/dc/terms/#">
     <md:FullModel rdf:about="urn:uuid:e6b94ef6-e043-4d29-a258-1718d6d2f507">
-        <dcat:Model.keyword>...</dcat:Model.keyword>
-        <dcat:Model.startDate>2023-01-01T00:00:00Z</dcat:Model.startDate>
-        <dcat:Model.endDate>2100-01-01T00:00:00Z</dcat:Model.endDate>
+        <dcat:keyword>...</dcat:keyword>
+        <dcat:startDate>2023-01-01T00:00:00Z</dcat:startDate>
+        <dcat:endDate>2100-01-01T00:00:00Z</dcat:endDate>
         ...
     </md:FullModel>
     ...
 </rdf:RDF>
 ```
 
-Each CSA profile is identified by a `keyword` that states which category of features it bears. Currently, FARAO handles
-6 different CSA profiles, the keyword and purpose of which are gathered in the following table:
+Each CSA profile is identified by a `dcat:keyword` that states which category of features it bears. To be valid for
+FARAO, a profile must have exactly one keyword defined in its header. Besides, FARAO currently handles 5 different CSA
+profiles, the keyword and purpose of which are gathered in the following table:
 
-| Keyword | Full Name                | Purpose                                  |
-|---------|--------------------------|------------------------------------------|
-| AE      | Assessed Element         | Definition of CNECs.                     |
-| CO      | Contingency              | Definition of contingencies.             |
-| ER      | Equipment Reliability    | Definition of CNECs' thresholds.         |
-| RA      | Remedial Action          | Definition of remedial actions.          |
-| RAS     | Remedial Action Schedule | Definition of automatic remedial action. |
-| SSI     | Steady State Instruction | Overriding data for specific instants.   |
+| Keyword | Full Name                | Purpose                                |
+|---------|--------------------------|----------------------------------------|
+| AE      | Assessed Element         | Definition of CNECs.                   |
+| CO      | Contingency              | Definition of contingencies.           |
+| ER      | Equipment Reliability    | Definition of AngleCNECs' thresholds.  |
+| RA      | Remedial Action          | Definition of remedial actions.        |
+| SSI     | Steady State Instruction | Overriding data for specific instants. |
 
-Besides, each CSA profile has a period of validity delimited by the `startDate` and `endDate` fields in the
-header's `FullModel` object. If the time at which the import occurs is outside of this time interval, the profile is
+Besides, each CSA profile has a period of validity delimited by the `dcat:startDate` and `dcat:endDate` fields (both
+required) in the header. If the time at which the import occurs is outside of this time interval, the profile is
 ignored.
+
+> Several other fields can be added to the header but these will be ignored by FARAO.
+
+## Profiles overview {#csa-overview}
+
+The CRAC data is spread over different profiles that reference one another. The relation between the objects and the
+fields read by FARAO are displayed in the following chart.
+
+> Fields preceded by a "~" are optional.
+
+![CSA profiles usage overview](/assets/img/CSA-profiles.png)
 
 ## Contingencies {#contingencies}
 
 The [contingencies](json#contingencies) are described in the **CO** profile. They can be represented by three types of
-objects: `OrdinaryContingency`, `ExceptionalContingency` and  `OutOfRangeContingency`. The contingency is linked to the
-network element on which it can occur through a `ContingencyEquipment`.
+objects: `OrdinaryContingency`, `ExceptionalContingency` and  `OutOfRangeContingency`. The contingency must be
+associated to the impacted network elements through `ContingencyEquipment` objects.
 
 {% capture case_OrdinaryContingency %}
 
@@ -153,7 +167,11 @@ tab3name="OutOfRangeContingency" tab3content=case_OutOfRangeContingency %}
 
 A contingency is imported only if the `normalMustStudy` field is set to `true` and if it is referenced by a
 valid `ContingencyEquipment`, i.e. having `Equipment` pointing to an existing network element and a `contingentStatus`
-being `outOfService`.
+being `outOfService`. A contingency with no associated `ContingencyEquipment` will be ignored.
+
+> - The contingency can still be imported if `normalMustStudy` is set to `false` if the contingency is also defined in
+    the SSI profile with its field `mustStudy` set to `true`.
+> - The network elements must be defined in the CGMES.
 
 From the `OrdinaryContingency` / `ExceptionalContingency` / `OutOfRangeContingency` object, the `mRID` is used as the
 contingency's identifier. Besides, the `EquipmentOperator` is converted to a friendly name and concatenated with the
@@ -175,24 +193,32 @@ name, instant(s) and operator information.
         <cim:IdentifiedObject.name>Assessed element</cim:IdentifiedObject.name>
         <cim:IdentifiedObject.description>Example of assessed element.</cim:IdentifiedObject.description>
         <nc:AssessedElement.inBaseCase>true</nc:AssessedElement.inBaseCase>
-        <nc:AssessedElement.isCritical>true</nc:AssessedElement.isCritical>
         <nc:AssessedElement.normalEnabled>true</nc:AssessedElement.normalEnabled>
         <nc:AssessedElement.isCombinableWithRemedialAction>false</nc:AssessedElement.isCombinableWithRemedialAction>
         <nc:AssessedElement.isCombinableWithContingency>false</nc:AssessedElement.isCombinableWithContingency>
         <nc:AssessedElement.AssessedSystemOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
-        <nc:AssessedElement.OperationalLimit rdf:resource="#_operational-limit"/>
     </nc:AssessedElement>
     ...
 </rdf:RDF>
 ```
 
-The CNEC is imported only if the `isCritical` and `normalEnabled` fields are both set to `true` or missing. If
-the `inBaseCase`
-field is set to `true` a **preventive** CNEC is created from this assessed element (but this does not mean that a
-curative CNEC cannot be created as well). The `AssessedSystemOperator` and the `name` are concatenated together with the
-CNEC's instant (with the pattern *TSO_name - instant*) to create the CNEC's name. Finally, the `OperationalLimit` points
-to an eponymous object in either the ER or EQ profile depending on the type of CNEC (see below). This `OperationalLimit`
-bears the value of the threshold and the reference to the network element(s).
+The CNEC is imported only if the `normalEnabled` fields is set to `true` or missing. If the `inBaseCase` field is set
+to `true` a **preventive** CNEC is created from this assessed element (but this does not mean that a curative CNEC
+cannot be created as well). The `AssessedSystemOperator` and the `name` are concatenated together with the CNEC's
+instant (with the pattern *TSO_name - instant*) to create the CNEC's name.
+
+> The CNEC can still be imported if `normalEnabled` is set to `false` if the AssessedElement is also defined in the SSI
+> profile with its field `enabled` set to `true`.
+
+Finally, in order to specify the type, value(s) of the threshold(s) and associated network elements of the CNEC, two
+options are possible:
+
+- using an `OperationalLimit` that points to an eponymous object in either the ER or EQ profile depending on the type of
+  CNEC (see below)
+- (FlowCNECs only) using a `ConductingEquipment` that points to a line to define FlowCNECs for the PATL and all the TATL
+  of the line at once
+
+> If none or both fields are present the AssessedElement will be ignored.
 
 A CNEC can also be made curative by linking it to a contingency through an `AssessedElementWithContingency`. In this
 case, the contingency's name is added to the CNEC's name.
@@ -215,12 +241,33 @@ case, the contingency's name is added to the CNEC's name.
 ```
 
 The distinction between the types of CNEC (FlowCNEC, AngleCNEC or VoltageCNEC) comes from the type of `OperationalLimit`
-of the Assessed Element.
+of the Assessed Element (or the use of a `ConductingEquipment` for FlowCNECs).
 
 ### FlowCNEC {#flow-cnec}
 
+{% capture case_OperationalLimit %}
+
 The CNEC is a [FlowCNEC](json#flow-cnecs) if its associated `OperationalLimit` is a `CurrentLimit` which can be found in
 the **EQ** profile (CGMES file).
+
+```xml
+<!-- AE Profile -->
+<rdf:RDF>
+    ...
+    <nc:AssessedElement rdf:ID="_assessed-element">
+        <cim:IdentifiedObject.mRID>assessed-element</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Assessed element</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of assessed element.</cim:IdentifiedObject.description>
+        <nc:AssessedElement.inBaseCase>true</nc:AssessedElement.inBaseCase>
+        <nc:AssessedElement.normalEnabled>true</nc:AssessedElement.normalEnabled>
+        <nc:AssessedElement.isCombinableWithRemedialAction>false</nc:AssessedElement.isCombinableWithRemedialAction>
+        <nc:AssessedElement.isCombinableWithContingency>false</nc:AssessedElement.isCombinableWithContingency>
+        <nc:AssessedElement.AssessedSystemOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+        <nc:AssessedElement.OperationalLimit rdf:resource="#_current-limit"/>
+    </nc:AssessedElement>
+    ...
+</rdf:RDF>
+```
 
 ```xml
 <!-- EQ (CGMES) Profile -->
@@ -274,7 +321,51 @@ present and sets the FlowCNEC's instant:
 - if `acceptableDuration` = 0, the FlowCNEC is **preventive** or **curative** (if linked to a contingency)
 - if 0 < `acceptableDuration` ≤ 60, the FlowCNEC is monitored at the **outage** instant
 - if 60 < `acceptableDuration` ≤ 900, the FlowCNEC is monitored at the **auto** instant
-- if `acceptableDuration` > 9000, the FlowCNEC is **curative**
+- if `acceptableDuration` > 900, the FlowCNEC is **curative**
+
+If the `AssessedElement` is `inBaseCase` and the limit is a PATL, a preventive FlowCNEC is added as well.
+
+{% endcapture %}
+
+{% capture case_ConductingEquipment %}
+
+FlowCNECs can also be defined with a `ConductingEquipement` that points to a line in the CGMES.
+
+```xml
+<!-- AE Profile -->
+<rdf:RDF>
+    ...
+    <nc:AssessedElement rdf:ID="_assessed-element">
+        <cim:IdentifiedObject.mRID>assessed-element</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Assessed element</cim:IdentifiedObject.name>
+        <cim:IdentifiedObject.description>Example of assessed element.</cim:IdentifiedObject.description>
+        <nc:AssessedElement.inBaseCase>true</nc:AssessedElement.inBaseCase>
+        <nc:AssessedElement.normalEnabled>true</nc:AssessedElement.normalEnabled>
+        <nc:AssessedElement.isCombinableWithRemedialAction>false</nc:AssessedElement.isCombinableWithRemedialAction>
+        <nc:AssessedElement.isCombinableWithContingency>false</nc:AssessedElement.isCombinableWithContingency>
+        <nc:AssessedElement.AssessedSystemOperator rdf:resource="http://data.europa.eu/energy/EIC/10XFR-RTE------Q"/>
+        <nc:AssessedElement.ConductingEquipement rdf:resource="#_conducting-equipment"/>
+    </nc:AssessedElement>
+    ...
+</rdf:RDF>
+```
+
+In that case, several FlowCNECs can be defined at once depending on the number of TATLs defined for the line (given that
+the `AssessedElement` is linked to a contingency). Thus, for each associated contingency and each TATL:
+
+- a curative FlowCNEC is created if the TATL duration is null
+- an outage FlowCNEC is created if the TATL duration is below 60 seconds
+- an auto FlowCNEC is created if the TATL duration is between 60 (excluded) and 900 (included) seconds
+- a curative FlowCNEC is created if the TATL duration is greater than 900 seconds
+
+For each contingency, a curative FlowCNEC is also created using the PATL. Finally, if the `AssessedElement`
+is `inBaseCase` a preventive FlowCNEC is added using the PATL as well. In all case, the limit's threshold is used for
+both the maximum (positive) and minimum (negative) FlowCNEC's thresholds.
+
+{% endcapture %}
+
+{% include /tabs.html id="CSA_FlowCNECs_tabs" tab1name="OperationalLimit" tab1content=case_OperationalLimit tab2name="
+ConductingEquipment" tab2content=case_ConductingEquipment %}
 
 ### AngleCNEC {#angle-cnec}
 
@@ -404,8 +495,12 @@ and instant of the remedial action.
 </rdf:RDF>
 ```
 
-The remedial action is imported only if the `normalAvailable` field is set to `true`. As for
-the [contingencies](#contingencies), the `mRID` is used as the remedial action's identifier and
+The remedial action is imported only if the `normalAvailable` field is set to `true`.
+
+> The remedial action can still be imported if `normalAvailable` is set to `false` if the remedial action is also
+> defined in the SSI profile with its field `avilable` set to `true`.
+
+As for the [contingencies](#contingencies), the `mRID` is used as the remedial action's identifier and
 the `RemedialActionSystemOperator` and `name` are concatenated together to create the remedial action's name. The
 instant of the remedial action is determined by the `kind` which can be either `preventive` or `curative`. Finally,
 the `timeToImplement` is converted to a number of seconds and used as the remedial action's speed.
@@ -449,8 +544,12 @@ The PST range action is considered only if the `normalEnabled` field is set to `
 reference an existing PST in the network and the `PropertyReference` must necessarily be `TapChanger.step` since it is
 the PST's tap position which shifts.
 
-To be valid, the `TapPositionAction` must itself be referenced by one or two `StaticPropertyRange` objects which provide
-the numerical values for the minimum and/or maximum reachable taps.
+> The PST range action can still be imported if `normalEnabled` is set to `false` if the TapPositionAction is also
+> defined in the SSI profile with its field `enabled` set to `true`.
+
+To be valid, the `TapPositionAction` must itself be referenced by at most two `StaticPropertyRange` objects which
+provide the numerical values for the minimum and/or maximum reachable taps. If no `StaticPropertyRange` is present, the
+range of the remedial action will be set from the PST range read in the network.
 
 ```xml
 <!-- RA Profile -->
@@ -486,14 +585,16 @@ the minimum. Note that the `valueKind` must be `absolute` to indicate that the l
 PST's state. Up to two `StaticPropertyRange` objects can be linked to the same PST range action to set the minimum
 and/or maximum tap.
 
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
+
 ### Network Actions {#network-actions}
 
 #### Topological Action {#topological-action}
 
 A [topological action](json#network-actions) is described by a `TopologyAction` object which references its parent
 remedial action (`GridStateAlterationRemedialAction`) and the switch affected by the action.
-
-> ℹ️ Currently, topological actions are implemented such that they can only open a switch.
 
 ```xml
 <!-- RA Profile -->
@@ -516,6 +617,41 @@ remedial action (`GridStateAlterationRemedialAction`) and the switch affected by
 The topological action is considered only if the `normalEnabled` field is set to `true`. Besides, the `Switch` must
 reference an existing switch in the network and the `PropertyReference` must necessarily be `Switch.open` since a
 topology action is about opening or closing such a switch.
+
+> The topological action can still be imported if `normalEnabled` is set to `false` if the TopologyAction is also
+> defined in the SSI profile with its field `enabled` set to `true`.
+
+To be valid, the `TopologyAction` must itself be referenced by one `StaticPropertyRange` object which indicates whether
+to open or to close the switch.
+
+```xml
+<!-- RA Profile -->
+<rdf:RDF>
+    ...
+    <nc:StaticPropertyRange rdf:ID="_static-property-range-for-topology-action">
+        <cim:IdentifiedObject.mRID>static-property-range-for-topology-action</cim:IdentifiedObject.mRID>
+        <cim:IdentifiedObject.name>Example of StaticPropertyRange to open a switch</cim:IdentifiedObject.name>
+        <nc:RangeConstraint.GridStateAlteration rdf:resource="#_tap-position-action"/>
+        <nc:RangeConstraint.normalValue>1</nc:RangeConstraint.normalValue>
+        <nc:RangeConstraint.direction rdf:resource="http://entsoe.eu/ns/nc#RelativeDirectionKind.none"/>
+        <nc:RangeConstraint.valueKind rdf:resource="http://entsoe.eu/ns/nc#ValueOffsetKind.absolute"/>
+        <nc:StaticPropertyRange.PropertyReference
+                rdf:resource="http://energy.referencedata.eu/PropertyReference/Switch.open"/>
+    </nc:StaticPropertyRange>
+    ...
+</rdf:RDF>
+```
+
+For the `StaticPropertyRange`, the `PropertyReference` must also be `Switch.open`. Note that the `valueKind` must
+be `absolute` and the `direction` must be `none` to indicate that the limit does not depend on the previous switch's
+state. Finally, the `normalValue` field sets the behaviour of the switch:
+
+- if it is 0 the switch will be closed
+- if it is 1 the switch will be opened
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 #### Injection Set-point Action {#injection-set-point-action}
 
@@ -552,6 +688,9 @@ The rotating machine action is considered only if the `normalEnabled` field is s
 the `RotatingMachine` must reference an existing generator in the network and the `PropertyReference` must necessarily
 be `RotatingMachine.p` since the remedial action acts on the generator's power.
 
+> The rotating machine action can still be imported if `normalEnabled` is set to `false` if the RotatingMachineAction is
+> also defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `RotatingMachineAction` must itself be referenced by a `StaticPropertyRange` which provides the value
 of the set-point.
 
@@ -576,6 +715,10 @@ of the set-point.
 For the `StaticPropertyRange`, the `PropertyReference` must also be `RotatingMachine.p`. The value of the set-point (in
 MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction` is none to
 indicate that the set-point is an imposed value without any degree of freedom for the RAO.
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 {% endcapture %}
 
@@ -607,6 +750,9 @@ the `PowerElectronicsConnection` must reference an existing power electronics co
 the `PropertyReference` must necessarily be `PowerElectronicsConnection.p` since the remedial action acts on the power
 electronics connection's power.
 
+> The power electronics connection action can still be imported if `normalEnabled` is set to `false` if the
+> PowerElectronicsConnectionAction is also defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `PowerElectronicsConnectionAction` must itself be referenced by a `StaticPropertyRange` which provides
 the value of the set-point.
 
@@ -632,6 +778,10 @@ the value of the set-point.
 For the `StaticPropertyRange`, the `PropertyReference` must also be `PowerElectronicsConnection.p`. The value of the
 set-point (in MW) is determined by the `normalValue` given that the `valueKind` is `absolute` and that the `direction`
 is none to indicate that the set-point is an imposed value without any degree of freedom for the RAO.
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 {% endcapture %}
 
@@ -661,6 +811,9 @@ The shunt compensator modification is considered only if the `normalEnabled` fie
 the `ShuntCompensator` must reference a shunt compensator in the network and the `PropertyReference` must necessarily
 be `ShuntCompensator.sections` since the remedial action acts on the number of sections of the shunt compensator.
 
+> The shunt compensator modification can still be imported if `normalEnabled` is set to `false` if the
+> ShuntCompensatorModification is also defined in the SSI profile with its field `enabled` set to `true`.
+
 To be valid, the `ShuntCompensatorModification` must itself be referenced by a `StaticPropertyRange` which provides the
 value of the set-point.
 
@@ -687,6 +840,10 @@ set-point (in SECTION_COUNT) is determined by the `normalValue` given that the `
 the `direction`is none to indicate that the number of section is an imposed value without any degree of freedom for the
 RAO. Note that `normalValue` must be integer-*castable* (i.e. a float number with null decimal part) to model a number
 of sections.
+
+> The `normalValue` can be overridden in the SSI profile if a `RangeConstraint` with the same mRID as
+> the `StaticPropertyRange` is defined. In that case, the field `value` of the `RangeConstraint` will be considered
+> instead.
 
 {% endcapture %}
 
