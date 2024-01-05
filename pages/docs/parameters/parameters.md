@@ -489,7 +489,7 @@ See also: [Modelling loop-flows and their virtual cost](/docs/castor/linear-opti
   If this constraint cannot be respected and the loop-flow exceeds the aforementioned threshold, the objective function
   associated to this situation will be penalized (see also [violation-cost](#loop-flow-violation-cost))
 
-### approximation {#loop-flow-approximation}
+### ptdf-approximation {#loop-flow-approximation}
 - **Expected value**: one of the following:
   - "FIXED_PTDF"
   - "UPDATE_PTDF_WITH_TOPO"
@@ -585,6 +585,22 @@ Zones are seperated by + or -.
   For example, in the SWE case, it should be equal to [ "{FR}-{ES}", "{ES}-{PT}" ].  
   For CORE, we should use all the CORE region boundaries (all countries seperated by a - sign) plus Alegro's special
   equation: "{BE}-{22Y201903144---9}-{DE}+{22Y201903145---4}"
+
+### ptdf-approximation {#relative-margins-approximation}
+- **Expected value**: one of the following:
+  - "FIXED_PTDF"
+  - "UPDATE_PTDF_WITH_TOPO"
+  - "UPDATE_PTDF_WITH_TOPO_AND_PST"
+- **Default value**: "FIXED_PTDF"
+- **Usage**: defines the frequency at which the PTDFs will be updated for the relative margins computation.
+  This parameter enables to set the desired trade-off between the accuracy of the relative margins computation, and the
+  computation time of the RAO.
+  - **FIXED_PTDF**: the PTDFs are computed only once at the beginning of the RAO.
+  - **UPDATE_PTDF_WITH_TOPO**: the PTDFs are re-computed for each new combination of topological actions (i.e.
+    for each new node of the search-tree).
+  - **UPDATE_PTDF_WITH_TOPO_AND_PST**: the PTDFs are re-computed for each new combination of topological action and for
+    each new combination of PST taps (i.e. for each iteration of the linear optimisation).  
+    *Note that this option is only relevant in AC-loadflow mode, as the UPDATE_PTDF_WITH_TOPO already maximizes accuracy in DC.*
 
 ### ptdf-sum-lower-bound {#relative-margins-ptdf-sum-lower-bound}
 - **Expected value**: numeric value, no unit (homogeneous to PTDFs)
@@ -707,7 +723,7 @@ Zones are seperated by + or -.
   "extensions" : {
     "loop-flow-parameters" : {
       "acceptable-increase" : 10.0,
-      "approximation" : "FIXED_PTDF",
+      "ptdf-approximation" : "FIXED_PTDF",
       "constraint-adjustment-coefficient" : 10.0,
       "violation-cost" : 10.0,
       "countries" : [ "FR", "ES", "PT" ]
@@ -719,6 +735,7 @@ Zones are seperated by + or -.
     },
     "relative-margins-parameters" : {
       "ptdf-boundaries" : [ "{FR}-{BE}", "{FR}-{DE}", "{BE}-{NL}", "{NL}-{DE}", "{DE}-{PL}", "{DE}-{CZ}", "{DE}-{AT}", "{PL}-{CZ}", "{PL}-{SK}", "{CZ}-{SK}", "{CZ}-{AT}", "{AT}-{HU}", "{AT}-{SI}", "{SI}-{HR}", "{SK}-{HU}", "{HU}-{RO}", "{HU}-{HR}", "{BE}-{22Y201903144---9}-{DE}+{22Y201903145---4}" ],
+      "ptdf-approximation" : "FIXED_PTDF",
       "ptdf-sum-lower-bound" : 0.01
     }
   }
