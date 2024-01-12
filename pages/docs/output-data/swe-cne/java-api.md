@@ -1,4 +1,4 @@
-After completing the RAO, the user can export the SWE CNE file using this method of [SweCneExporter](https://github.com/farao-community/farao-core/blob/master/data/result-exporter/swe-cne-exporter/src/main/java/com/farao_community/farao/data/swe_cne_exporter/SweCneExporter.java):
+After completing the RAO, the user can export the SWE CNE file using this method of [SweCneExporter](https://github.com/farao-community/farao-core/blob/master/data/result-exporter/swe-cne-exporter/src/main/java/com/powsybl/openrao/data/swecneexporter/SweCneExporter.java):
 ~~~java
 public void exportCne(Crac crac, Network network, 
         CimCracCreationContext cracCreationContext, 

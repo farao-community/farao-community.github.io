@@ -41,7 +41,7 @@ one/left. The convention of FARAO is that a positive flow is a flow in the "dire
 a flow in the "opposite" direction.
 
 > 💡  **NOTE**  
-> A FARAO FlowCnec is one implementation of the generic ["BranchCnec"](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/farao_community/farao/data/crac_api/cnec/BranchCnec.java).
+> A FARAO FlowCnec is one implementation of the generic ["BranchCnec"](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/powsybl/openrao/data/cracapi/cnec/BranchCnec.java).
 > If needed, this would allow you a fast implementation of other types of CNECs, on branches, but with a monitored
 > physical parameter other than power flow.
 

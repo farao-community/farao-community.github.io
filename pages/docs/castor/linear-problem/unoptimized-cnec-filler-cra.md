@@ -10,7 +10,7 @@ order: 9
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: |
-    [UnoptimizedCnecFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/UnoptimizedCnecFiller.java)
+    [UnoptimizedCnecFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/UnoptimizedCnecFiller.java)
 ---
 
 > ⚠️  **NOTE**  

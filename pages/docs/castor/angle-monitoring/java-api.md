@@ -1,4 +1,4 @@
-You can easily call the angle monitoring module using the [JAVA API](https://github.com/farao-community/farao-core/blob/master/monitoring/angle-monitoring/src/main/java/com/farao_community/farao/monitoring/angle_monitoring/AngleMonitoring.java):
+You can easily call the angle monitoring module using the [JAVA API](https://github.com/farao-community/farao-core/blob/master/monitoring/angle-monitoring/src/main/java/com/powsybl/openrao/monitoring/anglemonitoring/AngleMonitoring.java):
 1. Build an AngleMonitoring object using:
 ~~~java
 public AngleMonitoring(Crac crac, Network network, RaoResult raoResult, CimGlskDocument cimGlskDocument)

@@ -18,7 +18,7 @@ into an [internal CRAC format](pages/docs/input-data/crac/json), some data trans
 will not be a "one-to-one" exact representation of the data in the original file.  
 This can be an issue for the final user, as [querying the RAO result file or object](/docs/output-data/rao-result-json#contents) 
 needs knowledge of the artefacts FARAO created during CRAC creation.  
-The [CracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/CracCreationContext.java) 
+The [CracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/powsybl/openrao/data/craccreation/creator/api/CracCreationContext.java) 
 classes produced by the different CRAC creators allow the user to access meta-information 
 about the CRAC creation process, and to map the original file to the created artifacts in the FARAO object, or to 
 error messages if some objects could not be imported.  
@@ -88,14 +88,14 @@ cracCreationContext.getCreationReport().printCreationReport();
 ```
 
 ## UCTE implementation {#ucte}
-A common UCTE interface [UcteCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/std_creation_context/UcteCracCreationContext.java) 
+A common UCTE interface [UcteCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/powsybl/openrao/data/craccreation/creator/api/stdcreationcontext/UcteCracCreationContext.java) 
 has been defined in order to collect the common fields a CracCreationContext implementation should hold when created using a **UCTE** network.  
 Of course, not all CRAC formats use UCTE convention, so not all CRAC formats can implement this UCTE interface.  
 Currently, this interface is implemented by [FlowBasedConstraint](fbconstraint.md) and [CSE](cse.md) crac creators.  
 It has all the [non-specific](#non-specific) features, plus the following.
 
 ### Branch CNEC creation contexts {#ucte-branch-cnec-context}
-The [BranchCnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/std_creation_context/BranchCnecCreationContext.java) 
+The [BranchCnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/powsybl/openrao/data/craccreation/creator/api/std_creationcontext/BranchCnecCreationContext.java) 
 contains information about the creation of CNECs in FARAO. One BranchCreationContext is created for every native CNEC-equivalent 
 element in the original CRAC, that can be uniquely identified. It holds the following information:  
 - **NativeId** is the unique identifier of the native object in the original CRAC. Depending on the CRAC implementation, 
@@ -159,7 +159,7 @@ void printSomeResults(BranchCnecCreationContext context, CracCreationContext cra
 ```
 
 ### Remedial action creation contexts {#ucte-ra-context}
-The [RemedialActionCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/std_creation_context/RemedialActionCreationContext.java)
+The [RemedialActionCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/powsybl/openrao/data/craccreation/creator/api/stdcreationcontext/RemedialActionCreationContext.java)
 contains information about the creation of remedial actions in FARAO. One RemedialActionCreationContext is created for every native 
 remedial-action element in the original CRAC, that can be uniquely identified. It holds the following information:
 - **NativeId** is the unique identifier of the native object in the original CRAC. Depending on the CRAC implementation,
@@ -207,15 +207,15 @@ void printSomeResults(RemedialActionCreationContext context, CracCreationContext
 ```
 
 ## FlowBasedConstraint implementation {#fbconstraint}
-The [FbConstraintCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-fb-constraint/src/main/java/com/farao_community/farao/data/crac_creation/creator/fb_constraint/crac_creator/FbConstraintCreationContext.java) 
+The [FbConstraintCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-fb-constraint/src/main/java/com/powsybl/openrao/data/craccreation/creator/fbconstraint/craccreator/FbConstraintCreationContext.java) 
 is a [UcteCracCreationContext](#ucte) implementation with no extra features.
 
 ## CSE implementation {#cse}
-The [CseCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/farao_community/farao/data/crac_creation/creator/cse/CseCracCreationContext.java) 
+The [CseCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/powsybl/openrao/data/craccreation/creator/cse/CseCracCreationContext.java) 
 is a [UcteCracCreationContext](#ucte) implementation with one extra feature for contingencies.
 
 ### Outage creation contexts {#cse-outage-context}
-The [CseOutageCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/farao_community/farao/data/crac_creation/creator/cse/outage/CseOutageCreationContext.java)
+The [CseOutageCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/powsybl/openrao/data/craccreation/creator/cse/outage/CseOutageCreationContext.java)
 contains information about the creation of contingencies in FARAO. One CseOutageCreationContext is created for every native
 "Outage" element in the original CSE CRAC, that can be uniquely identified. It holds the following information:
 - **NativeId** is the unique identifier of the native Outage (contained in the "Name" tag)
@@ -256,12 +256,12 @@ void printSomeInformation(CseOutageCreationContext context, CracCreationContext 
 ```
 
 ## CIM implementation {#cim}
-The [CimCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/CimCracCreationContext.java) 
+The [CimCracCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/CimCracCreationContext.java) 
 is not a UcteCracCreationParameters implementation.  
 It has all the [non-specific](#non-specific) features, plus the following.
 
 ### Contingency series creation contexts {#cim-contingency-series-context}
-The [CimContingencyCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/contingency/CimContingencyCreationContext.java) 
+The [CimContingencyCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/contingency/CimContingencyCreationContext.java) 
 contains information about the creation of contingencies in FARAO. One CimContingencyCreationContext is created for every 
 [B55](cim#contingencies) "Contingency_Series" element in the original CSE CRAC, that can be uniquely identified. 
 It holds the following information:
@@ -309,7 +309,7 @@ void printSomeInformation(CimContingencyCreationContext context, CracCreationCon
 ```
 
 ### Monitored series creation contexts {#cim-monitored-series-context}
-The [MonitoredSeriesCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/cnec/MonitoredSeriesCreationContext.java) 
+The [MonitoredSeriesCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openraoao/data/craccreation/creator/cim/craccreator/cnec/MonitoredSeriesCreationContext.java) 
 contains information about the creation of CNECs in FARAO. One MonitoredSeriesCreationContext is created for every native 
 [B57](cim#flow-cnecs) "Monitored_Series" in the original CRAC, that can be uniquely identified. It holds the following information:
 - **NativeId** is the unique identifier of the native Monitored_Series (contained in the "mRID" tag)
@@ -323,7 +323,7 @@ contains information about the creation of CNECs in FARAO. One MonitoredSeriesCr
 - **CreatedCnecIds** holds the ID(s) of the FARAO CNEC(s) that were created for this native critical branch. These are the
   IDs the user should use to query the internal CRAC & RaoResult objects.
 - **MeasurementCreationContexts** is a set
-  of [MeasurementCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/cnec/MeasurementCreationContext.java)
+  of [MeasurementCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/cnec/MeasurementCreationContext.java)
   objects. One MeasurementCreationContexts is created for every "Measurements" tag inside the Monitored_Series. In fact,
   one "Measurement" can create multiple FARAO CNECs, depending on the contingencies and instants defined for the
   Monitored_Series in the CIM CRAC (see [here](cim#flow-cnecs) fore more detail). Every MeasurementCreationContext 
@@ -332,7 +332,7 @@ contains information about the creation of CNECs in FARAO. One MonitoredSeriesCr
   - **ImportStatus** contains further information about the import status of the element (see [appendix](#import-status))
   - **ImportStatusDetail** is a user-friendly message explaining why the element has not been imported (if applicable)
   - **CnecCreationContexts** is a map containing, for every state (i.e. (Instant, Contingency) pair), up to one 
-    [CnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/cnec/CnecCreationContext.java)
+    [CnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/cnec/CnecCreationContext.java)
     . Every CnecCreationContext holds the following information:
     - **isImported** is a boolean equal to true if FARAO was able to import a CNEC from this "Measurements", for the given contingency & instant.
     - **ImportStatus** contains further information about the import status of the element (see [appendix](#import-status))
@@ -380,7 +380,7 @@ void printSomeResults(MonitoredSeriesCreationContext context, CracCreationContex
 ```
 
 ### Angle CNEC creation contexts {#cim-angle-context}
-The [AngleCnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/cnec/AngleCnecCreationContext.java)
+The [AngleCnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/cnec/AngleCnecCreationContext.java)
 contains information about the creation of angle CNECs in FARAO. One AngleCnecCreationContext is created for every native
 [B56](cim#angle-cnecs) "AdditionalConstraint_Series" in the original CRAC, that can be uniquely identified. 
 It holds the following information:
@@ -420,7 +420,7 @@ void printSomeResults(AngleCnecCreationContext context, CracCreationContext crac
 ```
 
 ### Voltage CNEC creation contexts {#cim-angle-context}
-The [VoltageCnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/cnec/VoltageCnecCreationContext.java)
+The [VoltageCnecCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/cnec/VoltageCnecCreationContext.java)
 contains information about the creation of angle CNECs in FARAO. One VoltageCnecCreationContext is created for every voltage
 CNEC that should be created, as configured in the [CimCracCreationParameters](creation-parameters#voltage-cnecs-creation-parameters). 
 It holds the following information:
@@ -462,7 +462,7 @@ void printSomeResults(VoltageCnecCreationContext context, CracCreationContext cr
 ```
 
 ### Remedial action series creation contexts {#cim-ra-context}
-The CIM [RemedialActionSeriesCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/crac_creator/remedial_action/RemedialActionSeriesCreationContext.java)
+The CIM [RemedialActionSeriesCreationContext](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/craccreator/remedialaction/RemedialActionSeriesCreationContext.java)
 contains information about the creation of remedial actions in FARAO. One RemedialActionSeriesCreationContext is created for every
 [B56](cim#remedial-actions) "RemedialAction_Series" element in the original CRAC, that can be uniquely identified. 
 It holds the following information:
@@ -519,7 +519,7 @@ void printSomeResults(RemedialActionSeriesCreationContext context, CracCreationC
 
 ## Appendix {#appendix}
 ### Elementary import status {#import-status}
-[ImportStatus](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/ImportStatus.java) 
+[ImportStatus](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/powsybl/openrao/data/craccreation/creator/api/ImportStatus.java) 
 is an enum field that can be used in the API to filter elements that were not imported for different reasons.  
 For instance, the user may choose to write information about CNECs that were not imported because they are not useful in 
 the RAO ("NOT_FOR_RAO"), but ignore the other ones.  
