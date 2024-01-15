@@ -68,24 +68,20 @@ With $$\overline{f(c)}$$ and $$\underline{f(c)}$$ the bounds of the previous con
 $$
 \begin{matrix}
 \overline{f(c)} = \max(f^{+}_{threshold} (c) - c^{adj-coeff}_{m} \:, \: \:
-f_{0} (c) + c^{acc-augm}_{m} - c^{adj-coeff}_{m} \:, \: \:
-f_{0} (c))
+f_{0} (c) + c^{acc-augm}_{m} - c^{adj-coeff}_{m} \:)
 \end{matrix}
 $$  
 
 $$
 \begin{matrix}
 \underline{f(c)} = \min(f^{-}_{threshold} (c) + c^{adj-coeff}_{m} \:, \: \:
-f_{0} (c) - c^{acc-augm}_{m} + c^{adj-coeff}_{m} \:, \: \:
-f_{0} (c))
+f_{0} (c) - c^{acc-augm}_{m} + c^{adj-coeff}_{m} \:)
 \end{matrix}
 $$  
 
 The first terms of the bounds define the actual MNEC flow limit:  
 - either equal to the threshold defined in the CRAC,
 - or to the initial flow value of the FlowCnec, added to the acceptable margin diminution coefficient  
-
-The last terms ensure that the initial situation is always feasible, whatever the configuration parameters.
 
 <br>
 
