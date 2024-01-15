@@ -42,14 +42,14 @@ parameters = JsonCracCreationParameters.read(jsonFilePath);
   
   
 ## Non-specific parameters {#non-specific-parameters}
-FARAO's [CracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/farao_community/farao/data/crac_creation/creator/api/parameters/CracCreationParameters.java) 
+FARAO's [CracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-api/src/main/java/com/powsybl/openrao/data/craccreation/creator/api/parameters/CracCreationParameters.java) 
 defines a few parameters needed for all native CRAC formats.
 
 ### crac-factory {#crac-factory}
-FARAO's [Crac](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/farao_community/farao/data/crac_api/Crac.java) 
-object is actually just an interface, with a default implementation in [CracImpl](https://github.com/farao-community/farao-core/tree/master/data/crac/crac-impl/src/main/java/com/farao_community/farao/data/crac_impl).  
-As a FARAO toolbox user, you are allowed to define your own custom Crac implementation. This implementation shall be instanced using a [CracFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/farao_community/farao/data/crac_api/CracFactory.java).  
-FARAO's default implementation is [CracImplFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/main/java/com/farao_community/farao/data/crac_impl/CracImplFactory.java).  
+FARAO's [Crac](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/powsybl/openrao/data/cracapi/Crac.java) 
+object is actually just an interface, with a default implementation in [CracImpl](https://github.com/farao-community/farao-core/tree/master/data/crac/crac-impl/src/main/java/com/powsybl/openrao/data/cracimpl).  
+As a FARAO toolbox user, you are allowed to define your own custom Crac implementation. This implementation shall be instanced using a [CracFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/powsybl/openrao/data/cracapi/CracFactory.java).  
+FARAO's default implementation is [CracImplFactory](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/main/java/com/powsybl/openrao/data/cracimpl/CracImplFactory.java).  
 Parameter "crac-factory" allows the user to define which CracFactory implementation (thus which Crac implementation) to 
 use. If you do not have a custom implementation (which should be the case of most users), set it to "CracImplFactory".  
 
@@ -87,7 +87,7 @@ cracCreationParameters.setDefaultMonitoredLineSide(CracCreationParameters.Monito
 
 ## CSE-specific parameters {#cse}
 The [CSE native crac format](cse) lacks important information that other formats don't.  
-The user can define a [CseCracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/farao_community/farao/data/crac_creation/creator/cse/parameters/CseCracCreationParameters.java) 
+The user can define a [CseCracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cse/src/main/java/com/powsybl/openrao/data/craccreation/creator/cse/parameters/CseCracCreationParameters.java) 
 extension to the CracCreationParameters object in order to define them.  
 
 ### range-action-groups {#cse-range-action-groups}
@@ -168,7 +168,7 @@ cracCreationParameters.addExtension(CseCracCreationParameters.class, cseParamete
 
 ## CIM-specific parameters {#cim}
 The [CIM native CRAC format](cim) lacks important information that other formats don't.  
-The user can define a [CimCracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/farao_community/farao/data/crac_creation/creator/cim/parameters/CimCracCreationParameters.java)
+The user can define a [CimCracCreationParameters](https://github.com/farao-community/farao-core/blob/master/data/crac-creation/crac-creator-cim/src/main/java/com/powsybl/openrao/data/craccreation/creator/cim/parameters/CimCracCreationParameters.java)
 extension to the CracCreationParameters object in order to define them.
 
 ### timeseries-mrids {#timeseries-mrids}

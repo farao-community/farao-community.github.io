@@ -10,7 +10,7 @@ order: 1
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: |
-    [CoreProblemFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/farao_community/farao/search_tree_rao/linear_optimisation/algorithms/fillers/CoreProblemFiller.java)
+    [CoreProblemFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/CoreProblemFiller.java)
 ---
 
 ## Used input data {#input-data}

@@ -40,7 +40,7 @@ Example of complete CRACs are given below
 {% capture t1_java %}
 The creation of a small CRAC is for instance made in this test class of farao-core repository:
 <a href="
-https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/test/java/com/farao_community/farao/data/crac_impl/utils/CommonCracCreation.java"> 
+https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/test/java/com/powsybl/openrao/data/cracimpl/utils/CommonCracCreation.java"> 
 example on github
 </a>
 {% endcapture %}

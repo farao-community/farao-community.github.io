@@ -1,4 +1,4 @@
-You can easily call the voltage monitoring module using the [JAVA API](https://github.com/farao-community/farao-core/blob/master/monitoring/voltage-monitoring/src/main/java/com/farao_community/farao/monitoring/voltage_monitoring/VoltageMonitoring.java):
+You can easily call the voltage monitoring module using the [JAVA API](https://github.com/farao-community/farao-core/blob/master/monitoring/voltage-monitoring/src/main/java/com/powsybl/openrao/monitoring/voltagemonitoring/VoltageMonitoring.java):
 1. Build a VoltageMonitoring object using:
 ~~~java
 public VoltageMonitoring(Crac crac, Network network, RaoResult raoResult)
