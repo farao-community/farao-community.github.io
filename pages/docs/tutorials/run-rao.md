@@ -18,10 +18,10 @@ scratch using the Java API so there is no need to import a CRAC file.
 
 ## Set-up
 
-- Java 17
-- PowSyBl iidm
-- PowSyBl Open Rao
-- org.example project
+For this tutorial, we'll need Java 17 and we'll create a new project called `org.example` and work on its `Main` class.
+For everything to work properly, you also need to install the latest versions
+of [PowSyBl core](https://github.com/powsybl/powsybl-core)
+and [PowSyBl Open Rao](https://github.com/powsybl/powsybl-open-rao).
 
 ## Import network file
 
@@ -273,8 +273,8 @@ section.
 A last pre-processing step is required to run the RAO. The network and the CRAC must be processed together as
 a `RaoInput`. This is achieved through a `RaoInputBuilder`.
 
-```java
-RaoInput.RaoInputBuilder raoInputBuilder=RaoInput.build(network,crac);
+```
+RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network,crac);
 ```
 
 To run, the RAO also requires `RaoParameters` to properly set its desired behaviour. For our example, the default
@@ -283,8 +283,8 @@ parameters will be fully sufficient.
 Thus, using both our `RaoInputBuilder` and the default parameters, we can run the RAO and store the optimisation results
 in a [`RaoResult`](/docs/output-data/rao-result-json) object for further use or data export.
 
-```java
-RaoResult raoResult=Rao.find().run(raoInputBuilder.build(),new RaoParameters());
+```
+RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), new RaoParameters());
 ```
 
 ## Summary
