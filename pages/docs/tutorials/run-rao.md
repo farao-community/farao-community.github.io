@@ -283,7 +283,7 @@ parameters will be fully sufficient.
 Thus, using both our `RaoInputBuilder` and the default parameters, we can run the RAO and store the optimisation results
 in a [`RaoResult`](/docs/output-data/rao-result-json) object for further use or data export.
 
-```
+```java
 RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), new RaoParameters());
 ```
 
