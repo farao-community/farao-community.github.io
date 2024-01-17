@@ -287,7 +287,7 @@ in a [`RaoResult`](/docs/output-data/rao-result-json) object for further use or 
 RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), new RaoParameters());
 ```
 
-## Summary
+## Full example
 
 This entire tutorial is condensed into the following Java code snippet so that you can simply copy and paste it.
 
