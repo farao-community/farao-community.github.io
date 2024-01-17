@@ -213,7 +213,7 @@ an `IidmPstHelper` which fetches the information in the network.
 
 The usage rules must also be added to tell the RAO in which context the remedial can or must be applied.
 
-> For our example, let us create to usage rules:
+> For our example, let us create two usage rules:
 > - one _onInstant_ usage rule at the preventive instant making the PST range action available in the preventive instant
 > - one _onContingencyState_ usage rule for the already defined contingency to make the PST range action available after
     said contingency occurred on the network
