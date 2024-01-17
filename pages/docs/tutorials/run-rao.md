@@ -218,8 +218,8 @@ The usage rules must also be added to tell the RAO in which context the remedial
 > - one _onContingencyState_ usage rule for the already defined contingency to make the PST range action available after
     said contingency occurred on the network
 
-```
-IidmPstHelper iidmPstHelper = new IidmPstHelper("BBE2AA1  BBE3AA1  1",network);
+```java
+IidmPstHelper iidmPstHelper = new IidmPstHelper("BBE2AA1  BBE3AA1  1", network);
 
 crac.newPstRangeAction()
     .withId("pst-range-action")
