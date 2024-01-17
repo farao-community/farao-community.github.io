@@ -433,4 +433,4 @@ public class Main {
 
 ## Conclusion
 
-Congratulations! You know now how to run a RAO by defining the CRAC using the Java API.
+Congratulations! You now know how to run a simple RAO.
