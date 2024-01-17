@@ -426,7 +426,7 @@ public class Main {
 
         // Run RAO and retrieve raoResult
         RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network, crac);
-        RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), new RaoParameters());
+        RaoResult raoResult = Rao.find("SearchTreeRao").run(raoInputBuilder.build(), new RaoParameters());
     }
 }
 ```
