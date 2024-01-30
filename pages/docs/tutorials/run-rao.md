@@ -726,10 +726,10 @@ only hold for a limited period of time, curative remedial actions must be applie
 
 ## Curative optimisation
 
-The RAO will now try to apply the curative remedial action we defined in the CRAC to bring back the flow on line
-_NNL2AA1 BBE3AA1 1_ under the 410 MW PATL. As a reminder, this curative remedial action is a topological action
-consisting in closing lines _NNL2AA1 BBE3AA1 2_ and _NNL2AA1 BBE3AA1 3_ which are both parallel to _NNL2AA1 BBE3AA1 1_
-in order to divide the flow in three. It is expected that the remedial action will solve the current problem.
+The RAO will now try applying the curative remedial action we defined in the CRAC, to bring the flow on line
+_NNL2AA1 BBE3AA1 1_ back under the 410 MW PATL. As a reminder, this curative remedial action is a topological action
+that closes lines _NNL2AA1 BBE3AA1 2_ and _NNL2AA1 BBE3AA1 3_, which are both parallel to _NNL2AA1 BBE3AA1 1_,
+thus dividing the flow in three. It is expected that the remedial action can solve the current problem.
 
 ```
 [main] INFO  c.p.o.commons.logs.RaoBusinessLogs - ----- Post-contingency perimeters optimization [start]
