@@ -387,7 +387,7 @@ is divided among evenly among lines _NNL2AA1 BBE3AA1 1_ and _DDE2AA1 NNL3AA1 1_.
 
 However, the PATL of line _NNL2AA1 BBE3AA1 1_ is set to 410 MW which is below the current 500 MW flow on the line. Thus,
 remedial actions must be applied to solve this base case issue. In The CRAC, we only defined one preventive remedial
-action which is the PST range action. By changing, the PST's tap, we can change the line's impedance and thus modify the
+action which is the PST range action. By changing the PST's tap, we can change the line's impedance and thus modify the
 flow.
 
 ```
