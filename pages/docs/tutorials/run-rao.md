@@ -336,13 +336,7 @@ section.
 
 # RAO Parameters
 
-To run, the RAO also requires `RaoParameters` to properly set its desired behaviour. For our example, the default
-parameters will not be fully sufficient so we. See how you can tune the RAO using the parameters
-[here](/docs/parameters).
-
-The following code snippet helps set some parameters to specific values. In a nutshell, we impose the loadflow
-computations to be carried out in DC mode and set the margins unit to megawatt. We also indicate that we want to use
-discretised ranges for PSTS instead of continuous ones.
+Next, define the parameters to run the RAO using the [RaoParameters](/docs/parameters) object
 
 ```
 LoadFlowParameters loadFlowParameters = new LoadFlowParameters();
