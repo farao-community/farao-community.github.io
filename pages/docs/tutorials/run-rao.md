@@ -367,7 +367,7 @@ Run the RAO using the following code to produce a [`RaoResult`](/docs/output-dat
 
 ```java
 RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network,crac);
-RaoResult raoResult=Rao.find().run(raoInputBuilder.build(),new RaoParameters());
+RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), raoParameters);
 ```
 
 All the important information regarding the optimisation process (activated remedial actions and CNEC flow at each
