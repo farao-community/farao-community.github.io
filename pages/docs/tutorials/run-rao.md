@@ -772,7 +772,7 @@ thus dividing the flow in three. It is expected that the remedial action can sol
 
 We can see in the logs that the remedial action was indeed applied, increasing the margin on line _NNL2AA1 BBE3AA1 1_ to
 76.67 MW (i.e. decreasing the flow to 333 MW which is below the PATL). At the end of the curative perimeter, the network
-is still secure and the three parallel lines are all connected.
+is secure and the three parallel lines are all connected.
 
 ![](/assets/img/tutorial/curative.svg)
 
