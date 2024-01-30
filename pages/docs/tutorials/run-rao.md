@@ -415,7 +415,7 @@ perimeter is thus secured. The network with the preventive remedial action appli
 
 ## Loss of line
 
-The outage is then simulated: line _NNL3AA1 DDE2AA1 1_ is lost. The network's topology is modified and the new flow is
+The contingency is then simulated: line _NNL3AA1 DDE2AA1 1_ is lost. The network's topology is modified and the new flow is
 now of 1000 MW (the whole production power) on line _NNL2AA1 BBE3AA1 1_.
 
 ![](/assets/img/tutorial/outage.svg)
