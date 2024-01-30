@@ -363,8 +363,7 @@ raoParameters.getRangeActionsOptimizationParameters().setPstModel(RangeActionsOp
 
 # Run the RAO
 
-A last pre-processing step is required to run the RAO. The network and the CRAC must be processed together as
-a `RaoInput`. This is achieved through a `RaoInputBuilder`.
+Run the RAO using the following code to produce a [`RaoResult`](/docs/output-data/rao-result-json) object:
 
 ```java
 RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network,crac);
