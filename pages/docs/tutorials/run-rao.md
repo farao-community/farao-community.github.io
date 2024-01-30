@@ -381,7 +381,7 @@ RAO's behaviour.
 ## Base case and preventive optimisation
 
 As presented earlier, the whole electricity production (1000 MW) in the network is located at node _NNL1AA1_. The flow
-is divided among evenly among lines _NNL2AA1 BBE3AA1 1_ and _DDE2AA1 NNL3AA1 1_.
+is divided evenly among lines _NNL2AA1 BBE3AA1 1_ and _DDE2AA1 NNL3AA1 1_.
 
 ![](/assets/img/tutorial/basecase.svg)
 
