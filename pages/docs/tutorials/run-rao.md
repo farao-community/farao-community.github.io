@@ -433,11 +433,10 @@ The [CRAC](/docs/input-data/crac/crac) is the data object that contains all the 
 contingencies to simulate, the CNECs to optimise and the remedial actions to apply. The RAO's Java API allows users to
 manually fill the CRAC with all the required and desired data.
 
-The first step is to instantiate the CRAC using a `CracImpl` object:
+The first step is to instantiate an empty CRAC using the CracFactory:
 
 ```java
-Crac crac=CracFactory.findDefault().create();
-```
+Crac crac = CracFactory.findDefault().create();
 
 Once created, the CRAC can be filled sequentially (some data must be provided before others for logical reasons) with
 the information required to model our scenario.
