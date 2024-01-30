@@ -338,28 +338,28 @@ section.
 
 Next, define the parameters to run the RAO using the [RaoParameters](/docs/parameters) object
 
-```
+```java
+RaoParameters raoParameters = new RaoParameters();
+// Enable DC mode for load-flow & sensitivity computations
 LoadFlowParameters loadFlowParameters = new LoadFlowParameters();
 loadFlowParameters.setDc(true);
-loadFlowParameters.setBalanceType(LoadFlowParameters.BalanceType.PROPORTIONAL_TO_LOAD);
-
 SensitivityAnalysisParameters sensitivityAnalysisParameters = new SensitivityAnalysisParameters();
 sensitivityAnalysisParameters.setLoadFlowParameters(loadFlowParameters);
-
+// Set "OpenLoadFlow" as load-flow provider
 LoadFlowAndSensitivityParameters loadFlowAndSensitivityParameters = new LoadFlowAndSensitivityParameters();
 loadFlowAndSensitivityParameters.setLoadFlowProvider("OpenLoadFlow");
 loadFlowAndSensitivityParameters.setSensitivityWithLoadFlowParameters(sensitivityAnalysisParameters);
+raoParameters.setLoadFlowAndSensitivityParameters(loadFlowAndSensitivityParameters);
 
+// Ask the RAO to maximize minimum margin in MW, and to stop when network is secure (i.e. when margins are positive)
 ObjectiveFunctionParameters objectiveFunctionParameters = new ObjectiveFunctionParameters();
 objectiveFunctionParameters.setType(ObjectiveFunctionParameters.ObjectiveFunctionType.MAX_MIN_MARGIN_IN_MEGAWATT);
 objectiveFunctionParameters.setPreventiveStopCriterion(ObjectiveFunctionParameters.PreventiveStopCriterion.SECURE);
 objectiveFunctionParameters.setCurativeStopCriterion(ObjectiveFunctionParameters.CurativeStopCriterion.SECURE);
-
-RaoParameters raoParameters = new RaoParameters();
-raoParameters.setLoadFlowAndSensitivityParameters(loadFlowAndSensitivityParameters);
 raoParameters.setObjectiveFunctionParameters(objectiveFunctionParameters);
+
+// Enable "APPROXIMATED_INTEGERS" in PST optimization, for better accuracy
 raoParameters.getRangeActionsOptimizationParameters().setPstModel(RangeActionsOptimizationParameters.PstModel.APPROXIMATED_INTEGERS);
-```
 
 # Run the RAO
 
