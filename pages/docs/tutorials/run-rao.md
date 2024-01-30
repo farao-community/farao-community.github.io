@@ -367,12 +367,6 @@ Run the RAO using the following code to produce a [`RaoResult`](/docs/output-dat
 
 ```java
 RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network,crac);
-```
-
-Thus, using both our `RaoInputBuilder` and the default parameters, we can run the RAO and store the optimisation results
-in a [`RaoResult`](/docs/output-data/rao-result-json) object for further use or data export.
-
-```java
 RaoResult raoResult=Rao.find().run(raoInputBuilder.build(),new RaoParameters());
 ```
 
