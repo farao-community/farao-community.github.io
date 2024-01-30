@@ -22,70 +22,47 @@ of [PowSyBl core](https://github.com/powsybl/powsybl-core),
 [PowSyBl Open Rao](https://github.com/powsybl/powsybl-open-rao) and
 [PowSyBl Open Load Flow (OLF)](https://github.com/powsybl/powsybl-open-loadflow).
 
-You can create a Maven `pom.xml` file to manage all the dependencies at once. Simply copy and paste the following code
-snippet in an XML file.
+Start by creating a Maven `pom.xml` file and add the following dependencies:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-starter</artifactId>
+    <version>2023.4.0</version>
+</dependency>
+```
 
-   <groupId>org.example</groupId>
-   <artifactId>open-rao-tutorial</artifactId>
-   <version>1.0-SNAPSHOT</version>
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>open-rao-crac-creator-fb-constraint</artifactId>
+    <version>5.0.1</version>
+</dependency>
+```
 
-   <build>
-      <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
-            <configuration>
-               <forceJavacCompilerUse>true</forceJavacCompilerUse>
-               <encoding>UTF-8</encoding>
-               <release>17</release>
-            </configuration>
-         </plugin>
-      </plugins>
-   </build>
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>open-rao-crac-impl</artifactId>
+    <version>5.0.1</version>
+</dependency>
+```
 
-   <dependencies>
-      <dependency>
-         <groupId>com.powsybl</groupId>
-         <artifactId>powsybl-starter</artifactId>
-         <version>2023.4.0</version>
-      </dependency>
-      <dependency>
-         <groupId>com.powsybl</groupId>
-         <artifactId>open-rao-crac-creator-fb-constraint</artifactId>
-         <version>5.0.1</version>
-      </dependency>
-      <dependency>
-         <groupId>com.powsybl</groupId>
-         <artifactId>open-rao-crac-impl</artifactId>
-         <version>5.0.1</version>
-      </dependency>
-      <dependency>
-         <groupId>com.powsybl</groupId>
-         <artifactId>open-rao-rao-result-json</artifactId>
-         <version>5.0.1</version>
-      </dependency>
-      <dependency>
-         <groupId>ch.qos.logback</groupId>
-         <artifactId>logback-classic</artifactId>
-         <version>1.2.3</version>
-      </dependency>
-      <dependency>
-         <groupId>com.powsybl</groupId>
-         <artifactId>powsybl-ucte-converter</artifactId>
-         <version>6.1.0</version>
-         <scope>runtime</scope>
-      </dependency>
-   </dependencies>
+```xml
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.2.3</version>
+</dependency>
+```
 
-</project>
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-ucte-converter</artifactId>
+    <version>6.1.0</version>
+    <scope>runtime</scope>
+</dependency>
 ```
 
 # Import network file
@@ -145,7 +122,7 @@ BBE2AA1  BBE3AA1  1                    -0.68 90.00 16 0         SYMM
 
 The network can be imported using [PowSyBl](https://www.powsybl.org/index.html):
 
-```
+```java
 String networkFilename = "12Nodes.uct";
 Network network = Network.read(networkFilename, Main.class.getResourceAsStream("/%s".formatted(networkFilename)));
 ```
@@ -198,8 +175,8 @@ For our example, we only need 3 instants:
 
 ```java
 crac.newInstant("preventive", InstantKind.PREVENTIVE)
-        .newInstant("outage", InstantKind.OUTAGE)
-        .newInstant("curative", InstantKind.CURATIVE);
+    .newInstant("outage", InstantKind.OUTAGE)
+    .newInstant("curative", InstantKind.CURATIVE);
 ```
 
 Now that contingencies and instants are all set, we can start adding CNECs and remedial actions to the CRAC.
@@ -220,18 +197,18 @@ crac.newFlowCnec()
     .withOptimized()
     .withNetworkElement("NNL2AA1  BBE3AA1  1")
     .newThreshold()
-        .withMin(-410d)
-        .withMax(+410d)
-        .withUnit(Unit.MEGAWATT)
-        .withSide(Side.LEFT)
-        .add()
+       .withMin(-410d)
+       .withMax(+410d)
+       .withUnit(Unit.MEGAWATT)
+       .withSide(Side.LEFT)
+       .add()
     .add();
 ```
 
 Similarly, we need to verify that the flow on the line does not excedd the 1000 MW TATL after the loss of line _NNL3AA1
 DDE2AA1 1_:
 
-```
+```java
 crac.newFlowCnec()
     .withId("NNL2AA1  BBE3AA1  1 - outage")
     .withInstant("outage")
@@ -249,7 +226,7 @@ crac.newFlowCnec()
 
 Finally, let us assess that the flow goes back under the 410 MW PATL after the application of curative remedial actions:
 
-```
+```java
 crac.newFlowCnec()
     .withId("NNL2AA1  BBE3AA1  1 - curative")
     .withInstant("curative")
@@ -265,24 +242,14 @@ crac.newFlowCnec()
     .add();
 ```
 
-We can now finish populating our CRAC by adding remedial actions.
-
 ## Add remedial actions
 
 ### Add a preventive PST range action
 
-Let's start with a [PST range action](/docs/input-data/crac/json#range-actions). The network has one PST (_BBE2AA1
-BBE3AA1 1_) that we can use to define such a range actions. A PST range action can be added to the CRAC with
-the `newPstRangeAction` method. The identifier of the remedial action, the network element it is acting on and the tap
-range can be provided directly. For the initial tap and the tap-to-angle conversion map, it is easier to rely on
-an `IidmPstHelper` which fetches the information in the network.
+Let us add preventive a [PST range action](/docs/input-data/crac/json#range-actions). For simplicity's sake, it is
+easier to rely on an `IidmPstHelper` which fetches the PST's information in the network to create the remedial action.
 
-The usage rules must also be added to tell the RAO in which context the remedial can or must be applied.
-
-For our example, the PST range action can be used at the preventive instant to change the impedance of line _NNL2AA1
-BBE3AA1 1_ and reduce its flow to go under the PATL and anticipate the loss of line _NNL3AA1 DDE2AA1 1_.
-
-```
+```java
 IidmPstHelper iidmPstHelper = new IidmPstHelper("BBE2AA1  BBE3AA1  1", network);
 
 crac.newPstRangeAction()
@@ -304,15 +271,10 @@ crac.newPstRangeAction()
 
 ### Add a curative topological action
 
-We can finish by adding a topological action to the CRAC, using the `newNetworkAction` method and
-the `newTopologicalAction` adder, and providing an action type (i.e. open or close) and a line on which apply this
-action.
+We can finish by adding a topological action to the CRAC, which consists in connecting lines _NNL2AA1 BBE3AA1 2_ and
+_NNL2AA1 BBE3AA1 3_ (both parallel to _NNL2AA1 BBE3AA1 1_) to the rest of the network.
 
-In our example, this topological action consists in connecting lines _NNL2AA1 BBE3AA1 2_ and _NNL2AA1 BBE3AA1 3_ (both
-parallel to _NNL2AA1 BBE3AA1 1_) to the rest of the network so the flow is divided among the three parallel lines, which
-can make the flow on line _NNL2AA1 BBE3AA1 1_ go back under the PATL.
-
-```
+```java
 crac.newNetworkAction()
       .withId("topological-action")
       .newTopologicalAction()
@@ -331,20 +293,19 @@ crac.newNetworkAction()
       .add();
 ```
 
-We are almost there! The CRAC is complete and the RAO is almost ready to run. Let us see how to do this in the following
-section.
-
 # RAO Parameters
 
 Next, define the parameters to run the RAO using the [RaoParameters](/docs/parameters) object
 
 ```java
 RaoParameters raoParameters = new RaoParameters();
+
 // Enable DC mode for load-flow & sensitivity computations
 LoadFlowParameters loadFlowParameters = new LoadFlowParameters();
 loadFlowParameters.setDc(true);
 SensitivityAnalysisParameters sensitivityAnalysisParameters = new SensitivityAnalysisParameters();
 sensitivityAnalysisParameters.setLoadFlowParameters(loadFlowParameters);
+
 // Set "OpenLoadFlow" as load-flow provider
 LoadFlowAndSensitivityParameters loadFlowAndSensitivityParameters = new LoadFlowAndSensitivityParameters();
 loadFlowAndSensitivityParameters.setLoadFlowProvider("OpenLoadFlow");
@@ -360,14 +321,15 @@ raoParameters.setObjectiveFunctionParameters(objectiveFunctionParameters);
 
 // Enable "APPROXIMATED_INTEGERS" in PST optimization, for better accuracy
 raoParameters.getRangeActionsOptimizationParameters().setPstModel(RangeActionsOptimizationParameters.PstModel.APPROXIMATED_INTEGERS);
+```
 
 # Run the RAO
 
-Run the RAO using the following code to produce a [`RaoResult`](/docs/output-data/rao-result-json) object:
+ Run the RAO using the following code to produce a[`RaoResult`](/docs/output-data/rao-result-json)object:
 
-```java
-RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network,crac);
-RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), raoParameters);
+ ```java
+ RaoInput.RaoInputBuilder raoInputBuilder = RaoInput.build(network, crac);
+ RaoResult raoResult = Rao.find().run(raoInputBuilder.build(), raoParameters);
 ```
 
 All the important information regarding the optimisation process (activated remedial actions and CNEC flow at each
@@ -381,7 +343,8 @@ RAO's behaviour.
 ## Base case and preventive optimisation
 
 As presented earlier, the whole electricity production (1000 MW) in the network is located at node _NNL1AA1_. The flow
-is divided evenly among lines _NNL2AA1 BBE3AA1 1_ and _DDE2AA1 NNL3AA1 1_.
+is divided evenly among lines _NNL2AA1 BBE3AA1 1_ and _DDE2AA1 NNL3AA1 1_. The consumption (1000 MW as well) is entirely
+locate at node _FFR1AA1_.
 
 ![](/assets/img/tutorial/basecase.svg)
 
@@ -415,7 +378,8 @@ perimeter is thus secured. The network with the preventive remedial action appli
 
 ## Loss of line
 
-The contingency is then simulated: line _NNL3AA1 DDE2AA1 1_ is lost. The network's topology is modified and the new flow is
+The contingency is then simulated: line _NNL3AA1 DDE2AA1 1_ is lost. The network's topology is modified and the new flow
+is
 now of 1000 MW (the whole production power) on line _NNL2AA1 BBE3AA1 1_.
 
 ![](/assets/img/tutorial/outage.svg)
@@ -433,9 +397,9 @@ only hold for a limited period of time, curative remedial actions must be applie
 ## Curative optimisation
 
 The RAO will now try applying the curative remedial action we defined in the CRAC, to bring the flow on line
-_NNL2AA1 BBE3AA1 1_ back under the 410 MW PATL. As a reminder, this curative remedial action is a topological action
-that closes lines _NNL2AA1 BBE3AA1 2_ and _NNL2AA1 BBE3AA1 3_, which are both parallel to _NNL2AA1 BBE3AA1 1_,
-thus dividing the flow in three. It is expected that the remedial action can solve the current problem.
+_NNL2AA1 BBE3AA1 1_ back under the 410 MW PATL. This curative remedial action is a topological action that closes lines
+_NNL2AA1 BBE3AA1 2_ and _NNL2AA1 BBE3AA1 3_, which are both parallel to _NNL2AA1 BBE3AA1 1_, thus dividing the flow in
+three. It is expected that the remedial action can solve the current problem.
 
 ```
 [main] INFO  c.p.o.commons.logs.RaoBusinessLogs - ----- Post-contingency perimeters optimization [start]
@@ -615,27 +579,29 @@ public class Main {
             .add()
             .add();
 
-        // Parameters
+        // RAO Parameters setting
+        RaoParameters raoParameters = new RaoParameters();
 
+        // Enable DC mode for load-flow & sensitivity computations
         LoadFlowParameters loadFlowParameters = new LoadFlowParameters();
         loadFlowParameters.setDc(true);
-        loadFlowParameters.setBalanceType(LoadFlowParameters.BalanceType.PROPORTIONAL_TO_LOAD);
-
         SensitivityAnalysisParameters sensitivityAnalysisParameters = new SensitivityAnalysisParameters();
         sensitivityAnalysisParameters.setLoadFlowParameters(loadFlowParameters);
 
+        // Set "OpenLoadFlow" as load-flow provider
         LoadFlowAndSensitivityParameters loadFlowAndSensitivityParameters = new LoadFlowAndSensitivityParameters();
         loadFlowAndSensitivityParameters.setLoadFlowProvider("OpenLoadFlow");
         loadFlowAndSensitivityParameters.setSensitivityWithLoadFlowParameters(sensitivityAnalysisParameters);
+        raoParameters.setLoadFlowAndSensitivityParameters(loadFlowAndSensitivityParameters);
 
+        // Ask the RAO to maximize minimum margin in MW, and to stop when network is secure (i.e. when margins are positive)
         ObjectiveFunctionParameters objectiveFunctionParameters = new ObjectiveFunctionParameters();
         objectiveFunctionParameters.setType(ObjectiveFunctionParameters.ObjectiveFunctionType.MAX_MIN_MARGIN_IN_MEGAWATT);
         objectiveFunctionParameters.setPreventiveStopCriterion(ObjectiveFunctionParameters.PreventiveStopCriterion.SECURE);
         objectiveFunctionParameters.setCurativeStopCriterion(ObjectiveFunctionParameters.CurativeStopCriterion.SECURE);
-
-        RaoParameters raoParameters = new RaoParameters();
-        raoParameters.setLoadFlowAndSensitivityParameters(loadFlowAndSensitivityParameters);
         raoParameters.setObjectiveFunctionParameters(objectiveFunctionParameters);
+
+        // Enable "APPROXIMATED_INTEGERS" in PST optimization, for better accuracy
         raoParameters.getRangeActionsOptimizationParameters().setPstModel(RangeActionsOptimizationParameters.PstModel.APPROXIMATED_INTEGERS);
 
         // Run RAO
