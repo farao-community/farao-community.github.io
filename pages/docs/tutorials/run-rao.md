@@ -443,15 +443,7 @@ the information required to model our scenario.
 
 ## Create contingencies
 
-The first data to provide are the [contingencies](/docs/input-data/crac/json#contingencies), i.e. the incidents that can
-occur on the network. Each contingency will be simulated during the optimisation to ensure that there is a set of
-remedial actions that can solve constraints introduced by the contingency.
-
-A contingency can be added to the CRAC using the `newContingency` adder method. The identifier of the contingency must
-be provided alongside the impacted network element(s).
-
-As stated before, we want to simulate the loss of line _NNL3AA1 DDE2AA1 1_. This can be done by creating a contingency
-the network element of which is this very line.
+Start by defining a [contingency](/docs/input-data/crac/json#contingencies) called "contingency", on line _NNL3AA1 DDE2AA1 1_, with the following code:
 
 ```
 crac.newContingency()
