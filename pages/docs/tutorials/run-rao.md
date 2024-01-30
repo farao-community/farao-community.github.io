@@ -30,333 +30,60 @@ snippet in an XML file.
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+   <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>farao-core-csa</artifactId>
-    <version>1.0-SNAPSHOT</version>
+   <groupId>org.example</groupId>
+   <artifactId>open-rao-tutorial</artifactId>
+   <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <!-- Project properties -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+               <forceJavacCompilerUse>true</forceJavacCompilerUse>
+               <encoding>UTF-8</encoding>
+               <release>17</release>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 
-        <!-- Dependencies version -->
-        <powsybl.open-rao.version>5.1.0-SNAPSHOT</powsybl.open-rao.version>
-        <cucumber.version>6.6.1</cucumber.version>
-        <jackson.version>2.15.2</jackson.version>
-        <junit.version>4.12</junit.version>
-        <logback.version>1.2.3</logback.version>
-        <httpcomponents.version>4.5.12</httpcomponents.version>
-        <maven.checkstyle.version>3.1.1</maven.checkstyle.version>
-        <maven.compiler.version>3.8.1</maven.compiler.version>
-        <maven.jvnet.jaxb2-basics.version>1.11.1</maven.jvnet.jaxb2-basics.version>
-        <org.everit.json.version>1.5.1</org.everit.json.version>
-        <org.xmlunit.version>2.8.1</org.xmlunit.version>
-        <powsybl.core.version>6.1.0</powsybl.core.version>
-        <powsybl.entsoe.version>2.7.0</powsybl.entsoe.version>
-        <open-load-flow.version>1.5.0</open-load-flow.version>
-    </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.version}</version>
-                <configuration>
-                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
-                    <encoding>UTF-8</encoding>
-                    <release>${java.version}</release>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>package-jar-with-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>jar-with-dependencies.xml</descriptor>
-                            </descriptors>
-                            <archive>
-                                <manifest>
-                                    <mainClass>com.rte_france.faraocucumber.RunCucumberTest</mainClass>
-                                </manifest>
-                            </archive>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <profile>
-            <id>checks</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>${maven.checkstyle.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                                <configuration>
-                                    <configLocation>checkstyle.xml</configLocation>
-                                    <consoleOutput>true</consoleOutput>
-                                    <failsOnError>true</failsOnError>
-                                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <dependencies>
-        <!-- Compile dependencies -->
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-angle-monitoring</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-core-cne-exporter</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-cne-exporter-commons</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-api</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-creator-api</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-creator-cse</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-creator-fb-constraint</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-creator-cim</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-creator-csa-profiles</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-impl</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-io-api</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-crac-loopflow-extension</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-flowbased-computation-api</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-flowbased-computation-impl</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-flowbased-domain</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-glsk-virtual-hubs</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-virtual-hubs-xml</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-loopflow-computation</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-rao-api</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-rao-result-api</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-rao-result-json</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-reference-program</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-refprog-xml-importer</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-search-tree-rao</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-swe-cne-exporter</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>open-rao-util</artifactId>
-            <version>${powsybl.open-rao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jsonSchema</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-glsk-document-cim</artifactId>
-            <version>${powsybl.entsoe.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-glsk-document-ucte</artifactId>
-            <version>${powsybl.entsoe.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-scripting</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-serde</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-open-loadflow</artifactId>
-            <version>${open-load-flow.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.everit.json</groupId>
-            <artifactId>org.everit.json.schema</artifactId>
-            <version>${org.everit.json.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics</artifactId>
-            <version>${maven.jvnet.jaxb2-basics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.xmlunit</groupId>
-            <artifactId>xmlunit-core</artifactId>
-            <version>${org.xmlunit.version}</version>
-        </dependency>
-
-        <!-- Runtime dependencies -->
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-cgmes-conversion</artifactId>
-            <version>${powsybl.core.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-            <version>${powsybl.core.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-ucte-converter</artifactId>
-            <version>${powsybl.core.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
+   <dependencies>
+      <dependency>
+         <groupId>com.powsybl</groupId>
+         <artifactId>powsybl-starter</artifactId>
+         <version>2023.4.0</version>
+      </dependency>
+      <dependency>
+         <groupId>com.powsybl</groupId>
+         <artifactId>open-rao-crac-creator-fb-constraint</artifactId>
+         <version>5.0.1</version>
+      </dependency>
+      <dependency>
+         <groupId>com.powsybl</groupId>
+         <artifactId>open-rao-crac-impl</artifactId>
+         <version>5.0.1</version>
+      </dependency>
+      <dependency>
+         <groupId>com.powsybl</groupId>
+         <artifactId>open-rao-rao-result-json</artifactId>
+         <version>5.0.1</version>
+      </dependency>
+      <dependency>
+         <groupId>ch.qos.logback</groupId>
+         <artifactId>logback-classic</artifactId>
+         <version>1.2.3</version>
+      </dependency>
+      <dependency>
+         <groupId>com.powsybl</groupId>
+         <artifactId>powsybl-ucte-converter</artifactId>
+         <version>6.1.0</version>
+         <scope>runtime</scope>
+      </dependency>
+   </dependencies>
 
 </project>
 ```
@@ -369,7 +96,7 @@ Netherlands (node _NNL1AA1_) and the consumption (1000 MW) is in France (node _F
 
 ![](/assets/img/tutorial/basecase.svg)
 
-We will create an UCTE file to model this network, so it can be processed and imported for the RAO. Copy and paste the
+We will create a UCTE file to model this network, so it can be processed and imported for the RAO. Copy and paste the
 network data in a file named `12Nodes.uct` that you shall store in the resources directory of the project.
 
 ```
@@ -437,13 +164,15 @@ The first step is to instantiate an empty CRAC using the CracFactory:
 
 ```java
 Crac crac = CracFactory.findDefault().create();
+```
 
 Once created, the CRAC can be filled sequentially (some data must be provided before others for logical reasons) with
 the information required to model our scenario.
 
 ## Create contingencies
 
-Start by defining a [contingency](/docs/input-data/crac/json#contingencies) called "contingency", on line _NNL3AA1 DDE2AA1 1_, with the following code:
+Start by defining a [contingency](/docs/input-data/crac/json#contingencies) called "contingency", on line
+_NNL3AA1 DDE2AA1 1_, with the following code:
 
 ```
 crac.newContingency()
@@ -479,19 +208,10 @@ Now that contingencies and instants are all set, we can start adding CNECs and r
 
 The next step is to create the [CNECs](/docs/input-data/crac/json#cnecs). For our example and given the simple network
 we are using, we will only consider [FlowCNECs](/docs/input-data/crac/json#flow-cnecs) that correspond to lines in the
-network that will have to be optimised flow-wise after contingencies (and in the base case). The FlowCNECs also have
+network that will have to be optimised flow-wise after contingencies (and in basecase). The FlowCNECs also have
 thresholds that indicate the maximum admissible flow on the line for a given instant.
 
-The `newFlowCnec` method needs to be called to create a FlowCNEC in the CRAC. Different information must be provided
-including the CNEC's identifier, network element, instant and thresholds. For non-preventive CNECs, an associated
-contingency must also be provided.
-
-For our example, we want to monitor the flow on line _NNL2AA1 BBE3AA1 1_ in the base case, after the loss of line
-_NNL3AA1 DDE2AA1 1_ as well as after the application of curative remedial actions. They respectively correspond to the
-preventive, outage and curative instants. Fot both the preventive and curative instants, the operation limit is the PATL
-that we set to 410 MW. For the outage instant, the limit is temporary (TATL) and its threshold is higher to allow an
-overflow on the line which is restricted in time. For this example, we will consider that the TATL is 1000 MW. Thus, we
-need to define 3 FlowCNECS to monitor line _DDE2AA1 NNL3AA1 1_ at each instant.
+Let us make sure that the flow on line _NNL2AA1 BBE3AA1 1_ stays under 410 MW in basecase:
 
 ```
 crac.newFlowCnec()
@@ -506,7 +226,12 @@ crac.newFlowCnec()
         .withSide(Side.LEFT)
         .add()
     .add();
+```
 
+Similarly, we need to verify that the flow on the line does not excedd the 1000 MW TATL after the loss of line _NNL3AA1
+DDE2AA1 1_:
+
+```
 crac.newFlowCnec()
     .withId("NNL2AA1  BBE3AA1  1 - outage")
     .withInstant("outage")
@@ -520,7 +245,11 @@ crac.newFlowCnec()
         .withSide(Side.LEFT)
         .add()
     .add();
+```
 
+Finally, let us assess that the flow goes back under the 410 MW PATL after the application of curative remedial actions:
+
+```
 crac.newFlowCnec()
     .withId("NNL2AA1  BBE3AA1  1 - curative")
     .withInstant("curative")
@@ -536,7 +265,7 @@ crac.newFlowCnec()
     .add();
 ```
 
-Finally, we can add remedial actions in the CRAC.
+We can now finish populating our CRAC by adding remedial actions.
 
 ## Add remedial actions
 
@@ -654,6 +383,9 @@ in a [`RaoResult`](/docs/output-data/rao-result-json) object for further use or 
 RaoResult raoResult=Rao.find().run(raoInputBuilder.build(),new RaoParameters());
 ```
 
+All the important information regarding the optimisation process (activated remedial actions and CNEC flow at each
+instant) can be found in this RAO Result.
+
 # Step-by-step results
 
 We will go through the results of the RAO, instant by instant, to analyse the different optimisation steps and study the
@@ -673,25 +405,12 @@ flow.
 
 ```
 [main] INFO  c.p.o.commons.logs.RaoBusinessLogs - ----- Preventive perimeter optimization [start]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Evaluating root leaf
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Leaf has already been evaluated
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Root leaf, cost: 90.00 (functional: 90.00, virtual: 0.00)
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Limiting element #01: margin = -90.00 MW, element NNL2AA1  BBE3AA1  1 at state preventive, CNEC ID = "NNL2AA1  BBE3AA1  1 - preventive"
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Limiting element #02: margin = 0.00 MW, element NNL2AA1  BBE3AA1  1 at state contingency - outage, CNEC ID = "NNL2AA1  BBE3AA1  1 - outage"
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Linear optimization on root leaf
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Optimizing leaf...
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Loading library 'jniortools'
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 1: linear optimization [start]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 1: linear optimization [end]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 1: linear optimization [start]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 1: linear optimization [end]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Systematic sensitivity analysis [start]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Systematic sensitivity analysis [end]
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Iteration 1: better solution found with a cost of -0.00 (functional: -0.00)
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 2: linear optimization [start]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 2: linear optimization [end]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 2: linear optimization [start]
-[main] DEBUG c.p.o.commons.logs.TechnicalLogs - Iteration 2: linear optimization [end]
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Iteration 2: same results as previous iterations, optimal solution found
 [main] INFO  c.p.o.commons.logs.RaoBusinessLogs - Root leaf, 1 range action(s) activated, cost: -0.00 (functional: -0.00, virtual: 0.00)
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - range action(s): pst-range-action: -10
@@ -736,8 +455,6 @@ thus dividing the flow in three. It is expected that the remedial action can sol
 [main] INFO  c.p.o.commons.logs.TechnicalLogs - Using base network '12Nodes' on variant 'ContingencyScenario3b0ea217-ed17-4122-9bf1-7d8ceebf4267'
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Optimizing scenario post-contingency contingency.
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Optimizing curative state contingency - curative.
-[ForkJoinPool-1-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Evaluating root leaf
-[ForkJoinPool-1-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Leaf has already been evaluated
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Root leaf, cost: 590.00 (functional: 590.00, virtual: 0.00)
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Limiting element #01: margin = -590.00 MW, element NNL2AA1  BBE3AA1  1 at state contingency - curative, CNEC ID = "NNL2AA1  BBE3AA1  1 - curative"
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Linear optimization on root leaf
@@ -745,13 +462,9 @@ thus dividing the flow in three. It is expected that the remedial action can sol
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Root leaf, cost: 590.00 (functional: 590.00, virtual: 0.00)
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - No range actions activated
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Limiting element #01: margin = -590.00 MW, element NNL2AA1  BBE3AA1  1 at state contingency - curative, CNEC ID = "NNL2AA1  BBE3AA1  1 - curative"
-[ForkJoinPool-1-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Evaluating 1 leaves in parallel
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Using base network '12NodesProdNL' on variant 'OpenRaoNetworkPool working variant e2cc75b1-3886-4172-85ae-5fac9232431d'
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Search depth 1 [start]
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Leaves to evaluate: 1
-[ForkJoinPool-2-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Evaluating network action(s): topological-action
-[ForkJoinPool-2-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Systematic sensitivity analysis [start]
-[ForkJoinPool-2-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Systematic sensitivity analysis [end]
 [ForkJoinPool-2-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Evaluated network action(s): topological-action, cost: -76.67 (functional: -76.67, virtual: 0.00)
 [ForkJoinPool-2-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Optimized network action(s): topological-action, cost: -76.67 (functional: -76.67, virtual: 0.00)
 [ForkJoinPool-2-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Stop criterion reached, other threads may skip optimization.
@@ -766,7 +479,6 @@ thus dividing the flow in three. It is expected that the remedial action can sol
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Limiting element #01: margin = 76.67 MW, element NNL2AA1  BBE3AA1  1 at state contingency - curative, CNEC ID = "NNL2AA1  BBE3AA1  1 - curative"
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.RaoBusinessLogs - Scenario "contingency": initial cost = 590.00 (functional: 590.00, virtual: 0.00), 1 network action(s) activated : topological-action, cost after curative optimization = -76.67 (functional: -76.67, virtual: 0.00)
 [ForkJoinPool-1-worker-1] INFO  c.p.o.commons.logs.TechnicalLogs - Curative state contingency - curative has been optimized.
-[ForkJoinPool-1-worker-1] DEBUG c.p.o.commons.logs.TechnicalLogs - Remaining post-contingency scenarios to optimize: 0
 [main] INFO  c.p.o.commons.logs.RaoBusinessLogs - ----- Post-contingency perimeters optimization [end]
 ```
 
@@ -947,7 +659,3 @@ public class Main {
 }
 
 ```
-
-# Conclusion
-
-Congratulations! You now know how to run a simple RAO.
