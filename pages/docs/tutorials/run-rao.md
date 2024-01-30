@@ -213,7 +213,7 @@ thresholds that indicate the maximum admissible flow on the line for a given ins
 
 Let us make sure that the flow on line _NNL2AA1 BBE3AA1 1_ stays under 410 MW in basecase:
 
-```
+```java
 crac.newFlowCnec()
     .withId("NNL2AA1  BBE3AA1  1 - preventive")
     .withInstant("preventive")
