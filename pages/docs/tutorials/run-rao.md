@@ -196,7 +196,7 @@ For our example, we only need 3 instants:
 3. one **curative** instant during which curative remedial actions can be applied to solve the problems resulting from
    the outage
 
-```
+```java
 crac.newInstant("preventive", InstantKind.PREVENTIVE)
         .newInstant("outage", InstantKind.OUTAGE)
         .newInstant("curative", InstantKind.CURATIVE);
