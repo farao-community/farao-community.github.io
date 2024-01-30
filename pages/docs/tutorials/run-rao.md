@@ -174,7 +174,7 @@ the information required to model our scenario.
 Start by defining a [contingency](/docs/input-data/crac/json#contingencies) called "contingency", on line
 _NNL3AA1 DDE2AA1 1_, with the following code:
 
-```
+```java
 crac.newContingency()
     .withId("contingency")
     .withNetworkElement("NNL3AA1  DDE2AA1  1")
