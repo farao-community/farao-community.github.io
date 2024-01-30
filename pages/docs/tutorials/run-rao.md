@@ -427,7 +427,7 @@ the most limiting element displayed at the end of the preventive perimeter logs:
 Limiting element #01: margin = 0.00 MW, element NNL2AA1  BBE3AA1  1 at state contingency - outage, CNEC ID = "NNL2AA1  BBE3AA1  1 - outage"
 ```
 
-Indeed, the flow on line _NNL2AA1 BBE3AA1 1_ is equal to the TATL which is equivalent to a null margin. As the TATL can
+Indeed, the flow on line _NNL2AA1 BBE3AA1 1_ is equal to the TATL which is equivalent to a zero margin. As the TATL can
 only hold for a limited period of time, curative remedial actions must be applied to bring back the flow under the PATL.
 
 ## Curative optimisation
