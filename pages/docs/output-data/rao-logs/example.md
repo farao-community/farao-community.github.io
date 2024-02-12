@@ -225,8 +225,8 @@ The following steps will have to take care of this.
 
 ## Contingency scenarios
 Every contingency is treated separately:
-- The AUTO instant is simulated to select triggered automatons (if AUTO CNECs and remedial actions exist)
-- The CURATIVE instant is optimised in a search-tree to select best curative actions
+- Each auto instant is simulated to select triggered automatons (if AUTO CNECs and remedial actions exist)
+- Each curative instant is optimised in a search-tree to select best curative actions
 
 In this case, the CRAC only defines one contingency: "Contingency_FR1_FR3".  
 As many contingency scenarios are created as there are contingencies in the CRAC (with associated [remedial actions](/docs/engine/ra-optimisation/rao-steps#preventive-extension)).

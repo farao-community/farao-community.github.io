@@ -29,7 +29,7 @@ please refer to the [dedicated documentation](/docs/engine/ra-optimisation/close
 ### Search tree remedial action optimisation
 
 The search-tree is an efficient implementation of RAO interface for dealing with combinatorial
-and non linear problem of remedial actions optimisation mixing topological actions, and combined
+and non-linear problem of remedial actions optimisation mixing topological actions, and combined
 preventive/curative optimisation. The search tree RAO developed in FARAO, named CASTOR, is based on this algorithm.
 
 This module is being developed in FARAO toolbox. Please refer to [FARAO roadmap](/roadmap) for

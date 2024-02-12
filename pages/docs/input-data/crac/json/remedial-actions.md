@@ -31,37 +31,37 @@ Complete examples of Network and Range Action creation are given in the followin
 crac.newNetworkAction()
     .newFreeToUseUsageRule()
         .withUsageMethod(UsageMethod.AVAILABLE)
-        .withInstant(Instant.PREVENTIVE)
+        .withInstant("preventive")
         .add();
 
 crac.newNetworkAction()
     .newOnStateUsageRule()
         .withUsageMethod(UsageMethod.AVAILABLE)
-        .withInstant(Instant.CURATIVE)
+        .withInstant("curative")
         .withContingency("contingency-id")
         .add();
 
 crac.newNetworkAction()
     .newOnFlowConstraintUsageRule()
-        .withInstant(Instant.AUTO)
+        .withInstant("auto")
         .withFlowCnec("flow-cnec-id")
         .add();
 
 crac.newNetworkAction()
     .newOnFlowConstraintInCountryUsageRule()
-        .withInstant(Instant.PREVENTIVE)
+        .withInstant("preventive")
         .withCountry(Country.FR)
         .add();
 
 crac.newNetworkAction()
     .newOnAngleConstraintUsageRule()
-        .withInstant(Instant.CURATIVE)
+        .withInstant("curative")
         .withAngleCnec("angle-cnec-id")
         .add();
 
 crac.newNetworkAction()
     .newOnVoltageConstraintUsageRule()
-        .withInstant(Instant.CURATIVE)
+        .withInstant("curative")
         .withVoltageCnec("voltage-cnec-id")
         .add();
 ~~~

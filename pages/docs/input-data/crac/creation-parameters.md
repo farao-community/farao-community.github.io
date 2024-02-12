@@ -202,8 +202,8 @@ The CIM CRAC does not allow the definition of [VoltageCnecs](json#voltage-cnecs)
 to add VoltageCnecs during CRAC creation.  
 To define voltage CNECs, the user has to define:
 - A list of monitored network elements, identified by their unique ID in the network file. These network elements must be VoltageLevels.
-- Instants for which these elements should be monitored (among PREVENTIVE, OUTAGE, AUTO, and CURATIVE)
-- For instants other than PREVENTIVE that are selected, a list of contingencies after which these elements are monitored 
+- Instants for which these elements should be monitored (among instant IDs defined in the CRAC)
+- For instants other than preventive that are selected, a list of contingencies after which these elements are monitored 
 at defined instants (the contingences shall be identified by their CIM CRAC mRIDs as they figure in the B55 Series/Contingency_Series)
 - For every instant, the minimum and maximum voltage thresholds to be respected for every nominal voltage level.  
 See [example below](#cim-example) for a better illustration.
@@ -248,8 +248,8 @@ Set<String> voltageContingencies = Set.of("N-1 ONE", "N-1 TWO");
 // Put all this together in the CIM CRAC creation parameters
 cimParameters.setVoltageCnecsCreationParameters(new VoltageCnecsCreationParameters(
     Map.of(
-        Instant.PREVENTIVE, new VoltageMonitoredContingenciesAndThresholds(null, preventiveVoltageThresholds),
-        Instant.CURATIVE, new VoltageMonitoredContingenciesAndThresholds(voltageContingencies, curativeVoltageThresholds)
+        "preventive", new VoltageMonitoredContingenciesAndThresholds(null, preventiveVoltageThresholds),
+        "curative", new VoltageMonitoredContingenciesAndThresholds(voltageContingencies, curativeVoltageThresholds)
     ),
     voltageMonitoredElements
 ));
@@ -286,7 +286,7 @@ cracCreationParameters.addExtension(CimCracCreationParameters.class, cimParamete
       "voltage-cnecs-creation-parameters": {
         "monitored-states-and-thresholds": [
           {
-            "instant": "PREVENTIVE",
+            "instant": "preventive",
             "thresholds-per-nominal-v": [
               {
                 "nominalV": 400,
@@ -302,7 +302,7 @@ cracCreationParameters.addExtension(CimCracCreationParameters.class, cimParamete
             ]
           },
           {
-            "instant": "CURATIVE",
+            "instant": "curative",
             "thresholds-per-nominal-v": [
               {
                 "nominalV": 400,

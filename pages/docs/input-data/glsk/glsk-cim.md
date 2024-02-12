@@ -189,8 +189,8 @@ This type of GLSK is [described here](/docs/input-data/glsk#merit-order).
   - **A01**: "UP". Up signifies that the available power can be used by the Purchasing area to increase energy.
   - **A02**: "DOWN". Down signifies that the available power can be used by the Purchasing area to decrease energy.
 - **measurement_Unit.name**: unit of the GLSK. Only "MAW" (megawatt) is possible in this case.
-- **attributeInstanceComponent.position**: the relative position of the current timestep in the applicability timeframe   
-  of the current **Period** tag (first timestep has position 1)
+- **attributeInstanceComponent.position**: the relative position of the current timestamp in the applicability timeframe   
+  of the current **Period** tag (first timestamp has position 1)
 - **RegisteredResource**: describes the network element that should be shifted
   - **mRID**: unique ID of network element in the network. "codingScheme="A02"" means it is a CGMES ID.
   - **name**: human-readable name
