@@ -49,7 +49,7 @@ crac.newPstRangeAction()
         .withMinTap(-2)
         .withMaxTap(2)
         .add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant("preventive").add()
     .withSpeed(1)
     .add();
 ~~~
@@ -135,7 +135,7 @@ No two range-action automatons can have the same speed value, unless they are al
    		.withOperator("operator")
         .withNetworkElement("hvec-id")
         .newHvdcRange().withMin(-5).withMax(10).add()
-        .newFreeToUseUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
+        .newFreeToUseUsageRule().withInstant("preventive").withUsageMethod(UsageMethod.AVAILABLE).add()
         .add();  
 ~~~
 In that case, the validity domain of the HVDC is [-5; 10].
@@ -199,7 +199,7 @@ No two range-action automatons can have the same speed value, unless they are al
         .withNetworkElementAndKey(1, "network-element-1")
         .withNetworkElementAndKey(-0.5, "network-element-2")
         .newRange().withMin(-1200).withMax(500).add()
-        .newFreeToUseUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
+        .newFreeToUseUsageRule().withInstant("preventive").withUsageMethod(UsageMethod.AVAILABLE).add()
         .add();     
 ~~~
 In that case, the validity domain of the injection range action's reference set-point is [-1200; 500].  

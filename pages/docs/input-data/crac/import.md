@@ -75,7 +75,7 @@ can also be provided to the CracCreator, with some configurations which set the 
 
 
 > 💡  **NOTE**  
-> The flow-based constraint document contains two types of CNECs: base-case CNECs and post-contingency CNECs. Each post-contingency CNECs corresponds to two FlowCnecs in FARAO: one Instant.OUTAGE FlowCnec and one Instant.CURATIVE FlowCnec. The initial id of the CNEC cannot be kept, as it would be duplicated into the FARAO format, and new ids are therefore created by the CracCreator on the fly.  
+> The flow-based constraint document contains two types of CNECs: base-case CNECs and post-contingency CNECs. Each post-contingency CNECs corresponds to two FlowCnecs in FARAO: one FlowCnec associated with the outage instant and one FlowCnec associated with a curative instant. The initial id of the CNEC cannot be kept, as it would be duplicated into the FARAO format, and new ids are therefore created by the CracCreator on the fly.  
 > 
 > As a consequence, the interpretation of the created CRAC is not straightforward as it contains more Cnecs than the initial format, and with different ids.  
 > 
@@ -86,7 +86,7 @@ can also be provided to the CracCreator, with some configurations which set the 
 > - keep track of the branch which has been inverted because the initial format was not consistent with the iidm network (the Network is needed for that operation, that is an example of the reason why it is required by the CracCreator)
 > - keep some information of the initial format which are not imported in the FARAO CRAC.
 > 
-> In the CORE CC process, this CracCreationContext is re-used when results are exported at the end of the RAO, in order to roll-back the modifications which has been made during the creation, and export at the end of the process a CNE file which is consistent with the initial CRAC file.
+> In the CORE CC process, this CracCreationContext is re-used when results are exported at the end of the RAO, in order to roll back the modifications which has been made during the creation, and export at the end of the process a CNE file which is consistent with the initial CRAC file.
 
 The formats handled by the CracCreator are:	
 - [FlowBasedConstraint document](fbconstraint), also known as Merged-CB, CBCORA or F301 ([farao-crac-creator-fb-constraint](https://github.com/farao-community/farao-core/tree/master/data/crac-creation/crac-creator-fb-constraint))

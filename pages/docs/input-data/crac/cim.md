@@ -340,6 +340,6 @@ In the end, two HVDC range actions with an absolute range of -XXX MW to XXX MW e
 In order to ensure the imported CRAC is usable in the RAO, FARAO implements the following special rules:
 - Hybrid (range-actions + network-actions) remedial actions are prohibited.
 - If AUTO CNECs exist without any automaton that can eventually secure them, these CNECs are duplicated in the 
-  OUTAGE instant in order to be secured by the preventive RAO.
+  outage instant in order to be secured by the preventive RAO.
 - HVDC set-point remedial actions that require the deactivation of [angle-droop active power control](https://www.powsybl.org/pages/documentation/grid/model/extensions.html#hvdc-angle-droop-active-power-control)
-  (AC-emulation) are only supported at the AUTO instant.
+  (AC-emulation) are only supported at an auto instant.

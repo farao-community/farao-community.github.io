@@ -1,7 +1,7 @@
 A CRAC object must define "critical contingencies" (or "critical outages", or "CO", or "N-k"...).  
 The denomination chosen within the FARAO internal format is **"Contingency"**.
 
-A contingency is the representation of an incident on the network (i.e. a cut line or a group/transformer failure, etc).
+A contingency is the representation of an incident on the network (i.e. a cut line or a group/transformer failure, etc.).
 In FARAO, it is modelled by the loss of one or several network elements. Usually we have either a one-network-element-loss
 called "N-1", or a two-network-element-loss called "N-2".
 

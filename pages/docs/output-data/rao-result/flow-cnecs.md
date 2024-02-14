@@ -334,6 +334,7 @@ Example:
 {% include /tabs.html id="t8" tab1name="JAVA API" tab1content=t8_java tab2name="JSON file" tab2content=t8_json %}
 
 #### Complete JSON example {#flowcnec-json-example}
+This complete example was also enriched with two curative instants: `curative1` and  `curative2`.
 ~~~json
   "flowCnecResults" : [ {
     "flowCnecId" : "cnec1outageId",
@@ -376,6 +377,48 @@ Example:
           "flow" : 1220.5,
           "loopFlow" : 1223.5,
           "commercialFlow" : 1224.5
+        }
+      }
+    },
+    "curative1" : {
+      "megawatt" : {
+        "margin" : 1311.0,
+        "relativeMargin" : 1312.0,
+        "rightSide" : {
+          "flow" : 1310.5,
+          "loopFlow" : 1313.5,
+          "commercialFlow" : 1314.5,
+          "zonalPtdfSum" : 0.13
+        }
+      },
+      "ampere" : {
+        "margin" : 1321.0,
+        "relativeMargin" : 1322.0,
+        "rightSide" : {
+          "flow" : 1320.5,
+          "loopFlow" : 1323.5,
+          "commercialFlow" : 1324.5
+        }
+      }
+    },
+    "curative2" : {
+      "megawatt" : {
+        "margin" : 1411.0,
+        "relativeMargin" : 1412.0,
+        "rightSide" : {
+          "flow" : 1410.5,
+          "loopFlow" : 1413.5,
+          "commercialFlow" : 1414.5,
+          "zonalPtdfSum" : 0.14
+        }
+      },
+      "ampere" : {
+        "margin" : 1421.0,
+        "relativeMargin" : 1422.0,
+        "rightSide" : {
+          "flow" : 1420.5,
+          "loopFlow" : 1423.5,
+          "commercialFlow" : 1424.5
         }
       }
     }
@@ -422,6 +465,48 @@ Example:
           "commercialFlow" : 1224.5
         }
       }
-    }
-  }, ...
+    },
+    "curative1" : {
+      "megawatt" : {
+        "margin" : 1311.0,
+        "relativeMargin" : 1312.0,
+        "rightSide" : {
+          "flow" : 1310.5,
+          "loopFlow" : 1313.5,
+          "commercialFlow" : 1314.5,
+          "zonalPtdfSum" : 0.13
+        }
+      },
+      "ampere" : {
+        "margin" : 1321.0,
+        "relativeMargin" : 1322.0,
+        "rightSide" : {
+          "flow" : 1320.5,
+          "loopFlow" : 1323.5,
+          "commercialFlow" : 1324.5
+        }
+      }
+    },
+    "curative2" : {
+      "megawatt" : {
+        "margin" : 1411.0,
+        "relativeMargin" : 1412.0,
+        "rightSide" : {
+          "flow" : 1410.5,
+          "loopFlow" : 1413.5,
+          "commercialFlow" : 1414.5,
+          "zonalPtdfSum" : 0.14
+          }
+        },
+        "ampere" : {
+          "margin" : 1421.0,
+          "relativeMargin" : 1422.0,
+          "rightSide" : {
+            "flow" : 1420.5,
+            "loopFlow" : 1423.5,
+            "commercialFlow" : 1424.5
+          }
+        }
+      }
+    }, ...
 ~~~

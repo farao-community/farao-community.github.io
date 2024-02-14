@@ -16,7 +16,7 @@ scratch using the Java API so there is no need to import a CRAC file.
 
 # Set-up
 
-For this tutorial, we'll need Java 17 and we'll create a new project called `org.example` and work on its `Main` class.
+For this tutorial, we'll need Java 17, and we'll create a new project called `org.example` and work on its `Main` class.
 For everything to work properly, you also need to install the latest versions
 of [PowSyBl core](https://github.com/powsybl/powsybl-core),
 [PowSyBl Open Rao](https://github.com/powsybl/powsybl-open-rao) and

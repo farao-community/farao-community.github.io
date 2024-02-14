@@ -21,7 +21,7 @@ crac.newNetworkAction()
 		.withNetworkElement("network-element-id-2")
 		.withActionType(ActionType.OPEN)
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant("preventive").add()
     .add();
 
 // pst set-point
@@ -33,7 +33,7 @@ crac.newNetworkAction()
 		.withSetpoint(15)
 		.withNetworkElement("pst-network-element-id")
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant("preventive").add()
     .add();
 
 // injection set-point with two usage rules
@@ -45,8 +45,8 @@ crac.newNetworkAction()
 		.withNetworkElement("generator-network-element-id")
 		.withUnit(Unit.MEGAWATT)
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
-    .newOnStateUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withContingency("contingency-id").withInstant(Instant.CURATIVE).add()
+    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant("preventive").add()
+    .newOnStateUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withContingency("contingency-id").withInstant("curative").add()
     .add();
 
 // switch pair
@@ -57,7 +57,7 @@ crac.newNetworkAction()
 		.withSwitchToOpen("switch-to-open-id", "switch-to-open-name")
 		.withSwitchToClose("switch-to-close-id-and-name")
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant("preventive").add()
     .add();
 ~~~
 {% endcapture %}
