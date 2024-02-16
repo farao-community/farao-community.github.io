@@ -2,8 +2,8 @@ A FARAO "Network Action" is a remedial action with a binary state: it is either 
 One network action is a combination of one or multiple "elementary actions", among the following:
 - Topological action: opening or closing a branch or a switch in the network.
 - PST set-point: setting the tap of a PST in the network to a specific position.
-- Injection set-point: setting the active power set-point of an element in the network (load, generator, shunt compensator or [dangling line](https://www.powsybl.org/pages/documentation/grid/model/#dangling-line))
-  to a specific value.
+- Injection set-point: setting the active power set-point of an element in the network (load, generator, or [dangling line](https://www.powsybl.org/pages/documentation/grid/model/#dangling-line))
+  ot the number of sections of a shunt compensator to a specific value.
 - Switch pairs: opening a switch in the network and closing another (actually used to model [CSE bus-bar change remedial actions](cse#bus-bar)).
 
 {% capture t8_java %}
@@ -21,7 +21,7 @@ crac.newNetworkAction()
 		.withNetworkElement("network-element-id-2")
 		.withActionType(ActionType.OPEN)
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .add();
 
 // pst set-point
@@ -33,7 +33,7 @@ crac.newNetworkAction()
 		.withSetpoint(15)
 		.withNetworkElement("pst-network-element-id")
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .add();
 
 // injection set-point with two usage rules
@@ -45,9 +45,21 @@ crac.newNetworkAction()
 		.withNetworkElement("generator-network-element-id")
 		.withUnit(Unit.MEGAWATT)
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
-    .newOnStateUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withContingency("contingency-id").withInstant(Instant.CURATIVE).add()
+    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnContingencyStateUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withContingency("contingency-id").withInstant(Instant.CURATIVE).add()
     .add();
+
+// injection set-point on a shunt compensator
+    crac.newNetworkAction()
+        .withId("injection-setpoint-shunt-compensator-id")
+        .withOperator("operator")
+        .newInjectionSetPoint()
+          .withSetpoint(3)
+          .withNetworkElement("shunt-compensator-id")
+          .withUnit(Unit.SECTION_COUNT)
+          .add()
+        .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+        .add();
 
 // switch pair
 crac.newNetworkAction()
@@ -57,7 +69,7 @@ crac.newNetworkAction()
 		.withSwitchToOpen("switch-to-open-id", "switch-to-open-name")
 		.withSwitchToClose("switch-to-close-id-and-name")
 		.add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .add();
 ~~~
 {% endcapture %}

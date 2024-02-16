@@ -1,7 +1,8 @@
 A FARAO "Range Action" is a remedial action with a continuous or discrete set-point. If the range action is inactive, its
 set-point is equal to its value in the initial network. If it is activated, its set-point is optimized by the RAO to
 improve the objective function.  
-FARAO has three types of range actions : PST range actions, HVDC range actions, and "injection" range actions.
+FARAO has four types of range actions : PST range actions, HVDC range actions, "injection" range actions and counter-
+trading range actions.
 
 ### PST Range Action {#pst-range-action}
 A PstRangeAction contains a network element which must point to a [PST in the iidm PowSyBl network model](https://www.powsybl.org/pages/documentation/grid/model/#phase-tap-changer).
@@ -49,7 +50,7 @@ crac.newPstRangeAction()
         .withMinTap(-2)
         .withMaxTap(2)
         .add()
-    .newFreeToUseUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstantUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
     .withSpeed(1)
     .add();
 ~~~
@@ -62,7 +63,7 @@ Note that the [PstHelper utility class](https://github.com/farao-community/farao
     "id" : "pst-range-action-1-id",
     "name" : "pst-range-action-1-name",
     "operator" : "operator",
-    "freeToUseUsageRules" : [ {
+    "onInstantUsageRules" : [ {
       "instant" : "preventive",
       "usageMethod" : "available"
     } ],
@@ -105,8 +106,8 @@ group ID you like, as long as you use the same for all the range actions you wan
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **range type**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **min tap**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔵 **max tap**: at least one value must be defined  
-⚪ **freeToUse usage rules**: list of 0 to N FreeToUse usage rules (see paragraph on [usage rules](#remedial-actions))  
-⚪ **onState usage rules**: list of 0 to N OnState usage rules (see paragraph on [usage rules](#remedial-actions))  
+⚪ **onInstant usage rules**: list of 0 to N OnInstant usage rules (see paragraph on [usage rules](#remedial-actions))  
+⚪ **onState usage rules**: list of 0 to N OnContingencyState usage rules (see paragraph on [usage rules](#remedial-actions))  
 ⚪ **onFlowConstraintInCountry usage rules**: list of 0 to N OnFlowConstraintInCountry usage rules (see previous paragraph on [usage rules](#remedial-actions))  
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see previous paragraph on [usage rules](#remedial-actions))  
 ⚪ **onAngleConstraint usage rules**: list of 0 to N OnAngleConstraint usage rules (see previous paragraph on [usage rules](#remedial-actions))
@@ -135,7 +136,7 @@ No two range-action automatons can have the same speed value, unless they are al
    		.withOperator("operator")
         .withNetworkElement("hvec-id")
         .newHvdcRange().withMin(-5).withMax(10).add()
-        .newFreeToUseUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
+        .newOnInstantUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
         .add();  
 ~~~
 In that case, the validity domain of the HVDC is [-5; 10].
@@ -168,8 +169,8 @@ In that case, the validity domain of the HVDC is [-5; 10].
 ⚪ **hvdc ranges**: list of 0 to N HvdcRange  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **min**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **max**  
-⚪ **freeToUse usage rules**: list of 0 to N FreeToUse usage rules (see paragraph on [usage rules](#remedial-actions))  
-⚪ **onState usage rules**: list of 0 to N OnState usage rules (see paragraph on [usage rules](#remedial-actions))  
+⚪ **onInstant usage rules**: list of 0 to N OnInstant usage rules (see paragraph on [usage rules](#remedial-actions))  
+⚪ **onContingencyState usage rules**: list of 0 to N OnContingencyState usage rules (see paragraph on [usage rules](#remedial-actions))  
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on [usage rules](#remedial-actions))  
 {% endcapture %}
 {% include /tabs.html id="t10" tab1name="JAVA creation API" tab1content=t10_java tab2name="JSON file" tab2content=t10_json tab3name="Object fields" tab3content=t10_objects %}
@@ -199,7 +200,7 @@ No two range-action automatons can have the same speed value, unless they are al
         .withNetworkElementAndKey(1, "network-element-1")
         .withNetworkElementAndKey(-0.5, "network-element-2")
         .newRange().withMin(-1200).withMax(500).add()
-        .newFreeToUseUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
+        .newOnInstantUsageRule().withInstant(Instant.PREVENTIVE).withUsageMethod(UsageMethod.AVAILABLE).add()
         .add();     
 ~~~
 In that case, the validity domain of the injection range action's reference set-point is [-1200; 500].  
@@ -211,7 +212,7 @@ This means the set-point of "network-element-1" (key = 1) can be changed between
     "id" : "injection-range-action-id",
     "name" : "injection-range-action-name",
     "operator" : "operator",
-    "freeToUseUsageRules" : [ {
+    "onInstantUsageRules" : [ {
       "instant" : "preventive",
       "usageMethod" : "available"
     } ],
@@ -236,8 +237,73 @@ This means the set-point of "network-element-1" (key = 1) can be changed between
 🔴 **ranges**: list of 1 to N Range  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **min**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **max**  
-⚪ **freeToUse usage rules**: list of 0 to N FreeToUse usage rules (see paragraph on usage rules)  
-⚪ **onState usage rules**: list of 0 to N OnState usage rules (see paragraph on usage rules)  
+⚪ **onInstant usage rules**: list of 0 to N OnInstant usage rules (see paragraph on usage rules)  
+⚪ **onContingencyState usage rules**: list of 0 to N OnContingencyState usage rules (see paragraph on usage rules)  
 ⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on usage rules)  
 {% endcapture %}
 {% include /tabs.html id="t11" tab1name="JAVA creation API" tab1content=t11_java tab2name="JSON file" tab2content=t11_json tab3name="Object fields" tab3content=t11_objects %}
+
+### Counter-Trade Range Action {#counter-trade-range-action}
+
+A CounterTradeRangeAction is an exchange between two countries. The exporting country send power to the importing
+country.
+
+It is a costly remedial action which is handled differently by the RAO through a dichotomy engine.
+
+{% capture CT_java %}
+~~~java
+ crac.newCounterTradeRangeAction()
+        .withId("counter-trade-range-action-id")
+        .withGroupId("group-id")
+   		.withOperator("operator")
+        .withExportingCountry(Country.FR)
+        .withImportingCountry(Country.ES)
+        .newRange().withMin(0).withMax(1000).add()
+        .newOnInstantUsageRule().withInstant("preventive").withUsageMethod(UsageMethod.AVAILABLE).add()
+        .add();     
+~~~
+In that case, the validity domain of the counter-trade range action's reference set-point is [0; 1000]. The power is
+exported from France to Spain.
+{% endcapture %}
+{% capture CT_json %}
+~~~json
+"counterTradeRangeActions" : [ {
+    "id" : "counter-trade-range-action-id",
+    "name" : "counterTradeRange1Name",
+    "operator" : null,
+    "speed" : 30,
+    "onInstantUsageRules" : [ {
+        "instant" : "preventive",
+        "usageMethod" : "available"
+    } ],
+    "exportingCountry" : "FR",
+    "importingCountry" : "ES",
+    "initialSetpoint" : 50,
+    "ranges" : [ {
+        "min" : 0.0,
+        "max" : 1000.0
+    }, {
+        "min" : -1000.0,
+        "max" : 1000.0
+    } ]
+} ]
+~~~
+{% endcapture %}
+{% capture CT_objects %}
+🔴⭐ **identifier**  
+⚪ **name**  
+⚪ **operator**  
+🔴 **exporting country**
+🔴 **importing country**
+⚪ **groupId**: if you want to align this range action with others, set the same groupId for all  
+🔵 **speed**: mandatory if it is an automaton  
+⚪ **ranges**: list of 0 to N Range  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **min**  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **max**  
+⚪ **onInstant usage rules**: list of 0 to N OnInstant usage rules (see paragraph on usage rules)  
+⚪ **onContingencyState usage rules**: list of 0 to N OnContingencyState usage rules (see paragraph on usage rules)  
+⚪ **onFlowConstraint usage rules**: list of 0 to N OnFlowConstraint usage rules (see paragraph on usage rules)  
+⚪ **onAngleConstraint usage rules**: list of 0 to N OnAngleConstraint usage rules (see paragraph on usage rules)  
+⚪ **onVoltageConstraint usage rules**: list of 0 to N OnVoltageConstraint usage rules (see paragraph on usage rules)  
+{% endcapture %}
+{% include /tabs.html id="CT" tab1name="JAVA creation API" tab1content=CT_java tab2name="JSON file" tab2content=CT_json tab3name="Object fields" tab3content=CT_objects %}
