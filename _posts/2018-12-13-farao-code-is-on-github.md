@@ -22,7 +22,7 @@ CRAC model and import functions, remedial actions optimisation interface and pro
 for FARAO features. It will be the base for future results demonstration.
  
 [FARAO community](http://github.com/farao-community) website has also been enriched with a [documentation space](https://farao-community.github.io/docs)
-space, which is a good source of information about FARAO project. A [high level roadmap](https://farao-community.github.io/roadmap) has also been added.
+, which is a good source of information about FARAO project. A [high level roadmap](https://farao-community.github.io/roadmap) has also been added.
 
 If you have any question, do not hesitate to contact via [GitHub issues](https://github.com/farao-community/farao-core/issues).
 

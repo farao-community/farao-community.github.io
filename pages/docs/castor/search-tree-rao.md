@@ -94,7 +94,7 @@ of CNEC $$i$$ relatively to a commercial border (zone-to-zone) of the capacity c
  = one commercial border in the capacity calculation region (e-g FR-BE)
 
 The objective function of CASTOR is also configurable. The constraints taken into account within the 
-optimisation are also configurable in order to comply with process specificities (i.e limitation of 
+optimisation are also configurable in order to comply with process specificities (i.e. limitation of 
 [loop flows](/docs/engine/ra-optimisation/loop-flows) required for Flow based CORE Capacity Calculation).
 
 
@@ -122,9 +122,9 @@ The main inputs of the algorithm are:
 
 For Flow based Capacity calculation, considering that the objective function is the minimum margin (meaning the minimum 
 of all flow margins of every CNEC), there are currently two stop criteria, ie two ways to stop the search tree algorithm:
-- when the minimum margin is positive, meaning that the network is secured (all the CNEC flows are under line thresholds): **positive margin** stop criterion. 
+- when the minimum margin is positive, meaning that the network is secured (all the CNEC flows are underline thresholds): **positive margin** stop criterion. 
 As mentioned above, for NTC Capacity calculation/ CEP Validation, this stop criterion is applied.
-- when the the minimal margin on every CNEC cannot be increased anymore: **maximum margin** stop criterion.
+- when the minimal margin on every CNEC cannot be increased anymore: **maximum margin** stop criterion.
 
 
 These stop criteria only make sense for a minimum margin objective function (may it be absolute or relative).  

@@ -73,7 +73,7 @@ file without defining a timestamp, or a [CSE](cse.md) file with a non-UCTE netwo
 for the RAO (e.g. if a contingency is defined on an element that doesn't exist in the network, or if a CNEC is neither 
 optimized nor monitored, etc.)
 - **[ADDED]**: happens if FARAO decides to add elements that were not explicitly defined in the original file (e.g. if the 
-CRAC contains AUTO CNECs without any remedial action associated, FARAO will automatically duplicate them in the OUTAGE 
+CRAC contains AUTO CNECs without any remedial action associated, FARAO will automatically duplicate them in the outage 
 instant in order to secure them during the preventive RAO)
 - **[ALTERED]**: happens if FARAO imports an element after altering it or ignoring some of its components (e.g. if a monitored 
 element shall be so after multiple contingencies, among which some were not imported for any reason, then only valid 
@@ -426,7 +426,7 @@ CNEC that should be created, as configured in the [CimCracCreationParameters](cr
 It holds the following information:
 - **NativeNetworkElementId** is the unique identifier of the network element that is monitored
 - **Instant** is the instant for which the CNEC is created
-- **NativeContingencyName** is the name of the contingency for which the CNEC is created (if instant is not PREVENTIVE), 
+- **NativeContingencyName** is the name of the contingency for which the CNEC is created (if instant is not preventive), 
   as defined in the "name" field of the [B55](cim#contingencies) Contingency_Series
 - **isImported** is a boolean equal to true if FARAO was able to import the voltage CNEC
 - **ImportStatus** contains further information about the import status of the element (see [appendix](#import-status))

@@ -16,7 +16,7 @@ summary-hmax: 0
 
 #### Example of use cases :
 
-For RCC - Coordinated Security Analysis (sequential optimizsation of non-costly remedial actions and costly remedial actions). 
+For RCC - Coordinated Security Analysis (sequential optimisation of non-costly remedial actions and costly remedial actions). 
 
 Yearly congestion costs due to the use of costly remedial actions reach millions or even billions of euros for some 
 countries. All TSOs shall share the congestion costs resulting from the remedial actions optimisation of the Coordinated 
