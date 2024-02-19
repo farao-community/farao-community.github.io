@@ -248,7 +248,7 @@ This means the set-point of "network-element-1" (key = 1) can be changed between
 A CounterTradeRangeAction is an exchange between two countries. The exporting country send power to the importing
 country.
 
-It is a costly remedial action which is handled differently by the RAO through a dichotomy engine.
+It is a costly remedial action which is currently not handled by the RAO.
 
 {% capture CT_java %}
 ~~~java
