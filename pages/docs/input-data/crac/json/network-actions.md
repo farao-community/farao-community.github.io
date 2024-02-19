@@ -21,7 +21,7 @@ crac.newNetworkAction()
 		.withNetworkElement("network-element-id-2")
 		.withActionType(ActionType.OPEN)
 		.add()
-    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstantUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(PREVENTIVE_INSTANT).add()
     .add();
 
 // pst set-point
@@ -33,7 +33,7 @@ crac.newNetworkAction()
 		.withSetpoint(15)
 		.withNetworkElement("pst-network-element-id")
 		.add()
-    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstantUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(PREVENTIVE_INSTANT).add()
     .add();
 
 // injection set-point with two usage rules
@@ -45,7 +45,7 @@ crac.newNetworkAction()
 		.withNetworkElement("generator-network-element-id")
 		.withUnit(Unit.MEGAWATT)
 		.add()
-    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstantUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(PREVENTIVE_INSTANT).add()
     .newOnContingencyStateUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withContingency("contingency-id").withInstant(Instant.CURATIVE).add()
     .add();
 
@@ -58,7 +58,7 @@ crac.newNetworkAction()
           .withNetworkElement("shunt-compensator-id")
           .withUnit(Unit.SECTION_COUNT)
           .add()
-        .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+        .newOnInstantUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(PREVENTIVE_INSTANT).add()
         .add();
 
 // switch pair
@@ -69,7 +69,7 @@ crac.newNetworkAction()
 		.withSwitchToOpen("switch-to-open-id", "switch-to-open-name")
 		.withSwitchToClose("switch-to-close-id-and-name")
 		.add()
-    .newOnInstant().withUsageMethod(UsageMethod.AVAILABLE).withInstant(Instant.PREVENTIVE).add()
+    .newOnInstantUsageRule().withUsageMethod(UsageMethod.AVAILABLE).withInstant(PREVENTIVE_INSTANT).add()
     .add();
 ~~~
 {% endcapture %}
