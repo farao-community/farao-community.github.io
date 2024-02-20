@@ -102,6 +102,7 @@ cracCreationParameters.setCracFactoryName("CracImplFactory");
 cracCreationParameters.setDefaultMonitoredLineSide(CracCreationParameters.MonitoredLineSide.MONITOR_LINES_ON_BOTH_SIDES);
 RaUsageLimits raUsageLimits = new RaUsageLimits();
 raUsageLimits.setMaxRa(10);
+raUsageLimits.setMaxRaPerTso(Map.of("FR", 4, "BE", 6))
 cracCreationParameters.addRaUsageLimitsForAGivenInstant("curative", raUsageLimits);
 ```
 {% endcapture %}
@@ -112,10 +113,10 @@ cracCreationParameters.addRaUsageLimitsForAGivenInstant("curative", raUsageLimit
   "default-monitored-line-side" : "monitor-lines-on-both-sides",
   "ra-usage-limits-per-instant" : [ {
     "instant": "curative",
-    "max-ra" : 7,
-    "max-tso" : 3,
-    "max-topo-per-tso" : {"FR": 2, "BE": 1},
-    "max-pst-per-tso" : {"FR" : 3, "BE": 5},
+    "max-ra" : 10,
+    "max-tso" : 2147483647,
+    "max-topo-per-tso" : { },
+    "max-pst-per-tso" : { },
     "max-ra-per-tso" : {"FR": 4, "BE": 6}
   } ]
 }
