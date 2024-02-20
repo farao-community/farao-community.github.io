@@ -334,50 +334,6 @@ These parameters (second-preventive-rao) tune the behaviour of the [second preve
   RAO, as a predefined combination ("hint") to test at the first search depth of the second preventive RAO. This way, 
   if this combination is optimal in the 2nd preventive RAO as well, getting to the optimal solution will be much faster.
 
-## Remedial actions' usage limits {#ra-usage-limits-per-contingency}
-These parameters (ra-usage-limits-per-contingency) limit the usage of remedial actions, on a per-contingency basis.
-
-### max-curative-ra {#max-curative-ra}
-- **Expected value**: integer
-- **Default value**: 2^32 -1 (max integer value)
-- **Usage**: this parameter defines the maximum number of curative remedial actions allowed in the RAO. The RAO will 
-  prioritize remedial actions that have the best impact on the minimum margin.  
-  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
-
-### max-curative-tso {#max-curative-tso}
-- **Expected value**: integer
-- **Default value**: 2^32 -1 (max integer value)
-- **Usage**: this parameter defines the maximum number of TSOs that can apply remedial actions after a contingency. The 
-  RAO will choose the best TSOs combination to maximize the minimum margin.  
-  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
-
-### max-curative-ra-per-tso {#max-curative-ra-per-tso}
-- **Expected value**: a map with string keys and integer values. The keys should be the same as the RAs' operators as
-  written in the CRAC file
-- **Default value**: empty map
-- **Usage**: this parameter defines the maximum number of curative remedial actions allowed for each TSO, per contingency.  
-  The TSOs should be identified using the same IDs as in the CRAC. If a TSO is not listed in this map, then the number
-  of its allowed CRAs is supposed infinite.  
-  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
-
-### max-curative-topo-per-tso {#max-curative-topo-per-tso}
-- **Expected value**: a map with string keys and integer values. The keys should be the same as the RAs' operators as
-  written in the CRAC file
-- **Default value**: empty map
-- **Usage**: this parameter defines the maximum number of curative topological actions allowed for each TSO, per contingency.  
-  The TSOs should be identified using the same IDs as in the CRAC. If a TSO is not listed in this map, then the number
-  of its allowed CRAs is supposed infinite.  
-  This parameter is only used during the curative RAO.
-
-### max-curative-pst-per-tso {#max-curative-pst-per-tso}
-- **Expected value**: a map with string keys and integer values. The keys should be the same as the RAs' operators as
-  written in the CRAC file
-- **Default value**: empty map
-- **Usage**: this parameter defines the maximum number of curative PST remedial actions allowed for each TSO, per contingency.  
-  The TSOs should be identified using the same IDs as in the CRAC. If a TSO is not listed in this map, then the number
-  of its allowed curative PSTs is supposed infinite.  
-  This parameter is only used during the curative RAO (and second preventive RAO if it is set to re-optimize CRAs).
-
 ## CNECs that should not be optimised {#not-optimized-cnecs}
 These parameters (not-optimized-cnecs) allow the activation of region-specific features, that de-activate the
 optimisation of specific CNECs in specific conditions.
@@ -616,7 +572,7 @@ Zones are seperated by + or -.
 {% capture t1_json %}
 ~~~json
 {
-  "version" : "2.0",
+  "version" : "2.2",
   "objective-function" : {
     "type" : "MAX_MIN_RELATIVE_MARGIN_IN_AMPERE",
     "forbid-cost-increase" : false,
@@ -656,13 +612,6 @@ Zones are seperated by + or -.
     "execution-condition" : "POSSIBLE_CURATIVE_IMPROVEMENT",
     "re-optimize-curative-range-actions" : false,
     "hint-from-first-preventive-rao" : true
-  },
-  "ra-usage-limits-per-contingency" : {
-    "max-curative-ra" : 10,
-    "max-curative-tso" : 2,
-    "max-curative-topo-per-tso" : { },
-    "max-curative-pst-per-tso" : { },
-    "max-curative-ra-per-tso" : { "RTE" : 5 }
   },
   "not-optimized-cnecs" : {
     "do-not-optimize-curative-cnecs-for-tsos-without-cras" : false,
