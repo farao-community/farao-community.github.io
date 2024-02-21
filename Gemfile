@@ -6,3 +6,4 @@ group :jekyll_plugins do
   gem "jemoji"
 end
 gem 'wdm', '>= 0.1.0'
+gem 'html-proofer'

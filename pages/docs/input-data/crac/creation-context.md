@@ -9,12 +9,12 @@ docu-parent: CRAC
 order: 8
 tags: [Docs, Data, CRAC]
 see-also: |
-    [CRAC import](import), [CRAC object](pages/docs/input-data/crac/json), [RAO result object](/docs/output-data/rao-result-json)
+    [CRAC import](import), [CRAC object](/docs/input-data/crac/json), [RAO result object](/docs/output-data/rao-result-json)
 ---
 
 ## Introduction {#introduction}
 When FARAO tries to import a native CRAC file ([FlowBasedConstraint](fbconstraint.md), [CSE](cse.md), [CIM](cim.md), ...) 
-into an [internal CRAC format](pages/docs/input-data/crac/json), some data transformation can happen, and data present in the final CRAC object 
+into an [internal CRAC format](/docs/input-data/crac/json), some data transformation can happen, and data present in the final CRAC object 
 will not be a "one-to-one" exact representation of the data in the original file.  
 This can be an issue for the final user, as [querying the RAO result file or object](/docs/output-data/rao-result-json#contents) 
 needs knowledge of the artefacts FARAO created during CRAC creation.  

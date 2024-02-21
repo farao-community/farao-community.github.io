@@ -73,6 +73,9 @@ _See also: [RAO steps](/docs/engine/ra-optimisation/rao-steps)_
 ### Computation status {#computation-status}
 {% include_relative computation-status.md %}  
 
+### Security status {#security-status}
+{% include_relative security-status.md %}  
+
 ### Executed optimisation steps {#executed-optimisation-steps}
 {% include_relative steps.md %}
 

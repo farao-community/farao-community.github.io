@@ -31,7 +31,7 @@ types of their ranges: ABSOLUTE, RELATIVE_TO_INITIAL_NETWORK, RELATIVE_TO_PREVIO
 
 | Name | Details |
 |---|---|
-| [pst-optimization-approximation](/docs/parameters#pst-optimization-approximation) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
+| [pst-model](/docs/parameters#pst-model) | This filler is used only if this parameters is set to *APPROXIMATED_INTEGERS* |
 
 ## Defined optimization variables {#defined-variables}
 

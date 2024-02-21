@@ -18,15 +18,7 @@ the RAO result interface).
 
 Two implementations of RAO functionality are currently part of FARAO roadmap.
 
-### Closed optimisation
-
-Closed optimisation implementation of RAO feature is the conversion of RAO problem in a single
-[Mixed-Integer Linear Programming](https://en.wikipedia.org/wiki/Integer_programming) (MILP) problem. This problem can then be solved using different solvers.
-
-For more information regarding closed optimisation engine, and available optimisation problem converters,
-please refer to the [dedicated documentation](/docs/engine/ra-optimisation/closed-optimisation-rao).  
-
-### Search tree remedial action optimisation
+### Search tree remedial action optimisation (CASTOR)
 
 The search-tree is an efficient implementation of RAO interface for dealing with combinatorial
 and non-linear problem of remedial actions optimisation mixing topological actions, and combined

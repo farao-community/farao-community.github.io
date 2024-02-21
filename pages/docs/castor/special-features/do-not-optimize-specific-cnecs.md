@@ -10,7 +10,7 @@ order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: | 
-    [Not optimized CNECs](/docs/parameters#do-not-optimize-specific-cnecs)
+    [Not optimized CNECs](/docs/parameters#not-optimized-cnecs)
 ---
 
 ### Definition

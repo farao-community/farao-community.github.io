@@ -17,7 +17,7 @@ A CNEC has an operator, i.e. the identifier of the TSO operating its network ele
 Moreover, a CNEC can have a reliability margin: a safety buffer to cope with unplanned events or uncertainties of input
 data (i.e. an extra margin).
 
-**Optimised and monitored CNECs**  
+### Optimised and monitored CNECs {#optimised-vs-monitored}  
 CNECs can be monitored and/or optimised. This notion of monitored/optimised has been introduced by the capacity
 calculation on the CORE region, and is now also used for the CSE region:
 - maximise the margins of CNECs that are "optimised"
