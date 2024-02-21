@@ -6,7 +6,7 @@ parameters among:
 
 {% capture t18_java %}
 ~~~java
-    // Indicates whether the all the CNECs of a given type at a given instant are secure.
+    // Indicates whether all the CNECs of a given type at a given instant are secure.
     boolean isSecure(Instant optimizedInstant, PhysicalParameter... u);
 
     // Indicates whether all the CNECs of a given type are secure at last instant (i.e. after RAO).
