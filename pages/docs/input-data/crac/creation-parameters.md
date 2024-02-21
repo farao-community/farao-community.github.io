@@ -69,6 +69,7 @@ apply to both sides (typically to be used in AC-loadflow mode)
 
 ### ra-usage-limits-per-instant {#ra-usage-limits-per-instant}
 This parameter limits the usage of remedial actions for given instants.  
+The instant ID must match an ID of an instant in the CRAC.   
 If the given instant contains multiple states (possible for auto and curative instant), the given limits are applied independently on each state.  
 The RAs usage limits contain the following fields :
 
