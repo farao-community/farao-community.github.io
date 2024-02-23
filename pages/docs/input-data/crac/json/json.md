@@ -40,14 +40,14 @@ Example of complete CRACs are given below
 {% capture t1_java %}
 The creation of a small CRAC is for instance made in this test class of farao-core repository:
 <a href="
-https://github.com/farao-community/farao-core/blob/master/data/crac/crac-impl/src/test/java/com/powsybl/openrao/data/cracimpl/utils/CommonCracCreation.java"> 
+https://github.com/powsybl/powsybl-open-rao/blob/main/data/crac/crac-impl/src/test/java/com/powsybl/openrao/data/cracimpl/utils/CommonCracCreation.java"> 
 example on github
 </a>
 {% endcapture %}
 {% capture t1_json %}
 An example of a small CRAC in the json internal format of FARAO is given below:
 <a href="
-https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/test/resources/crac/small-crac-with-network-actions.json"> 
+https://github.com/powsybl/powsybl-open-rao/blob/main/ra-optimisation/search-tree-rao/src/test/resources/crac/small-crac-with-network-actions.json"> 
 example on github
 </a>
 {% endcapture %}

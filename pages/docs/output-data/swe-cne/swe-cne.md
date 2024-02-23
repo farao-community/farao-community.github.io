@@ -11,7 +11,7 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 summary-hmax: 2
 see-also: |
-    [SWE CNE export package](https://github.com/farao-community/farao-core/tree/master/data/result-exporter/swe-cne-exporter)
+    [SWE CNE export package](https://github.com/powsybl/powsybl-open-rao/tree/main/data/result-exporter/swe-cne-exporter)
 ---
 
 # Introduction {#introduction}

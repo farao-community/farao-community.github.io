@@ -1,6 +1,6 @@
 These results contain important RAO information about flow CNECs.  
 Note that you have to use [FlowCnec](/docs/input-data/crac/json#flow-cnecs) objects from the CRAC in order to query the RaoResult Java API.
-Most results are power flow results (like flows & margins), and can be queried in two [units](https://github.com/farao-community/farao-core/blob/master/commons/src/main/java/com/powsybl/openrao/commons/Unit.java)
+Most results are power flow results (like flows & margins), and can be queried in two [units](https://github.com/powsybl/powsybl-open-rao/blob/main/commons/src/main/java/com/powsybl/openrao/commons/Unit.java)
 (AMEPRE & MEGAWATT) and on one or two sides (LEFT & RIGHT).
 
 #### Flow {#flowcnec-flow}

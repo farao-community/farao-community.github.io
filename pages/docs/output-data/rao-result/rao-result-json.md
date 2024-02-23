@@ -26,17 +26,17 @@ In this page, we present:
 - how to access information in the RaoResult, using either the RaoResult java object or the JSON file.
 
 ## Accessing the RAO result {#rao-result}
-The [RaoResult](https://github.com/farao-community/farao-core/blob/master/data/rao-result/rao-result-api/src/main/java/com/powsybl/openrao/data/raoresultapi/RaoResult.java) java object is actually an interface that is implemented by many FARAO classes. However, one only needs to use the interface's functions.
+The [RaoResult](https://github.com/powsybl/powsybl-open-rao/blob/main/data/rao-result/rao-result-api/src/main/java/com/powsybl/openrao/data/raoresultapi/RaoResult.java) java object is actually an interface that is implemented by many FARAO classes. However, one only needs to use the interface's functions.
 A RaoResult object is returned by FARAO's main optimisation method:
 ~~~java
 CompletableFuture<RaoResult> RaoProvider::run(RaoInput raoInput, RaoParameters parameters, Instant targetEndInstant)
 ~~~
-Where RaoProvider is the chosen implementation of the RAO, such as [CASTOR](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/castor/algorithm/Castor.java).
+Where RaoProvider is the chosen implementation of the RAO, such as [CASTOR](https://github.com/powsybl/powsybl-open-rao/blob/main/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/castor/algorithm/Castor.java).
 
 ## Exporting and importing a JSON file {#export-import}
 
 A RaoResult object can be saved into a JSON file (no matter what implementation it is).
-A RaoResult JSON file can be imported into a [RaoResultImpl](https://github.com/farao-community/farao-core/blob/master/data/rao-result/rao-result-impl/src/main/java/com/powsybl/openrao/data/raoresultimpl/RaoResultImpl.java), and used as a RaoResult java object.
+A RaoResult JSON file can be imported into a [RaoResultImpl](https://github.com/powsybl/powsybl-open-rao/blob/main/data/rao-result/rao-result-impl/src/main/java/com/powsybl/openrao/data/raoresultimpl/RaoResultImpl.java), and used as a RaoResult java object.
 
 ### Export {#export}
 Example:
@@ -72,6 +72,9 @@ _See also: [RAO steps](/docs/engine/ra-optimisation/rao-steps)_
 
 ### Computation status {#computation-status}
 {% include_relative computation-status.md %}  
+
+### Security status {#security-status}
+{% include_relative security-status.md %}  
 
 ### Executed optimisation steps {#executed-optimisation-steps}
 {% include_relative steps.md %}

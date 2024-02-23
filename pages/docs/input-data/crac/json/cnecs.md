@@ -17,7 +17,7 @@ A CNEC has an operator, i.e. the identifier of the TSO operating its network ele
 Moreover, a CNEC can have a reliability margin: a safety buffer to cope with unplanned events or uncertainties of input
 data (i.e. an extra margin).
 
-**Optimised and monitored CNECs**  
+### Optimised and monitored CNECs {#optimised-vs-monitored}  
 CNECs can be monitored and/or optimised. This notion of monitored/optimised has been introduced by the capacity
 calculation on the CORE region, and is now also used for the CSE region:
 - maximise the margins of CNECs that are "optimised"
@@ -29,8 +29,13 @@ FARAO contains 3 families of CNECs, depending on which type of physical constrai
 ### Flow CNECs {#flow-cnecs}
 A "FlowCnec" has the two following specificities:
 
-- it contains one network element that is a **Branch**. In the PowSyBl vocabulary, a [Branch](https://www.powsybl.org/pages/documentation/grid/model/#branches)
-  is an element connected to two terminals. For instance, lines, tie-lines, transformers and PSTs are all "Branches".
+- it contains one network element that is a **Branch**. In the PowSyBl vocabulary, a "Branch"
+  is an element connected to two terminals. For instance, 
+  [lines](https://www.powsybl.org/pages/documentation/grid/model/#line), 
+  [tie-lines](https://www.powsybl.org/pages/documentation/grid/model/#tie-line), 
+  [transformers](https://www.powsybl.org/pages/documentation/grid/model/#transformers) 
+  and [PSTs](https://www.powsybl.org/pages/documentation/grid/model/#phase-tap-changer)
+  are all "Branches".
 - the physical parameter which is monitored on the CNEC is the **power flow**.
 
 A FlowCnec has **two sides**, which correspond to the two terminals of the PowSyBl network element of the FlowCnec
@@ -41,7 +46,7 @@ one/left. The convention of FARAO is that a positive flow is a flow in the "dire
 a flow in the "opposite" direction.
 
 > 💡  **NOTE**  
-> A FARAO FlowCnec is one implementation of the generic ["BranchCnec"](https://github.com/farao-community/farao-core/blob/master/data/crac/crac-api/src/main/java/com/powsybl/openrao/data/cracapi/cnec/BranchCnec.java).
+> A FARAO FlowCnec is one implementation of the generic ["BranchCnec"](https://github.com/powsybl/powsybl-open-rao/blob/main/data/crac/crac-api/src/main/java/com/powsybl/openrao/data/cracapi/cnec/BranchCnec.java).
 > If needed, this would allow you a fast implementation of other types of CNECs, on branches, but with a monitored
 > physical parameter other than power flow.
 
