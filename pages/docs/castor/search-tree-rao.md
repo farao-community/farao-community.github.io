@@ -41,7 +41,7 @@ For Capacity calculation processes, CASTOR considers the following remedial acti
 
 The impact of some types of remedial actions on flows could be considered to be linear: optimisation of HVDC setpoints and optimisation of generation unit setpoints. In addition to these, CASTOR also considers phase shifter transformers as linear remedial actions.[^1]
 
-[^1]: CASTOR offers different approximation levels for modelling PSTs. See [the relevant RAO parameter](/docs/parameters#pst-optimization-approximation) for more information. 
+[^1]: CASTOR offers different approximation levels for modelling PSTs. See [the relevant RAO parameter](/docs/parameters#pst-model) for more information. 
 
 A phase shifter transformer (PST) is defined by its range of acceptable tap settings.
 This acceptable tap setting can be defined by three different ways:
@@ -62,7 +62,8 @@ As a matter of clarification, connecting/disconnecting a generation unit can als
 
 #### For Flow-based Capacity calculation – minimum margin
 
-The objective function is used to determine at each step of the search tree which remedial action is the best. A variant of it is also used when solving the [linear optimisation problem](/docs/castor/linear-rao).
+The objective function is used to determine at each step of the search tree which remedial action is the best. 
+A variant of it is also used when solving the [linear optimisation problem](/docs/engine/ra-optimisation/linear-rao).
 
 The active flow $$F_i$$ on a CNEC $$i$$ is:
 
@@ -129,9 +130,9 @@ As mentioned above, for NTC Capacity calculation/ CEP Validation, this stop crit
 
 These stop criteria only make sense for a minimum margin objective function (may it be absolute or relative).  
 
-On both stop criteria, [additional constraints](/docs/parameters#search-tree-parameters) can be added, for example:
-- the [maximal number of consecutive chosen network actions](/docs/parameters#maximum-search-depth), also called search tree depth,
-- the [minimal relative gain](/docs/parameters#relative-network-action-minimum-impact-threshold) of objective function between two consecutive network actions (i.e. between two search tree depths).
+On both stop criteria, [additional constraints](/docs/parameters#topological-actions-optimization) can be added, for example:
+- the [maximal number of consecutive chosen network actions](/docs/parameters#max-search-tree-depth), also called search tree depth,
+- the [minimal relative gain](/docs/parameters#relative-minimum-impact-threshold) of objective function between two consecutive network actions (i.e. between two search tree depths).
 
 ### Algorithm
 

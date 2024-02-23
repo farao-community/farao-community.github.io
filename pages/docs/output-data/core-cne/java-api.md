@@ -1,4 +1,4 @@
-After completing the RAO, the user can export the CORE CNE file using this method of [CoreCneExporter](https://github.com/farao-community/farao-core/blob/master/data/result-exporter/core-cne-exporter/src/main/java/com/powsybl/openrao/data/corecneexporter/CoreCneExporter.java):
+After completing the RAO, the user can export the CORE CNE file using this method of [CoreCneExporter](https://github.com/powsybl/powsybl-open-rao/blob/main/data/result-exporter/core-cne-exporter/src/main/java/com/powsybl/openrao/data/corecneexporter/CoreCneExporter.java):
 ~~~java
 public void exportCne(Crac crac, Network network,
     UcteCracCreationContext cracCreationContext,

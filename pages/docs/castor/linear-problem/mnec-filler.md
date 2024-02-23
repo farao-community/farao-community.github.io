@@ -10,7 +10,7 @@ order: 5
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: |
-    [MnecFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/MnecFiller.java)
+    [MnecFiller](https://github.com/powsybl/powsybl-open-rao/blob/main/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/MnecFiller.java)
 ---
 
 ## Used input data {#input-data}
@@ -24,12 +24,12 @@ see-also: |
 
 ## Used parameters {#parameters}
 
-| Name | Symbol | Details |
-|---|---|---|
-| [rao-with-mnec-limitation](/docs/parameters#rao-with-mnec-limitation) |  | This filler is only used if this parameter is activated |
-| [mnec-acceptable-margin-diminution](/docs/parameters#mnec-acceptable-margin-diminution) | $$c^{acc-augm}_{m}$$ | The decrease of the initial margin that is allowed by the optimisation on MNECs.  |
-| [mnec-constraint-adjustment-coefficient](/docs/parameters#mnec-constraint-adjustment-coefficient) | $$c^{adj-coeff}_{m}$$ | This coefficient is here to mitigate the approximation made by the linear optimization (approximation = use of sensitivities to linearize the flows, rounding of the PST taps). <br> It tightens the MNEC constraint, in order to take some margin for that constraint to stay respected once the approximations are removed (i.e. taps have been rounded and real flow calculated) |
-| [mnec-violation-cost](/docs/parameters#mnec-violation-cost) | $$c^{penalty}_{lf}$$ | penalisation, in the objective function, of the excess of 1 MW of a MNEC flow |
+| Name                                                                                              | Symbol                 | Details                                                                                                                                                                                                                                                                                                                                                                             |
+|---------------------------------------------------------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [MNEC extension](/docs/parameters#mnec-parameters)                                                |                        | This filler is only used if this extension is defined                                                                                                                                                                                                                                                                                                                               |
+| [mnec-acceptable-margin-decrease](/docs/parameters#mnec-acceptable-margin-decrease)               | $$c^{acc-augm}_{m}$$   | The decrease of the initial margin that is allowed by the optimisation on MNECs.                                                                                                                                                                                                                                                                                                    |
+| [mnec-constraint-adjustment-coefficient](/docs/parameters#mnec-constraint-adjustment-coefficient) | $$c^{adj-coeff}_{m}$$  | This coefficient is here to mitigate the approximation made by the linear optimization (approximation = use of sensitivities to linearize the flows, rounding of the PST taps). <br> It tightens the MNEC constraint, in order to take some margin for that constraint to stay respected once the approximations are removed (i.e. taps have been rounded and real flow calculated) |
+| [mnec-violation-cost](/docs/parameters#mnec-violation-cost)                                       | $$c^{penalty}_{lf}$$   | penalisation, in the objective function, of the excess of 1 MW of a MNEC flow                                                                                                                                                                                                                                                                                                       |
 
 ## Defined optimization variables {#defined-variables}
 

@@ -7,7 +7,7 @@ tags: [Edito, powsybl, Coordination, FARAO]
 excerpt_separator: <!--more-->
 ---
 
-What is FARAO? FARAO is a [Powsybl](http://www.powsybl.org) based toolbox that aims at providing open-source, fully transparent software solutions for coordinated processes in power sytems operations and planning.
+What is FARAO? FARAO is a [Powsybl](https://www.powsybl.org) based toolbox that aims at providing open-source, fully transparent software solutions for coordinated processes in power sytems operations and planning.
 <!--more-->
 
 ### FARAO context
@@ -20,7 +20,7 @@ We strongly believe that the only way to face these challenges is to build a lar
 
 ### Ambition and planning
 
-In FARAO team, we have one ambition: create an open, transparent and modular toolbox for supporting coordination processes experimentations and industrialisation. That is the main reason why we decided to base our developments on [Powsybl](http://www.powsybl.org) framework, a project supported by the Linux Fondation through the [LF Energy project](http://www.lfenergy.org).
+In FARAO team, we have one ambition: create an open, transparent and modular toolbox for supporting coordination processes experiments and industrialisation. That is the main reason why we decided to base our developments on [Powsybl](https://www.powsybl.org) framework, a project supported by the Linux Foundation through the [LF Energy project](https://lfenergy.org/).
 
 We want these tools to be shared, developed and improved with the community, including:
 - CGMES integration and associated files (GLSK, CRAC, CNE)
@@ -32,4 +32,4 @@ The first complete release of FARAO is expected on June 2019, but modules will b
 [^1]:
     Capacity Allocation & Congestion Management, published on 07/24/2015. The text can be found on [ENTSO-E network code page][cacm-code].
 
-[cacm-code]: https://electricity.network-codes.eu/network_codes/cacm
+[cacm-code]: https://www.entsoe.eu/network_codes/cacm/
