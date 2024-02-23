@@ -1,5 +1,5 @@
 A FARAO "ra-usage-limits-per-instant" consists in limits on the usage of remedial actions for given instants.  
-
+The given instant ID should match an ID of an instant in the CRAC. Otherwise, the limits will be ignored.  
 See [here]((/docs/input-data/crac/creation-parameters#ra-usage-limits-per-instant)) for further explanation on each field described in the following example.
 
 {% capture t8_java %}
