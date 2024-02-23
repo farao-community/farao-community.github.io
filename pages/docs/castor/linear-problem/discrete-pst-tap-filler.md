@@ -10,7 +10,7 @@ order: 7
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: |
-    [DiscretePstTapFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/DiscretePstTapFiller.java)
+    [DiscretePstTapFiller](https://github.com/powsybl/powsybl-open-rao/blob/main/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/DiscretePstTapFiller.java)
 ---
 
 ## Used input data {#input-data}

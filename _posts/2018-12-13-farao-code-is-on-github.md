@@ -16,15 +16,15 @@ be part of these tools design and/or improvements. That is main reason why we de
 on an open platform such as GitHub.
 
 Current code base is divided into two repositories:
-- **[farao-core](http://github.com/farao-community/farao-core)** which contains the core features of FARAO:
+- **[farao-core](https://github.com/powsybl/powsybl-open-rao)** which contains the core features of FARAO:
 CRAC model and import functions, remedial actions optimisation interface and prototype, ...
-- **[farao-gse](http://github.com/farao-community/farao-gse)** which contains the demonstration interface
+- **[farao-gse](https://github.com/farao-community/farao-gse)** which contains the demonstration interface
 for FARAO features. It will be the base for future results demonstration.
  
-[FARAO community](http://github.com/farao-community) website has also been enriched with a [documentation space](https://farao-community.github.io/docs)
+[FARAO community](https://github.com/farao-community) website has also been enriched with a [documentation space](https://farao-community.github.io/docs)
 , which is a good source of information about FARAO project. A [high level roadmap](https://farao-community.github.io/roadmap) has also been added.
 
-If you have any question, do not hesitate to contact via [GitHub issues](https://github.com/farao-community/farao-core/issues).
+If you have any question, do not hesitate to contact via [GitHub issues](https://github.com/powsybl/powsybl-open-rao/issues).
 
 See you soon on GitHub !
 

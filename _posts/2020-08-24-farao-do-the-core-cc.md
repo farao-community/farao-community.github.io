@@ -22,6 +22,6 @@ Moreover, before its release, the RAO has been tested on several timestamps of t
 
 Our efforts in designing and developing FARAO are still ongoing, and [new features](/roadmap) are yet to come in your favorite remedial action optimiser! 
 
-More information about FARAO v2.1.1 can be found in the [release note](https://github.com/farao-community/farao-core/releases/tag/v2.1.0)
+More information about FARAO v2.1.1 can be found in the [release note](https://github.com/powsybl/powsybl-open-rao/releases/tag/v2.1.0)
  
 For any question, don't hesitate to contact us using the [FARAO Spectrum community](https://spectrum.chat/farao-community).

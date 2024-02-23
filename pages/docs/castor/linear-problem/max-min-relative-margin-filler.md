@@ -10,7 +10,7 @@ order: 3
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: |
-  [MaxMinRelativeMarginFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/MaxMinRelativeMarginFiller.java)
+  [MaxMinRelativeMarginFiller](https://github.com/powsybl/powsybl-open-rao/blob/main/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/MaxMinRelativeMarginFiller.java)
 ---
 
 ## Used input data {#input-data}

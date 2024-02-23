@@ -10,7 +10,7 @@ order: 6
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: |
-    [ContinuousRangeActionGroupFiller](https://github.com/farao-community/farao-core/blob/master/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/ContinuousRangeActionGroupFiller.java)
+    [ContinuousRangeActionGroupFiller](https://github.com/powsybl/powsybl-open-rao/blob/main/ra-optimisation/search-tree-rao/src/main/java/com/powsybl/openrao/searchtreerao/linearoptimisation/algorithms/fillers/ContinuousRangeActionGroupFiller.java)
 ---
 
 ## Used input data {#input-data}
