@@ -22,12 +22,16 @@ make the CRAC or some outputs of the application more readable for humans.
 
 {% capture t2_java %}
 Network elements are never built on their own in the CRAC object: they are always a component of a larger business object,
-and are added implicitly to the CRAC when the business object is added (e.g. a contingency, a CNEC, or a remedial action).
+and are added implicitly to the CRAC when the business object is added (e.g. a CNEC, or a remedial action).
 When building a business object, one of the two following methods can be used to add a network element to it (using an
 ID only, or an ID and a name).
 ~~~java
 (...).withNetworkElement("network_element_id")
 (...).withNetworkElement("network_element_id", "network_element_name")
+~~~
+In case of a contingency, the following method is used to add the id of a network element as contingency element:
+~~~java
+(...).withContingencyElement("network_element_id", ContingencyElementType.<TYPE>)
 ~~~
 These methods will be depicted in the following examples on this page.
 {% endcapture %}
