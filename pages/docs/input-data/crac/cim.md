@@ -97,9 +97,9 @@ All period points are present from position 1 to position 24, and represent an h
 ```
 
 ##### VARIABLE_SIZED_BLOCK_CURVE
-- point position 5 >= 2021-04-02T02:00Z, < 2021-04-02T11:00Z
-- point position 14 >= 2021-04-02T11:00Z, < 2021-04-02T15:00Z
-- point position 18 >= 2021-04-02T15:00Z, < 2021-04-02T22:00Z
+- point position 5 is applicable for timestamps between 2021-04-02T02:00Z (included) and 2021-04-02T11:00Z (excluded)
+- point position 14 is applicable for timestamps between 2021-04-02T11:00Z (included) and 2021-04-02T15:00Z (excluded)
+- point position 18 is applicable for timestamps between 2021-04-02T15:00Z (included) and 2021-04-02T22:00Z (excluded)
 ```xml
   <TimeSeries>
     <mRID>TimeSeries2</mRID>
