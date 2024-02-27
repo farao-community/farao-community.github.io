@@ -57,10 +57,9 @@ or **VARIABLE_SIZED_BLOCK_CURVE**  (value "A03").
 
 ##### SEQUENTIAL_FIXED_SIZE_BLOCKS_CURVE_TYPE
 All period points are present from position 1 to position 24, and represent an hour (because resolution is "PT60M" = 60 minutes):
-- point position 1 is >= 2021-04-01T22:00Z, < 2021-04-01T23:00Z 
-- point position 2 is >= 2021-04-01T23:00Z, < 2021-04-01T24:00Z
-- point position 3 is >= 2021-04-01T24:00Z, < 2021-04-02T01:00Z
-etc
+- point position 1 is applicable for timestamps between 2021-04-01T22:00Z (included) and 2021-04-01T23:00Z (excluded)
+- point position 2 is applicable for timestamps between 2021-04-01T23:00Z (included) and 2021-04-01T24:00Z (excluded)
+- point position 3 is applicable for timestamps between 2021-04-01T24:00Z (included) and 2021-04-02T01:00Z (excluded), etc
 ```xml
   <TimeSeries>
     <mRID>TimeSeries2</mRID>
