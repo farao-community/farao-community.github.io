@@ -48,8 +48,93 @@ see-also: |
 ```
 A crac market document has a time interval for its validity. Therefore, **this document has to be imported for a specific datetime** – hourly-precise.  
 Moreover, only timeseries whose mRIDs are configured in the CimCracCreationParameters [timeseries-mrids](creation-parameters#timeseries-mrids) 
-parameter are imported. this allows the import of border-specific contraints and remedial actions.
+parameter are imported. This allows the import of border-specific contraints and remedial actions.
+Each timeseries is configured using a curve: either **SEQUENTIAL_FIXED_SIZE_BLOCKS_CURVE_TYPE** (value "A01"), 
+or **VARIABLE_SIZED_BLOCK_CURVE**  (value "A03").
+- In the case of SEQUENTIAL_FIXED_SIZE_BLOCKS_CURVE_TYPE, all period's points represent one resolution timespan (**resolution** is a parameter i.e. 60 minutes), their **position** parameter gives their relative start and end in their periods timespan (starting from "1")  depending on resolution.
+- In the case of VARIABLE_SIZED_BLOCK_CURVE, period's points can represent multiple resolution timespans, their **position** parameter gives their relative start, and their end is either equal to the next defined point's beginning, or the end of the period if no other point is defined after.
+#### Period examples
 
+##### SEQUENTIAL_FIXED_SIZE_BLOCKS_CURVE_TYPE
+All period points are present from position 1 to position 24, and represent an hour (because resolution is "PT60M" = 60 minutes):
+- point position 1 is >= 2021-04-01T22:00Z, < 2021-04-01T23:00Z 
+- point position 2 is >= 2021-04-01T23:00Z, < 2021-04-01T24:00Z
+- point position 3 is >= 2021-04-01T24:00Z, < 2021-04-02T01:00Z
+etc
+```xml
+  <TimeSeries>
+    <mRID>TimeSeries2</mRID>
+    <businessType>B54</businessType>
+    <curveType>A01</curveType>
+    <in_Domain.mRID codingScheme="A01">FAKE</in_Domain.mRID>
+    <out_Domain.mRID codingScheme="A01">FAKE</out_Domain.mRID>
+    <Period>
+      <timeInterval>
+        <start>2021-04-01T22:00Z</start>
+        <end>2021-04-02T22:00Z</end>
+      </timeInterval>
+      <resolution>PT60M</resolution>
+      <Point>
+        <position>1</position>
+        <Series>
+          ...
+        </Series>
+      </Point>
+      <Point>
+        <position>2</position>
+        <Series>
+          ...
+        </Series>
+      </Point>
+      (...)
+      <Point>
+        <position>24</position>
+        <Series>
+          ...
+        </Series>
+      </Point>
+    </Period>
+  </TimeSeries>
+```
+
+##### VARIABLE_SIZED_BLOCK_CURVE
+- point position 5 >= 2021-04-02T02:00Z, < 2021-04-02T11:00Z
+- point position 14 >= 2021-04-02T11:00Z, < 2021-04-02T15:00Z
+- point position 18 >= 2021-04-02T15:00Z, < 2021-04-02T22:00Z
+```xml
+  <TimeSeries>
+    <mRID>TimeSeries2</mRID>
+    <businessType>B54</businessType>
+    <curveType>A03</curveType>
+    <in_Domain.mRID codingScheme="A01">FAKE</in_Domain.mRID>
+    <out_Domain.mRID codingScheme="A01">FAKE</out_Domain.mRID>
+    <Period>
+      <timeInterval>
+        <start>2021-04-01T22:00Z</start>
+        <end>2021-04-02T22:00Z</end>
+      </timeInterval>
+      <resolution>PT60M</resolution>
+      <Point>
+        <position>5</position>
+        <Series>
+          ...
+        </Series>
+      </Point>
+      <Point>
+        <position>14</position>
+        <Series>
+          ...
+        </Series>
+      </Point>
+      <Point>
+        <position>18</position>
+        <Series>
+          ...
+        </Series>
+      </Point>
+    </Period>
+  </TimeSeries>
+```
 
 ### Contingencies {#contingencies} 
 
