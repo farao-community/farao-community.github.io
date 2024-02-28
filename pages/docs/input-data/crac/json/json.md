@@ -70,6 +70,9 @@ The following paragraphs of this page explain, step by step, the content of thes
 ## Instants and States {#instants-states}
 {% include_relative instants-states.md %}  
 
+## RAs usage limitations {#ra-usage-limits}
+{% include_relative ra-usage-limits.md %}
+
 ## CNECs {#cnecs}
 {% include_relative cnecs.md %}  
 

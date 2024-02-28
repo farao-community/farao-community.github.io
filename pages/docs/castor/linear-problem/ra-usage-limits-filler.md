@@ -29,7 +29,7 @@ see-also: |
 | Maximum number of RAs per TSO | $$nRA^{max}(tso,s)$$ | Maximum number of range actions to use by a given TSO on state $$s$$|
 | TSOs | $$tso \in \mathcal{TSO}$$ | Set of all TSOs operating a range action in RangeActions |
 
-*Note that this filler is currently only used for curative RAO, and uses parameters defined [here](/docs/parameters#ra-usage-limits-per-contingency). Nonetheless, they are modified to take into account applied topological actions first.*
+*Note that this filler uses crac-creation-parameters defined [here](/docs/input-data/crac/creation-parameters#ra-usage-limits-per-instant). Nonetheless, they are modified to take into account applied topological actions first.*
 
 ## Defined optimization variables {#defined-variables}
 
@@ -62,7 +62,7 @@ $$
 
 *⚠️ In order to mitigate rounding issues, and ensure that the max and min setpoints are feasible, a small "epsilon" (1e-5) is added to max / subtracted to min setpoint.*  
 
-*⚠️ In order to mitigate PST tap ↔ angle approximation in "[APPROXIMATED_INTEGERS](/docs/parameters#pst-model)" mode, and ensure that the initial setpoint is feasible, a correction factor is added or subtracted from the initial setpoint in the constraints above. This coefficient is computed as 30% of the average tap to angle conversion factor:*  
+*⚠️ In order to mitigate PST tap ↔ angle approximation in "[APPROXIMATED_INTEGERS](/docs/parameters#pst-optimization-approximation)" mode, and ensure that the initial setpoint is feasible, a correction factor is added or subtracted from the initial setpoint in the constraints above. This coefficient is computed as 30% of the average tap to angle conversion factor:*  
 *correction = 0.3 x abs((max angle - min angle) / (max tap - min tap))*
 
 ### Maximum number of remedial actions
