@@ -115,9 +115,6 @@ cracCreationParameters.addRaUsageLimitsForAGivenInstant("curative", raUsageLimit
   "ra-usage-limits-per-instant" : [ {
     "instant": "curative",
     "max-ra" : 10,
-    "max-tso" : 2147483647,
-    "max-topo-per-tso" : { },
-    "max-pst-per-tso" : { },
     "max-ra-per-tso" : {"FR": 4, "BE": 6}
   } ]
 }

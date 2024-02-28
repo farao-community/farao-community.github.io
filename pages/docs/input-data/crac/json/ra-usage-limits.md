@@ -27,11 +27,7 @@ crac.newRaUsageLimits("curative")
   "max-pst-per-tso" : {"BE": 7}
 }, {
   "instant": "curative",
-  "max-ra" : 3,
-  "max-tso" : 2147483647,
-  "max-ra-per-tso" : { },
-  "max-topo-per-tso" : { },
-  "max-pst-per-tso" : { }
+  "max-ra" : 3
 } ]
 ~~~
 {% endcapture %}
