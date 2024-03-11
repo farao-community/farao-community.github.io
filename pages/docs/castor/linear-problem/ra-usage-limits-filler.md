@@ -29,7 +29,7 @@ see-also: |
 | Maximum number of RAs per TSO | $$nRA^{max}(tso,s)$$ | Maximum number of range actions to use by a given TSO on state $$s$$|
 | TSOs | $$tso \in \mathcal{TSO}$$ | Set of all TSOs operating a range action in RangeActions |
 
-*Note that this filler is currently only used for curative RAO, and uses parameters defined [here](/docs/parameters#ra-usage-limits-per-contingency). Nonetheless, they are modified to take into account applied topological actions first.*
+*Note that this filler uses crac-creation-parameters defined [here](/docs/input-data/crac/creation-parameters#ra-usage-limits-per-instant). Nonetheless, they are modified to take into account applied topological actions first.*
 
 ## Defined optimization variables {#defined-variables}
 
