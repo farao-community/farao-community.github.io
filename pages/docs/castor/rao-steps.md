@@ -52,7 +52,7 @@ In CASTOR, this simulation is carried out in three stages, the first two handlin
 First, all automatic network actions which are forced are applied on the network.
 
 #### Automatic search tree {#auto-search-tree}
-Then, the automatic network actions which are available (i.e. not mandatory to apply) are selected by the RAO if they help making the network secure.
+Then, the automatic network actions which are available (i.e. not mandatory to apply) are selected by the RAO if they help making the network secure, using a search-tree algorithm.
 
 #### Automatic range actions simulation {#auto-ra}
 Finally, automatic range actions are applied one by one, as long as some of the perimeter's CNECs are overloaded. Range actions include PSTs and HVDCs. The remedial actions' speed determines the order in which they are applied: the fastest range actions are simulated first. Aligned range actions are simulated simultaneously.
