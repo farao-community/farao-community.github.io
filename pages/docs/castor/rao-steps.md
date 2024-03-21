@@ -44,8 +44,8 @@ An automaton perimeter can be defined for each defined contingency. Each automat
 
 Optimal preventive actions selected by the preventive RAO are applied in this perimeter.   
 
-While preventive and curative remedial actions are optimized to prevent overloads in their respective perimeters, auto remedial actions can actually be simulated in the automaton perimeter. Indeed, in real life an "automated protection" is triggered when an outage takes place, even if its triggering causes another constraint somewhere else in the network.
-That's why, regardless of the impacts on CNECs, automatic remedial actions can be activated if their specific activation conditions are met (eg. after a given contingency).
+While preventive and curative remedial actions are always optimized to prevent overloads in their respective perimeters, auto remedial actions can actually either be optimized or forced in the automaton perimeter, depending on the usage method. Indeed, in real life an "automated protection" is triggered when an outage takes place, even if its triggering causes another constraint somewhere else in the network.
+That's why, regardless of the impacts on CNECs, forced automatic remedial actions are activated if their specific activation conditions are met (eg. after a given contingency).
 In CASTOR, this simulation is carried out in three stages, the first two handling specifically the automatic remedial actions for which there is not set-point to compute. These remedial actions are called [network actions](/docs/input-data/crac/json#network-actions). They include topological actions, injection set-points, PST set-points, switch pairs.
 
 #### Automatic network actions simulation {#auto-na}
