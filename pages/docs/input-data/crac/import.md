@@ -10,6 +10,7 @@ order: 0
 tags: [Docs, Data, CRAC]
 see-also: |
     [CRAC creation parameters](creation-parameters), [CRAC object](json), [CRAC creation context](creation-context)
+redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/import.html
 ---
 
 ## CRAC import/export {#import-export}

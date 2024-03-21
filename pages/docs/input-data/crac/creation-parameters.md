@@ -10,6 +10,7 @@ order: 2
 tags: [Docs, Data, CRAC]
 see-also: |
     [CSE CRAC format](cse), [CIM CRAC format](cim)
+redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/creation-parameters.html
 ---
 
 ## Introduction {#introduction}

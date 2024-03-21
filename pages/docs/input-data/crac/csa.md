@@ -8,6 +8,7 @@ docu-section: Input Data
 docu-parent: CRAC
 order: 6
 tags: [ Docs, Data, CRAC, CSA ]
+redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/csa.html
 ---
 
 ## Presentation {#presentation}

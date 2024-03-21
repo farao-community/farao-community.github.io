@@ -10,6 +10,7 @@ order: 4
 tags: [Docs, Data, CRAC]
 see-also: |
     [CracCreationParameters](creation-parameters#non-specific-parameters), [FbConstraintCreationContext](creation-context#fbconstraint)
+redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/fbconstraint.html
 ---
 
 ### Header overview {#header}
