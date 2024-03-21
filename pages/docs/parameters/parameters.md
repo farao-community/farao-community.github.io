@@ -67,7 +67,7 @@ These parameters (objective-function) configure the remedial action optimisation
 - **Default value**: "SECURE"
 - **Usage**: Stop criterion of the preventive RAO search-tree.  
   - **MIN_OBJECTIVE**: the search-tree will maximize the minimum margin until it converges to a
-  maximum value, or until another stop criterion has been reached (e.g. [max-search-tree-depth](#max-search-tree-depth)).  
+  maximum value, or until another stop criterion has been reached (e.g. [max-preventive-search-tree-depth](#max-preventive-search-tree-depth)).  
   - **SECURE**: the search-tree will stop as soon as it finds a solution where the minimum margin is positive.  
   *Note: if the best possible minimum margin is negative, both stop criterion will return the same solution.*
 
@@ -80,7 +80,7 @@ These parameters (objective-function) configure the remedial action optimisation
 - **Default value**: "MIN_OBJECTIVE"
 - **Usage**: stop criterion for the curative RAO search-tree.  
   - **MIN_OBJECTIVE**: the search-tree will maximize the minimum margin until it converges to a
-    maximum value, or until another stop criterion has been reached (e.g. [max-search-tree-depth](#max-search-tree-depth)).  
+    maximum value, or until another stop criterion has been reached (e.g. [max-curative-search-tree-depth](#max-curative-search-tree-depth)).  
   - **SECURE**: the search-tree will stop as soon as it finds a solution where the minimum margin is positive.  
   - **PREVENTIVE_OBJECTIVE**: the search-tree will stop as soon as the preventive RAO's objective value is reached, 
     and improved by at least ["curative-rao-min-obj-improvement"](#curative-min-obj-improvement).  
@@ -239,11 +239,22 @@ These are parameters that tune the solver used to solve the MIP problem.
 These parameters (topological-actions-optimization) tune the [search-tree algorithm](/docs/engine/ra-optimisation/search-tree-rao) 
 when searching for the best network actions.
 
-### max-search-tree-depth {#max-search-tree-depth}
+### max-preventive-search-tree-depth {#max-preventive-search-tree-depth}
 - **Expected value**: integer
 - **Default value**: 2^32 -1 (max integer value)
-- **Usage**: maximum search-tree depth.  
-  Applies separately to the preventive RAO and to each perimeter-specific curative RAO.
+- **Usage**: maximum search-tree depth for preventive optimization.  
+  Applies to the preventive RAO.
+
+### max-auto-search-tree-depth {#max-auto-search-tree-depth}
+- **Expected value**: integer
+- **Default value**: 2^32 -1 (max integer value)
+- **Usage**: maximum search-tree depth for the optimization of available auto network actions.  
+
+### max-curative-search-tree-depth {#max-curative-search-tree-depth}
+- **Expected value**: integer
+- **Default value**: 2^32 -1 (max integer value)
+- **Usage**: maximum search-tree depth for curative optimization.  
+  Applies separately to each perimeter-specific curative RAO.
 
 ### predefined-combinations {#predefined-combinations}
 - **Expected value**: an array containing sets of network action IDs
@@ -572,7 +583,7 @@ Zones are seperated by + or -.
 {% capture t1_json %}
 ~~~json
 {
-  "version" : "2.2",
+  "version" : "2.3",
   "objective-function" : {
     "type" : "MAX_MIN_RELATIVE_MARGIN_IN_AMPERE",
     "forbid-cost-increase" : false,
@@ -596,7 +607,9 @@ Zones are seperated by + or -.
     }
   },
   "topological-actions-optimization" : {
-    "max-search-tree-depth" : 2,
+    "max-preventive-search-tree-depth" : 2,
+    "max-auto-search-tree-depth" : 1,
+    "max-curative-search-tree-depth" : 2,
     "predefined-combinations" : [ "na1 + na2", "na4 + na5 + na6"],
     "relative-minimum-impact-threshold" : 0.0,
     "absolute-minimum-impact-threshold" : 1.0,
@@ -709,7 +722,9 @@ rao-linear-optimization-solver:
   solver: CBC
 
 rao-topological-actions-optimization:
-  max-search-tree-depth: 3
+  max-preventive-search-tree-depth: 3
+  max-auto-search-tree-depth: 2
+  max-curative-search-tree-depth: 3
   predefined-combinations: [ "{na1}+{na2}", "{na3}+{na4}+{na5}" ]
   relative-minimum-impact-threshold: 0.0
   absolute-minimum-impact-threshold: 2.0
