@@ -12,21 +12,21 @@ Examples:
 A contingency is a probable event that can put the grid at risk. Therefore, contingencies must
 be considered when operating the electrical transmission / distribution system.
 
-In FARAO, contingencies are defined in the following way:
+In FARAO, contingencies come from PowSyBl Contingency, where a contingency element has the id of the impacted network element, and its type is linked to the network elements type.
+They are represented in the following way:
 
 {% capture t3_java %}
 ~~~java
 crac.newContingency()
     .withId("CO_0001")
-    .withName("N-1 on generator")
-    .withNetworkElement("powsybl_generator_id", "my_generators_name")
+    .withContingencyElement("powsybl_generator_id", ContingencyElementType.GENERATOR)
     .add();
 
 crac.newContingency()
     .withId("CO_0002")
     .withName("N-2 on electrical lines")
-    .withNetworkElement("powsybl_electrical_line_1_id")
-    .withNetworkElement("powsybl_electrical_line_2_id")
+    .withContingencyElement("powsybl_electrical_line_1_id", ContingencyElementType.LINE)
+    .withContingencyElement("powsybl_electrical_line_2_id", ContingencyElementType.LINE)
     .add();
 ~~~
 {% endcapture %}
@@ -44,15 +44,12 @@ crac.newContingency()
 ~~~
 {% endcapture %}
 {% capture t3_objects %}
-🔴⭐ **identifier**  
-⚪ **name**  
-⚪ **network elements**: list of 0 to N network elements  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔴 **network element id**: must be the id of a PowSyBl network identifiable  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚪ **network element names**: names are optional, they can be used to make the CRAC
-more understandable from a business viewpoint, but applications relying on the CRAC do not necessarily need them.  
+The object used is the PowSyBl Contingency, please refer to the [dedicated documentation](https://www.powsybl.org/pages/documentation/index.html#grid-model) on PowSyBl website.
 {% endcapture %}
 {% include /tabs.html id="t3" tab1name="JAVA creation API" tab1content=t3_java tab2name="JSON file" tab2content=t3_json tab3name="Object fields" tab3content=t3_objects %}
 
 > 💡  **NOTE**  
+> The contingency elements type can be retrieve from the PowSyBl Network using the network element id, with:
+> `ContingencyElement.of(network.getIdentifiable(id)).getType()`  
 > The network elements currently handled by FARAO's contingencies are: internal lines, interconnections, transformers,
 > PSTs, generators, HVDCs, bus-bar sections, and dangling lines.  
