@@ -333,8 +333,11 @@ These parameters (second-preventive-rao) tune the behaviour of the [second preve
 - **Expected value**: true/false
 - **Default value**: false
 - **Usage**: 
-  - **false**: the 2nd preventive RAO will optimize only the preventive remedial actions, keeping **all** optimal 
-    curative remedial actions selected during the curative RAO.
+  - **false**: the 2nd preventive RAO will only re-optimize **some preventive** remedial actions. Every topological action will be considered but some range actions will be filtered out. If one of the following 2 criterion applies to the range action, it won't be re-optimized:
+    - 1: The RA has a range limitation relative to the previous instant. Re-optimizing it could lead to inconsistency between preventive & post-contingency tap positions.
+    - 2: The RA is preventive and available after some contingency. For both these states, it has the same setpoint. The crac has some RA usage limitations for the contingency state (see [here](/docs/input-data/crac/creation-parameters#ra-usage-limits-per-instant)) that might be at risk. 
+    Reoptimizing such a RA in preventive only could lead the RAO to wrongly exceed the RaUsageLimits for the given state.
+    The same check goes for preventive RA that shares the same network elements as another post-contingency RA.
   - **true**: the 2nd preventive RAO will optimize preventive remedial actions **and** curative range actions, keeping 
     only the optimal curative **topological** actions computed in the curative RAO.
 
