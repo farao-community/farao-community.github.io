@@ -10,5 +10,5 @@ order: 5
 tags: [Docs, Data, CRAC]
 see-also: |
     [CseCracCreationParameters](creation-parameters#cse), [CseCracCreationContext](creation-context#cse)
-redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/cse.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/crac/cse.html
 ---
