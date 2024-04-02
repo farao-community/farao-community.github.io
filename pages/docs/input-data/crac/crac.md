@@ -10,5 +10,5 @@ order: 3
 tags: [Docs, Data, CRAC]
 see-also: |
     [CRAC import](import), [CRAC object](json)
-redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/introduction.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/crac/introduction.html
 ---
