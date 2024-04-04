@@ -12,5 +12,5 @@ tags: [Docs, Data]
 summary-hmax: 2
 see-also: |
     [CORE CNE export package](https://github.com/powsybl/powsybl-open-rao/tree/main/data/result-exporter/core-cne-exporter)
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/core-cne/core-cne.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/core-cne.html
 ---

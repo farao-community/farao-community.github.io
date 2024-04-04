@@ -10,5 +10,5 @@ order: 1
 feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 summary-hmax: 0
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/rao-logs/rao-logs.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/rao-logs.html
 ---

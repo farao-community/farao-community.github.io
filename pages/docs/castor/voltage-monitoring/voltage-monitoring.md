@@ -12,5 +12,5 @@ tags: [Docs, Data]
 summary-hmax: 3
 see-also: |
     [Voltage CNECs](/docs/input-data/crac/json#voltage-cnecs), [RAO result](/docs/output-data/rao-result-json)
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/voltage-monitoring/voltage-monitoring.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/monitoring/voltage-monitoring.html
 ---

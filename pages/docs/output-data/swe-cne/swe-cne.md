@@ -12,5 +12,5 @@ tags: [Docs, Data]
 summary-hmax: 2
 see-also: |
     [SWE CNE export package](https://github.com/powsybl/powsybl-open-rao/tree/main/data/result-exporter/swe-cne-exporter)
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/swe-cne/swe-cne.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/swe-cne.html
 ---

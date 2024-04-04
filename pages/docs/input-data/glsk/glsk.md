@@ -12,5 +12,5 @@ tags: [Docs, Data]
 see-also: |
     [ENTSO-E implementation guide of GLSK](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/07_Generation_and_Load%20Shift_Key_Implementation_Guide_v2r1.pdf), 
     [PowSyBl ENTSO-E repository](https://github.com/powsybl/powsybl-entsoe)
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/glsk/glsk.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/glsk.html
 ---

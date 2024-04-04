@@ -10,5 +10,5 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Parameters]
 order: 4
 summary-hmax: 2
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/parameters/parameters.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/parameters.html
 ---

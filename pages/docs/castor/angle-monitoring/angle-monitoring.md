@@ -12,5 +12,5 @@ tags: [Docs, Data]
 summary-hmax: 3
 see-also: |
     [Angle CNECs](/docs/input-data/crac/json#angle-cnecs), [GLSK](/docs/input-data/glsk), [RAO result](/docs/output-data/rao-result-json)
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/angle-monitoring/angle-monitoring.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/monitoring/angle-monitoring.html
 ---

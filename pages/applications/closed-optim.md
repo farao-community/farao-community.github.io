@@ -10,5 +10,5 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Applications]
 order: 4
 summary-hmax: 0
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/applications/applications.html#closed-optimisation
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/applications.html#closed-optimisation
 ---
