@@ -9,6 +9,7 @@ docu-parent: none
 order: 1
 tags: [Docs, Data]
 summary-hmax: 0
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/glossary/glossary.html
 ---
 
 | Term                                                              | Acronym | Definition                                                                                                                                                                                                                   |
