@@ -12,23 +12,5 @@ tags: [Docs, Data]
 summary-hmax: 2
 see-also: |
     [CORE CNE export package](https://github.com/powsybl/powsybl-open-rao/tree/main/data/result-exporter/core-cne-exporter)
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/core-cne.html
 ---
-
-# Introduction {#introduction}
-{% include_relative introduction.md %}
-
-# The Java API {#java-api}
-{% include_relative java-api.md %}  
-
-# Contents of the CORE CNE file {#contents}
-Here is an overview of the general structure of the CORE CNE document, detailed in the following sections: 
-![CORE CNE general structure](/assets/img/core-cne-structure.png)
-
-## Header {#header}
-{% include_relative header.md %}  
-
-## CNEC results {#cnec-results}
-{% include_relative cnec-results.md %}  
-
-## Remedial action results {#ra-results}
-{% include_relative ra-results.md %}  

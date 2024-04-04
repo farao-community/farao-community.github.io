@@ -11,5 +11,5 @@ tags: [Docs, Data, CRAC]
 summary-hmax: 3
 see-also: |
     [CRAC import](import)
-redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/json.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/crac/json.html
 ---

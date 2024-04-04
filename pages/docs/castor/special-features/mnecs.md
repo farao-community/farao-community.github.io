@@ -11,11 +11,5 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Search Tree RAO, CASTOR]
 see-also: | 
     [MNEC parameters](/docs/parameters#mnec-parameters)
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/castor/special-features/mnecs.html
 ---
-
-### Definition
-MNECs (Monitored Network Elements) are monitored rather than optimised, see [Optimised and monitored CNECs](/docs/input-data/crac/json#optimised-vs-monitored)
-Their margin must be kept positive or above its initial value.
-
-### Implementation
-MNEC constraints are modelled in the RAO under the linear problem as [MNEC constraints](/docs/castor/linear-optimisation-problem/mnec-filler).

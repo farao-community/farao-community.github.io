@@ -12,26 +12,5 @@ tags: [Docs, Data]
 summary-hmax: 2
 see-also: |
     [SWE CNE export package](https://github.com/powsybl/powsybl-open-rao/tree/main/data/result-exporter/swe-cne-exporter)
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/output-data/swe-cne.html
 ---
-
-# Introduction {#introduction}
-{% include_relative introduction.md %}  
-
-# The Java API {#java-api}
-{% include_relative java-api.md %}  
-
-# Contents of the SWE CNE file {#contents}
-Here is an overview of the general structure of the SWE CNE document, detailed in the following sections:
-![SWE CNE general structure](/assets/img/swe-cne-structure.png)
-
-## Header {#header}
-{% include_relative header.md %}  
-
-## Remedial action results {#ra-results}
-{% include_relative ra-results.md %}  
-
-## CNEC results {#cnec-results}
-{% include_relative cnec-results.md %}  
-
-## Overall status {#status}
-{% include_relative status.md %}

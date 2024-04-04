@@ -10,5 +10,5 @@ order: 6
 tags: [Docs, Data, CRAC]
 see-also: |
     [CimCracCreationParameters](creation-parameters#cim), [CimCracCreationContext](creation-context#cim)
-redirect_to: https://powsybl-openrao.readthedocs.io/latest/input-data/crac/cim.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/crac/cim.html
 ---
