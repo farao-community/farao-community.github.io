@@ -11,5 +11,5 @@ feature-img: "assets/img/farao3.jpg"
 tags: [Docs, Data]
 see-also: |
   [GLSK](/docs/input-data/glsk)
-redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/glsk/glsk-cim.html
+redirect_to: https://powsybl.readthedocs.io/projects/openrao/en/latest/input-data/glsk/glsk-ucte.html
 ---
